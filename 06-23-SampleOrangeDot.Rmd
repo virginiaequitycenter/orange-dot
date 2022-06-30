@@ -1,0 +1,971 @@
+---
+title: "Sample Orange Dot visualization"
+author: "Lee LeBoeuf, Michele Claibourn"
+date: "6/23/2022"
+output: 
+  html_document:
+      toc: true
+      toc_float: true
+      toc_depth: 3
+      code_folding: hide
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(hrbrthemes)
+library(sjmisc)
+library(sf)
+library(leaflet)
+library(ggpubr)
+library(reactable)
+
+# ACS data
+tractdat <- read_csv("data/acs_tract_orangedot.csv")
+tractdat$GEOID <- as.character(tractdat$GEOID)
+countydat <- read_csv("data/acs_county_orangedot.csv")
+
+# Spatial data
+geo <- readRDS("data/cvilleODreport_tracts.RDS")
+
+geofull <- geo %>%
+  left_join(tractdat, by = "GEOID")
+
+geofull <- st_transform(geofull, crs = 4326) 
+
+expenses <- read_csv("data/Expenses-SH-2kids.csv")
+
+highlightcolor <- ("#FDE725FF")
+
+```
+
+# Region 
+
+### Number of families struggling in the region
+
+```{r, echo=FALSE, warning=FALSE}
+
+strfam <- countydat %>%
+  dplyr::select(countyName, AllFamUnder35kE, perc_AllFamUnder35kE) %>%
+  rename(Locality = countyName,
+         "Number of families making < 35K" = AllFamUnder35kE,
+         "Percent of families making < 35K" = perc_AllFamUnder35kE)
+
+reactable(strfam,
+          highlight = TRUE,
+          defaultSorted = "Locality",
+          rowStyle = function(index) {
+    if (strfam[index, "Locality"] == "Whole Region" ){
+      list(background = highlightcolor)}
+          }
+)
+
+```
+
+### Number of families making < $35,000
+
+```{r, echo=FALSE, warning=FALSE}
+
+countydatlong1 <- reshape_longer(as.data.frame(countydat[1:7,c("AllFamUnder35kE","BlackFamUnder35kE","WhiteFamUnder35kE","countyName")]), columns = list(
+                         c("AllFamUnder35kE","BlackFamUnder35kE","WhiteFamUnder35kE")),
+                       names.to = "value",
+                       values.to = "Number",
+                       id = "countyName")
+
+countydatlong1$value <- factor(countydatlong1$value, levels = c("AllFamUnder35kE", "BlackFamUnder35kE", "WhiteFamUnder35kE"))
+
+ggplot(countydatlong1, aes(y=Number, x=countyName, fill=value)) + 
+    geom_bar(position="dodge", stat="identity") +
+  geom_text(aes(label=Number), position=position_dodge(width=0.9), vjust=-0.5, size=2.5) + 
+  labs(x = "County", y = "Number of families") + 
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  scale_fill_manual(values=c("#482677FF", "#2D708EFF", "#29AF7FFF"), labels = c("All families","Black families",  "White families"),
+                    name = element_blank()) + 
+  annotate("text", x = "Greene", y = 2250, label = "Whole Region = 9,413 families")
+  
+```
+
+### Percent of families making < $35,000
+
+```{r, echo=FALSE, warning=FALSE}
+
+countydatlong2 <- reshape_longer(as.data.frame(countydat[,c("perc_AllFamUnder35kE","perc_WhiteFamUnder35kE","perc_BlackFamUnder35kE", "countyName")]), columns = list(
+                         c("perc_AllFamUnder35kE","perc_BlackFamUnder35kE","perc_WhiteFamUnder35kE")),
+                       names.to = "value",
+                       values.to = "Percent",
+                       id = "countyName")
+
+countydatlong2$value <- factor(countydatlong2$value, levels = c("perc_AllFamUnder35kE", "perc_BlackFamUnder35kE", "perc_WhiteFamUnder35kE"))
+
+blank <- as.data.frame(matrix(nrow = 3, ncol = 3))
+colnames(blank) <- colnames(countydatlong2)
+blank$countyName <- ""
+blank$value <- c("perc_AllFamUnder35kE", "perc_BlackFamUnder35kE", "perc_WhiteFamUnder35kE")
+
+countydatlong2 <- rbind(countydatlong2, blank)
+
+countydatlong2$countyName <- factor(countydatlong2$countyName, levels = c("Whole Region", "","Albemarle", "Buckingham", "Charlottesville", "Fluvanna", "Greene", "Louisa", "Nelson"))
+
+ggplot(countydatlong2, aes(y=Percent, x=countyName, fill=value))+ 
+    geom_bar(position="dodge", stat="identity") +
+  geom_text(aes(label=paste0(round(Percent, 0),"%")), position=position_dodge(width=0.9), vjust=-0.5, size=2.5) + 
+  labs(x = "County", y = "Percent of families") + 
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        axis.ticks.x = element_blank()) +
+  scale_fill_manual(values=c("#482677FF", "#2D708EFF", "#29AF7FFF"), labels = c("All families","Black families",  "White families"),
+                    name = element_blank()) 
+```
+
+### Breakdown of families making < $35,000 in the whole region
+
+```{r, echo=FALSE, warning=FALSE}
+incomebins <- data_frame(Income = list("$0 - $9,999", "$10,000 - $14,999", "$15,000 - $24,999", "$25,000 - $34,999"),
+                         Number = list(countydat[8,]$AllFamUnder10kE, countydat[8,]$AllFamBtw10_14kE, countydat[8,]$AllFamBtw15_24kE, countydat[8,]$AllFamBtw25_34kE),
+                         Percent = list(countydat[8,]$perc_AllFamUnder10kE, countydat[8,]$perc_AllFamBtw10_14kE, countydat[8,]$perc_AllFamBtw15_24kE, countydat[8,]$perc_AllFamBtw25_34kE))
+
+reactable(incomebins, defaultSorted = c("Number", "Percent"),
+          highlight = TRUE,
+          bordered = TRUE,
+          rowStyle = function(index) {
+    if (incomebins[index, "Income"] == "$15,000 - $24,999" | incomebins[index, "Income"] == "$25,000 - $34,999") {
+      list(background = highlightcolor)}
+          }
+)
+
+```
+
+### Adult education attainment 
+#### Number and Percent of adults over age 25 without a high school diploma 
+```{r, echo=FALSE, warning=FALSE}
+countydatlong3 <- reshape_longer(as.data.frame(countydat[1:7,c("noHSE", "perc_noHSE", "countyName")]),
+                                 columns = c("noHSE", "perc_noHSE"),
+                       names.to = "value",
+                       values.to = "number",
+                       id = "countyName")
+
+num <- countydatlong3[countydatlong3$value == "noHSE",]
+perc <- countydatlong3[countydatlong3$value == "perc_noHSE",]
+
+numberplot <- ggplot(num,aes(x=countyName, y=number, fill=countyName)) + 
+  geom_col(position="dodge") +
+  labs(x="County Name", y="Number of adults") + 
+  theme(axis.text.x = element_text(angle = 45, hjust = 1), legend.position = "none") +
+  geom_text(aes(label=num$number), position=position_dodge(width=0.9), vjust=-0.5, size=2.5) +
+  scale_fill_manual(values=c("#482677FF", "#2D708EFF", "#29AF7FFF",
+                             "#73D055FF", "#404788FF", "#238A8DFF", "#440154FF")) 
+
+percentplot <- ggplot(perc,aes(x=countyName, y=number, fill=countyName)) + 
+  geom_col(position="dodge") +
+  labs(x="County Name", y="Percent of adults") + 
+  theme(axis.text.x = element_text(angle = 45, hjust = 1), legend.position = "none") +
+  geom_text(aes(label=perc$number), position=position_dodge(width=0.9), vjust=-0.5, size=2.5) +
+  scale_fill_manual(values=c("#482677FF", "#2D708EFF", "#29AF7FFF",
+                             "#73D055FF", "#404788FF", "#238A8DFF", "#440154FF")) 
+
+ggarrange(numberplot, percentplot, ncol = 2, nrow = 1) + 
+  ggtitle("Adults Over 25 years old without a high school diploma")
+
+```
+
+# Locality {.tabset}
+
+## Albemarle County
+```{r, echo=FALSE, warning=FALSE}
+albemarle <- countydat[countydat$countyName == "Albemarle",]
+```
+
+#### Breakdown of families making < $35,000 in Albemarle County
+```{r, echo=FALSE, warning=FALSE}
+incomebinsAC <- data_frame(Income = list("$0 - $9,999", "$10,000 - $14,999", "$15,000 - $24,999", "$25,000 - $34,999", "Total"),
+                         Number = list(albemarle$AllFamUnder10kE, albemarle$AllFamBtw10_14kE, albemarle$AllFamBtw15_24kE, albemarle$AllFamBtw25_34kE, sum(albemarle$AllFamUnder10kE, albemarle$AllFamBtw10_14kE, albemarle$AllFamBtw15_24kE, albemarle$AllFamBtw25_34kE)),
+                         "of whole county" = list(albemarle$perc_AllFamUnder10kE, albemarle$perc_AllFamBtw10_14kE, albemarle$perc_AllFamBtw15_24kE, albemarle$perc_AllFamBtw25_34kE, sum(albemarle$perc_AllFamUnder10kE, albemarle$perc_AllFamBtw10_14kE, albemarle$perc_AllFamBtw15_24kE, albemarle$perc_AllFamBtw25_34kE)),
+                         "of families making < 35K in county" =
+                           list(round(albemarle$AllFamUnder10kE/albemarle$AllFamUnder35kE * 100, 2),
+                                round(albemarle$AllFamBtw10_14kE/albemarle$AllFamUnder35kE * 100, 2),
+                                round(albemarle$AllFamBtw15_24kE/albemarle$AllFamUnder35kE * 100, 2),
+                                round(albemarle$AllFamBtw25_34kE/albemarle$AllFamUnder35kE * 100, 2),
+                                100))
+
+reactable(incomebinsAC, 
+          columnGroups = list(colGroup(name = "Percent", columns = c("of whole county", "of families making < 35K in county"))),
+          highlight = TRUE,
+          bordered = TRUE,
+          rowStyle = function(index) {
+    if (incomebinsAC[index, "Income"] == "$15,000 - $24,999" | incomebinsAC[index, "Income"] == "$25,000 - $34,999") {
+      list(background = highlightcolor)}
+          }
+)
+
+```
+
+#### Income distribution of Black and White families in Albemarle County
+```{r, echo=FALSE, warning=FALSE}
+albemarlelong <- pivot_longer(albemarle[,c("perc_AllFamUnder35kE", "perc_WhiteFamUnder35kE", "perc_BlackFamUnder35kE", "perc_AllFamBtw35_100kE", "perc_WhiteFamBtw35_100kE", "perc_BlackFamBtw35_100kE", "perc_AllFamOver100kE", "perc_WhiteFamOver100kE", "perc_BlackFamOver100kE", "countyName")],
+                       cols = -c(countyName),
+                       values_to = 'percent',
+                       names_to = c('race', 'amount'),
+                       names_pattern = 'perc_(AllFam|BlackFam|WhiteFam)(.+)')
+
+albemarlelong$amount <- factor(albemarlelong$amount, levels = c("Under35kE", "Btw35_100kE", "Over100kE"))
+
+ggplot(albemarlelong,aes(x=amount, y=percent,fill=race)) + 
+  geom_col(position="dodge") +
+  labs(x="Income", y="Percent of families") + 
+  scale_x_discrete(labels = c("Earning Under $35K", "Earning $35K-$100K", "Earning Over $100K")) + 
+  scale_fill_manual(values=c("#482677FF", "#2D708EFF", "#29AF7FFF"), labels = c("All families","Black families",  "White families"),
+                    name = element_blank())  + 
+  geom_text(aes(label=paste0(round(albemarlelong$percent, 1), "%")), position=position_dodge(width=0.9), vjust=-0.5, size=2.5)
+
+```
+
+#### Expenses: Single Householder + 2 Children (1 Toddler)
+```{r, echo=FALSE, warning=FALSE}
+exAC <- expenses %>%
+  filter(Locality == "Albemarle",
+         Unit == "Total") %>%
+  select(Expense, Annual, Monthly, Weekly)
+
+reactable(exAC,
+          highlight = TRUE,
+          bordered = TRUE,
+          rowStyle = function(index) {
+    if (exAC[index, "Expense"] == "Total Expenses") 
+      list(background = highlightcolor)
+  }
+)
+```
+
+* Currently looking for a data source for childcare costs. 
+
+## Buckingham County
+```{r, echo=FALSE, warning=FALSE}
+Buckingham <- countydat[countydat$countyName == "Buckingham",]
+```
+
+#### Breakdown of families making < $35,000 in Buckingham County
+```{r, echo=FALSE, warning=FALSE}
+incomebinsBC <- data_frame(Income = list("$0 - $9,999", "$10,000 - $14,999", "$15,000 - $24,999", "$25,000 - $34,999", "Total"),
+                         Number = list(Buckingham$AllFamUnder10kE, Buckingham$AllFamBtw10_14kE, Buckingham$AllFamBtw15_24kE, Buckingham$AllFamBtw25_34kE, sum(Buckingham$AllFamUnder10kE, Buckingham$AllFamBtw10_14kE, Buckingham$AllFamBtw15_24kE, Buckingham$AllFamBtw25_34kE)),
+                         "of whole county" = list(Buckingham$perc_AllFamUnder10kE, Buckingham$perc_AllFamBtw10_14kE, Buckingham$perc_AllFamBtw15_24kE, Buckingham$perc_AllFamBtw25_34kE, sum(Buckingham$perc_AllFamUnder10kE, Buckingham$perc_AllFamBtw10_14kE, Buckingham$perc_AllFamBtw15_24kE, Buckingham$perc_AllFamBtw25_34kE)),
+                         "of families making < 35K in county" =
+                           list(round(Buckingham$AllFamUnder10kE/Buckingham$AllFamUnder35kE * 100, 2),
+                                round(Buckingham$AllFamBtw10_14kE/Buckingham$AllFamUnder35kE * 100, 2),
+                                round(Buckingham$AllFamBtw15_24kE/Buckingham$AllFamUnder35kE * 100, 2),
+                                round(Buckingham$AllFamBtw25_34kE/Buckingham$AllFamUnder35kE * 100, 2),
+                                100))
+
+reactable(incomebinsBC,
+          columnGroups = list(colGroup(name = "Percent", columns = c("of whole county", "of families making < 35K in county"))),
+          highlight = TRUE,
+          bordered = TRUE,
+          rowStyle = function(index) {
+    if (incomebinsAC[index, "Income"] == "$15,000 - $24,999" | incomebinsAC[index, "Income"] == "$25,000 - $34,999") {
+      list(background = highlightcolor)}
+          }
+)
+
+
+```
+
+#### Income distribution of Black and White families in Buckingham County
+```{r, echo=FALSE, warning=FALSE}
+Buckinghamlong <- pivot_longer(Buckingham[,c("perc_AllFamUnder35kE", "perc_WhiteFamUnder35kE", "perc_BlackFamUnder35kE", "perc_AllFamBtw35_100kE", "perc_WhiteFamBtw35_100kE", "perc_BlackFamBtw35_100kE", "perc_AllFamOver100kE", "perc_WhiteFamOver100kE", "perc_BlackFamOver100kE", "countyName")],
+                       cols = -c(countyName),
+                       values_to = 'percent',
+                       names_to = c('race', 'amount'),
+                       names_pattern = 'perc_(AllFam|BlackFam|WhiteFam)(.+)')
+
+Buckinghamlong$amount <- factor(Buckinghamlong$amount, levels = c("Under35kE", "Btw35_100kE", "Over100kE"))
+
+ggplot(Buckinghamlong,aes(x=amount, y=percent,fill=race)) + 
+  geom_col(position="dodge") +
+  labs(x="Income", y="Percent of families") + 
+  scale_x_discrete(labels = c("Earning Under $35K", "Earning $35K-$100K", "Earning Over $100K")) + 
+  scale_fill_manual(values=c("#482677FF", "#2D708EFF", "#29AF7FFF"), labels = c("All families","Black families",  "White families"),
+                    name = element_blank())  + 
+  geom_text(aes(label=paste0(round(Buckinghamlong$percent, 1), "%")), position=position_dodge(width=0.9), vjust=-0.5, size=2.5)
+
+```
+
+#### Expenses: Single Householder + 2 Children (1 Toddler)
+```{r, echo=FALSE, warning=FALSE}
+exBC <- expenses %>%
+  filter(Locality == "Buckingham",
+         Unit == "Total") %>%
+  select(Expense, Annual, Monthly, Weekly)
+
+reactable(exBC,
+          highlight = TRUE,
+          bordered = TRUE,
+          rowStyle = function(index) {
+    if (exBC[index, "Expense"] == "Total Expenses") 
+      list(background = highlightcolor)
+  }
+)
+```
+
+* Currently looking for a data source for childcare costs. 
+
+## Charlottesville City
+```{r, echo=FALSE, warning=FALSE}
+Charlottesville <- countydat[countydat$countyName == "Charlottesville",]
+```
+
+#### Breakdown of families making < $35,000 in Charlottesville City
+```{r, echo=FALSE, warning=FALSE}
+incomebinsCC <- data_frame(Income = list("$0 - $9,999", "$10,000 - $14,999", "$15,000 - $24,999", "$25,000 - $34,999", "Total"),
+                         Number = list(Charlottesville$AllFamUnder10kE, Charlottesville$AllFamBtw10_14kE, Charlottesville$AllFamBtw15_24kE, Charlottesville$AllFamBtw25_34kE, sum(Charlottesville$AllFamUnder10kE, Charlottesville$AllFamBtw10_14kE, Charlottesville$AllFamBtw15_24kE, Charlottesville$AllFamBtw25_34kE)),
+                         "of whole county" = list(Charlottesville$perc_AllFamUnder10kE, Charlottesville$perc_AllFamBtw10_14kE, Charlottesville$perc_AllFamBtw15_24kE, Charlottesville$perc_AllFamBtw25_34kE, sum(Charlottesville$perc_AllFamUnder10kE, Charlottesville$perc_AllFamBtw10_14kE, Charlottesville$perc_AllFamBtw15_24kE, Charlottesville$perc_AllFamBtw25_34kE)),
+                         "of families making < 35K in county" =
+                           list(round(Charlottesville$AllFamUnder10kE/Charlottesville$AllFamUnder35kE * 100, 2),
+                                round(Charlottesville$AllFamBtw10_14kE/Charlottesville$AllFamUnder35kE * 100, 2),
+                                round(Charlottesville$AllFamBtw15_24kE/Charlottesville$AllFamUnder35kE * 100, 2),
+                                round(Charlottesville$AllFamBtw25_34kE/Charlottesville$AllFamUnder35kE * 100, 2),
+                                100))
+
+reactable(incomebinsCC, 
+          columnGroups = list(colGroup(name = "Percent", columns = c("of whole county", "of families making < 35K in county"))),
+          highlight = TRUE,
+          bordered = TRUE,
+          rowStyle = function(index) {
+    if (incomebinsAC[index, "Income"] == "$15,000 - $24,999" | incomebinsAC[index, "Income"] == "$25,000 - $34,999") {
+      list(background = highlightcolor)}
+          }
+)
+
+
+```
+
+#### Income distribution of Black and White families in Charlottesville City
+```{r, echo=FALSE, warning=FALSE}
+Charlottesvillelong <- pivot_longer(Charlottesville[,c("perc_AllFamUnder35kE", "perc_WhiteFamUnder35kE", "perc_BlackFamUnder35kE", "perc_AllFamBtw35_100kE", "perc_WhiteFamBtw35_100kE", "perc_BlackFamBtw35_100kE", "perc_AllFamOver100kE", "perc_WhiteFamOver100kE", "perc_BlackFamOver100kE", "countyName")],
+                       cols = -c(countyName),
+                       values_to = 'percent',
+                       names_to = c('race', 'amount'),
+                       names_pattern = 'perc_(AllFam|BlackFam|WhiteFam)(.+)')
+
+Charlottesvillelong$amount <- factor(Charlottesvillelong$amount, levels = c("Under35kE", "Btw35_100kE", "Over100kE"))
+
+ggplot(Charlottesvillelong,aes(x=amount, y=percent,fill=race)) + 
+  geom_col(position="dodge") +
+  labs(x="Income", y="Percent of families") + 
+  scale_x_discrete(labels = c("Earning Under $35K", "Earning $35K-$100K", "Earning Over $100K")) + 
+  scale_fill_manual(values=c("#482677FF", "#2D708EFF", "#29AF7FFF"), labels = c("All families","Black families",  "White families"),
+                    name = element_blank())  + 
+  geom_text(aes(label=paste0(round(Charlottesvillelong$percent, 1), "%")), position=position_dodge(width=0.9), vjust=-0.5, size=2.5)
+
+```
+
+#### Expenses: Single Householder + 2 Children (1 Toddler)
+```{r, echo=FALSE, warning=FALSE}
+exCC <- expenses %>%
+  filter(Locality == "Charlottesville",
+         Unit == "Total") %>%
+  select(Expense, Annual, Monthly, Weekly)
+
+reactable(exCC,
+          highlight = TRUE,
+          bordered = TRUE,
+          rowStyle = function(index) {
+    if (exCC[index, "Expense"] == "Total Expenses") 
+      list(background = highlightcolor)
+  }
+)
+```
+
+* Currently looking for a data source for childcare costs. 
+
+## Fluvanna County
+```{r, echo=FALSE, warning=FALSE}
+Fluvanna <- countydat[countydat$countyName == "Fluvanna",]
+```
+
+#### Breakdown of families making < $35,000 in Fluvanna County
+```{r, echo=FALSE, warning=FALSE}
+incomebinsFC <- data_frame(Income = list("$0 - $9,999", "$10,000 - $14,999", "$15,000 - $24,999", "$25,000 - $34,999", "Total"),
+                         Number = list(Fluvanna$AllFamUnder10kE, Fluvanna$AllFamBtw10_14kE, Fluvanna$AllFamBtw15_24kE, Fluvanna$AllFamBtw25_34kE, sum(Fluvanna$AllFamUnder10kE, Fluvanna$AllFamBtw10_14kE, Fluvanna$AllFamBtw15_24kE, Fluvanna$AllFamBtw25_34kE)),
+                         "of whole county" = list(Fluvanna$perc_AllFamUnder10kE, Fluvanna$perc_AllFamBtw10_14kE, Fluvanna$perc_AllFamBtw15_24kE, Fluvanna$perc_AllFamBtw25_34kE, sum(Fluvanna$perc_AllFamUnder10kE, Fluvanna$perc_AllFamBtw10_14kE, Fluvanna$perc_AllFamBtw15_24kE, Fluvanna$perc_AllFamBtw25_34kE)),
+                         "of families making < 35K in county" =
+                           list(round(Fluvanna$AllFamUnder10kE/Fluvanna$AllFamUnder35kE * 100, 2),
+                                round(Fluvanna$AllFamBtw10_14kE/Fluvanna$AllFamUnder35kE * 100, 2),
+                                round(Fluvanna$AllFamBtw15_24kE/Fluvanna$AllFamUnder35kE * 100, 2),
+                                round(Fluvanna$AllFamBtw25_34kE/Fluvanna$AllFamUnder35kE * 100, 2),
+                                100))
+
+reactable(incomebinsFC, 
+          columnGroups = list(colGroup(name = "Percent", columns = c("of whole county", "of families making < 35K in county"))),
+          highlight = TRUE,
+          bordered = TRUE,
+          rowStyle = function(index) {
+    if (incomebinsAC[index, "Income"] == "$15,000 - $24,999" | incomebinsAC[index, "Income"] == "$25,000 - $34,999") {
+      list(background = highlightcolor)}
+          }
+)
+
+
+```
+
+#### Income distribution of Black and White families in Fluvanna County
+```{r, echo=FALSE, warning=FALSE}
+Fluvannalong <- pivot_longer(Fluvanna[,c("perc_AllFamUnder35kE", "perc_WhiteFamUnder35kE", "perc_BlackFamUnder35kE", "perc_AllFamBtw35_100kE", "perc_WhiteFamBtw35_100kE", "perc_BlackFamBtw35_100kE", "perc_AllFamOver100kE", "perc_WhiteFamOver100kE", "perc_BlackFamOver100kE", "countyName")],
+                       cols = -c(countyName),
+                       values_to = 'percent',
+                       names_to = c('race', 'amount'),
+                       names_pattern = 'perc_(AllFam|BlackFam|WhiteFam)(.+)')
+
+Fluvannalong$amount <- factor(Fluvannalong$amount, levels = c("Under35kE", "Btw35_100kE", "Over100kE"))
+
+ggplot(Fluvannalong,aes(x=amount, y=percent,fill=race)) + 
+  geom_col(position="dodge") +
+  labs(x="Income", y="Percent of families") + 
+  scale_x_discrete(labels = c("Earning Under $35K", "Earning $35K-$100K", "Earning Over $100K")) + 
+  scale_fill_manual(values=c("#482677FF", "#2D708EFF", "#29AF7FFF"), labels = c("All families","Black families",  "White families"),
+                    name = element_blank())  + 
+  geom_text(aes(label=paste0(round(Fluvannalong$percent, 1), "%")), position=position_dodge(width=0.9), vjust=-0.5, size=2.5)
+
+```
+
+#### Expenses: Single Householder + 2 Children (1 Toddler)
+```{r, echo=FALSE, warning=FALSE}
+exFC <- expenses %>%
+  filter(Locality == "Fluvanna",
+         Unit == "Total") %>%
+  select(Expense, Annual, Monthly, Weekly)
+
+reactable(exFC,
+          highlight = TRUE,
+          bordered = TRUE,
+          rowStyle = function(index) {
+    if (exFC[index, "Expense"] == "Total Expenses") 
+      list(background = highlightcolor)
+  }
+)
+```
+
+* Currently looking for a data source for childcare costs. 
+
+## Greene County
+```{r, echo=FALSE, warning=FALSE}
+Greene <- countydat[countydat$countyName == "Greene",]
+```
+
+#### Breakdown of families making < $35,000 in Greene County
+```{r, echo=FALSE, warning=FALSE}
+incomebinsGC <- data_frame(Income = list("$0 - $9,999", "$10,000 - $14,999", "$15,000 - $24,999", "$25,000 - $34,999", "Total"),
+                         Number = list(Greene$AllFamUnder10kE, Greene$AllFamBtw10_14kE, Greene$AllFamBtw15_24kE, Greene$AllFamBtw25_34kE, sum(Greene$AllFamUnder10kE, Greene$AllFamBtw10_14kE, Greene$AllFamBtw15_24kE, Greene$AllFamBtw25_34kE)),
+                         "of whole county" = list(Greene$perc_AllFamUnder10kE, Greene$perc_AllFamBtw10_14kE, Greene$perc_AllFamBtw15_24kE, Greene$perc_AllFamBtw25_34kE, sum(Greene$perc_AllFamUnder10kE, Greene$perc_AllFamBtw10_14kE, Greene$perc_AllFamBtw15_24kE, Greene$perc_AllFamBtw25_34kE)),
+                         "of families making < 35K in county" =
+                           list(round(Greene$AllFamUnder10kE/Greene$AllFamUnder35kE * 100, 2),
+                                round(Greene$AllFamBtw10_14kE/Greene$AllFamUnder35kE * 100, 2),
+                                round(Greene$AllFamBtw15_24kE/Greene$AllFamUnder35kE * 100, 2),
+                                round(Greene$AllFamBtw25_34kE/Greene$AllFamUnder35kE * 100, 2),
+                                100))
+
+reactable(incomebinsGC,
+          columnGroups = list(colGroup(name = "Percent", columns = c("of whole county", "of families making < 35K in county"))),
+          highlight = TRUE,
+          bordered = TRUE,
+          rowStyle = function(index) {
+    if (incomebinsAC[index, "Income"] == "$15,000 - $24,999" | incomebinsAC[index, "Income"] == "$25,000 - $34,999") {
+      list(background = highlightcolor)}
+          }
+)
+
+```
+
+#### Income distribution of Black and White families in Greene County
+```{r, echo=FALSE, warning=FALSE}
+Greenelong <- pivot_longer(Greene[,c("perc_AllFamUnder35kE", "perc_WhiteFamUnder35kE", "perc_BlackFamUnder35kE", "perc_AllFamBtw35_100kE", "perc_WhiteFamBtw35_100kE", "perc_BlackFamBtw35_100kE", "perc_AllFamOver100kE", "perc_WhiteFamOver100kE", "perc_BlackFamOver100kE", "countyName")],
+                       cols = -c(countyName),
+                       values_to = 'percent',
+                       names_to = c('race', 'amount'),
+                       names_pattern = 'perc_(AllFam|BlackFam|WhiteFam)(.+)')
+
+Greenelong$amount <- factor(Greenelong$amount, levels = c("Under35kE", "Btw35_100kE", "Over100kE"))
+
+ggplot(Greenelong,aes(x=amount, y=percent,fill=race)) + 
+  geom_col(position="dodge") +
+  labs(x="Income", y="Percent of families") + 
+  scale_x_discrete(labels = c("Earning Under $35K", "Earning $35K-$100K", "Earning Over $100K")) + 
+  scale_fill_manual(values=c("#482677FF", "#2D708EFF", "#29AF7FFF"), labels = c("All families","Black families",  "White families"),
+                    name = element_blank())  + 
+  geom_text(aes(label=paste0(round(Greenelong$percent, 1), "%")), position=position_dodge(width=0.9), vjust=-0.5, size=2.5)
+
+```
+
+#### Expenses: Single Householder + 2 Children (1 Toddler)
+```{r, echo=FALSE, warning=FALSE}
+exGC <- expenses %>%
+  filter(Locality == "Greene",
+         Unit == "Total") %>%
+  select(Expense, Annual, Monthly, Weekly)
+
+reactable(exGC,
+          highlight = TRUE,
+          bordered = TRUE,
+          rowStyle = function(index) {
+    if (exGC[index, "Expense"] == "Total Expenses") 
+      list(background = highlightcolor)
+  }
+)
+```
+
+* Currently looking for a data source for childcare costs. 
+
+## Louisa County
+```{r, echo=FALSE, warning=FALSE}
+Louisa <- countydat[countydat$countyName == "Louisa",]
+```
+
+#### Breakdown of families making < $35,000 in Louisa County
+```{r, echo=FALSE, warning=FALSE}
+incomebinsLC <- data_frame(Income = list("$0 - $9,999", "$10,000 - $14,999", "$15,000 - $24,999", "$25,000 - $34,999", "Total"),
+                         Number = list(Louisa$AllFamUnder10kE, Louisa$AllFamBtw10_14kE, Louisa$AllFamBtw15_24kE, Louisa$AllFamBtw25_34kE, sum(Louisa$AllFamUnder10kE, Louisa$AllFamBtw10_14kE, Louisa$AllFamBtw15_24kE, Louisa$AllFamBtw25_34kE)),
+                         "of whole county" = list(Louisa$perc_AllFamUnder10kE, Louisa$perc_AllFamBtw10_14kE, Louisa$perc_AllFamBtw15_24kE, Louisa$perc_AllFamBtw25_34kE, sum(Louisa$perc_AllFamUnder10kE, Louisa$perc_AllFamBtw10_14kE, Louisa$perc_AllFamBtw15_24kE, Louisa$perc_AllFamBtw25_34kE)),
+                         "of families making < 35K in county" =
+                           list(round(Louisa$AllFamUnder10kE/Louisa$AllFamUnder35kE * 100, 2),
+                                round(Louisa$AllFamBtw10_14kE/Louisa$AllFamUnder35kE * 100, 2),
+                                round(Louisa$AllFamBtw15_24kE/Louisa$AllFamUnder35kE * 100, 2),
+                                round(Louisa$AllFamBtw25_34kE/Louisa$AllFamUnder35kE * 100, 2),
+                                100))
+
+reactable(incomebinsLC, 
+          columnGroups = list(colGroup(name = "Percent", columns = c("of whole county", "of families making < 35K in county"))),
+          highlight = TRUE,
+          bordered = TRUE,
+          rowStyle = function(index) {
+    if (incomebinsAC[index, "Income"] == "$15,000 - $24,999" | incomebinsAC[index, "Income"] == "$25,000 - $34,999") {
+      list(background = highlightcolor)}
+          }
+)
+
+```
+
+#### Income distribution of Black and White families in Louisa County
+```{r, echo=FALSE, warning=FALSE}
+Louisalong <- pivot_longer(Louisa[,c("perc_AllFamUnder35kE", "perc_WhiteFamUnder35kE", "perc_BlackFamUnder35kE", "perc_AllFamBtw35_100kE", "perc_WhiteFamBtw35_100kE", "perc_BlackFamBtw35_100kE", "perc_AllFamOver100kE", "perc_WhiteFamOver100kE", "perc_BlackFamOver100kE", "countyName")],
+                       cols = -c(countyName),
+                       values_to = 'percent',
+                       names_to = c('race', 'amount'),
+                       names_pattern = 'perc_(AllFam|BlackFam|WhiteFam)(.+)')
+
+Louisalong$amount <- factor(Louisalong$amount, levels = c("Under35kE", "Btw35_100kE", "Over100kE"))
+
+ggplot(Louisalong,aes(x=amount, y=percent,fill=race)) + 
+  geom_col(position="dodge") +
+  labs(x="Income", y="Percent of families") + 
+  scale_x_discrete(labels = c("Earning Under $35K", "Earning $35K-$100K", "Earning Over $100K")) + 
+  scale_fill_manual(values=c("#482677FF", "#2D708EFF", "#29AF7FFF"), labels = c("All families","Black families",  "White families"),
+                    name = element_blank())  + 
+  geom_text(aes(label=paste0(round(Louisalong$percent, 1), "%")), position=position_dodge(width=0.9), vjust=-0.5, size=2.5)
+
+```
+
+#### Expenses: Single Householder + 2 Children (1 Toddler)
+```{r, echo=FALSE, warning=FALSE}
+exLC <- expenses %>%
+  filter(Locality == "Louisa",
+         Unit == "Total") %>%
+  select(Expense, Annual, Monthly, Weekly)
+
+reactable(exLC,
+          highlight = TRUE,
+          bordered = TRUE,
+          rowStyle = function(index) {
+    if (exLC[index, "Expense"] == "Total Expenses") 
+      list(background = highlightcolor)
+  }
+)
+```
+
+* Currently looking for a data source for childcare costs. 
+
+
+## Nelson County
+```{r, echo=FALSE, warning=FALSE}
+Nelson <- countydat[countydat$countyName == "Nelson",]
+```
+
+#### Breakdown of families making < $35,000 in Nelson County
+```{r, echo=FALSE, warning=FALSE}
+incomebinsNC <- data_frame(Income = list("$0 - $9,999", "$10,000 - $14,999", "$15,000 - $24,999", "$25,000 - $34,999", "Total"),
+                         Number = list(Nelson$AllFamUnder10kE, Nelson$AllFamBtw10_14kE, Nelson$AllFamBtw15_24kE, Nelson$AllFamBtw25_34kE, sum(Nelson$AllFamUnder10kE, Nelson$AllFamBtw10_14kE, Nelson$AllFamBtw15_24kE, Nelson$AllFamBtw25_34kE)),
+                         "of whole county" = list(Nelson$perc_AllFamUnder10kE, Nelson$perc_AllFamBtw10_14kE, Nelson$perc_AllFamBtw15_24kE, Nelson$perc_AllFamBtw25_34kE, sum(Nelson$perc_AllFamUnder10kE, Nelson$perc_AllFamBtw10_14kE, Nelson$perc_AllFamBtw15_24kE, Nelson$perc_AllFamBtw25_34kE)),
+                         "of families making < 35K in county" =
+                           list(round(Nelson$AllFamUnder10kE/Nelson$AllFamUnder35kE * 100, 2),
+                                round(Nelson$AllFamBtw10_14kE/Nelson$AllFamUnder35kE * 100, 2),
+                                round(Nelson$AllFamBtw15_24kE/Nelson$AllFamUnder35kE * 100, 2),
+                                round(Nelson$AllFamBtw25_34kE/Nelson$AllFamUnder35kE * 100, 2),
+                                100))
+
+reactable(incomebinsNC, 
+          columnGroups = list(colGroup(name = "Percent", columns = c("of whole county", "of families making < 35K in county"))),
+          highlight = TRUE,
+          bordered = TRUE,
+          rowStyle = function(index) {
+    if (incomebinsAC[index, "Income"] == "$15,000 - $24,999" | incomebinsAC[index, "Income"] == "$25,000 - $34,999") {
+      list(background = highlightcolor)}
+          }
+)
+```
+
+#### Income distribution of Black and White families in Nelson County
+```{r, echo=FALSE, warning=FALSE}
+Nelsonlong <- pivot_longer(Nelson[,c("perc_AllFamUnder35kE", "perc_WhiteFamUnder35kE", "perc_BlackFamUnder35kE", "perc_AllFamBtw35_100kE", "perc_WhiteFamBtw35_100kE", "perc_BlackFamBtw35_100kE", "perc_AllFamOver100kE", "perc_WhiteFamOver100kE", "perc_BlackFamOver100kE", "countyName")],
+                       cols = -c(countyName),
+                       values_to = 'percent',
+                       names_to = c('race', 'amount'),
+                       names_pattern = 'perc_(AllFam|BlackFam|WhiteFam)(.+)')
+
+Nelsonlong$amount <- factor(Nelsonlong$amount, levels = c("Under35kE", "Btw35_100kE", "Over100kE"))
+
+ggplot(Nelsonlong,aes(x=amount, y=percent,fill=race)) + 
+  geom_col(position="dodge") +
+  labs(x="Income", y="Percent of families") + 
+  scale_x_discrete(labels = c("Earning Under $35K", "Earning $35K-$100K", "Earning Over $100K")) + 
+  scale_fill_manual(values=c("#482677FF", "#2D708EFF", "#29AF7FFF"), labels = c("All families","Black families",  "White families"),
+                    name = element_blank())  + 
+  geom_text(aes(label=paste0(round(Nelsonlong$percent, 1), "%")), position=position_dodge(width=0.9), vjust=-0.5, size=2.5)
+
+```
+
+#### Expenses: Single Householder + 2 Children (1 Toddler)
+```{r, echo=FALSE, warning=FALSE}
+exNC <- expenses %>%
+  filter(Locality == "Nelson",
+         Unit == "Total") %>%
+  select(Expense, Annual, Monthly, Weekly)
+
+reactable(exNC,
+          highlight = TRUE,
+          bordered = TRUE,
+          rowStyle = function(index) {
+    if (exNC[index, "Expense"] == "Total Expenses") 
+      list(background = highlightcolor)
+  }
+)
+```
+
+* Currently looking for a data source for childcare costs. 
+
+# Tract {.tabset}
+
+##  Albemarle County 
+
+#### Median family income
+```{r, echo=FALSE, warning=FALSE}
+ACmap <- geofull %>%
+  filter(countyName == "Albemarle")
+
+pal <- colorNumeric("viridis", reverse = TRUE, domain = ACmap$medianFamIncomeE)
+leaflet() %>% 
+  addProviderTiles("CartoDB.Positron") %>% 
+  addPolygons(data = ACmap,
+              fillColor = ~pal(medianFamIncomeE),
+              weight = 1,
+              opacity = 1,
+              color = "white", 
+              fillOpacity = 0.6,
+              smoothFactor = 0.3,
+              highlight = highlightOptions(
+                weight = 1, fillOpacity = 0.8, bringToFront = T
+              ),
+              popup = paste0("Median family income: ", ACmap$medianFamIncomeE)) %>% 
+  addLegend("bottomright", pal = pal, values = ACmap$medianFamIncomeE, 
+            title = "Median family income", opacity = 0.7)
+```
+
+#### Percent of families making < $35,000
+```{r, echo=FALSE, warning=FALSE}
+pal <- colorNumeric("viridis", reverse = TRUE, domain = ACmap$perc_AllFamUnder35kE)
+leaflet() %>% 
+  addProviderTiles("CartoDB.Positron") %>% 
+  addPolygons(data = ACmap,
+              fillColor = ~pal(perc_AllFamUnder35kE),
+              weight = 1,
+              opacity = 1,
+              color = "white", 
+              fillOpacity = 0.6,
+              smoothFactor = 0.3,
+              highlight = highlightOptions(
+                weight = 1, fillOpacity = 0.8, bringToFront = T
+              ),
+              popup = paste0("Percent of families: ", ACmap$perc_AllFamUnder35kE, "%")) %>% 
+  addLegend("bottomright", pal = pal, values = ACmap$perc_AllFamUnder35kE, 
+            title = "Percent of families <br> making < $35,000", opacity = 0.7)
+```
+
+
+## Buckingham County
+
+#### Median family income
+```{r, echo=FALSE, warning=FALSE}
+BCmap <- geofull %>%
+  filter(countyName == "Buckingham")
+
+pal <- colorNumeric("viridis", reverse = TRUE, domain = BCmap$medianFamIncomeE)
+leaflet() %>% 
+  addProviderTiles("CartoDB.Positron") %>% 
+  addPolygons(data = BCmap,
+              fillColor = ~pal(medianFamIncomeE),
+              weight = 1,
+              opacity = 1,
+              color = "white", 
+              fillOpacity = 0.6,
+              smoothFactor = 0.3,
+              highlight = highlightOptions(
+                weight = 1, fillOpacity = 0.8, bringToFront = T
+              ),
+              popup = paste0("Median family income: ", BCmap$medianFamIncomeE)) %>% 
+  addLegend("bottomright", pal = pal, values = BCmap$medianFamIncomeE, 
+            title = "Median family income", opacity = 0.7)
+```
+
+#### Percent of families making < $35,000
+```{r, echo=FALSE, warning=FALSE}
+pal <- colorNumeric("viridis", reverse = TRUE, domain = BCmap$perc_AllFamUnder35kE)
+leaflet() %>% 
+  addProviderTiles("CartoDB.Positron") %>% 
+  addPolygons(data = BCmap,
+              fillColor = ~pal(perc_AllFamUnder35kE),
+              weight = 1,
+              opacity = 1,
+              color = "white", 
+              fillOpacity = 0.6,
+              smoothFactor = 0.3,
+              highlight = highlightOptions(
+                weight = 1, fillOpacity = 0.8, bringToFront = T
+              ),
+              popup = paste0("Percent of families: ", BCmap$perc_AllFamUnder35kE, "%")) %>% 
+  addLegend("bottomright", pal = pal, values = BCmap$perc_AllFamUnder35kE, 
+            title = "Percent of families <br> making < $35,000", opacity = 0.7)
+```
+
+
+##  Charlottesville City 
+
+#### Median family income
+```{r, echo=FALSE, warning=FALSE}
+cvillemap <- geofull %>%
+  filter(countyName == "Charlottesville")
+
+pal <- colorNumeric("viridis", reverse = TRUE, domain = cvillemap$medianFamIncomeE)
+leaflet() %>% 
+  addProviderTiles("CartoDB.Positron") %>% 
+  addPolygons(data = cvillemap,
+              fillColor = ~pal(medianFamIncomeE),
+              weight = 1,
+              opacity = 1,
+              color = "white", 
+              fillOpacity = 0.6,
+              smoothFactor = 0.3,
+              highlight = highlightOptions(
+                weight = 1, fillOpacity = 0.8, bringToFront = T
+              ),
+              popup = paste0("Median family income: ", cvillemap$medianFamIncomeE)) %>% 
+  addLegend("bottomright", pal = pal, values = cvillemap$medianFamIncomeE, 
+            title = "Median family income", opacity = 0.7)
+```
+
+#### Percent of families making < $35,000
+```{r, echo=FALSE, warning=FALSE}
+pal <- colorNumeric("viridis", reverse = TRUE, domain = cvillemap$perc_AllFamUnder35kE)
+leaflet() %>% 
+  addProviderTiles("CartoDB.Positron") %>% 
+  addPolygons(data = cvillemap,
+              fillColor = ~pal(perc_AllFamUnder35kE),
+              weight = 1,
+              opacity = 1,
+              color = "white", 
+              fillOpacity = 0.6,
+              smoothFactor = 0.3,
+              highlight = highlightOptions(
+                weight = 1, fillOpacity = 0.8, bringToFront = T
+              ),
+              popup = paste0("Percent of families: ", cvillemap$perc_AllFamUnder35kE, "%")) %>% 
+  addLegend("bottomright", pal = pal, values = cvillemap$perc_AllFamUnder35kE, 
+            title = "Percent of families <br> making < $35,000", opacity = 0.7)
+```
+
+
+##  Fluvanna County 
+
+#### Median family income
+```{r, echo=FALSE, warning=FALSE}
+FCmap <- geofull %>%
+  filter(countyName == "Fluvanna")
+
+pal <- colorNumeric("viridis", reverse = TRUE, domain = FCmap$medianFamIncomeE)
+leaflet() %>% 
+  addProviderTiles("CartoDB.Positron") %>% 
+  addPolygons(data = FCmap,
+              fillColor = ~pal(medianFamIncomeE),
+              weight = 1,
+              opacity = 1,
+              color = "white", 
+              fillOpacity = 0.6,
+              smoothFactor = 0.3,
+              highlight = highlightOptions(
+                weight = 1, fillOpacity = 0.8, bringToFront = T
+              ),
+              popup = paste0("Median family income: ", FCmap$medianFamIncomeE)) %>% 
+  addLegend("bottomright", pal = pal, values = FCmap$medianFamIncomeE, 
+            title = "Median family income", opacity = 0.7)
+```
+
+#### Percent of families making < $35,000
+```{r, echo=FALSE, warning=FALSE}
+pal <- colorNumeric("viridis", reverse = TRUE, domain = FCmap$perc_AllFamUnder35kE)
+leaflet() %>% 
+  addProviderTiles("CartoDB.Positron") %>% 
+  addPolygons(data = FCmap,
+              fillColor = ~pal(perc_AllFamUnder35kE),
+              weight = 1,
+              opacity = 1,
+              color = "white", 
+              fillOpacity = 0.6,
+              smoothFactor = 0.3,
+              highlight = highlightOptions(
+                weight = 1, fillOpacity = 0.8, bringToFront = T
+              ),
+              popup = paste0("Percent of families: ", FCmap$perc_AllFamUnder35kE, "%")) %>% 
+  addLegend("bottomright", pal = pal, values = FCmap$perc_AllFamUnder35kE, 
+            title = "Percent of families <br> making < $35,000", opacity = 0.7)
+```
+
+##  Greene County 
+
+#### Median family income
+```{r, echo=FALSE, warning=FALSE}
+GCmap <- geofull %>%
+  filter(countyName == "Greene")
+
+pal <- colorNumeric("viridis", reverse = TRUE, domain = GCmap$medianFamIncomeE)
+leaflet() %>% 
+  addProviderTiles("CartoDB.Positron") %>% 
+  addPolygons(data = GCmap,
+              fillColor = ~pal(medianFamIncomeE),
+              weight = 1,
+              opacity = 1,
+              color = "white", 
+              fillOpacity = 0.6,
+              smoothFactor = 0.3,
+              highlight = highlightOptions(
+                weight = 1, fillOpacity = 0.8, bringToFront = T
+              ),
+              popup = paste0("Median family income: ", GCmap$medianFamIncomeE)) %>% 
+  addLegend("bottomright", pal = pal, values = GCmap$medianFamIncomeE, 
+            title = "Median family income", opacity = 0.7)
+```
+
+#### Percent of families making < $35,000
+```{r, echo=FALSE, warning=FALSE}
+pal <- colorNumeric("viridis", reverse = TRUE, domain = GCmap$perc_AllFamUnder35kE)
+leaflet() %>% 
+  addProviderTiles("CartoDB.Positron") %>% 
+  addPolygons(data = GCmap,
+              fillColor = ~pal(perc_AllFamUnder35kE),
+              weight = 1,
+              opacity = 1,
+              color = "white", 
+              fillOpacity = 0.6,
+              smoothFactor = 0.3,
+              highlight = highlightOptions(
+                weight = 1, fillOpacity = 0.8, bringToFront = T
+              ),
+              popup = paste0("Percent of families: ", GCmap$perc_AllFamUnder35kE, "%")) %>% 
+  addLegend("bottomright", pal = pal, values = GCmap$perc_AllFamUnder35kE, 
+            title = "Percent of families <br> making < $35,000", opacity = 0.7)
+```
+
+
+##  Louisa County 
+
+#### Median family income
+```{r, echo=FALSE, warning=FALSE}
+LCmap <- geofull %>%
+  filter(countyName == "Louisa")
+
+pal <- colorNumeric("viridis", reverse = TRUE, domain = LCmap$medianFamIncomeE)
+leaflet() %>% 
+  addProviderTiles("CartoDB.Positron") %>% 
+  addPolygons(data = LCmap,
+              fillColor = ~pal(medianFamIncomeE),
+              weight = 1,
+              opacity = 1,
+              color = "white", 
+              fillOpacity = 0.6,
+              smoothFactor = 0.3,
+              highlight = highlightOptions(
+                weight = 1, fillOpacity = 0.8, bringToFront = T
+              ),
+              popup = paste0("Median family income: ", LCmap$medianFamIncomeE)) %>% 
+  addLegend("bottomright", pal = pal, values = LCmap$medianFamIncomeE, 
+            title = "Median family income", opacity = 0.7)
+```
+
+#### Percent of families making < $35,000
+```{r, echo=FALSE, warning=FALSE}
+pal <- colorNumeric("viridis", reverse = TRUE, domain = LCmap$perc_AllFamUnder35kE)
+leaflet() %>% 
+  addProviderTiles("CartoDB.Positron") %>% 
+  addPolygons(data = LCmap,
+              fillColor = ~pal(perc_AllFamUnder35kE),
+              weight = 1,
+              opacity = 1,
+              color = "white", 
+              fillOpacity = 0.6,
+              smoothFactor = 0.3,
+              highlight = highlightOptions(
+                weight = 1, fillOpacity = 0.8, bringToFront = T
+              ),
+              popup = paste0("Percent of families: ", LCmap$perc_AllFamUnder35kE, "%")) %>% 
+  addLegend("bottomright", pal = pal, values = LCmap$perc_AllFamUnder35kE, 
+            title = "Percent of families <br> making < $35,000", opacity = 0.7)
+```
+
+##  Nelson County 
+
+#### Median family income 
+```{r, echo=FALSE, warning=FALSE}
+NCmap <- geofull %>%
+  filter(countyName == "Nelson")
+
+pal <- colorNumeric("viridis", reverse = TRUE, domain = NCmap$medianFamIncomeE)
+leaflet() %>% 
+  addProviderTiles("CartoDB.Positron") %>% 
+  addPolygons(data = NCmap,
+              fillColor = ~pal(medianFamIncomeE),
+              weight = 1,
+              opacity = 1,
+              color = "white", 
+              fillOpacity = 0.6,
+              smoothFactor = 0.3,
+              highlight = highlightOptions(
+                weight = 1, fillOpacity = 0.8, bringToFront = T
+              ),
+              popup = paste0("Median family income: ", NCmap$medianFamIncomeE)) %>% 
+  addLegend("bottomright", pal = pal, values = NCmap$medianFamIncomeE, 
+            title = "Median family income", opacity = 0.7)
+```
+
+#### Percent of families making < $35,000
+```{r, echo=FALSE, warning=FALSE}
+pal <- colorNumeric("viridis", reverse = TRUE, domain = NCmap$perc_AllFamUnder35kE)
+leaflet() %>% 
+  addProviderTiles("CartoDB.Positron") %>% 
+  addPolygons(data = NCmap,
+              fillColor = ~pal(perc_AllFamUnder35kE),
+              weight = 1,
+              opacity = 1,
+              color = "white", 
+              fillOpacity = 0.6,
+              smoothFactor = 0.3,
+              highlight = highlightOptions(
+                weight = 1, fillOpacity = 0.8, bringToFront = T
+              ),
+              popup = paste0("Percent of families: ", NCmap$perc_AllFamUnder35kE, "%")) %>% 
+  addLegend("bottomright", pal = pal, values = NCmap$perc_AllFamUnder35kE, 
+            title = "Percent of families <br> making < $35,000", opacity = 0.7)
+```
+
