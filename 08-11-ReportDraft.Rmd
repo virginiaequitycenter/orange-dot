@@ -1,0 +1,229 @@
+---
+title: "08-11-2022 Report Draft"
+date: '2022-08-11'
+output: 
+  html_document:
+      toc: true
+      toc_float: true
+      toc_depth: 1
+      code_folding: hide
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(hrbrthemes)
+library(sjmisc)
+library(sf)
+library(leaflet)
+library(ggpubr)
+library(reactable)
+
+# ACS data
+tractdat <- read_csv("data/acs_tract_orangedot.csv")
+tractdat$GEOID <- as.character(tractdat$GEOID)
+countydat <- read_csv("data/acs_county_orangedot.csv")
+
+# Spatial data
+geo <- readRDS("data/cvilleODreport_tracts.RDS")
+
+geofull <- geo %>%
+  left_join(tractdat, by = "GEOID")
+
+geofull <- st_transform(geofull, crs = 4326) 
+
+expenses <- read_csv("data/Expenses-SH-2kids.csv")
+
+highlightcolor <- ("#FDE725FF")
+
+```
+
+## Project Purpose
+
+In 2018, we set a goal of helping 4,000 families secure quality jobs by 2026. We plan to achieve this goal by identifying struggling families through our Job Seeker Network, connecting them to quality jobs through our Employer Network, and supporting them through our Provider Network.
+
+Our approach is to amplify the effects of the region’s extensive support services and economic power by deploying existing social networks to connect those resources more directly to the families struggling in the Charlottesville region.
+
+## Executive Summary
+In our community, 9,413 families (14 percent) do not make enough money to afford the essentials of life—food, shelter, clothing and utilities—and the added costs associated with working—childcare and transportation.
+
+The struggle is not equally shared. Thirty-two percent of black families make less than $35,000/year, compared to 11% of white families.
+
+Due mainly to the cost of housing, a single parent with a toddler in childcare needs to earn over $45,000 a year.
+
+Network2Work@PVCC intentionally addresses these struggles. We have enrolled over 1,000 job- seekers, and 85% of those who complete secure employment. Fifty-nine percent of those jobs pay $25,000 or more. Fifty-six percent of our job-seekers are black.
+Last year, Network2Work@PVCC provided job-seekers, on average, $750 in one-time emergency financial assistance, primarily for either housing or transportation.
+In addition to expanding the reach of Network2Work@PVCC, there are ten additional steps our community could take to help our neighbors climb the economic ladder:
+1. Increase local procurement.
+2. Pilot Open HiringTM.
+3. Provide universal pre-K.
+4. Offer low-interest loans/grants to pay life expenses while attending school.
+5. Pair subsidized housing with opportunities for economic mobility wherever possible.
+6. Build more $800/month two-bedroom apartments for working families.
+7. Create a community-wide employee assistance program.
+8. Expand homeownership and wealth-building through purpose-built condominiums.
+9. Make access to capital affordable by providing loan guarantees.
+10. Lock shifts.
+
+# Part I: Defining the Issue
+
+> "Let us dedicate ourselves to what the Greeks wrote so many years ago: To tame the savageness of man and make gentle the life of this world."
+
+Robert F. Kennedy^[Robert F. Kennedy was a 1951 graduate of the University of Virginia School of Law. Kennedy, R.F. (1968, April 4). Statement on Assassination of Martin Luther King, Jr. Retrieved from https://www.jfklibrary.org/learn/about- jfk/the-kennedy-family/robert-f-kennedy/robert-f-kennedy-speeches/statement-on-assassination-of-martin- luther-king-jr-indianapolis-indiana-april-4-1968]
+
+Remarks following the assassination of Dr.
+Martin Luther King, Jr., April 4, 1968 Indianapolis, Indiana
+
+__2020 was a difficult year. The pandemic. Economic collapse. Racial tensions. A divided nation.__
+
+These upheavals have us all yearning for security and stability. We want to provide for ourselves and for our families. We want our children to have a better life.
+
+We want the life of this world to be made more gentle.
+
+For too many families in our community, life is not gentle. In America, the coin of the realm is coin. And without enough coin, every day is a struggle. To maintain a roof over your family's head, to put food on the table, to fix the car that is your family's lifeblood because it carries you to work.
+
+When you are faced daily with those struggles, it is difficult to be the parent you want to be, the worker you know you could be, or the person you were meant to be.
+
+__The novel coronavirus highlights conditions that are, sadly, not novel at all: low-income individuals, especially individuals of color, are suffering disproportionately, both physically and financially. These health and income inequities—which were pre-existing conditions long before COVID-19—will persist long after the pandemic subsides unless we are as intentional in solving poverty as our nation has been in creating it.__^[See, e.g., Rothstein, R. (2017). The Color of Law: A Forgotten History of How Our Government Segregated America. New York/London: Liveright Publishing Corporation. This history was not long ago. Early in my own lifetime, it was legal for Americans to be denied employment, be segregated in their schools, and be denied the right to vote because of the color of their skin. From a historical timeline perspective, it is interesting to note that Harriett Tubman was born when Thomas Jefferson was still alive and died after Ronald Reagan was born.]
+
+We should focus our recovery efforts not on restoring the old economy but on rebuilding an equitable economy, intentionally constructed on a foundation of racial justice.
+
+In the pages that follow, we provide an update to the Orange Dot Project report first issued in September 2011.^[To find previous versions of the Orange Dot report, go to https://www.pvcc.edu/history-network2workpvcc- program. COVID-19 delayed the publication of this report, as it has disrupted so much over the past year. We intend to resume releasing updated Orange Dot Reports in the Fall of even years, beginning again in 2022.] Knowing that we can only solve issues we can understand, we start with a snapshot of the families in our community who are struggling, and we conclude with some solutions that address those struggles.
+
+What we have learned since our work began in 2011 is that there are too many struggling families in our community, but not too many to help.
+
+## Too Many Struggling Families
+
+There are 66,633 families living in the Charlottesville region.^[Family is defined as two or more related people living in the same household. U.S. Census Bureau (2020). Selected Economic Characteristics. American Community Survey 5-Year Estimates, 2014-2018. Retrieved from https://data.census.gov/cedsci/table?text=dp03&tid=ACSDP5Y2018.DP03&hidePreview=true.]
+
+Of these, 9,413 families (14 percent) do not make enough money to afford the essentials of life—food, shelter, clothing and utilities—and the added costs associated with working— childcare and transportation.^[This report reflects the U.S. Census Bureau's American Community Survey 5-year averages, 2015-2020.]
+
+While this is still too many families, it is heartening to note that the situation improved since the previous report was published in January 2021. In the Orange Dot Report 4.0, we found that there were 10,940 families (17 percent) who did not earn enough to meet their basic needs. Thus, over the following two years our community reduced the number of struggling families by nearly 14 percent. __At this rate, our community is on track to help lift 4,000 families to self-sufficiency by 2026__.^[This is a community success, brought about primarily by the hard work of the job-seekers themselves, made possible by the quality employers who hire them, and propelled by the social and material support supplied by family, friends and a network of community-based organizations and agencies.]
+
+As detailed in the sections that follow, families in our community generally need to earn at least $35,000 annually to meet their basic needs.
+
+### Number of families struggling in the region
+
+```{r, echo=FALSE, warning=FALSE}
+
+strfam <- countydat %>%
+  dplyr::select(countyName, AllFamUnder35kE, perc_AllFamUnder35kE) %>%
+  rename(Locality = countyName,
+         "Number of families making < 35K" = AllFamUnder35kE,
+         "Percent of families making < 35K" = perc_AllFamUnder35kE)
+
+reactable(strfam,
+          highlight = TRUE,
+          defaultSorted = "Locality",
+          rowStyle = function(index) {
+    if (strfam[index, "Locality"] == "Whole Region" ){
+      list(background = highlightcolor)}
+          }
+)
+
+```
+
+### Number of families making < $35,000
+
+```{r, echo=FALSE, warning=FALSE}
+
+countydatlong1 <- reshape_longer(as.data.frame(countydat[1:7,c("AllFamUnder35kE","BlackFamUnder35kE","WhiteFamUnder35kE","countyName")]), columns = list(
+                         c("AllFamUnder35kE","BlackFamUnder35kE","WhiteFamUnder35kE")),
+                       names.to = "value",
+                       values.to = "Number",
+                       id = "countyName")
+
+countydatlong1$value <- factor(countydatlong1$value, levels = c("AllFamUnder35kE", "BlackFamUnder35kE", "WhiteFamUnder35kE"))
+
+ggplot(countydatlong1, aes(y=Number, x=countyName, fill=value)) + 
+    geom_bar(position="dodge", stat="identity") +
+  geom_text(aes(label=Number), position=position_dodge(width=0.9), vjust=-0.5, size=2.5) + 
+  labs(x = "County", y = "Number of families") + 
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  scale_fill_manual(values=c("#482677FF", "#2D708EFF", "#29AF7FFF"), labels = c("All families","Black families",  "White families"),
+                    name = element_blank()) + 
+  annotate("text", x = "Greene", y = 2250, label = "Whole Region = 9,413 families")
+  
+```
+
+### Percent of families making < $35,000
+
+```{r, echo=FALSE, warning=FALSE}
+
+countydatlong2 <- reshape_longer(as.data.frame(countydat[,c("perc_AllFamUnder35kE","perc_WhiteFamUnder35kE","perc_BlackFamUnder35kE", "countyName")]), columns = list(
+                         c("perc_AllFamUnder35kE","perc_BlackFamUnder35kE","perc_WhiteFamUnder35kE")),
+                       names.to = "value",
+                       values.to = "Percent",
+                       id = "countyName")
+
+countydatlong2$value <- factor(countydatlong2$value, levels = c("perc_AllFamUnder35kE", "perc_BlackFamUnder35kE", "perc_WhiteFamUnder35kE"))
+
+blank <- as.data.frame(matrix(nrow = 3, ncol = 3))
+colnames(blank) <- colnames(countydatlong2)
+blank$countyName <- ""
+blank$value <- c("perc_AllFamUnder35kE", "perc_BlackFamUnder35kE", "perc_WhiteFamUnder35kE")
+
+countydatlong2 <- rbind(countydatlong2, blank)
+
+countydatlong2$countyName <- factor(countydatlong2$countyName, levels = c("Whole Region", "","Albemarle", "Buckingham", "Charlottesville", "Fluvanna", "Greene", "Louisa", "Nelson"))
+
+ggplot(countydatlong2, aes(y=Percent, x=countyName, fill=value))+ 
+    geom_bar(position="dodge", stat="identity") +
+  geom_text(aes(label=paste0(round(Percent, 0),"%")), position=position_dodge(width=0.9), vjust=-0.5, size=2.5) + 
+  labs(x = "County", y = "Percent of families") + 
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        axis.ticks.x = element_blank()) +
+  scale_fill_manual(values=c("#482677FF", "#2D708EFF", "#29AF7FFF"), labels = c("All families","Black families",  "White families"),
+                    name = element_blank()) 
+```
+
+
+As you can see from the table below, while some of these 9,413 families struggling in our community appear to have limited or no earning capacity (those with incomes from $0-$14,999), most appear to be working and earning income ($15,000-$34,999) but not enough to support their families:
+
+### Breakdown of families making < $35,000 in the whole region
+
+```{r, echo=FALSE, warning=FALSE}
+incomebins <- data_frame(Income = list("$0 - $9,999", "$10,000 - $14,999", "$15,000 - $24,999", "$25,000 - $34,999"),
+                         Number = list(countydat[8,]$AllFamUnder10kE, countydat[8,]$AllFamBtw10_14kE, countydat[8,]$AllFamBtw15_24kE, countydat[8,]$AllFamBtw25_34kE),
+                         Percent = list(countydat[8,]$perc_AllFamUnder10kE, countydat[8,]$perc_AllFamBtw10_14kE, countydat[8,]$perc_AllFamBtw15_24kE, countydat[8,]$perc_AllFamBtw25_34kE))
+
+reactable(incomebins, defaultSorted = c("Number", "Percent"),
+          highlight = TRUE,
+          bordered = TRUE,
+          rowStyle = function(index) {
+    if (incomebins[index, "Income"] == "$15,000 - $24,999" | incomebins[index, "Income"] == "$25,000 - $34,999") {
+      list(background = highlightcolor)}
+          }
+)
+
+```
+
+This data points to an important distinction when developing a strategy for improving the lives of these families. There are two categories of families: Those who can earn their way to self- sufficiency, and those whose earning potential is more limited. And we need a method for distinguishing between the two.
+
+Unfortunately, we often lump them together. But for most families, low-incomeness is not a constant that must be worked around, but a variable that must be changed.
+
+When we are working with someone who is low-income, our very first question should be: Do they need to be low-income?
+
+Certainly, there are those who have exhausted their earning potential and are on fixed incomes that are unlikely to increase by very much. These families require sustained subsidy to meet their basic needs of food, shelter, clothing and utilities. These families have run out of other options. Based on the income data above, which shows 3,057 families make less than $15,000 annually (28%), as well data from Charlottesville’s housing affordability study^[Partners for Economic Solutions. (2018). Housing Needs Assessment: Socioeconomic and Housing Market Analysis. Washington, D.C.: Form-Based Code Institute/Smart Growth America, 58.], it is estimated that roughly one-third of the families who are struggling cannot earn their way to self-sufficiency. Their very survival depends on the strength of the social safety net—a blend of government assistance and private philanthropy.
+
+The vast majority of families, however, have the potential to provide for themselves. They are working, but their labor is simply not valued.
+
+Not being valued—literally—has devastating consequences. One consequence is the stigma of being poor in America. We Americans hold tightly to the belief that "if you work hard and play by the rules," you will get ahead. The corollary to that belief, sadly, is that if you haven't gotten ahead, it must be because you don't work hard and don't play by the rules. As demonstrated by the following mathematical formula, however, working hard and playing by the rules doesn't guarantee that you'll get ahead:
+
+## Missing photo on page 6 ## 
+
+The variable is not the hard work, but the wages. People generally don’t choose to be poor. It is important to note that a full-time worker making Virginia's minimum wage will have a gross income of $14,400 per year8. To reduce the number of struggling families, therefore, requires that we increase their wages. We need a system that identifies the 72 percent of low-income families who are working for a living but who are not valued, and help them increase their value in the eyes of their employers:
+
+## Missing pie charts on page 6 ##
+
+
+
+
+
+
+
+
+
+
+
+
