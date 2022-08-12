@@ -5,7 +5,7 @@ output:
   html_document:
       toc: true
       toc_float: true
-      toc_depth: 1
+      toc_depth: 3
       code_folding: hide
 ---
 
@@ -38,13 +38,13 @@ highlightcolor <- ("#FDE725FF")
 
 ```
 
-## Project Purpose
+# Project Purpose
 
 In 2018, we set a goal of helping 4,000 families secure quality jobs by 2026. We plan to achieve this goal by identifying struggling families through our Job Seeker Network, connecting them to quality jobs through our Employer Network, and supporting them through our Provider Network.
 
 Our approach is to amplify the effects of the region’s extensive support services and economic power by deploying existing social networks to connect those resources more directly to the families struggling in the Charlottesville region.
 
-## Executive Summary
+# Executive Summary
 In our community, 9,413 families (14 percent) do not make enough money to afford the essentials of life—food, shelter, clothing and utilities—and the added costs associated with working—childcare and transportation.
 
 The struggle is not equally shared. Thirty-two percent of black families make less than $35,000/year, compared to 11% of white families.
@@ -52,7 +52,9 @@ The struggle is not equally shared. Thirty-two percent of black families make le
 Due mainly to the cost of housing, a single parent with a toddler in childcare needs to earn over $45,000 a year.
 
 Network2Work@PVCC intentionally addresses these struggles. We have enrolled over 1,000 job- seekers, and 85% of those who complete secure employment. Fifty-nine percent of those jobs pay $25,000 or more. Fifty-six percent of our job-seekers are black.
+
 Last year, Network2Work@PVCC provided job-seekers, on average, $750 in one-time emergency financial assistance, primarily for either housing or transportation.
+
 In addition to expanding the reach of Network2Work@PVCC, there are ten additional steps our community could take to help our neighbors climb the economic ladder:
 1. Increase local procurement.
 2. Pilot Open HiringTM.
@@ -69,10 +71,7 @@ In addition to expanding the reach of Network2Work@PVCC, there are ten additiona
 
 > "Let us dedicate ourselves to what the Greeks wrote so many years ago: To tame the savageness of man and make gentle the life of this world."
 
-Robert F. Kennedy^[Robert F. Kennedy was a 1951 graduate of the University of Virginia School of Law. Kennedy, R.F. (1968, April 4). Statement on Assassination of Martin Luther King, Jr. Retrieved from https://www.jfklibrary.org/learn/about- jfk/the-kennedy-family/robert-f-kennedy/robert-f-kennedy-speeches/statement-on-assassination-of-martin- luther-king-jr-indianapolis-indiana-april-4-1968]
-
-Remarks following the assassination of Dr.
-Martin Luther King, Jr., April 4, 1968 Indianapolis, Indiana
+Robert F. Kennedy^[Robert F. Kennedy was a 1951 graduate of the University of Virginia School of Law. Kennedy, R.F. (1968, April 4). Statement on Assassination of Martin Luther King, Jr. Retrieved from https://www.jfklibrary.org/learn/about- jfk/the-kennedy-family/robert-f-kennedy/robert-f-kennedy-speeches/statement-on-assassination-of-martin- luther-king-jr-indianapolis-indiana-april-4-1968]Remarks following the assassination of Dr. Martin Luther King, Jr., April 4, 1968 Indianapolis, Indiana
 
 __2020 was a difficult year. The pandemic. Economic collapse. Racial tensions. A divided nation.__
 
@@ -92,7 +91,7 @@ In the pages that follow, we provide an update to the Orange Dot Project report 
 
 What we have learned since our work began in 2011 is that there are too many struggling families in our community, but not too many to help.
 
-## Too Many Struggling Families
+### Struggling Families
 
 There are 66,633 families living in the Charlottesville region.^[Family is defined as two or more related people living in the same household. U.S. Census Bureau (2020). Selected Economic Characteristics. American Community Survey 5-Year Estimates, 2014-2018. Retrieved from https://data.census.gov/cedsci/table?text=dp03&tid=ACSDP5Y2018.DP03&hidePreview=true.]
 
@@ -102,7 +101,7 @@ While this is still too many families, it is heartening to note that the situati
 
 As detailed in the sections that follow, families in our community generally need to earn at least $35,000 annually to meet their basic needs.
 
-### Number of families struggling in the region
+#### Number of families struggling in the region
 
 ```{r, echo=FALSE, warning=FALSE}
 
@@ -123,7 +122,103 @@ reactable(strfam,
 
 ```
 
-### Number of families making < $35,000
+As you can see from the table below, while some of these 9,413 families struggling in our community appear to have limited or no earning capacity (those with incomes from $0-$14,999), most appear to be working and earning income ($15,000-$34,999) but not enough to support their families:
+
+#### Breakdown of families making < $35,000 in the whole region
+
+```{r, echo=FALSE, warning=FALSE}
+incomebins <- data_frame(Income = list("$0 - $9,999", "$10,000 - $14,999", "$15,000 - $24,999", "$25,000 - $34,999"),
+                         Number = list(countydat[8,]$AllFamUnder10kE, countydat[8,]$AllFamBtw10_14kE, countydat[8,]$AllFamBtw15_24kE, countydat[8,]$AllFamBtw25_34kE),
+                         Percent = list(countydat[8,]$perc_AllFamUnder10kE, countydat[8,]$perc_AllFamBtw10_14kE, countydat[8,]$perc_AllFamBtw15_24kE, countydat[8,]$perc_AllFamBtw25_34kE))
+
+reactable(incomebins, defaultSorted = c("Number", "Percent"),
+          highlight = TRUE,
+          bordered = TRUE,
+          rowStyle = function(index) {
+    if (incomebins[index, "Income"] == "$15,000 - $24,999" | incomebins[index, "Income"] == "$25,000 - $34,999") {
+      list(background = highlightcolor)}
+          }
+)
+
+```
+
+This data points to an important distinction when developing a strategy for improving the lives of these families. There are two categories of families: Those who can earn their way to self- sufficiency, and those whose earning potential is more limited. And we need a method for distinguishing between the two.
+
+Unfortunately, we often lump them together. But for most families, low-incomeness is not a constant that must be worked around, but a variable that must be changed.
+
+When we are working with someone who is low-income, our very first question should be: Do they need to be low-income?
+
+Certainly, there are those who have exhausted their earning potential and are on fixed incomes that are unlikely to increase by very much. These families require sustained subsidy to meet their basic needs of food, shelter, clothing and utilities. These families have run out of other options. Based on the income data above, which shows 3,057 families make less than $15,000 annually (28%), as well data from Charlottesville’s housing affordability study^[Partners for Economic Solutions. (2018). Housing Needs Assessment: Socioeconomic and Housing Market Analysis. Washington, D.C.: Form-Based Code Institute/Smart Growth America, 58.], it is estimated that roughly one-third of the families who are struggling cannot earn their way to self-sufficiency. Their very survival depends on the strength of the social safety net—a blend of government assistance and private philanthropy.
+
+The vast majority of families, however, have the potential to provide for themselves. They are working, but their labor is simply not valued.
+
+Not being valued—literally—has devastating consequences. One consequence is the stigma of being poor in America. We Americans hold tightly to the belief that "if you work hard and play by the rules," you will get ahead. The corollary to that belief, sadly, is that if you haven't gotten ahead, it must be because you don't work hard and don't play by the rules. As demonstrated by the following mathematical formula, however, working hard and playing by the rules doesn't guarantee that you'll get ahead:
+
+\begin{align*}
+Hard work x High Wages = High Income \\
+
+Hard work x Low Wages = Low Income \\
+\end{align*}
+
+The variable is not the hard work, but the wages. People generally don’t choose to be poor. It is important to note that a full-time worker making Virginia's minimum wage will have a gross income of 22,000 per year.^[Based on wage of $11/hour.]. To reduce the number of struggling families, therefore, requires that we increase their wages. We need a system that identifies the 72 percent of low-income families who are working for a living but who are not valued, and help them increase their value in the eyes of their employers:
+
+## Missing pie charts on page 6 ##
+
+## The Importance of Core Skills
+
+In order to advance economically, individuals often need to advance educationally—they need skills that provide them more "employer-recognized value." Acquiring those valuable skills, however, can be difficult for adults who left high school before developing core skills and receiving a high school credential.
+Over 18,000 adults in our region do not have a high school diploma. Especially in a community teeming with college graduates, the lack of a high school credential can prevent job-seekers who have enormous potential from grasping even the first rung on a career ladder.
+
+#### Number and Percent of adults over age 25 without a high school diploma 
+```{r, echo=FALSE, warning=FALSE}
+countydatlong3 <- reshape_longer(as.data.frame(countydat[1:7,c("noHSE", "perc_noHSE", "countyName")]),
+                                 columns = c("noHSE", "perc_noHSE"),
+                       names.to = "value",
+                       values.to = "number",
+                       id = "countyName")
+
+num <- countydatlong3[countydatlong3$value == "noHSE",]
+perc <- countydatlong3[countydatlong3$value == "perc_noHSE",]
+
+numberplot <- ggplot(num,aes(x=countyName, y=number, fill=countyName)) + 
+  geom_col(position="dodge") +
+  labs(x="County Name", y="Number of adults") + 
+  theme(axis.text.x = element_text(angle = 45, hjust = 1), legend.position = "none") +
+  geom_text(aes(label=num$number), position=position_dodge(width=0.9), vjust=-0.5, size=2.5) +
+  scale_fill_manual(values=c("#482677FF", "#2D708EFF", "#29AF7FFF",
+                             "#73D055FF", "#404788FF", "#238A8DFF", "#440154FF")) 
+
+percentplot <- ggplot(perc,aes(x=countyName, y=number, fill=countyName)) + 
+  geom_col(position="dodge") +
+  labs(x="County Name", y="Percent of adults") + 
+  theme(axis.text.x = element_text(angle = 45, hjust = 1), legend.position = "none") +
+  geom_text(aes(label=perc$number), position=position_dodge(width=0.9), vjust=-0.5, size=2.5) +
+  scale_fill_manual(values=c("#482677FF", "#2D708EFF", "#29AF7FFF",
+                             "#73D055FF", "#404788FF", "#238A8DFF", "#440154FF")) 
+
+ggarrange(numberplot, percentplot, ncol = 2, nrow = 1) + 
+  ggtitle("Adults Over 25 years old without a high school diploma")
+
+```
+
+## The Matter of Race
+
+While there are too many families struggling in our region, that struggle is not equally shared.
+As the graphs below demonstrate, in many of our communities the labor of our black neighbors is disproportionately valued less than the labor of our white neighbors. There are many reasons for this. Overt and subconscious racial discrimination. Disinvestment in black communities. Blocking wealth creation through red-lining, unfair lending practices, predatory lending and predatory training. Massive Resistance. Disfranchisement. Jim Crow. Black codes. Disproportionate treatment by the criminal justice system. Sadly, the list goes on. And on.
+
+So while we need to be intentional about helping all families in our community who struggle in our economy, we need to be especially attentive to black families who are struggling, as they may understandably be distrustful or disconnected from the very institutions that may be able to help.
+
+Of course, this struggle is not new. When Dr. Martin Luther King, Jr. stood on the steps of the Lincoln Memorial on August 28, 1963 and delivered his iconic I Have A Dream speech, he was addressing a "March for Jobs and Freedom." And when he was assassinated at the Lorraine Motel on April 4, 1968, he was in Memphis to stand shoulder to shoulder with black sanitation works fighting for higher wages.
+
+This struggle is not new, and it's not unique to the Charlottesville region. Across the nation, there is a significant racial wealth gap. The Federal Reserve Bank of St. Louis, for example, calculated that the average net worth of a white family in America was ten times greater than the net worth of a black family, as shown on the following graphic.^[Emmons, W., Kent, A., & Ricketts, L. (2019, October 9). Just How Severe is America's Racial Wealth Gap?. Federal Reserve Bank of St. Louis. Retrieved from: https://www.stlouisfed.org/open-vault/2019/october/how-severe- americas-racial-wealth-gap]
+
+That racial wealth gap is best explained by unequal labor income, according to research from the Federal Reserve Bank of Cleveland.^[Mock, B. (2019, March 21). Why Can't We Close the Racial Wealth Gap? Bloomberg City Lab. Retrieved from https://www.bloomberg.com/news/articles/2019-03-21/how-income-inequality-feeds-the-racial-wealth-gap. Data on unequal labor income in our region comes from U.S. Census Bureau (2020). Family Income in the Past 12 Months. American Community Survey 5-Year Estimates, 2014-2018, Tables B19101, 19101A, 19101B]
+
+## Missing info-graphics from page 33 ## 
+
+This is the same unequal labor income we see in our own communities, as shown below.
+
+#### Number of families making < $35,000
 
 ```{r, echo=FALSE, warning=FALSE}
 
@@ -146,7 +241,7 @@ ggplot(countydatlong1, aes(y=Number, x=countyName, fill=value)) +
   
 ```
 
-### Percent of families making < $35,000
+#### Percent of families making < $35,000
 
 ```{r, echo=FALSE, warning=FALSE}
 
@@ -177,51 +272,839 @@ ggplot(countydatlong2, aes(y=Percent, x=countyName, fill=value))+
                     name = element_blank()) 
 ```
 
+To get ahead, those workers will need jobs and careers that pay enough to support their families.
+The sections that follow detail what it costs to be self-sufficient in each of the localities that comprise the region, including the costs of food^[U.S. Department of Agriculture, Center for Nutrition Policy and Promotion (2022). Official USDA Food Plans: Cost of Food at Home at Four Levels, U.S. Average, May 2022, Weekly Cost of the Low-Cost Plan. Retrieved from https://www.fns.usda.gov/sites/default/files/media/file/CostofFoodMay2022Thrifty.pdf], shelter^[Virginia Housing. (2022). 2022 Fair Market Rents. retrieved from https://www.huduser.gov/portal/datasets/fmr/fmrs/FY2022_code/2022summary.odn], clothing^[U.S. Department of Agriculture, Center for Nutrition Policy and Promotion. (2017). Expenditures on Children by Families, Estimated annual expenditures on a child by single-parent families. Retrieved from https://www.fns.usda.gov/sites/default/files/resource-files/crc2015-march2017.pdf and U.S. Bureau of Labor Statistics. (2020). Consumer Expenditures Survey, CE Tables, Age of Reference Person, Apparel and Services by Women, 16 and over. Retrieved from https://www.bls.gov/cex/tables/calendar-year/mean-item-share-average-standard-error/reference-person-age-ranges-2020.pdf], utilities^[Virginia Housing Development Authority. (2022). Allowances for Tenant-Furnished Utilities and Other Services, Two Exposed UA Schedule. Retrieved from https://mc-0e9acafd-48f4-4c49-b478-6257-cdn-endpoint.azureedge.net/-/media/docs/partners/housing-choice-vouchers/utility-allowance/2exposed-walls.pdf?rev=91c81573c2e94b8cb314f871bbad5e65&hash=666946C107D54311AC4222AC1E81F850 and the U.S. Bureau of Labor Statistics. (2020), Consumer Expenditure Survey, Telephone Services. Retrieved from https://www.bls.gov/cex/tables/calendar-year/mean-item-share-average-standard-error/reference-person-age-ranges-2020.pdf], childcare^[Childcare costs provided by a local childcare center], transportation^[U.S. Bureau of Labor Statistics. (2020). Consumer Expenditures Survey, CE Tables, Age of Reference Person, Apparel and Services by Women, 16 and over. Retrieved from https://www.bls.gov/cex/tables/calendar-year/mean-item-share-average-standard-error/reference-person-age-ranges-2020.pdf], and necessary costs^[Garner, T. (2010). Supplemental Poverty Measure Thresholds: Laying the Foundation. Washington DC: Bureau of Labor Statistics.].
 
-As you can see from the table below, while some of these 9,413 families struggling in our community appear to have limited or no earning capacity (those with incomes from $0-$14,999), most appear to be working and earning income ($15,000-$34,999) but not enough to support their families:
+You will see in the following maps geographical variation across the regions. Charlottesville for example, is a city of roughly 10 square miles. Albemarle surrounds Charlottesville, dwarfs it physically at 726 square miles and has both dense urban neighborhoods and sprawling rural ones. In fact, the United States Census Bureau recognizes these various neighborhoods, known as census tracts. These tracts are roughly equal in population and are bounded by major roads, rivers and railroad tracks.
 
-### Breakdown of families making < $35,000 in the whole region
+Variations occur not just geographically but economically as well. Housing is less expensive in Buckingham and Louisa. ~~Childcare is more expensive in Albemarle and Charlottesville.~~
 
+The maps that follow use these census tracts to describe what is happening in our communities beyond the superficial. For example, on its surface Albemarle County is a wealthy county whose residents earned $4.7 Billion in income. That overview, however, does not capture the variations that occur across the county in its neighborhoods, both urban and rural.
+
+In fact, while there is variation across the communities in our region, there is one constant: In every corner of every county and the city, there are hundreds of families who struggle every day to put a roof over their heads, food in their bellies, clothes on their backs and heat in their homes.
+
+The reason that boosting incomes is so important are among the truths that are self-evident:
+
+**Kids do better.** Graduating from college continues to be the fastest way to climb the economic ladder. But as noted author Robert Putnam reports, “[a]s the twenty-first century opened, a family’s socioeconomic status had become even more important than test scores in predicting which eighth graders would graduate from college. High-scoring poor kids are now slightly less likely (29 percent) to get a college degree than low-scoring rich kids (30 percent).”^[Putnam, R. (2015). Our Kids: The American Dream in Crisis. New York, NY: Simon & Schuster, 189-190.]
+
+**Local businesses benefit.** In a consumer-based economy, the more money that consumers (read: workers) have, the better for the economy, especially the local economy.^[In a classic example of the tragedy of the commons, while all businesses benefit when consumers have more money to spend on their goods and services, each particular business feels pressure to keep wages low.]
+
+**Taxpayers benefit.** Most families want to provide for themselves, and when they do, they require less support from others.
+
+**The community thrives.** A community thrives when its residents thrive. Residents thrive when their capacity as human beings is unleashed. And their capacity as human beings can only be unleashed when their basic needs are met. As illustrated in the pages that follow, there are too many families in our community who do not earn enough to meet their basic needs. When you worry every month about paying the landlord, every week about buying groceries, every day about whether your car will start, it is difficult to realize your full potential as a parent, as a friend, as a worker, or as a human being.
+
+**People live longer.** According to the Centers for Disease Control, the biggest factor in poor health is socio-economic status, as shown in the graphic below.18 In fact, according to the Health Inequality Project, a man in the Charlottesville area in the lowest income bracket dies nearly a decade sooner than a man in the highest.^[Thomas Jefferson Health District (Fall/Winter 2019), MAPP2Health. Retrieved from: https://www.vdh.virginia.gov/content/uploads/sites/91/2019/08/2019-MAPP2Health-Report.pdf]
+
+## Specific Locality Information {.tabset}
+
+### Albemarle County
 ```{r, echo=FALSE, warning=FALSE}
-incomebins <- data_frame(Income = list("$0 - $9,999", "$10,000 - $14,999", "$15,000 - $24,999", "$25,000 - $34,999"),
-                         Number = list(countydat[8,]$AllFamUnder10kE, countydat[8,]$AllFamBtw10_14kE, countydat[8,]$AllFamBtw15_24kE, countydat[8,]$AllFamBtw25_34kE),
-                         Percent = list(countydat[8,]$perc_AllFamUnder10kE, countydat[8,]$perc_AllFamBtw10_14kE, countydat[8,]$perc_AllFamBtw15_24kE, countydat[8,]$perc_AllFamBtw25_34kE))
+albemarle <- countydat[countydat$countyName == "Albemarle",]
+```
 
-reactable(incomebins, defaultSorted = c("Number", "Percent"),
+There are 26,522 families living in Albemarle county.
+
+Of these, 2,614 (10%) do not earn enough to provide for their basic needs and the costs associated with working. As you can see from the expenses table below and those that follow for the other localities, the single biggest factor that dictates how much a family needs to earn in order to survive without assistance is housing, followed closely by the cost of childcare.
+
+#### Expenses: Single Householder + 2 Children (1 Toddler)
+```{r, echo=FALSE, warning=FALSE}
+exAC <- expenses %>%
+  filter(Locality == "Albemarle",
+         Unit == "Total") %>%
+  select(Expense, Annual, Monthly, Weekly)
+
+reactable(exAC,
           highlight = TRUE,
           bordered = TRUE,
           rowStyle = function(index) {
-    if (incomebins[index, "Income"] == "$15,000 - $24,999" | incomebins[index, "Income"] == "$25,000 - $34,999") {
+    if (exAC[index, "Expense"] == "Total Expenses") 
+      list(background = highlightcolor)
+  }
+)
+```
+
+As this table shows, 78% (2,034) of the families who cannot meet their basic needs earn between $15,000-$35,000 annually. This strongly suggests they are working, but not earning the wages, or getting the hours, they need to support their families.
+
+#### Breakdown of families making < $35,000 in Albemarle County
+```{r, echo=FALSE, warning=FALSE}
+incomebinsAC <- data_frame(Income = list("$0 - $9,999", "$10,000 - $14,999", "$15,000 - $24,999", "$25,000 - $34,999", "Total"),
+                         Number = list(albemarle$AllFamUnder10kE, albemarle$AllFamBtw10_14kE, albemarle$AllFamBtw15_24kE, albemarle$AllFamBtw25_34kE, sum(albemarle$AllFamUnder10kE, albemarle$AllFamBtw10_14kE, albemarle$AllFamBtw15_24kE, albemarle$AllFamBtw25_34kE)),
+                         "of whole county" = list(albemarle$perc_AllFamUnder10kE, albemarle$perc_AllFamBtw10_14kE, albemarle$perc_AllFamBtw15_24kE, albemarle$perc_AllFamBtw25_34kE, sum(albemarle$perc_AllFamUnder10kE, albemarle$perc_AllFamBtw10_14kE, albemarle$perc_AllFamBtw15_24kE, albemarle$perc_AllFamBtw25_34kE)),
+                         "of families making < 35K in county" =
+                           list(round(albemarle$AllFamUnder10kE/albemarle$AllFamUnder35kE * 100, 2),
+                                round(albemarle$AllFamBtw10_14kE/albemarle$AllFamUnder35kE * 100, 2),
+                                round(albemarle$AllFamBtw15_24kE/albemarle$AllFamUnder35kE * 100, 2),
+                                round(albemarle$AllFamBtw25_34kE/albemarle$AllFamUnder35kE * 100, 2),
+                                100))
+
+reactable(incomebinsAC, 
+          columnGroups = list(colGroup(name = "Percent", columns = c("of whole county", "of families making < 35K in county"))),
+          highlight = TRUE,
+          bordered = TRUE,
+          rowStyle = function(index) {
+    if (incomebinsAC[index, "Income"] == "$15,000 - $24,999" | incomebinsAC[index, "Income"] == "$25,000 - $34,999") {
       list(background = highlightcolor)}
           }
 )
 
 ```
 
-This data points to an important distinction when developing a strategy for improving the lives of these families. There are two categories of families: Those who can earn their way to self- sufficiency, and those whose earning potential is more limited. And we need a method for distinguishing between the two.
+#### Income distribution of Black and White families in Albemarle County
+```{r, echo=FALSE, warning=FALSE}
+albemarlelong <- pivot_longer(albemarle[,c("perc_AllFamUnder35kE", "perc_WhiteFamUnder35kE", "perc_BlackFamUnder35kE", "perc_AllFamBtw35_100kE", "perc_WhiteFamBtw35_100kE", "perc_BlackFamBtw35_100kE", "perc_AllFamOver100kE", "perc_WhiteFamOver100kE", "perc_BlackFamOver100kE", "countyName")],
+                       cols = -c(countyName),
+                       values_to = 'percent',
+                       names_to = c('race', 'amount'),
+                       names_pattern = 'perc_(AllFam|BlackFam|WhiteFam)(.+)')
 
-Unfortunately, we often lump them together. But for most families, low-incomeness is not a constant that must be worked around, but a variable that must be changed.
+albemarlelong$amount <- factor(albemarlelong$amount, levels = c("Under35kE", "Btw35_100kE", "Over100kE"))
 
-When we are working with someone who is low-income, our very first question should be: Do they need to be low-income?
+ggplot(albemarlelong,aes(x=amount, y=percent,fill=race)) + 
+  geom_col(position="dodge") +
+  labs(x="Income", y="Percent of families") + 
+  scale_x_discrete(labels = c("Earning Under $35K", "Earning $35K-$100K", "Earning Over $100K")) + 
+  scale_fill_manual(values=c("#482677FF", "#2D708EFF", "#29AF7FFF"), labels = c("All families","Black families",  "White families"),
+                    name = element_blank())  + 
+  geom_text(aes(label=paste0(round(albemarlelong$percent, 1), "%")), position=position_dodge(width=0.9), vjust=-0.5, size=2.5)
 
-Certainly, there are those who have exhausted their earning potential and are on fixed incomes that are unlikely to increase by very much. These families require sustained subsidy to meet their basic needs of food, shelter, clothing and utilities. These families have run out of other options. Based on the income data above, which shows 3,057 families make less than $15,000 annually (28%), as well data from Charlottesville’s housing affordability study^[Partners for Economic Solutions. (2018). Housing Needs Assessment: Socioeconomic and Housing Market Analysis. Washington, D.C.: Form-Based Code Institute/Smart Growth America, 58.], it is estimated that roughly one-third of the families who are struggling cannot earn their way to self-sufficiency. Their very survival depends on the strength of the social safety net—a blend of government assistance and private philanthropy.
+```
 
-The vast majority of families, however, have the potential to provide for themselves. They are working, but their labor is simply not valued.
+#### Median family income in Albemarle County
+```{r, echo=FALSE, warning=FALSE}
+ACmap <- geofull %>%
+  filter(countyName == "Albemarle")
 
-Not being valued—literally—has devastating consequences. One consequence is the stigma of being poor in America. We Americans hold tightly to the belief that "if you work hard and play by the rules," you will get ahead. The corollary to that belief, sadly, is that if you haven't gotten ahead, it must be because you don't work hard and don't play by the rules. As demonstrated by the following mathematical formula, however, working hard and playing by the rules doesn't guarantee that you'll get ahead:
+pal <- colorNumeric("viridis", reverse = TRUE, domain = ACmap$medianFamIncomeE)
+leaflet() %>% 
+  addProviderTiles("CartoDB.Positron") %>% 
+  addPolygons(data = ACmap,
+              fillColor = ~pal(medianFamIncomeE),
+              weight = 1,
+              opacity = 1,
+              color = "white", 
+              fillOpacity = 0.6,
+              smoothFactor = 0.3,
+              highlight = highlightOptions(
+                weight = 1, fillOpacity = 0.8, bringToFront = T
+              ),
+              popup = paste0("Median family income: ", ACmap$medianFamIncomeE)) %>% 
+  addLegend("bottomright", pal = pal, values = ACmap$medianFamIncomeE, 
+            title = "Median family income", opacity = 0.7)
+```
 
-## Missing photo on page 6 ## 
+#### Percent of families making < $35,000 in Albemarle County
+```{r, echo=FALSE, warning=FALSE}
+pal <- colorNumeric("viridis", reverse = TRUE, domain = ACmap$perc_AllFamUnder35kE)
+leaflet() %>% 
+  addProviderTiles("CartoDB.Positron") %>% 
+  addPolygons(data = ACmap,
+              fillColor = ~pal(perc_AllFamUnder35kE),
+              weight = 1,
+              opacity = 1,
+              color = "white", 
+              fillOpacity = 0.6,
+              smoothFactor = 0.3,
+              highlight = highlightOptions(
+                weight = 1, fillOpacity = 0.8, bringToFront = T
+              ),
+              popup = paste0("Percent of families: ", ACmap$perc_AllFamUnder35kE, "%")) %>% 
+  addLegend("bottomright", pal = pal, values = ACmap$perc_AllFamUnder35kE, 
+            title = "Percent of families <br> making < $35,000", opacity = 0.7)
+```
 
-The variable is not the hard work, but the wages. People generally don’t choose to be poor. It is important to note that a full-time worker making Virginia's minimum wage will have a gross income of $14,400 per year8. To reduce the number of struggling families, therefore, requires that we increase their wages. We need a system that identifies the 72 percent of low-income families who are working for a living but who are not valued, and help them increase their value in the eyes of their employers:
+### Buckingham County
+```{r, echo=FALSE, warning=FALSE}
+Buckingham <- countydat[countydat$countyName == "Buckingham",]
+```
 
-## Missing pie charts on page 6 ##
+There are 4,037 families living in Buckingham county. This is the fewest number of families in a locality in the region.
+
+Of these, 1,136 (28%) do not earn enough to provide for their basic needs and the costs associated with working.
+
+#### Expenses: Single Householder + 2 Children (1 Toddler)
+```{r, echo=FALSE, warning=FALSE}
+exBC <- expenses %>%
+  filter(Locality == "Buckingham",
+         Unit == "Total") %>%
+  select(Expense, Annual, Monthly, Weekly)
+
+reactable(exBC,
+          highlight = TRUE,
+          bordered = TRUE,
+          rowStyle = function(index) {
+    if (exBC[index, "Expense"] == "Total Expenses") 
+      list(background = highlightcolor)
+  }
+)
+```
+
+As this table shows, 76% (868) of the families who cannot meet their basic needs earn between $15,000-$35,000 annually. This strongly suggests they are working, but not earning the wages, or getting the hours, they need to support their families.
+
+#### Breakdown of families making < $35,000 in Buckingham County
+```{r, echo=FALSE, warning=FALSE}
+incomebinsBC <- data_frame(Income = list("$0 - $9,999", "$10,000 - $14,999", "$15,000 - $24,999", "$25,000 - $34,999", "Total"),
+                         Number = list(Buckingham$AllFamUnder10kE, Buckingham$AllFamBtw10_14kE, Buckingham$AllFamBtw15_24kE, Buckingham$AllFamBtw25_34kE, sum(Buckingham$AllFamUnder10kE, Buckingham$AllFamBtw10_14kE, Buckingham$AllFamBtw15_24kE, Buckingham$AllFamBtw25_34kE)),
+                         "of whole county" = list(Buckingham$perc_AllFamUnder10kE, Buckingham$perc_AllFamBtw10_14kE, Buckingham$perc_AllFamBtw15_24kE, Buckingham$perc_AllFamBtw25_34kE, sum(Buckingham$perc_AllFamUnder10kE, Buckingham$perc_AllFamBtw10_14kE, Buckingham$perc_AllFamBtw15_24kE, Buckingham$perc_AllFamBtw25_34kE)),
+                         "of families making < 35K in county" =
+                           list(round(Buckingham$AllFamUnder10kE/Buckingham$AllFamUnder35kE * 100, 2),
+                                round(Buckingham$AllFamBtw10_14kE/Buckingham$AllFamUnder35kE * 100, 2),
+                                round(Buckingham$AllFamBtw15_24kE/Buckingham$AllFamUnder35kE * 100, 2),
+                                round(Buckingham$AllFamBtw25_34kE/Buckingham$AllFamUnder35kE * 100, 2),
+                                100))
+
+reactable(incomebinsBC,
+          columnGroups = list(colGroup(name = "Percent", columns = c("of whole county", "of families making < 35K in county"))),
+          highlight = TRUE,
+          bordered = TRUE,
+          rowStyle = function(index) {
+    if (incomebinsAC[index, "Income"] == "$15,000 - $24,999" | incomebinsAC[index, "Income"] == "$25,000 - $34,999") {
+      list(background = highlightcolor)}
+          }
+)
 
 
+```
+
+#### Income distribution of Black and White families in Buckingham County
+```{r, echo=FALSE, warning=FALSE}
+Buckinghamlong <- pivot_longer(Buckingham[,c("perc_AllFamUnder35kE", "perc_WhiteFamUnder35kE", "perc_BlackFamUnder35kE", "perc_AllFamBtw35_100kE", "perc_WhiteFamBtw35_100kE", "perc_BlackFamBtw35_100kE", "perc_AllFamOver100kE", "perc_WhiteFamOver100kE", "perc_BlackFamOver100kE", "countyName")],
+                       cols = -c(countyName),
+                       values_to = 'percent',
+                       names_to = c('race', 'amount'),
+                       names_pattern = 'perc_(AllFam|BlackFam|WhiteFam)(.+)')
+
+Buckinghamlong$amount <- factor(Buckinghamlong$amount, levels = c("Under35kE", "Btw35_100kE", "Over100kE"))
+
+ggplot(Buckinghamlong,aes(x=amount, y=percent,fill=race)) + 
+  geom_col(position="dodge") +
+  labs(x="Income", y="Percent of families") + 
+  scale_x_discrete(labels = c("Earning Under $35K", "Earning $35K-$100K", "Earning Over $100K")) + 
+  scale_fill_manual(values=c("#482677FF", "#2D708EFF", "#29AF7FFF"), labels = c("All families","Black families",  "White families"),
+                    name = element_blank())  + 
+  geom_text(aes(label=paste0(round(Buckinghamlong$percent, 1), "%")), position=position_dodge(width=0.9), vjust=-0.5, size=2.5)
+
+```
+
+#### Median family income in Buckingham County
+```{r, echo=FALSE, warning=FALSE}
+BCmap <- geofull %>%
+  filter(countyName == "Buckingham")
+
+pal <- colorNumeric("viridis", reverse = TRUE, domain = BCmap$medianFamIncomeE)
+leaflet() %>% 
+  addProviderTiles("CartoDB.Positron") %>% 
+  addPolygons(data = BCmap,
+              fillColor = ~pal(medianFamIncomeE),
+              weight = 1,
+              opacity = 1,
+              color = "white", 
+              fillOpacity = 0.6,
+              smoothFactor = 0.3,
+              highlight = highlightOptions(
+                weight = 1, fillOpacity = 0.8, bringToFront = T
+              ),
+              popup = paste0("Median family income: ", BCmap$medianFamIncomeE)) %>% 
+  addLegend("bottomright", pal = pal, values = BCmap$medianFamIncomeE, 
+            title = "Median family income", opacity = 0.7)
+```
+
+#### Percent of families making < $35,000 in Buckingham County
+```{r, echo=FALSE, warning=FALSE}
+pal <- colorNumeric("viridis", reverse = TRUE, domain = BCmap$perc_AllFamUnder35kE)
+leaflet() %>% 
+  addProviderTiles("CartoDB.Positron") %>% 
+  addPolygons(data = BCmap,
+              fillColor = ~pal(perc_AllFamUnder35kE),
+              weight = 1,
+              opacity = 1,
+              color = "white", 
+              fillOpacity = 0.6,
+              smoothFactor = 0.3,
+              highlight = highlightOptions(
+                weight = 1, fillOpacity = 0.8, bringToFront = T
+              ),
+              popup = paste0("Percent of families: ", BCmap$perc_AllFamUnder35kE, "%")) %>% 
+  addLegend("bottomright", pal = pal, values = BCmap$perc_AllFamUnder35kE, 
+            title = "Percent of families <br> making < $35,000", opacity = 0.7)
+```
+
+### Charlottesville City
+```{r, echo=FALSE, warning=FALSE}
+Charlottesville <- countydat[countydat$countyName == "Charlottesville",]
+```
+
+There are 8,950 families living in Charlottesville.
+
+Of these, 1,710 families (19 percent) do not make enough money to pay for the essentials of life and the costs associated with working.
+
+#### Expenses: Single Householder + 2 Children (1 Toddler)
+```{r, echo=FALSE, warning=FALSE}
+exCC <- expenses %>%
+  filter(Locality == "Charlottesville",
+         Unit == "Total") %>%
+  select(Expense, Annual, Monthly, Weekly)
+
+reactable(exCC,
+          highlight = TRUE,
+          bordered = TRUE,
+          rowStyle = function(index) {
+    if (exCC[index, "Expense"] == "Total Expenses") 
+      list(background = highlightcolor)
+  }
+)
+```
+
+As this table shows, 58% (992) of the families who cannot meet their basic needs earn between $15,000-$35,000 annually. This strongly suggests they are working, but not earning the wages, or getting the hours, they need to support their families.
+
+#### Breakdown of families making < $35,000 in Charlottesville City
+```{r, echo=FALSE, warning=FALSE}
+incomebinsCC <- data_frame(Income = list("$0 - $9,999", "$10,000 - $14,999", "$15,000 - $24,999", "$25,000 - $34,999", "Total"),
+                         Number = list(Charlottesville$AllFamUnder10kE, Charlottesville$AllFamBtw10_14kE, Charlottesville$AllFamBtw15_24kE, Charlottesville$AllFamBtw25_34kE, sum(Charlottesville$AllFamUnder10kE, Charlottesville$AllFamBtw10_14kE, Charlottesville$AllFamBtw15_24kE, Charlottesville$AllFamBtw25_34kE)),
+                         "of whole county" = list(Charlottesville$perc_AllFamUnder10kE, Charlottesville$perc_AllFamBtw10_14kE, Charlottesville$perc_AllFamBtw15_24kE, Charlottesville$perc_AllFamBtw25_34kE, sum(Charlottesville$perc_AllFamUnder10kE, Charlottesville$perc_AllFamBtw10_14kE, Charlottesville$perc_AllFamBtw15_24kE, Charlottesville$perc_AllFamBtw25_34kE)),
+                         "of families making < 35K in county" =
+                           list(round(Charlottesville$AllFamUnder10kE/Charlottesville$AllFamUnder35kE * 100, 2),
+                                round(Charlottesville$AllFamBtw10_14kE/Charlottesville$AllFamUnder35kE * 100, 2),
+                                round(Charlottesville$AllFamBtw15_24kE/Charlottesville$AllFamUnder35kE * 100, 2),
+                                round(Charlottesville$AllFamBtw25_34kE/Charlottesville$AllFamUnder35kE * 100, 2),
+                                100))
+
+reactable(incomebinsCC, 
+          columnGroups = list(colGroup(name = "Percent", columns = c("of whole county", "of families making < 35K in county"))),
+          highlight = TRUE,
+          bordered = TRUE,
+          rowStyle = function(index) {
+    if (incomebinsAC[index, "Income"] == "$15,000 - $24,999" | incomebinsAC[index, "Income"] == "$25,000 - $34,999") {
+      list(background = highlightcolor)}
+          }
+)
 
 
+```
+
+#### Income distribution of Black and White families in Charlottesville City
+```{r, echo=FALSE, warning=FALSE}
+Charlottesvillelong <- pivot_longer(Charlottesville[,c("perc_AllFamUnder35kE", "perc_WhiteFamUnder35kE", "perc_BlackFamUnder35kE", "perc_AllFamBtw35_100kE", "perc_WhiteFamBtw35_100kE", "perc_BlackFamBtw35_100kE", "perc_AllFamOver100kE", "perc_WhiteFamOver100kE", "perc_BlackFamOver100kE", "countyName")],
+                       cols = -c(countyName),
+                       values_to = 'percent',
+                       names_to = c('race', 'amount'),
+                       names_pattern = 'perc_(AllFam|BlackFam|WhiteFam)(.+)')
+
+Charlottesvillelong$amount <- factor(Charlottesvillelong$amount, levels = c("Under35kE", "Btw35_100kE", "Over100kE"))
+
+ggplot(Charlottesvillelong,aes(x=amount, y=percent,fill=race)) + 
+  geom_col(position="dodge") +
+  labs(x="Income", y="Percent of families") + 
+  scale_x_discrete(labels = c("Earning Under $35K", "Earning $35K-$100K", "Earning Over $100K")) + 
+  scale_fill_manual(values=c("#482677FF", "#2D708EFF", "#29AF7FFF"), labels = c("All families","Black families",  "White families"),
+                    name = element_blank())  + 
+  geom_text(aes(label=paste0(round(Charlottesvillelong$percent, 1), "%")), position=position_dodge(width=0.9), vjust=-0.5, size=2.5)
+
+```
+
+#### Median family income in Charlottesville City
+```{r, echo=FALSE, warning=FALSE}
+cvillemap <- geofull %>%
+  filter(countyName == "Charlottesville")
+
+pal <- colorNumeric("viridis", reverse = TRUE, domain = cvillemap$medianFamIncomeE)
+leaflet() %>% 
+  addProviderTiles("CartoDB.Positron") %>% 
+  addPolygons(data = cvillemap,
+              fillColor = ~pal(medianFamIncomeE),
+              weight = 1,
+              opacity = 1,
+              color = "white", 
+              fillOpacity = 0.6,
+              smoothFactor = 0.3,
+              highlight = highlightOptions(
+                weight = 1, fillOpacity = 0.8, bringToFront = T
+              ),
+              popup = paste0("Median family income: ", cvillemap$medianFamIncomeE)) %>% 
+  addLegend("bottomright", pal = pal, values = cvillemap$medianFamIncomeE, 
+            title = "Median family income", opacity = 0.7)
+```
+
+#### Percent of families making < $35,000 in Charlottesville City
+```{r, echo=FALSE, warning=FALSE}
+pal <- colorNumeric("viridis", reverse = TRUE, domain = cvillemap$perc_AllFamUnder35kE)
+leaflet() %>% 
+  addProviderTiles("CartoDB.Positron") %>% 
+  addPolygons(data = cvillemap,
+              fillColor = ~pal(perc_AllFamUnder35kE),
+              weight = 1,
+              opacity = 1,
+              color = "white", 
+              fillOpacity = 0.6,
+              smoothFactor = 0.3,
+              highlight = highlightOptions(
+                weight = 1, fillOpacity = 0.8, bringToFront = T
+              ),
+              popup = paste0("Percent of families: ", cvillemap$perc_AllFamUnder35kE, "%")) %>% 
+  addLegend("bottomright", pal = pal, values = cvillemap$perc_AllFamUnder35kE, 
+            title = "Percent of families <br> making < $35,000", opacity = 0.7)
+```
+
+### Fluvanna County
+```{r, echo=FALSE, warning=FALSE}
+Fluvanna <- countydat[countydat$countyName == "Fluvanna",]
+```
+
+There are 7,131 families living in Fluvanna county.
+
+Of these, 559 (8%) do not earn enough to provide for their basic needs and the costs associated with working.
+
+#### Expenses: Single Householder + 2 Children (1 Toddler)
+```{r, echo=FALSE, warning=FALSE}
+exFC <- expenses %>%
+  filter(Locality == "Fluvanna",
+         Unit == "Total") %>%
+  select(Expense, Annual, Monthly, Weekly)
+
+reactable(exFC,
+          highlight = TRUE,
+          bordered = TRUE,
+          rowStyle = function(index) {
+    if (exFC[index, "Expense"] == "Total Expenses") 
+      list(background = highlightcolor)
+  }
+)
+```
+
+As this table shows, 79% (442) of the families who cannot meet their basic needs earn between $15,000-$35,000 annually. This strongly suggests they are working, but not earning the wages, or getting the hours, they need to support their families.
+
+#### Breakdown of families making < $35,000 in Fluvanna County
+```{r, echo=FALSE, warning=FALSE}
+incomebinsFC <- data_frame(Income = list("$0 - $9,999", "$10,000 - $14,999", "$15,000 - $24,999", "$25,000 - $34,999", "Total"),
+                         Number = list(Fluvanna$AllFamUnder10kE, Fluvanna$AllFamBtw10_14kE, Fluvanna$AllFamBtw15_24kE, Fluvanna$AllFamBtw25_34kE, sum(Fluvanna$AllFamUnder10kE, Fluvanna$AllFamBtw10_14kE, Fluvanna$AllFamBtw15_24kE, Fluvanna$AllFamBtw25_34kE)),
+                         "of whole county" = list(Fluvanna$perc_AllFamUnder10kE, Fluvanna$perc_AllFamBtw10_14kE, Fluvanna$perc_AllFamBtw15_24kE, Fluvanna$perc_AllFamBtw25_34kE, sum(Fluvanna$perc_AllFamUnder10kE, Fluvanna$perc_AllFamBtw10_14kE, Fluvanna$perc_AllFamBtw15_24kE, Fluvanna$perc_AllFamBtw25_34kE)),
+                         "of families making < 35K in county" =
+                           list(round(Fluvanna$AllFamUnder10kE/Fluvanna$AllFamUnder35kE * 100, 2),
+                                round(Fluvanna$AllFamBtw10_14kE/Fluvanna$AllFamUnder35kE * 100, 2),
+                                round(Fluvanna$AllFamBtw15_24kE/Fluvanna$AllFamUnder35kE * 100, 2),
+                                round(Fluvanna$AllFamBtw25_34kE/Fluvanna$AllFamUnder35kE * 100, 2),
+                                100))
+
+reactable(incomebinsFC, 
+          columnGroups = list(colGroup(name = "Percent", columns = c("of whole county", "of families making < 35K in county"))),
+          highlight = TRUE,
+          bordered = TRUE,
+          rowStyle = function(index) {
+    if (incomebinsAC[index, "Income"] == "$15,000 - $24,999" | incomebinsAC[index, "Income"] == "$25,000 - $34,999") {
+      list(background = highlightcolor)}
+          }
+)
 
 
+```
 
+#### Income distribution of Black and White families in Fluvanna County
+```{r, echo=FALSE, warning=FALSE}
+Fluvannalong <- pivot_longer(Fluvanna[,c("perc_AllFamUnder35kE", "perc_WhiteFamUnder35kE", "perc_BlackFamUnder35kE", "perc_AllFamBtw35_100kE", "perc_WhiteFamBtw35_100kE", "perc_BlackFamBtw35_100kE", "perc_AllFamOver100kE", "perc_WhiteFamOver100kE", "perc_BlackFamOver100kE", "countyName")],
+                       cols = -c(countyName),
+                       values_to = 'percent',
+                       names_to = c('race', 'amount'),
+                       names_pattern = 'perc_(AllFam|BlackFam|WhiteFam)(.+)')
+
+Fluvannalong$amount <- factor(Fluvannalong$amount, levels = c("Under35kE", "Btw35_100kE", "Over100kE"))
+
+ggplot(Fluvannalong,aes(x=amount, y=percent,fill=race)) + 
+  geom_col(position="dodge") +
+  labs(x="Income", y="Percent of families") + 
+  scale_x_discrete(labels = c("Earning Under $35K", "Earning $35K-$100K", "Earning Over $100K")) + 
+  scale_fill_manual(values=c("#482677FF", "#2D708EFF", "#29AF7FFF"), labels = c("All families","Black families",  "White families"),
+                    name = element_blank())  + 
+  geom_text(aes(label=paste0(round(Fluvannalong$percent, 1), "%")), position=position_dodge(width=0.9), vjust=-0.5, size=2.5)
+
+```
+
+#### Median family income in Fluvanna County
+```{r, echo=FALSE, warning=FALSE}
+FCmap <- geofull %>%
+  filter(countyName == "Fluvanna")
+
+pal <- colorNumeric("viridis", reverse = TRUE, domain = FCmap$medianFamIncomeE)
+leaflet() %>% 
+  addProviderTiles("CartoDB.Positron") %>% 
+  addPolygons(data = FCmap,
+              fillColor = ~pal(medianFamIncomeE),
+              weight = 1,
+              opacity = 1,
+              color = "white", 
+              fillOpacity = 0.6,
+              smoothFactor = 0.3,
+              highlight = highlightOptions(
+                weight = 1, fillOpacity = 0.8, bringToFront = T
+              ),
+              popup = paste0("Median family income: ", FCmap$medianFamIncomeE)) %>% 
+  addLegend("bottomright", pal = pal, values = FCmap$medianFamIncomeE, 
+            title = "Median family income", opacity = 0.7)
+```
+
+#### Percent of families making < $35,000 in Fluvanna County
+```{r, echo=FALSE, warning=FALSE}
+pal <- colorNumeric("viridis", reverse = TRUE, domain = FCmap$perc_AllFamUnder35kE)
+leaflet() %>% 
+  addProviderTiles("CartoDB.Positron") %>% 
+  addPolygons(data = FCmap,
+              fillColor = ~pal(perc_AllFamUnder35kE),
+              weight = 1,
+              opacity = 1,
+              color = "white", 
+              fillOpacity = 0.6,
+              smoothFactor = 0.3,
+              highlight = highlightOptions(
+                weight = 1, fillOpacity = 0.8, bringToFront = T
+              ),
+              popup = paste0("Percent of families: ", FCmap$perc_AllFamUnder35kE, "%")) %>% 
+  addLegend("bottomright", pal = pal, values = FCmap$perc_AllFamUnder35kE, 
+            title = "Percent of families <br> making < $35,000", opacity = 0.7)
+```
+
+### Greene County
+```{r, echo=FALSE, warning=FALSE}
+Greene <- countydat[countydat$countyName == "Greene",]
+```
+
+There are 5,372 families living in Greene county.
+
+Of these, 791 (15%) do not earn enough to provide for their basic needs and the costs associated with working.
+
+#### Expenses: Single Householder + 2 Children (1 Toddler)
+```{r, echo=FALSE, warning=FALSE}
+exGC <- expenses %>%
+  filter(Locality == "Greene",
+         Unit == "Total") %>%
+  select(Expense, Annual, Monthly, Weekly)
+
+reactable(exGC,
+          highlight = TRUE,
+          bordered = TRUE,
+          rowStyle = function(index) {
+    if (exGC[index, "Expense"] == "Total Expenses") 
+      list(background = highlightcolor)
+  }
+)
+```
+
+As this table shows, 78% (614) of the families who cannot meet their basic needs earn between $15,000-$35,000 annually. This is the highest percent in the region. This strongly suggests they are working, but not earning the wages, or getting the hours, they need to support their families.
+
+#### Breakdown of families making < $35,000 in Greene County
+```{r, echo=FALSE, warning=FALSE}
+incomebinsGC <- data_frame(Income = list("$0 - $9,999", "$10,000 - $14,999", "$15,000 - $24,999", "$25,000 - $34,999", "Total"),
+                         Number = list(Greene$AllFamUnder10kE, Greene$AllFamBtw10_14kE, Greene$AllFamBtw15_24kE, Greene$AllFamBtw25_34kE, sum(Greene$AllFamUnder10kE, Greene$AllFamBtw10_14kE, Greene$AllFamBtw15_24kE, Greene$AllFamBtw25_34kE)),
+                         "of whole county" = list(Greene$perc_AllFamUnder10kE, Greene$perc_AllFamBtw10_14kE, Greene$perc_AllFamBtw15_24kE, Greene$perc_AllFamBtw25_34kE, sum(Greene$perc_AllFamUnder10kE, Greene$perc_AllFamBtw10_14kE, Greene$perc_AllFamBtw15_24kE, Greene$perc_AllFamBtw25_34kE)),
+                         "of families making < 35K in county" =
+                           list(round(Greene$AllFamUnder10kE/Greene$AllFamUnder35kE * 100, 2),
+                                round(Greene$AllFamBtw10_14kE/Greene$AllFamUnder35kE * 100, 2),
+                                round(Greene$AllFamBtw15_24kE/Greene$AllFamUnder35kE * 100, 2),
+                                round(Greene$AllFamBtw25_34kE/Greene$AllFamUnder35kE * 100, 2),
+                                100))
+
+reactable(incomebinsGC,
+          columnGroups = list(colGroup(name = "Percent", columns = c("of whole county", "of families making < 35K in county"))),
+          highlight = TRUE,
+          bordered = TRUE,
+          rowStyle = function(index) {
+    if (incomebinsAC[index, "Income"] == "$15,000 - $24,999" | incomebinsAC[index, "Income"] == "$25,000 - $34,999") {
+      list(background = highlightcolor)}
+          }
+)
+
+```
+
+#### Income distribution of Black and White families in Greene County
+```{r, echo=FALSE, warning=FALSE}
+Greenelong <- pivot_longer(Greene[,c("perc_AllFamUnder35kE", "perc_WhiteFamUnder35kE", "perc_BlackFamUnder35kE", "perc_AllFamBtw35_100kE", "perc_WhiteFamBtw35_100kE", "perc_BlackFamBtw35_100kE", "perc_AllFamOver100kE", "perc_WhiteFamOver100kE", "perc_BlackFamOver100kE", "countyName")],
+                       cols = -c(countyName),
+                       values_to = 'percent',
+                       names_to = c('race', 'amount'),
+                       names_pattern = 'perc_(AllFam|BlackFam|WhiteFam)(.+)')
+
+Greenelong$amount <- factor(Greenelong$amount, levels = c("Under35kE", "Btw35_100kE", "Over100kE"))
+
+ggplot(Greenelong,aes(x=amount, y=percent,fill=race)) + 
+  geom_col(position="dodge") +
+  labs(x="Income", y="Percent of families") + 
+  scale_x_discrete(labels = c("Earning Under $35K", "Earning $35K-$100K", "Earning Over $100K")) + 
+  scale_fill_manual(values=c("#482677FF", "#2D708EFF", "#29AF7FFF"), labels = c("All families","Black families",  "White families"),
+                    name = element_blank())  + 
+  geom_text(aes(label=paste0(round(Greenelong$percent, 1), "%")), position=position_dodge(width=0.9), vjust=-0.5, size=2.5)
+
+```
+
+#### Median family income in Greene County
+```{r, echo=FALSE, warning=FALSE}
+GCmap <- geofull %>%
+  filter(countyName == "Greene")
+
+pal <- colorNumeric("viridis", reverse = TRUE, domain = GCmap$medianFamIncomeE)
+leaflet() %>% 
+  addProviderTiles("CartoDB.Positron") %>% 
+  addPolygons(data = GCmap,
+              fillColor = ~pal(medianFamIncomeE),
+              weight = 1,
+              opacity = 1,
+              color = "white", 
+              fillOpacity = 0.6,
+              smoothFactor = 0.3,
+              highlight = highlightOptions(
+                weight = 1, fillOpacity = 0.8, bringToFront = T
+              ),
+              popup = paste0("Median family income: ", GCmap$medianFamIncomeE)) %>% 
+  addLegend("bottomright", pal = pal, values = GCmap$medianFamIncomeE, 
+            title = "Median family income", opacity = 0.7)
+```
+
+#### Percent of families making < $35,000 in Greene County
+```{r, echo=FALSE, warning=FALSE}
+pal <- colorNumeric("viridis", reverse = TRUE, domain = GCmap$perc_AllFamUnder35kE)
+leaflet() %>% 
+  addProviderTiles("CartoDB.Positron") %>% 
+  addPolygons(data = GCmap,
+              fillColor = ~pal(perc_AllFamUnder35kE),
+              weight = 1,
+              opacity = 1,
+              color = "white", 
+              fillOpacity = 0.6,
+              smoothFactor = 0.3,
+              highlight = highlightOptions(
+                weight = 1, fillOpacity = 0.8, bringToFront = T
+              ),
+              popup = paste0("Percent of families: ", GCmap$perc_AllFamUnder35kE, "%")) %>% 
+  addLegend("bottomright", pal = pal, values = GCmap$perc_AllFamUnder35kE, 
+            title = "Percent of families <br> making < $35,000", opacity = 0.7)
+```
+
+### Louisa County
+```{r, echo=FALSE, warning=FALSE}
+Louisa <- countydat[countydat$countyName == "Louisa",]
+```
+
+There are 10,249 families living in Louisa county. Louisa is home to the second largest number of families in the region.
+
+Of these, 1,791 (17%) do not earn enough to provide for their basic needs and the costs associated with working. Louisa has second highest number of families left behind. 19 percent of the families struggling in our region live in Louisa, where the median income is $79,821 annually. Louisa has the second lowest cost for housing.
+
+#### Expenses: Single Householder + 2 Children (1 Toddler)
+```{r, echo=FALSE, warning=FALSE}
+exLC <- expenses %>%
+  filter(Locality == "Louisa",
+         Unit == "Total") %>%
+  select(Expense, Annual, Monthly, Weekly)
+
+reactable(exLC,
+          highlight = TRUE,
+          bordered = TRUE,
+          rowStyle = function(index) {
+    if (exLC[index, "Expense"] == "Total Expenses") 
+      list(background = highlightcolor)
+  }
+)
+```
+
+As this table shows, 77% (1,376) of the families who cannot meet their basic needs earn between $15,000-$35,000 annually. This strongly suggests they are working, but not earning the wages, or getting the hours, they need to support their families.
+
+#### Breakdown of families making < $35,000 in Louisa County
+```{r, echo=FALSE, warning=FALSE}
+incomebinsLC <- data_frame(Income = list("$0 - $9,999", "$10,000 - $14,999", "$15,000 - $24,999", "$25,000 - $34,999", "Total"),
+                         Number = list(Louisa$AllFamUnder10kE, Louisa$AllFamBtw10_14kE, Louisa$AllFamBtw15_24kE, Louisa$AllFamBtw25_34kE, sum(Louisa$AllFamUnder10kE, Louisa$AllFamBtw10_14kE, Louisa$AllFamBtw15_24kE, Louisa$AllFamBtw25_34kE)),
+                         "of whole county" = list(Louisa$perc_AllFamUnder10kE, Louisa$perc_AllFamBtw10_14kE, Louisa$perc_AllFamBtw15_24kE, Louisa$perc_AllFamBtw25_34kE, sum(Louisa$perc_AllFamUnder10kE, Louisa$perc_AllFamBtw10_14kE, Louisa$perc_AllFamBtw15_24kE, Louisa$perc_AllFamBtw25_34kE)),
+                         "of families making < 35K in county" =
+                           list(round(Louisa$AllFamUnder10kE/Louisa$AllFamUnder35kE * 100, 2),
+                                round(Louisa$AllFamBtw10_14kE/Louisa$AllFamUnder35kE * 100, 2),
+                                round(Louisa$AllFamBtw15_24kE/Louisa$AllFamUnder35kE * 100, 2),
+                                round(Louisa$AllFamBtw25_34kE/Louisa$AllFamUnder35kE * 100, 2),
+                                100))
+
+reactable(incomebinsLC, 
+          columnGroups = list(colGroup(name = "Percent", columns = c("of whole county", "of families making < 35K in county"))),
+          highlight = TRUE,
+          bordered = TRUE,
+          rowStyle = function(index) {
+    if (incomebinsAC[index, "Income"] == "$15,000 - $24,999" | incomebinsAC[index, "Income"] == "$25,000 - $34,999") {
+      list(background = highlightcolor)}
+          }
+)
+
+```
+
+#### Income distribution of Black and White families in Louisa County
+```{r, echo=FALSE, warning=FALSE}
+Louisalong <- pivot_longer(Louisa[,c("perc_AllFamUnder35kE", "perc_WhiteFamUnder35kE", "perc_BlackFamUnder35kE", "perc_AllFamBtw35_100kE", "perc_WhiteFamBtw35_100kE", "perc_BlackFamBtw35_100kE", "perc_AllFamOver100kE", "perc_WhiteFamOver100kE", "perc_BlackFamOver100kE", "countyName")],
+                       cols = -c(countyName),
+                       values_to = 'percent',
+                       names_to = c('race', 'amount'),
+                       names_pattern = 'perc_(AllFam|BlackFam|WhiteFam)(.+)')
+
+Louisalong$amount <- factor(Louisalong$amount, levels = c("Under35kE", "Btw35_100kE", "Over100kE"))
+
+ggplot(Louisalong,aes(x=amount, y=percent,fill=race)) + 
+  geom_col(position="dodge") +
+  labs(x="Income", y="Percent of families") + 
+  scale_x_discrete(labels = c("Earning Under $35K", "Earning $35K-$100K", "Earning Over $100K")) + 
+  scale_fill_manual(values=c("#482677FF", "#2D708EFF", "#29AF7FFF"), labels = c("All families","Black families",  "White families"),
+                    name = element_blank())  + 
+  geom_text(aes(label=paste0(round(Louisalong$percent, 1), "%")), position=position_dodge(width=0.9), vjust=-0.5, size=2.5)
+
+```
+
+#### Median family income in Louisa County
+```{r, echo=FALSE, warning=FALSE}
+LCmap <- geofull %>%
+  filter(countyName == "Louisa")
+
+pal <- colorNumeric("viridis", reverse = TRUE, domain = LCmap$medianFamIncomeE)
+leaflet() %>% 
+  addProviderTiles("CartoDB.Positron") %>% 
+  addPolygons(data = LCmap,
+              fillColor = ~pal(medianFamIncomeE),
+              weight = 1,
+              opacity = 1,
+              color = "white", 
+              fillOpacity = 0.6,
+              smoothFactor = 0.3,
+              highlight = highlightOptions(
+                weight = 1, fillOpacity = 0.8, bringToFront = T
+              ),
+              popup = paste0("Median family income: ", LCmap$medianFamIncomeE)) %>% 
+  addLegend("bottomright", pal = pal, values = LCmap$medianFamIncomeE, 
+            title = "Median family income", opacity = 0.7)
+```
+
+#### Percent of families making < $35,000 in Louisa County
+```{r, echo=FALSE, warning=FALSE}
+pal <- colorNumeric("viridis", reverse = TRUE, domain = LCmap$perc_AllFamUnder35kE)
+leaflet() %>% 
+  addProviderTiles("CartoDB.Positron") %>% 
+  addPolygons(data = LCmap,
+              fillColor = ~pal(perc_AllFamUnder35kE),
+              weight = 1,
+              opacity = 1,
+              color = "white", 
+              fillOpacity = 0.6,
+              smoothFactor = 0.3,
+              highlight = highlightOptions(
+                weight = 1, fillOpacity = 0.8, bringToFront = T
+              ),
+              popup = paste0("Percent of families: ", LCmap$perc_AllFamUnder35kE, "%")) %>% 
+  addLegend("bottomright", pal = pal, values = LCmap$perc_AllFamUnder35kE, 
+            title = "Percent of families <br> making < $35,000", opacity = 0.7)
+```
+
+### Nelson County
+```{r, echo=FALSE, warning=FALSE}
+Nelson <- countydat[countydat$countyName == "Nelson",]
+```
+
+There are 4,486 families living in Nelson county.
+
+Of these, 812 (19%) do not earn enough to provide for their basic needs and the costs associated with working.
+
+#### Expenses: Single Householder + 2 Children (1 Toddler)
+```{r, echo=FALSE, warning=FALSE}
+exNC <- expenses %>%
+  filter(Locality == "Nelson",
+         Unit == "Total") %>%
+  select(Expense, Annual, Monthly, Weekly)
+
+reactable(exNC,
+          highlight = TRUE,
+          bordered = TRUE,
+          rowStyle = function(index) {
+    if (exNC[index, "Expense"] == "Total Expenses") 
+      list(background = highlightcolor)
+  }
+)
+```
+
+As this table shows, 72% (588) of the families who cannot meet their basic needs earn between $15,000-$35,000 annually. This strongly suggests they are working, but not earning the wages, or getting the hours, they need to support their families.
+
+#### Breakdown of families making < $35,000 in Nelson County
+```{r, echo=FALSE, warning=FALSE}
+incomebinsNC <- data_frame(Income = list("$0 - $9,999", "$10,000 - $14,999", "$15,000 - $24,999", "$25,000 - $34,999", "Total"),
+                         Number = list(Nelson$AllFamUnder10kE, Nelson$AllFamBtw10_14kE, Nelson$AllFamBtw15_24kE, Nelson$AllFamBtw25_34kE, sum(Nelson$AllFamUnder10kE, Nelson$AllFamBtw10_14kE, Nelson$AllFamBtw15_24kE, Nelson$AllFamBtw25_34kE)),
+                         "of whole county" = list(Nelson$perc_AllFamUnder10kE, Nelson$perc_AllFamBtw10_14kE, Nelson$perc_AllFamBtw15_24kE, Nelson$perc_AllFamBtw25_34kE, sum(Nelson$perc_AllFamUnder10kE, Nelson$perc_AllFamBtw10_14kE, Nelson$perc_AllFamBtw15_24kE, Nelson$perc_AllFamBtw25_34kE)),
+                         "of families making < 35K in county" =
+                           list(round(Nelson$AllFamUnder10kE/Nelson$AllFamUnder35kE * 100, 2),
+                                round(Nelson$AllFamBtw10_14kE/Nelson$AllFamUnder35kE * 100, 2),
+                                round(Nelson$AllFamBtw15_24kE/Nelson$AllFamUnder35kE * 100, 2),
+                                round(Nelson$AllFamBtw25_34kE/Nelson$AllFamUnder35kE * 100, 2),
+                                100))
+
+reactable(incomebinsNC, 
+          columnGroups = list(colGroup(name = "Percent", columns = c("of whole county", "of families making < 35K in county"))),
+          highlight = TRUE,
+          bordered = TRUE,
+          rowStyle = function(index) {
+    if (incomebinsAC[index, "Income"] == "$15,000 - $24,999" | incomebinsAC[index, "Income"] == "$25,000 - $34,999") {
+      list(background = highlightcolor)}
+          }
+)
+```
+
+#### Income distribution of Black and White families in Nelson County
+```{r, echo=FALSE, warning=FALSE}
+Nelsonlong <- pivot_longer(Nelson[,c("perc_AllFamUnder35kE", "perc_WhiteFamUnder35kE", "perc_BlackFamUnder35kE", "perc_AllFamBtw35_100kE", "perc_WhiteFamBtw35_100kE", "perc_BlackFamBtw35_100kE", "perc_AllFamOver100kE", "perc_WhiteFamOver100kE", "perc_BlackFamOver100kE", "countyName")],
+                       cols = -c(countyName),
+                       values_to = 'percent',
+                       names_to = c('race', 'amount'),
+                       names_pattern = 'perc_(AllFam|BlackFam|WhiteFam)(.+)')
+
+Nelsonlong$amount <- factor(Nelsonlong$amount, levels = c("Under35kE", "Btw35_100kE", "Over100kE"))
+
+ggplot(Nelsonlong,aes(x=amount, y=percent,fill=race)) + 
+  geom_col(position="dodge") +
+  labs(x="Income", y="Percent of families") + 
+  scale_x_discrete(labels = c("Earning Under $35K", "Earning $35K-$100K", "Earning Over $100K")) + 
+  scale_fill_manual(values=c("#482677FF", "#2D708EFF", "#29AF7FFF"), labels = c("All families","Black families",  "White families"),
+                    name = element_blank())  + 
+  geom_text(aes(label=paste0(round(Nelsonlong$percent, 1), "%")), position=position_dodge(width=0.9), vjust=-0.5, size=2.5)
+
+```
+
+#### Median family income in Nelson County
+```{r, echo=FALSE, warning=FALSE}
+NCmap <- geofull %>%
+  filter(countyName == "Nelson")
+
+pal <- colorNumeric("viridis", reverse = TRUE, domain = NCmap$medianFamIncomeE)
+leaflet() %>% 
+  addProviderTiles("CartoDB.Positron") %>% 
+  addPolygons(data = NCmap,
+              fillColor = ~pal(medianFamIncomeE),
+              weight = 1,
+              opacity = 1,
+              color = "white", 
+              fillOpacity = 0.6,
+              smoothFactor = 0.3,
+              highlight = highlightOptions(
+                weight = 1, fillOpacity = 0.8, bringToFront = T
+              ),
+              popup = paste0("Median family income: ", NCmap$medianFamIncomeE)) %>% 
+  addLegend("bottomright", pal = pal, values = NCmap$medianFamIncomeE, 
+            title = "Median family income", opacity = 0.7)
+```
+
+#### Percent of families making < $35,000 in Nelson County
+```{r, echo=FALSE, warning=FALSE}
+pal <- colorNumeric("viridis", reverse = TRUE, domain = NCmap$perc_AllFamUnder35kE)
+leaflet() %>% 
+  addProviderTiles("CartoDB.Positron") %>% 
+  addPolygons(data = NCmap,
+              fillColor = ~pal(perc_AllFamUnder35kE),
+              weight = 1,
+              opacity = 1,
+              color = "white", 
+              fillOpacity = 0.6,
+              smoothFactor = 0.3,
+              highlight = highlightOptions(
+                weight = 1, fillOpacity = 0.8, bringToFront = T
+              ),
+              popup = paste0("Percent of families: ", NCmap$perc_AllFamUnder35kE, "%")) %>% 
+  addLegend("bottomright", pal = pal, values = NCmap$perc_AllFamUnder35kE, 
+            title = "Percent of families <br> making < $35,000", opacity = 0.7)
+```
+
+# Part II: Providing a Solution
 
 
 
