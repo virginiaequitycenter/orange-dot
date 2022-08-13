@@ -162,7 +162,29 @@ Hard work x Low Wages = Low Income \\
 
 The variable is not the hard work, but the wages. People generally don’t choose to be poor. It is important to note that a full-time worker making Virginia's minimum wage will have a gross income of 22,000 per year.^[Based on wage of $11/hour.]. To reduce the number of struggling families, therefore, requires that we increase their wages. We need a system that identifies the 72 percent of low-income families who are working for a living but who are not valued, and help them increase their value in the eyes of their employers:
 
-## Missing pie charts on page 6 ##
+## Families in the Charlottesville Region
+```{r}
+# Create Data
+pie1 <- countydat[which(countydat$NAME == "Charlottesville Region"), c("perc_AllFamUnder35kE", "NAME")]
+pie1 <- pie1 %>%
+  mutate(NAME = "Not Self-Sufficient") %>%
+  rename(percent = perc_AllFamUnder35kE) %>%
+  add_row("percent" = 100 - 14.13, "NAME" = "Self-Sufficient")
+
+# Compute the position of labels
+pie1 <- pie1 %>% 
+  arrange(desc(NAME)) %>%
+  mutate(ypos = cumsum(percent)- 0.5*percent )
+
+# Basic piechart
+ggplot(pie1, aes(x="", y=percent, fill=NAME)) +
+  geom_bar(stat="identity", width=1, color="white") +
+  coord_polar("y", start=0) +
+  theme_void() + 
+  theme(legend.position="identity") +
+  geom_text(aes(y = ypos, label = percent), color = "white", size=6) +
+  scale_fill_brewer(palette="Set1")
+```
 
 ## The Importance of Core Skills
 
@@ -214,7 +236,9 @@ This struggle is not new, and it's not unique to the Charlottesville region. Acr
 
 That racial wealth gap is best explained by unequal labor income, according to research from the Federal Reserve Bank of Cleveland.^[Mock, B. (2019, March 21). Why Can't We Close the Racial Wealth Gap? Bloomberg City Lab. Retrieved from https://www.bloomberg.com/news/articles/2019-03-21/how-income-inequality-feeds-the-racial-wealth-gap. Data on unequal labor income in our region comes from U.S. Census Bureau (2020). Family Income in the Past 12 Months. American Community Survey 5-Year Estimates, 2014-2018, Tables B19101, 19101A, 19101B]
 
-## Missing info-graphics from page 33 ## 
+![Racial Wealth Gap](WealthGap.png)
+![Racial Income Gap](IncomeGap.jpg)
+
 
 This is the same unequal labor income we see in our own communities, as shown below.
 
