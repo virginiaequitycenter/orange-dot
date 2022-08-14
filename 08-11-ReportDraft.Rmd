@@ -97,7 +97,7 @@ There are 66,633 families living in the Charlottesville region.^[Family is defin
 
 Of these, 9,413 families (14 percent) do not make enough money to afford the essentials of life—food, shelter, clothing and utilities—and the added costs associated with working— childcare and transportation.^[This report reflects the U.S. Census Bureau's American Community Survey 5-year averages, 2015-2020.]
 
-While this is still too many families, it is heartening to note that the situation improved since the previous report was published in January 2021. In the Orange Dot Report 4.0, we found that there were 10,940 families (17 percent) who did not earn enough to meet their basic needs. Thus, over the following two years our community reduced the number of struggling families by nearly 14 percent. __At this rate, our community is on track to help lift 4,000 families to self-sufficiency by 2026__.^[This is a community success, brought about primarily by the hard work of the job-seekers themselves, made possible by the quality employers who hire them, and propelled by the social and material support supplied by family, friends and a network of community-based organizations and agencies.]
+While this is still too many families, it is heartening to note that the situation improved since the previous report was published in January 2021. In the Orange Dot Report 4.0, we found that there were 10,940 families (17 percent) who did not earn enough to meet their basic needs. Thus, over the following two years our community reduced the number of struggling families by nearly 14 percent. ~~At this rate, our community is on track to help lift 4,000 families to self-sufficiency by 2026~~.^[This is a community success, brought about primarily by the hard work of the job-seekers themselves, made possible by the quality employers who hire them, and propelled by the social and material support supplied by family, friends and a network of community-based organizations and agencies.]
 
 As detailed in the sections that follow, families in our community generally need to earn at least $35,000 annually to meet their basic needs.
 
@@ -162,29 +162,7 @@ Hard work x Low Wages = Low Income \\
 
 The variable is not the hard work, but the wages. People generally don’t choose to be poor. It is important to note that a full-time worker making Virginia's minimum wage will have a gross income of 22,000 per year.^[Based on wage of $11/hour.]. To reduce the number of struggling families, therefore, requires that we increase their wages. We need a system that identifies the 72 percent of low-income families who are working for a living but who are not valued, and help them increase their value in the eyes of their employers:
 
-## Families in the Charlottesville Region
-```{r}
-# Create Data
-pie1 <- countydat[which(countydat$NAME == "Charlottesville Region"), c("perc_AllFamUnder35kE", "NAME")]
-pie1 <- pie1 %>%
-  mutate(NAME = "Not Self-Sufficient") %>%
-  rename(percent = perc_AllFamUnder35kE) %>%
-  add_row("percent" = 100 - 14.13, "NAME" = "Self-Sufficient")
-
-# Compute the position of labels
-pie1 <- pie1 %>% 
-  arrange(desc(NAME)) %>%
-  mutate(ypos = cumsum(percent)- 0.5*percent )
-
-# Basic piechart
-ggplot(pie1, aes(x="", y=percent, fill=NAME)) +
-  geom_bar(stat="identity", width=1, color="white") +
-  coord_polar("y", start=0) +
-  theme_void() + 
-  theme(legend.position="identity") +
-  geom_text(aes(y = ypos, label = percent), color = "white", size=6) +
-  scale_fill_brewer(palette="Set1")
-```
+![](PictureChart.png)
 
 ## The Importance of Core Skills
 
