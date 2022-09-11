@@ -209,16 +209,26 @@ tract_AllFamUnder35k <- tract_AllFam %>%
 tract_AllFamUnder35k$perc_AllFamUnder35kE <- round(tract_AllFamUnder35k$AllFamUnder35kE / AllFamT$AllFamE * 100, 2)
 tract_AllFamUnder35k$perc_AllFamUnder35kM <- round(moe_prop(tract_AllFamUnder35k$AllFamUnder35kE, AllFamT$AllFamE, 
                                                           tract_AllFamUnder35k$AllFamUnder35kM, AllFamT$AllFamM), 2)
-# All families making 35-100k 
-tract_AllFamBtw35_100 <- tract_AllFam %>% 
+# All families making 35-59,999k 
+tract_AllFamBtw35_59k <- tract_AllFam %>% 
   filter(variable %in% c("B19101_008", "B19101_009", "B19101_010",
-                         "B19101_011", "B19101_012", "B19101_013")) %>% 
+                         "B19101_011")) %>% 
   group_by(GEOID, NAME) %>% 
-  summarize(AllFamBtw35_100kE = sum(estimate),
-            AllFamBtw35_100kM = round(moe_sum(moe = moe, estimate = estimate), 2))
-tract_AllFamBtw35_100$perc_AllFamBtw35_100kE <- round(tract_AllFamBtw35_100$AllFamBtw35_100kE / AllFamT$AllFamE * 100, 2)
-tract_AllFamBtw35_100$perc_AllFamBtw35_100kM <- round(moe_prop(tract_AllFamBtw35_100$AllFamBtw35_100kE, AllFamT$AllFamE, 
-                                                       tract_AllFamBtw35_100$AllFamBtw35_100kM, AllFamT$AllFamM), 2)
+  summarize(AllFamBtw35_59kE = sum(estimate),
+            AllFamBtw35_59kM = round(moe_sum(moe = moe, estimate = estimate), 2)) 
+tract_AllFamBtw35_59k$perc_AllFamBtw35_59kE <- round(tract_AllFamBtw35_59k$AllFamBtw35_59kE / AllFamT$AllFamE * 100, 2)
+tract_AllFamBtw35_59k$perc_AllFamBtw35_59kM <- round(moe_prop(tract_AllFamBtw35_59k$AllFamBtw35_59kE, AllFamT$AllFamE, 
+                                                              tract_AllFamBtw35_59k$AllFamBtw35_59kM, AllFamT$AllFamM), 2)
+
+# All families making 60-100k 
+tract_AllFamBtw60_100k <- tract_AllFam %>% 
+  filter(variable %in% c("B19101_012", "B19101_013")) %>% 
+  group_by(GEOID, NAME) %>% 
+  summarize(AllFamBtw60_100kE = sum(estimate),
+            AllFamBtw60_100kM = round(moe_sum(moe = moe, estimate = estimate), 2)) 
+tract_AllFamBtw60_100k$perc_AllFamBtw60_100kE <- round(tract_AllFamBtw60_100k$AllFamBtw60_100kE / AllFamT$AllFamE * 100, 2)
+tract_AllFamBtw60_100k$perc_AllFamBtw60_100kM <- round(moe_prop(tract_AllFamBtw60_100k$AllFamBtw60_100kE, AllFamT$AllFamE, 
+                                                              tract_AllFamBtw60_100k$AllFamBtw60_100kM, AllFamT$AllFamM), 2)
 
 # All families making Over 100k 
 tract_AllFamOver100 <- tract_AllFam %>% 
@@ -300,16 +310,26 @@ tract_WhiteFamUnder35k <- tract_White %>%
 tract_WhiteFamUnder35k$perc_WhiteFamUnder35kE <- round(tract_WhiteFamUnder35k$WhiteFamUnder35kE / tract_WhiteAll$AllWhiteFamE * 100, 2)
 tract_WhiteFamUnder35k$perc_WhiteFamUnder35kM <- round(moe_prop(tract_WhiteFamUnder35k$WhiteFamUnder35kE, tract_WhiteAll$AllWhiteFamE, 
                                                           tract_WhiteFamUnder35k$WhiteFamUnder35kM, tract_WhiteAll$AllWhiteFamM), 2)
-# White families making 35-100k 
-tract_WhiteFamBtw35_100 <- tract_White %>% 
+# White families making 35-59,999k 
+tract_WhiteFamBtw35_59k <- tract_White %>% 
   filter(variable %in% c("B19101A_008", "B19101A_009", "B19101A_010",
-                         "B19101A_011", "B19101A_012", "B19101A_013")) %>% 
+                         "B19101A_011")) %>% 
   group_by(GEOID, NAME) %>% 
-  summarize(WhiteFamBtw35_100kE = sum(estimate),
-            WhiteFamBtw35_100kM = round(moe_sum(moe = moe, estimate = estimate), 2))
-tract_WhiteFamBtw35_100$perc_WhiteFamBtw35_100kE <- round(tract_WhiteFamBtw35_100$WhiteFamBtw35_100kE / tract_WhiteAll$AllWhiteFamE * 100, 2)
-tract_WhiteFamBtw35_100$perc_WhiteFamBtw35_100kM <- round(moe_prop(tract_WhiteFamBtw35_100$WhiteFamBtw35_100kE, tract_WhiteAll$AllWhiteFamE, 
-                                                       tract_WhiteFamBtw35_100$WhiteFamBtw35_100kM, tract_WhiteAll$AllWhiteFamM), 2)
+  summarize(WhiteFamBtw35_59kE = sum(estimate),
+            WhiteFamBtw35_59kM = round(moe_sum(moe = moe, estimate = estimate), 2)) 
+tract_WhiteFamBtw35_59k$perc_WhiteFamBtw35_59kE <- round(tract_WhiteFamBtw35_59k$WhiteFamBtw35_59kE / tract_WhiteAll$AllWhiteFamE * 100, 2)
+tract_WhiteFamBtw35_59k$perc_WhiteFamBtw35_59kM <- round(moe_prop(tract_WhiteFamBtw35_59k$WhiteFamBtw35_59kE, tract_WhiteAll$AllWhiteFamE, 
+                                                              tract_WhiteFamBtw35_59k$WhiteFamBtw35_59kM, tract_WhiteAll$AllWhiteFamM), 2)
+
+# White families making 60-100k 
+tract_WhiteFamBtw60_100k <- tract_White %>% 
+  filter(variable %in% c("B19101A_012", "B19101A_013")) %>% 
+  group_by(GEOID, NAME) %>% 
+  summarize(WhiteFamBtw60_100kE = sum(estimate),
+            WhiteFamBtw60_100kM = round(moe_sum(moe = moe, estimate = estimate), 2)) 
+tract_WhiteFamBtw60_100k$perc_WhiteFamBtw60_100kE <- round(tract_WhiteFamBtw60_100k$WhiteFamBtw60_100kE / tract_WhiteAll$AllWhiteFamE * 100, 2)
+tract_WhiteFamBtw60_100k$perc_WhiteFamBtw60_100kM <- round(moe_prop(tract_WhiteFamBtw60_100k$WhiteFamBtw60_100kE, tract_WhiteAll$AllWhiteFamE, 
+                                                                tract_WhiteFamBtw60_100k$WhiteFamBtw60_100kM, tract_WhiteAll$AllWhiteFamM), 2)
 
 # White families making Over 100k 
 tract_WhiteFamOver100 <- tract_White %>% 
@@ -391,16 +411,26 @@ tract_BlackFamUnder35k <- tract_Black %>%
 tract_BlackFamUnder35k$perc_BlackFamUnder35kE <- round(tract_BlackFamUnder35k$BlackFamUnder35kE / tract_BlackAll$AllBlackFamE * 100, 2)
 tract_BlackFamUnder35k$perc_BlackFamUnder35kM <- round(moe_prop(tract_BlackFamUnder35k$BlackFamUnder35kE, tract_BlackAll$AllBlackFamE, 
                                                           tract_BlackFamUnder35k$BlackFamUnder35kM, tract_BlackAll$AllBlackFamM), 2)
-# Black families making 35-100k 
-tract_BlackFamBtw35_100 <- tract_Black %>% 
+# Black families making 35-59,999k 
+tract_BlackFamBtw35_59k <- tract_Black %>% 
   filter(variable %in% c("B19101B_008", "B19101B_009", "B19101B_010",
-                         "B19101B_011", "B19101B_012", "B19101B_013")) %>% 
+                         "B19101B_011")) %>% 
   group_by(GEOID, NAME) %>% 
-  summarize(BlackFamBtw35_100kE = sum(estimate),
-            BlackFamBtw35_100kM = round(moe_sum(moe = moe, estimate = estimate), 2))
-tract_BlackFamBtw35_100$perc_BlackFamBtw35_100kE <- round(tract_BlackFamBtw35_100$BlackFamBtw35_100kE / tract_BlackAll$AllBlackFamE * 100, 2)
-tract_BlackFamBtw35_100$perc_BlackFamBtw35_100kM <- round(moe_prop(tract_BlackFamBtw35_100$BlackFamBtw35_100kE, tract_BlackAll$AllBlackFamE, 
-                                                       tract_BlackFamBtw35_100$BlackFamBtw35_100kM, tract_BlackAll$AllBlackFamM), 2)
+  summarize(BlackFamBtw35_59kE = sum(estimate),
+            BlackFamBtw35_59kM = round(moe_sum(moe = moe, estimate = estimate), 2)) 
+tract_BlackFamBtw35_59k$perc_BlackFamBtw35_59kE <- round(tract_BlackFamBtw35_59k$BlackFamBtw35_59kE / tract_BlackAll$AllBlackFamE * 100, 2)
+tract_BlackFamBtw35_59k$perc_BlackFamBtw35_59kM <- round(moe_prop(tract_BlackFamBtw35_59k$BlackFamBtw35_59kE, tract_BlackAll$AllBlackFamE, 
+                                                                  tract_BlackFamBtw35_59k$BlackFamBtw35_59kM, tract_BlackAll$AllBlackFamM), 2)
+
+# Black families making 60-100k 
+tract_BlackFamBtw60_100k <- tract_Black %>% 
+  filter(variable %in% c("B19101B_012", "B19101B_013")) %>% 
+  group_by(GEOID, NAME) %>% 
+  summarize(BlackFamBtw60_100kE = sum(estimate),
+            BlackFamBtw60_100kM = round(moe_sum(moe = moe, estimate = estimate), 2)) 
+tract_BlackFamBtw60_100k$perc_BlackFamBtw60_100kE <- round(tract_BlackFamBtw60_100k$BlackFamBtw60_100kE / tract_BlackAll$AllBlackFamE * 100, 2)
+tract_BlackFamBtw60_100k$perc_BlackFamBtw60_100kM <- round(moe_prop(tract_BlackFamBtw60_100k$BlackFamBtw60_100kE, tract_BlackAll$AllBlackFamE, 
+                                                                    tract_BlackFamBtw60_100k$BlackFamBtw60_100kM, tract_BlackAll$AllBlackFamM), 2)
 
 # Black families making Over 100k 
 tract_BlackFamOver100 <- tract_Black %>% 
@@ -423,7 +453,8 @@ tract_data <- tract_data_s %>%
   left_join(tract_AllFamBtw15_24k) %>%
   left_join(tract_AllFamBtw25_34k) %>%
   left_join(tract_AllFamUnder35k) %>%
-  left_join(tract_AllFamBtw35_100) %>%
+  left_join(tract_AllFamBtw35_59k) %>%
+  left_join(tract_AllFamBtw60_100k) %>%
   left_join(tract_AllFamOver100) %>%
   left_join(tract_WhiteAll) %>%
   left_join(tract_WhiteFamUnder10k) %>%
@@ -431,7 +462,8 @@ tract_data <- tract_data_s %>%
   left_join(tract_WhiteFamBtw15_24k) %>%
   left_join(tract_WhiteFamBtw25_34k) %>%
   left_join(tract_WhiteFamUnder35k) %>%
-  left_join(tract_WhiteFamBtw35_100) %>%
+  left_join(tract_WhiteFamBtw35_59k) %>%
+  left_join(tract_WhiteFamBtw60_100k) %>%
   left_join(tract_WhiteFamOver100) %>%
   left_join(tract_BlackAll) %>%
   left_join(tract_BlackFamUnder10k) %>%
@@ -439,7 +471,8 @@ tract_data <- tract_data_s %>%
   left_join(tract_BlackFamBtw15_24k) %>%
   left_join(tract_BlackFamBtw25_34k) %>%
   left_join(tract_BlackFamUnder35k) %>%
-  left_join(tract_BlackFamBtw35_100) %>%
+  left_join(tract_BlackFamBtw35_59k) %>%
+  left_join(tract_BlackFamBtw60_100k) %>%
   left_join(tract_BlackFamOver100)
   
 

@@ -31,6 +31,7 @@ countydat <- read_csv("data/acs_county_orangedot.csv")
 
 # Spatial data
 geo <- readRDS("data/cvilleODreport_tracts.RDS")
+geo$GEOID <- as.character(geo$GEOID)
 
 geofull <- geo %>%
   left_join(tractdat, by = "GEOID")
@@ -146,7 +147,7 @@ The variable is not the hard work, but the wages. People generally don’t choos
 ![](PictureChart.png)
 To get ahead, those workers will need jobs and careers that pay enough to support their families.
 
-The sections that follow detail what it costs to be self-sufficient in each of the localities that comprise the region, including the costs of food^[U.S. Department of Agriculture, Center for Nutrition Policy and Promotion (2022). Official USDA Food Plans: Cost of Food at Home at Four Levels, U.S. Average, May 2022, Weekly Cost of the Low-Cost Plan. Retrieved from https://www.fns.usda.gov/sites/default/files/media/file/CostofFoodMay2022Thrifty.pdf], shelter^[Virginia Housing. (2022). 2022 Fair Market Rents. retrieved from https://www.huduser.gov/portal/datasets/fmr/fmrs/FY2022_code/2022summary.odn], clothing^[U.S. Department of Agriculture, Center for Nutrition Policy and Promotion. (2017). Expenditures on Children by Families, Estimated annual expenditures on a child by single-parent families. Retrieved from https://www.fns.usda.gov/sites/default/files/resource-files/crc2015-march2017.pdf and U.S. Bureau of Labor Statistics. (2020). Consumer Expenditures Survey, CE Tables, Age of Reference Person, Apparel and Services by Women, 16 and over. Retrieved from https://www.bls.gov/cex/tables/calendar-year/mean-item-share-average-standard-error/reference-person-age-ranges-2020.pdf], utilities^[Virginia Housing Development Authority. (2022). Allowances for Tenant-Furnished Utilities and Other Services, Two Exposed UA Schedule. Retrieved from https://mc-0e9acafd-48f4-4c49-b478-6257-cdn-endpoint.azureedge.net/-/media/docs/partners/housing-choice-vouchers/utility-allowance/2exposed-walls.pdf?rev=91c81573c2e94b8cb314f871bbad5e65&hash=666946C107D54311AC4222AC1E81F850 and the U.S. Bureau of Labor Statistics. (2020), Consumer Expenditure Survey, Telephone Services. Retrieved from https://www.bls.gov/cex/tables/calendar-year/mean-item-share-average-standard-error/reference-person-age-ranges-2020.pdf], childcare^[Childcare costs provided by a local childcare center], transportation^[U.S. Bureau of Labor Statistics. (2020). Consumer Expenditures Survey, CE Tables, Age of Reference Person, Apparel and Services by Women, 16 and over. Retrieved from https://www.bls.gov/cex/tables/calendar-year/mean-item-share-average-standard-error/reference-person-age-ranges-2020.pdf], and necessary costs^[Garner, T. (2010). Supplemental Poverty Measure Thresholds: Laying the Foundation. Washington DC: Bureau of Labor Statistics.].
+The sections that follow detail what it costs to be self-sufficient in each of the localities that comprise the region, including the costs of food^[U.S. Department of Agriculture, Center for Nutrition Policy and Promotion (2022). Official USDA Food Plans: Cost of Food at Home at Four Levels, U.S. Average, May 2022, Weekly Cost of the Low-Cost Plan. Retrieved from https://www.fns.usda.gov/sites/default/files/media/file/CostofFoodMay2022Thrifty.pdf], shelter^[Virginia Housing. (2022). 2022 Fair Market Rents. retrieved from https://www.huduser.gov/portal/datasets/fmr/fmrs/FY2022_code/2022summary.odn], clothing^[U.S. Department of Agriculture, Center for Nutrition Policy and Promotion. (2017). Expenditures on Children by Families, Estimated annual expenditures on a child by single-parent families. Retrieved from https://www.fns.usda.gov/sites/default/files/resource-files/crc2015-march2017.pdf and U.S. Bureau of Labor Statistics. (2020). Consumer Expenditures Survey, CE Tables, Age of Reference Person, Apparel and Services by Women, 16 and over. Retrieved from https://www.bls.gov/cex/tables/calendar-year/mean-item-share-average-standard-error/reference-person-age-ranges-2020.pdf], utilities^[Virginia Housing Development Authority. (2022). Allowances for Tenant-Furnished Utilities and Other Services, Two Exposed UA Schedule. Retrieved from https://mc-0e9acafd-48f4-4c49-b478-6257-cdn-endpoint.azureedge.net/-/media/docs/partners/housing-choice-vouchers/utility-allowance/2exposed-walls.pdf?rev=91c81573c2e94b8cb314f871bbad5e65&hash=666946C107D54311AC4222AC1E81F850 and the U.S. Bureau of Labor Statistics. (2020), Consumer Expenditure Survey, Telephone Services. Retrieved from https://www.bls.gov/cex/tables/calendar-year/mean-item-share-average-standard-error/reference-person-age-ranges-2020.pdf], childcare^[Virginia Department of Social Services, Division of Child Care and Early Childhood Development. (2021). Child Care Subsidy Program Guidance Manual. Richmond, Virginia. Retrieved from https://doe.virginia.gov/cc/files/child-care-subsidy-guidance-manual.pdf.], transportation^[U.S. Bureau of Labor Statistics. (2020). Consumer Expenditures Survey, CE Tables, Age of Reference Person, Apparel and Services by Women, 16 and over. Retrieved from https://www.bls.gov/cex/tables/calendar-year/mean-item-share-average-standard-error/reference-person-age-ranges-2020.pdf], and necessary costs^[Garner, T. (2010). Supplemental Poverty Measure Thresholds: Laying the Foundation. Washington DC: Bureau of Labor Statistics.].
 
 While there is variation across the communities in our region, there is one constant: In every corner of every county and the city, there are hundreds of families who struggle every day to put a roof over their heads, food in their bellies, clothes on their backs and heat in their homes.
 
@@ -290,18 +291,18 @@ flextable(incomebinsAC) %>%
 
 #### Income distribution of Black and White families in Albemarle County
 ```{r, echo=FALSE, warning=FALSE}
-albemarlelong <- pivot_longer(albemarle[,c("perc_AllFamUnder35kE", "perc_WhiteFamUnder35kE", "perc_BlackFamUnder35kE", "perc_AllFamBtw35_100kE", "perc_WhiteFamBtw35_100kE", "perc_BlackFamBtw35_100kE", "perc_AllFamOver100kE", "perc_WhiteFamOver100kE", "perc_BlackFamOver100kE", "countyName")],
+albemarlelong <- pivot_longer(albemarle[,c("perc_AllFamUnder35kE", "perc_WhiteFamUnder35kE", "perc_BlackFamUnder35kE", "perc_AllFamBtw35_59kE", "perc_WhiteFamBtw35_59kE", "perc_BlackFamBtw35_59kE", "perc_AllFamBtw60_100kE", "perc_WhiteFamBtw60_100kE", "perc_BlackFamBtw60_100kE","perc_AllFamOver100kE", "perc_WhiteFamOver100kE", "perc_BlackFamOver100kE", "countyName")],
                        cols = -c(countyName),
                        values_to = 'percent',
                        names_to = c('race', 'amount'),
                        names_pattern = 'perc_(AllFam|BlackFam|WhiteFam)(.+)')
 
-albemarlelong$amount <- factor(albemarlelong$amount, levels = c("Under35kE", "Btw35_100kE", "Over100kE"))
+albemarlelong$amount <- factor(albemarlelong$amount, levels = c("Under35kE", "Btw35_59kE","Btw60_100kE", "Over100kE"))
 
 ggplot(albemarlelong,aes(x=amount, y=percent,fill=race)) + 
   geom_col(position="dodge") +
   labs(x="Income", y="Percent of families") + 
-  scale_x_discrete(labels = c("Earning Under $35K", "Earning $35K-$100K", "Earning Over $100K")) + 
+  scale_x_discrete(labels = c("Earning Under $35K", "Earning $35K-$59,999K", "Earning $60-100k","Earning Over $100K")) + 
   scale_fill_manual(values=c("#FFAD0A", "#1BB6AF", "#7473A6"), labels = c("All families","Black families",  "White families"),
                     name = element_blank())  + 
   geom_text(aes(label=paste0(round(albemarlelong$percent, 1), "%")), position=position_dodge(width=0.9), vjust=-0.5, size=2.5)
@@ -335,6 +336,7 @@ leaflet() %>%
 #### Percent of families making < $35,000 in Albemarle County
 ```{r, echo=FALSE, warning=FALSE}
 pal <- colorBin(palette = c("#D72000", "#FFAD0A", "#1BB6AF", "#EE6100", "#9093A2", "#132157"), domain = ACmap$perc_AllFamUnder35kE)
+
 leaflet() %>% 
   addProviderTiles("CartoDB.Positron") %>% 
   addPolygons(data = ACmap,
@@ -368,7 +370,7 @@ exBC <- expenses %>%
          Unit == "Total") %>%
   select(Expense, Annual, Monthly, Weekly)
 
-flextable(exAC) %>% 
+flextable(exBC) %>% 
   width(width = 5) %>%
   align(align = "center", part = "all") %>% 
   bg(i = ~Annual > 40000, bg = highlightcolor) %>%
@@ -398,18 +400,18 @@ flextable(incomebinsBC) %>%
 
 #### Income distribution of Black and White families in Buckingham County
 ```{r, echo=FALSE, warning=FALSE}
-Buckinghamlong <- pivot_longer(Buckingham[,c("perc_AllFamUnder35kE", "perc_WhiteFamUnder35kE", "perc_BlackFamUnder35kE", "perc_AllFamBtw35_100kE", "perc_WhiteFamBtw35_100kE", "perc_BlackFamBtw35_100kE", "perc_AllFamOver100kE", "perc_WhiteFamOver100kE", "perc_BlackFamOver100kE", "countyName")],
+Buckinghamlong <- pivot_longer(Buckingham[,c("perc_AllFamUnder35kE", "perc_WhiteFamUnder35kE", "perc_BlackFamUnder35kE", "perc_AllFamBtw35_59kE", "perc_WhiteFamBtw35_59kE", "perc_BlackFamBtw35_59kE", "perc_AllFamBtw60_100kE", "perc_WhiteFamBtw60_100kE", "perc_BlackFamBtw60_100kE","perc_AllFamOver100kE", "perc_WhiteFamOver100kE", "perc_BlackFamOver100kE", "countyName")],
                        cols = -c(countyName),
                        values_to = 'percent',
                        names_to = c('race', 'amount'),
                        names_pattern = 'perc_(AllFam|BlackFam|WhiteFam)(.+)')
 
-Buckinghamlong$amount <- factor(Buckinghamlong$amount, levels = c("Under35kE", "Btw35_100kE", "Over100kE"))
+Buckinghamlong$amount <- factor(Buckinghamlong$amount, levels = c("Under35kE", "Btw35_59kE","Btw60_100kE", "Over100kE"))
 
 ggplot(Buckinghamlong,aes(x=amount, y=percent,fill=race)) + 
   geom_col(position="dodge") +
   labs(x="Income", y="Percent of families") + 
-  scale_x_discrete(labels = c("Earning Under $35K", "Earning $35K-$100K", "Earning Over $100K")) + 
+  scale_x_discrete(labels = c("Earning Under $35K", "Earning $35K-$59,999K", "Earning $60-100k","Earning Over $100K")) + 
   scale_fill_manual(values=c("#FFAD0A", "#1BB6AF", "#7473A6"), labels = c("All families","Black families",  "White families"),
                     name = element_blank())  + 
   geom_text(aes(label=paste0(round(Buckinghamlong$percent, 1), "%")), position=position_dodge(width=0.9), vjust=-0.5, size=2.5)
@@ -506,18 +508,18 @@ flextable(incomebinsCC) %>%
 
 #### Income distribution of Black and White families in Charlottesville City
 ```{r, echo=FALSE, warning=FALSE}
-Charlottesvillelong <- pivot_longer(Charlottesville[,c("perc_AllFamUnder35kE", "perc_WhiteFamUnder35kE", "perc_BlackFamUnder35kE", "perc_AllFamBtw35_100kE", "perc_WhiteFamBtw35_100kE", "perc_BlackFamBtw35_100kE", "perc_AllFamOver100kE", "perc_WhiteFamOver100kE", "perc_BlackFamOver100kE", "countyName")],
+Charlottesvillelong <- pivot_longer(Charlottesville[,c("perc_AllFamUnder35kE", "perc_WhiteFamUnder35kE", "perc_BlackFamUnder35kE", "perc_AllFamBtw35_59kE", "perc_WhiteFamBtw35_59kE", "perc_BlackFamBtw35_59kE", "perc_AllFamBtw60_100kE", "perc_WhiteFamBtw60_100kE", "perc_BlackFamBtw60_100kE","perc_AllFamOver100kE", "perc_WhiteFamOver100kE", "perc_BlackFamOver100kE", "countyName")],
                        cols = -c(countyName),
                        values_to = 'percent',
                        names_to = c('race', 'amount'),
                        names_pattern = 'perc_(AllFam|BlackFam|WhiteFam)(.+)')
 
-Charlottesvillelong$amount <- factor(Charlottesvillelong$amount, levels = c("Under35kE", "Btw35_100kE", "Over100kE"))
+Charlottesvillelong$amount <- factor(Charlottesvillelong$amount, levels = c("Under35kE", "Btw35_59kE","Btw60_100kE", "Over100kE"))
 
 ggplot(Charlottesvillelong,aes(x=amount, y=percent,fill=race)) + 
   geom_col(position="dodge") +
   labs(x="Income", y="Percent of families") + 
-  scale_x_discrete(labels = c("Earning Under $35K", "Earning $35K-$100K", "Earning Over $100K")) + 
+  scale_x_discrete(labels = c("Earning Under $35K", "Earning $35K-$59,999K", "Earning $60-100k","Earning Over $100K")) + 
   scale_fill_manual(values=c("#FFAD0A", "#1BB6AF", "#7473A6"), labels = c("All families","Black families",  "White families"),
                     name = element_blank())  + 
   geom_text(aes(label=paste0(round(Charlottesvillelong$percent, 1), "%")), position=position_dodge(width=0.9), vjust=-0.5, size=2.5)
@@ -614,18 +616,18 @@ flextable(incomebinsFC) %>%
 
 #### Income distribution of Black and White families in Fluvanna County
 ```{r, echo=FALSE, warning=FALSE}
-Fluvannalong <- pivot_longer(Fluvanna[,c("perc_AllFamUnder35kE", "perc_WhiteFamUnder35kE", "perc_BlackFamUnder35kE", "perc_AllFamBtw35_100kE", "perc_WhiteFamBtw35_100kE", "perc_BlackFamBtw35_100kE", "perc_AllFamOver100kE", "perc_WhiteFamOver100kE", "perc_BlackFamOver100kE", "countyName")],
+Fluvannalong <- pivot_longer(Fluvanna[,c("perc_AllFamUnder35kE", "perc_WhiteFamUnder35kE", "perc_BlackFamUnder35kE", "perc_AllFamBtw35_59kE", "perc_WhiteFamBtw35_59kE", "perc_BlackFamBtw35_59kE", "perc_AllFamBtw60_100kE", "perc_WhiteFamBtw60_100kE", "perc_BlackFamBtw60_100kE","perc_AllFamOver100kE", "perc_WhiteFamOver100kE", "perc_BlackFamOver100kE", "countyName")],
                        cols = -c(countyName),
                        values_to = 'percent',
                        names_to = c('race', 'amount'),
                        names_pattern = 'perc_(AllFam|BlackFam|WhiteFam)(.+)')
 
-Fluvannalong$amount <- factor(Fluvannalong$amount, levels = c("Under35kE", "Btw35_100kE", "Over100kE"))
+Fluvannalong$amount <- factor(Fluvannalong$amount, levels = c("Under35kE", "Btw35_59kE","Btw60_100kE", "Over100kE"))
 
 ggplot(Fluvannalong,aes(x=amount, y=percent,fill=race)) + 
   geom_col(position="dodge") +
   labs(x="Income", y="Percent of families") + 
-  scale_x_discrete(labels = c("Earning Under $35K", "Earning $35K-$100K", "Earning Over $100K")) + 
+  scale_x_discrete(labels = c("Earning Under $35K", "Earning $35K-$59,999K", "Earning $60-100k","Earning Over $100K")) + 
   scale_fill_manual(values=c("#FFAD0A", "#1BB6AF", "#7473A6"), labels = c("All families","Black families",  "White families"),
                     name = element_blank())  + 
   geom_text(aes(label=paste0(round(Fluvannalong$percent, 1), "%")), position=position_dodge(width=0.9), vjust=-0.5, size=2.5)
@@ -722,18 +724,18 @@ flextable(incomebinsGC) %>%
 
 #### Income distribution of Black and White families in Greene County
 ```{r, echo=FALSE, warning=FALSE}
-Greenelong <- pivot_longer(Greene[,c("perc_AllFamUnder35kE", "perc_WhiteFamUnder35kE", "perc_BlackFamUnder35kE", "perc_AllFamBtw35_100kE", "perc_WhiteFamBtw35_100kE", "perc_BlackFamBtw35_100kE", "perc_AllFamOver100kE", "perc_WhiteFamOver100kE", "perc_BlackFamOver100kE", "countyName")],
+Greenelong <- pivot_longer(Greene[,c("perc_AllFamUnder35kE", "perc_WhiteFamUnder35kE", "perc_BlackFamUnder35kE", "perc_AllFamBtw35_59kE", "perc_WhiteFamBtw35_59kE", "perc_BlackFamBtw35_59kE", "perc_AllFamBtw60_100kE", "perc_WhiteFamBtw60_100kE", "perc_BlackFamBtw60_100kE","perc_AllFamOver100kE", "perc_WhiteFamOver100kE", "perc_BlackFamOver100kE", "countyName")],
                        cols = -c(countyName),
                        values_to = 'percent',
                        names_to = c('race', 'amount'),
                        names_pattern = 'perc_(AllFam|BlackFam|WhiteFam)(.+)')
 
-Greenelong$amount <- factor(Greenelong$amount, levels = c("Under35kE", "Btw35_100kE", "Over100kE"))
+Greenelong$amount <- factor(Greenelong$amount, levels = c("Under35kE", "Btw35_59kE","Btw60_100kE", "Over100kE"))
 
 ggplot(Greenelong,aes(x=amount, y=percent,fill=race)) + 
   geom_col(position="dodge") +
   labs(x="Income", y="Percent of families") + 
-  scale_x_discrete(labels = c("Earning Under $35K", "Earning $35K-$100K", "Earning Over $100K")) + 
+  scale_x_discrete(labels = c("Earning Under $35K", "Earning $35K-$59,999K", "Earning $60-100k","Earning Over $100K")) + 
   scale_fill_manual(values=c("#FFAD0A", "#1BB6AF", "#7473A6"), labels = c("All families","Black families",  "White families"),
                     name = element_blank())  + 
   geom_text(aes(label=paste0(round(Greenelong$percent, 1), "%")), position=position_dodge(width=0.9), vjust=-0.5, size=2.5)
@@ -830,18 +832,18 @@ flextable(incomebinsLC) %>%
 
 #### Income distribution of Black and White families in Louisa County
 ```{r, echo=FALSE, warning=FALSE}
-Louisalong <- pivot_longer(Louisa[,c("perc_AllFamUnder35kE", "perc_WhiteFamUnder35kE", "perc_BlackFamUnder35kE", "perc_AllFamBtw35_100kE", "perc_WhiteFamBtw35_100kE", "perc_BlackFamBtw35_100kE", "perc_AllFamOver100kE", "perc_WhiteFamOver100kE", "perc_BlackFamOver100kE", "countyName")],
+Louisalong <- pivot_longer(Louisa[,c("perc_AllFamUnder35kE", "perc_WhiteFamUnder35kE", "perc_BlackFamUnder35kE", "perc_AllFamBtw35_59kE", "perc_WhiteFamBtw35_59kE", "perc_BlackFamBtw35_59kE", "perc_AllFamBtw60_100kE", "perc_WhiteFamBtw60_100kE", "perc_BlackFamBtw60_100kE","perc_AllFamOver100kE", "perc_WhiteFamOver100kE", "perc_BlackFamOver100kE", "countyName")],
                        cols = -c(countyName),
                        values_to = 'percent',
                        names_to = c('race', 'amount'),
                        names_pattern = 'perc_(AllFam|BlackFam|WhiteFam)(.+)')
 
-Louisalong$amount <- factor(Louisalong$amount, levels = c("Under35kE", "Btw35_100kE", "Over100kE"))
+Louisalong$amount <- factor(Louisalong$amount, levels = c("Under35kE", "Btw35_59kE","Btw60_100kE", "Over100kE"))
 
 ggplot(Louisalong,aes(x=amount, y=percent,fill=race)) + 
   geom_col(position="dodge") +
   labs(x="Income", y="Percent of families") + 
-  scale_x_discrete(labels = c("Earning Under $35K", "Earning $35K-$100K", "Earning Over $100K")) + 
+  scale_x_discrete(labels = c("Earning Under $35K", "Earning $35K-$59,999K", "Earning $60-100k","Earning Over $100K")) + 
   scale_fill_manual(values=c("#FFAD0A", "#1BB6AF", "#7473A6"), labels = c("All families","Black families",  "White families"),
                     name = element_blank())  + 
   geom_text(aes(label=paste0(round(Louisalong$percent, 1), "%")), position=position_dodge(width=0.9), vjust=-0.5, size=2.5)
@@ -937,18 +939,18 @@ flextable(incomebinsNC) %>%
 
 #### Income distribution of Black and White families in Nelson County
 ```{r, echo=FALSE, warning=FALSE}
-Nelsonlong <- pivot_longer(Nelson[,c("perc_AllFamUnder35kE", "perc_WhiteFamUnder35kE", "perc_BlackFamUnder35kE", "perc_AllFamBtw35_100kE", "perc_WhiteFamBtw35_100kE", "perc_BlackFamBtw35_100kE", "perc_AllFamOver100kE", "perc_WhiteFamOver100kE", "perc_BlackFamOver100kE", "countyName")],
+Nelsonlong <- pivot_longer(Nelson[,c("perc_AllFamUnder35kE", "perc_WhiteFamUnder35kE", "perc_BlackFamUnder35kE", "perc_AllFamBtw35_59kE", "perc_WhiteFamBtw35_59kE", "perc_BlackFamBtw35_59kE", "perc_AllFamBtw60_100kE", "perc_WhiteFamBtw60_100kE", "perc_BlackFamBtw60_100kE","perc_AllFamOver100kE", "perc_WhiteFamOver100kE", "perc_BlackFamOver100kE", "countyName")],
                        cols = -c(countyName),
                        values_to = 'percent',
                        names_to = c('race', 'amount'),
                        names_pattern = 'perc_(AllFam|BlackFam|WhiteFam)(.+)')
 
-Nelsonlong$amount <- factor(Nelsonlong$amount, levels = c("Under35kE", "Btw35_100kE", "Over100kE"))
+Nelsonlong$amount <- factor(Nelsonlong$amount, levels = c("Under35kE", "Btw35_59kE","Btw60_100kE", "Over100kE"))
 
 ggplot(Nelsonlong,aes(x=amount, y=percent,fill=race)) + 
   geom_col(position="dodge") +
   labs(x="Income", y="Percent of families") + 
-  scale_x_discrete(labels = c("Earning Under $35K", "Earning $35K-$100K", "Earning Over $100K")) + 
+  scale_x_discrete(labels = c("Earning Under $35K", "Earning $35K-$59,999K", "Earning $60-100k","Earning Over $100K")) + 
   scale_fill_manual(values=c("#FFAD0A", "#1BB6AF", "#7473A6"), labels = c("All families","Black families",  "White families"),
                     name = element_blank())  + 
   geom_text(aes(label=paste0(round(Nelsonlong$percent, 1), "%")), position=position_dodge(width=0.9), vjust=-0.5, size=2.5)

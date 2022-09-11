@@ -2,7 +2,7 @@
 # ORANGE DOT REPROT
 ####################################################
 # Acquire ACS data
-# Last updated: 05/25/2022
+# Last updated: 09/11/2022
 # Metrics used in Orange dot report: 
 # * Total population
 # * Number and percent of families who fall into the following income bands (disaggregated by race):
@@ -128,7 +128,7 @@ names(tract_data_s) = c("GEOID", "NAME",
 
 # Income bands of interest for Orange Dot:
 # $0-9,999; $10,000-14,999; $15,000-24,999; $25,000-34,999
-# under $35K, $35-100K, over $100K
+# under $35K, $35-59,999, $60-100K, over $100K
 
 # Family income -- all families #########################
 tract_hhincall <- get_acs(geography = "tract", 
@@ -196,16 +196,27 @@ tract_allunder35k <- tract_hhincall %>%
 tract_allunder35k$perc_allunder35kE <- round(tract_allunder35k$allunder35kE / hhincallT$allFamE * 100, 2)
 tract_allunder35k$perc_allunder35kM <- round(moe_prop(tract_allunder35k$allunder35kE, hhincallT$allFamE, 
                                                           tract_allunder35k$allunder35kM, hhincallT$allFamM), 2)
-# all families making 35-100k 
-tract_all35_100 <- tract_hhincall %>% 
+
+# all families making 35-59,999k 
+tract_all35_59 <- tract_hhincall %>% 
   filter(variable %in% c("B19101_008", "B19101_009", "B19101_010",
-                         "B19101_011", "B19101_012", "B19101_013")) %>% 
+                         "B19101_011")) %>% 
   group_by(GEOID, NAME) %>% 
-  summarize(all35_100kE = sum(estimate),
-            all35_100kM = round(moe_sum(moe = moe, estimate = estimate), 2))
-tract_all35_100$perc_all35_100kE <- round(tract_all35_100$all35_100kE / hhincallT$allFamE * 100, 2)
-tract_all35_100$perc_all35_100kM <- round(moe_prop(tract_all35_100$all35_100kE, hhincallT$allFamE, 
-                                                       tract_all35_100$all35_100kM, hhincallT$allFamM), 2)
+  summarize(all35_59kE = sum(estimate),
+            all35_59kM = round(moe_sum(moe = moe, estimate = estimate), 2))
+tract_all35_59$perc_all35_59kE <- round(tract_all35_59$all35_59kE / hhincallT$allFamE * 100, 2)
+tract_all35_59$perc_all35_59kM <- round(moe_prop(tract_all35_59$all35_59kE, hhincallT$allFamE, 
+                                                   tract_all35_59$all35_59kM, hhincallT$allFamM), 2)
+
+# all families making 60-100k 
+tract_all60_100 <- tract_hhincall %>% 
+  filter(variable %in% c("B19101_012", "B19101_013")) %>% 
+  group_by(GEOID, NAME) %>% 
+  summarize(all60_100kE = sum(estimate),
+            all60_100kM = round(moe_sum(moe = moe, estimate = estimate), 2))
+tract_all60_100$perc_all60_100kE <- round(tract_all60_100$all60_100kE / hhincallT$allFamE * 100, 2)
+tract_all60_100$perc_all60_100kM <- round(moe_prop(tract_all60_100$all60_100kE, hhincallT$allFamE, 
+                                                       tract_all60_100$all60_100kM, hhincallT$allFamM), 2)
 
 # all families making over 100k 
 tract_allover100 <- tract_hhincall %>% 
@@ -287,16 +298,26 @@ tract_whiteunder35k <- tract_hhincwhite %>%
 tract_whiteunder35k$perc_whiteunder35kE <- round(tract_whiteunder35k$whiteunder35kE / tract_hhincwhiteall$allwhiteFamE * 100, 2)
 tract_whiteunder35k$perc_whiteunder35kM <- round(moe_prop(tract_whiteunder35k$whiteunder35kE, tract_hhincwhiteall$allwhiteFamE, 
                                                           tract_whiteunder35k$whiteunder35kM, tract_hhincwhiteall$allwhiteFamM), 2)
-# white families making 35-100k 
-tract_white35_100 <- tract_hhincwhite %>% 
-  filter(variable %in% c("B19101A_008", "B19101A_009", "B19101A_010",
-                         "B19101A_011", "B19101A_012", "B19101A_013")) %>% 
+# white families making 35-59,999k 
+tract_white35_59 <- tract_hhincwhite %>% 
+  filter(variable %in% c("B19101A_008", "B19101A_009", "B1910A1_010",
+                         "B19101A_011")) %>% 
   group_by(GEOID, NAME) %>% 
-  summarize(white35_100kE = sum(estimate),
-            white35_100kM = round(moe_sum(moe = moe, estimate = estimate), 2))
-tract_white35_100$perc_white35_100kE <- round(tract_white35_100$white35_100kE / tract_hhincwhiteall$allwhiteFamE * 100, 2)
-tract_white35_100$perc_white35_100kM <- round(moe_prop(tract_white35_100$white35_100kE, tract_hhincwhiteall$allwhiteFamE, 
-                                                       tract_white35_100$white35_100kM, tract_hhincwhiteall$allwhiteFamM), 2)
+  summarize(white35_59kE = sum(estimate),
+            white35_59kM = round(moe_sum(moe = moe, estimate = estimate), 2))
+tract_white35_59$perc_white35_59kE <- round(tract_white35_59$white35_59kE / tract_hhincwhiteall$allwhiteFamE * 100, 2)
+tract_white35_59$perc_white35_59kM <- round(moe_prop(tract_white35_59$white35_59kE, tract_hhincwhiteall$allwhiteFamE, 
+                                                 tract_white35_59$white35_59kM, tract_hhincwhiteall$allwhiteFamM), 2)
+
+# white families making 60-100k 
+tract_white60_100 <- tract_hhincwhite %>% 
+  filter(variable %in% c("B19101A_012", "B19101A_013")) %>% 
+  group_by(GEOID, NAME) %>% 
+  summarize(white60_100kE = sum(estimate),
+            white60_100kM = round(moe_sum(moe = moe, estimate = estimate), 2))
+tract_white60_100$perc_white60_100kE <- round(tract_white60_100$white60_100kE / tract_hhincwhiteall$allwhiteFamE * 100, 2)
+tract_white60_100$perc_white60_100kM <- round(moe_prop(tract_white60_100$white60_100kE, tract_hhincwhiteall$allwhiteFamE, 
+                                                   tract_white60_100$white60_100kM, tract_hhincwhiteall$allwhiteFamM), 2)
 
 # white families making over 100k 
 tract_whiteover100 <- tract_hhincwhite %>% 
@@ -378,16 +399,26 @@ tract_blackunder35k <- tract_hhincblack %>%
 tract_blackunder35k$perc_blackunder35kE <- round(tract_blackunder35k$blackunder35kE / tract_hhincblackall$allblackFamE * 100, 2)
 tract_blackunder35k$perc_blackunder35kM <- round(moe_prop(tract_blackunder35k$blackunder35kE, tract_hhincblackall$allblackFamE, 
                                                           tract_blackunder35k$blackunder35kM, tract_hhincblackall$allblackFamM), 2)
-# black families making 35-100k 
-tract_black35_100 <- tract_hhincblack %>% 
+# black families making 35-59,999k 
+tract_black35_59 <- tract_hhincblack %>% 
   filter(variable %in% c("B19101B_008", "B19101B_009", "B19101B_010",
-                         "B19101B_011", "B19101B_012", "B19101B_013")) %>% 
+                         "B19101B_011")) %>% 
   group_by(GEOID, NAME) %>% 
-  summarize(black35_100kE = sum(estimate),
-            black35_100kM = round(moe_sum(moe = moe, estimate = estimate), 2))
-tract_black35_100$perc_black35_100kE <- round(tract_black35_100$black35_100kE / tract_hhincblackall$allblackFamE * 100, 2)
-tract_black35_100$perc_black35_100kM <- round(moe_prop(tract_black35_100$black35_100kE, tract_hhincblackall$allblackFamE, 
-                                                       tract_black35_100$black35_100kM, tract_hhincblackall$allblackFamM), 2)
+  summarize(black35_59kE = sum(estimate),
+            black35_59kM = round(moe_sum(moe = moe, estimate = estimate), 2))
+tract_black35_59$perc_black35_59kE <- round(tract_black35_59$black35_59kE / tract_hhincblackall$allblackFamE * 100, 2)
+tract_black35_59$perc_black35_59kM <- round(moe_prop(tract_black35_59$black35_59kE, tract_hhincblackall$allblackFamE, 
+                                                     tract_black35_59$black35_59kM, tract_hhincblackall$allblackFamM), 2)
+
+# black families making 60-100k 
+tract_black60_100 <- tract_hhincblack %>% 
+  filter(variable %in% c("B19101B_012", "B19101B_013")) %>% 
+  group_by(GEOID, NAME) %>% 
+  summarize(black60_100kE = sum(estimate),
+            black60_100kM = round(moe_sum(moe = moe, estimate = estimate), 2))
+tract_black60_100$perc_black60_100kE <- round(tract_black60_100$black60_100kE / tract_hhincblackall$allblackFamE * 100, 2)
+tract_black60_100$perc_black60_100kM <- round(moe_prop(tract_black60_100$black60_100kE, tract_hhincblackall$allblackFamE, 
+                                                       tract_black60_100$black60_100kM, tract_hhincblackall$allblackFamM), 2)
 
 # black families making over 100k 
 tract_blackover100 <- tract_hhincblack %>% 
@@ -410,7 +441,8 @@ tract_data <- tract_data_s %>%
   left_join(tract_all15_24k) %>%
   left_join(tract_all25_34k) %>%
   left_join(tract_allunder35k) %>%
-  left_join(tract_all35_100) %>%
+  left_join(tract_all35_59) %>%
+  left_join(tract_all60_100) %>%
   left_join(tract_allover100) %>%
   left_join(tract_hhincwhiteall) %>%
   left_join(tract_whiteunder10k) %>%
@@ -418,7 +450,8 @@ tract_data <- tract_data_s %>%
   left_join(tract_white15_24k) %>%
   left_join(tract_white25_34k) %>%
   left_join(tract_whiteunder35k) %>%
-  left_join(tract_white35_100) %>%
+  left_join(tract_white35_59) %>%
+  left_join(tract_white60_100) %>%
   left_join(tract_whiteover100) %>%
   left_join(tract_hhincblackall) %>%
   left_join(tract_blackunder10k) %>%
@@ -426,7 +459,8 @@ tract_data <- tract_data_s %>%
   left_join(tract_black15_24k) %>%
   left_join(tract_black25_34k) %>%
   left_join(tract_blackunder35k) %>%
-  left_join(tract_black35_100) %>%
+  left_join(tract_black35_59) %>%
+  left_join(tract_black60_100) %>%
   left_join(tract_blackover100)
   
 

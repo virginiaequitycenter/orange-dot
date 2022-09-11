@@ -204,16 +204,26 @@ county_AllFamUnder35k <- county_AllFam %>%
 county_AllFamUnder35k$perc_AllFamUnder35kE <- round(county_AllFamUnder35k$AllFamUnder35kE / AllFamT$AllFamE * 100, 2)
 county_AllFamUnder35k$perc_AllFamUnder35kM <- round(moe_prop(county_AllFamUnder35k$AllFamUnder35kE, AllFamT$AllFamE, 
                                                             county_AllFamUnder35k$AllFamUnder35kM, AllFamT$AllFamM), 2)
-# All families making 35-100k 
-county_AllFamBtw35_100 <- county_AllFam %>% 
+# All families making 35-59k 
+county_AllFamBtw35_59 <- county_AllFam %>% 
   filter(variable %in% c("B19101_008", "B19101_009", "B19101_010",
-                         "B19101_011", "B19101_012", "B19101_013")) %>% 
+                         "B19101_011")) %>% 
   group_by(GEOID, NAME) %>% 
-  summarize(AllFamBtw35_100kE = sum(estimate),
-            AllFamBtw35_100kM = round(moe_sum(moe = moe, estimate = estimate), 2))
-county_AllFamBtw35_100$perc_AllFamBtw35_100kE <- round(county_AllFamBtw35_100$AllFamBtw35_100kE / AllFamT$AllFamE * 100, 2)
-county_AllFamBtw35_100$perc_AllFamBtw35_100kM <- round(moe_prop(county_AllFamBtw35_100$AllFamBtw35_100kE, AllFamT$AllFamE, 
-                                                               county_AllFamBtw35_100$AllFamBtw35_100kM, AllFamT$AllFamM), 2)
+  summarize(AllFamBtw35_59kE = sum(estimate),
+            AllFamBtw35_59kM = round(moe_sum(moe = moe, estimate = estimate), 2))
+county_AllFamBtw35_59$perc_AllFamBtw35_59kE <- round(county_AllFamBtw35_59$AllFamBtw35_59kE / AllFamT$AllFamE * 100, 2)
+county_AllFamBtw35_59$perc_AllFamBtw35_59kM <- round(moe_prop(county_AllFamBtw35_59$AllFamBtw35_59kE, AllFamT$AllFamE, 
+                                                               county_AllFamBtw35_59$AllFamBtw35_59kM, AllFamT$AllFamM), 2)
+
+# All families making 60-100k 
+county_AllFamBtw60_100 <- county_AllFam %>% 
+  filter(variable %in% c("B19101_012", "B19101_013")) %>% 
+  group_by(GEOID, NAME) %>% 
+  summarize(AllFamBtw60_100kE = sum(estimate),
+            AllFamBtw60_100kM = round(moe_sum(moe = moe, estimate = estimate), 2))
+county_AllFamBtw60_100$perc_AllFamBtw60_100kE <- round(county_AllFamBtw60_100$AllFamBtw60_100kE / AllFamT$AllFamE * 100, 2)
+county_AllFamBtw60_100$perc_AllFamBtw60_100kM <- round(moe_prop(county_AllFamBtw60_100$AllFamBtw60_100kE, AllFamT$AllFamE, 
+                                                                county_AllFamBtw60_100$AllFamBtw60_100kM, AllFamT$AllFamM), 2)
 
 # All families making Over 100k 
 county_AllFamOver100 <- county_AllFam %>% 
@@ -295,16 +305,26 @@ county_WhiteFamUnder35k <- county_White %>%
 county_WhiteFamUnder35k$perc_WhiteFamUnder35kE <- round(county_WhiteFamUnder35k$WhiteFamUnder35kE / county_WhiteAll$AllWhiteFamE * 100, 2)
 county_WhiteFamUnder35k$perc_WhiteFamUnder35kM <- round(moe_prop(county_WhiteFamUnder35k$WhiteFamUnder35kE, county_WhiteAll$AllWhiteFamE, 
                                                                 county_WhiteFamUnder35k$WhiteFamUnder35kM, county_WhiteAll$AllWhiteFamM), 2)
-# White families making 35-100k 
-county_WhiteFamBtw35_100 <- county_White %>% 
+# White families making 35-59,999k 
+county_WhiteFamBtw35_59 <- county_White %>% 
   filter(variable %in% c("B19101A_008", "B19101A_009", "B19101A_010",
-                         "B19101A_011", "B19101A_012", "B19101A_013")) %>% 
+                         "B19101A_011")) %>% 
   group_by(GEOID, NAME) %>% 
-  summarize(WhiteFamBtw35_100kE = sum(estimate),
-            WhiteFamBtw35_100kM = round(moe_sum(moe = moe, estimate = estimate), 2))
-county_WhiteFamBtw35_100$perc_WhiteFamBtw35_100kE <- round(county_WhiteFamBtw35_100$WhiteFamBtw35_100kE / county_WhiteAll$AllWhiteFamE * 100, 2)
-county_WhiteFamBtw35_100$perc_WhiteFamBtw35_100kM <- round(moe_prop(county_WhiteFamBtw35_100$WhiteFamBtw35_100kE, county_WhiteAll$AllWhiteFamE, 
-                                                                   county_WhiteFamBtw35_100$WhiteFamBtw35_100kM, county_WhiteAll$AllWhiteFamM), 2)
+  summarize(WhiteFamBtw35_59kE = sum(estimate),
+            WhiteFamBtw35_59kM = round(moe_sum(moe = moe, estimate = estimate), 2))
+county_WhiteFamBtw35_59$perc_WhiteFamBtw35_59kE <- round(county_WhiteFamBtw35_59$WhiteFamBtw35_59kE / county_WhiteAll$AllWhiteFamE * 100, 2)
+county_WhiteFamBtw35_59$perc_WhiteFamBtw35_59kM <- round(moe_prop(county_WhiteFamBtw35_59$WhiteFamBtw35_59kE, county_WhiteAll$AllWhiteFamE, 
+                                                                   county_WhiteFamBtw35_59$WhiteFamBtw35_59kM, county_WhiteAll$AllWhiteFamM), 2)
+
+# White families making 60-100k 
+county_WhiteFamBtw60_100 <- county_White %>% 
+  filter(variable %in% c("B19101A_012", "B19101A_013")) %>% 
+  group_by(GEOID, NAME) %>% 
+  summarize(WhiteFamBtw60_100kE = sum(estimate),
+            WhiteFamBtw60_100kM = round(moe_sum(moe = moe, estimate = estimate), 2))
+county_WhiteFamBtw60_100$perc_WhiteFamBtw60_100kE <- round(county_WhiteFamBtw60_100$WhiteFamBtw60_100kE / county_WhiteAll$AllWhiteFamE * 100, 2)
+county_WhiteFamBtw60_100$perc_WhiteFamBtw60_100kM <- round(moe_prop(county_WhiteFamBtw60_100$WhiteFamBtw60_100kE, county_WhiteAll$AllWhiteFamE, 
+                                                                    county_WhiteFamBtw60_100$WhiteFamBtw60_100kM, county_WhiteAll$AllWhiteFamM), 2)
 
 # White families making Over 100k 
 county_WhiteFamOver100 <- county_White %>% 
@@ -386,16 +406,26 @@ county_BlackFamUnder35k <- county_Black %>%
 county_BlackFamUnder35k$perc_BlackFamUnder35kE <- round(county_BlackFamUnder35k$BlackFamUnder35kE / county_BlackAll$AllBlackFamE * 100, 2)
 county_BlackFamUnder35k$perc_BlackFamUnder35kM <- round(moe_prop(county_BlackFamUnder35k$BlackFamUnder35kE, county_BlackAll$AllBlackFamE, 
                                                                 county_BlackFamUnder35k$BlackFamUnder35kM, county_BlackAll$AllBlackFamM), 2)
-# Black families making 35-100k 
-county_BlackFamBtw35_100 <- county_Black %>% 
+# Black families making 35-59k 
+county_BlackFamBtw35_59 <- county_Black %>% 
   filter(variable %in% c("B19101B_008", "B19101B_009", "B19101B_010",
-                         "B19101B_011", "B19101B_012", "B19101B_013")) %>% 
+                         "B19101B_011")) %>% 
   group_by(GEOID, NAME) %>% 
-  summarize(BlackFamBtw35_100kE = sum(estimate),
-            BlackFamBtw35_100kM = round(moe_sum(moe = moe, estimate = estimate), 2))
-county_BlackFamBtw35_100$perc_BlackFamBtw35_100kE <- round(county_BlackFamBtw35_100$BlackFamBtw35_100kE / county_BlackAll$AllBlackFamE * 100, 2)
-county_BlackFamBtw35_100$perc_BlackFamBtw35_100kM <- round(moe_prop(county_BlackFamBtw35_100$BlackFamBtw35_100kE, county_BlackAll$AllBlackFamE, 
-                                                                   county_BlackFamBtw35_100$BlackFamBtw35_100kM, county_BlackAll$AllBlackFamM), 2)
+  summarize(BlackFamBtw35_59kE = sum(estimate),
+            BlackFamBtw35_59kM = round(moe_sum(moe = moe, estimate = estimate), 2))
+county_BlackFamBtw35_59$perc_BlackFamBtw35_59kE <- round(county_BlackFamBtw35_59$BlackFamBtw35_59kE / county_BlackAll$AllBlackFamE * 100, 2)
+county_BlackFamBtw35_59$perc_BlackFamBtw35_59kM <- round(moe_prop(county_BlackFamBtw35_59$BlackFamBtw35_59kE, county_BlackAll$AllBlackFamE, 
+                                                                   county_BlackFamBtw35_59$BlackFamBtw35_59kM, county_BlackAll$AllBlackFamM), 2)
+
+# Black families making 60-100k 
+county_BlackFamBtw60_100 <- county_Black %>% 
+  filter(variable %in% c("B19101B_012", "B19101B_013")) %>% 
+  group_by(GEOID, NAME) %>% 
+  summarize(BlackFamBtw60_100kE = sum(estimate),
+            BlackFamBtw60_100kM = round(moe_sum(moe = moe, estimate = estimate), 2))
+county_BlackFamBtw60_100$perc_BlackFamBtw60_100kE <- round(county_BlackFamBtw60_100$BlackFamBtw60_100kE / county_BlackAll$AllBlackFamE * 100, 2)
+county_BlackFamBtw60_100$perc_BlackFamBtw60_100kM <- round(moe_prop(county_BlackFamBtw60_100$BlackFamBtw60_100kE, county_BlackAll$AllBlackFamE, 
+                                                                    county_BlackFamBtw60_100$BlackFamBtw60_100kM, county_BlackAll$AllBlackFamM), 2)
 
 # Black families making Over 100k 
 county_BlackFamOver100 <- county_Black %>% 
@@ -418,7 +448,8 @@ county_data <- county_data_s %>%
   left_join(county_AllFamBtw15_24k) %>%
   left_join(county_AllFamBtw25_34k) %>%
   left_join(county_AllFamUnder35k) %>%
-  left_join(county_AllFamBtw35_100) %>%
+  left_join(county_AllFamBtw35_59) %>%
+  left_join(county_AllFamBtw60_100) %>%
   left_join(county_AllFamOver100) %>%
   left_join(county_WhiteAll) %>%
   left_join(county_WhiteFamUnder10k) %>%
@@ -426,7 +457,8 @@ county_data <- county_data_s %>%
   left_join(county_WhiteFamBtw15_24k) %>%
   left_join(county_WhiteFamBtw25_34k) %>%
   left_join(county_WhiteFamUnder35k) %>%
-  left_join(county_WhiteFamBtw35_100) %>%
+  left_join(county_WhiteFamBtw35_59) %>%
+  left_join(county_WhiteFamBtw60_100) %>%
   left_join(county_WhiteFamOver100) %>%
   left_join(county_BlackAll) %>%
   left_join(county_BlackFamUnder10k) %>%
@@ -434,7 +466,8 @@ county_data <- county_data_s %>%
   left_join(county_BlackFamBtw15_24k) %>%
   left_join(county_BlackFamBtw25_34k) %>%
   left_join(county_BlackFamUnder35k) %>%
-  left_join(county_BlackFamBtw35_100) %>%
+  left_join(county_BlackFamBtw35_59) %>%
+  left_join(county_BlackFamBtw60_100) %>%
   left_join(county_BlackFamOver100)
 
 
@@ -455,7 +488,7 @@ county_data$countyName <- recode(county_data$locality, "540" = "Charlottesville"
 ## Aggregating to the entire region -- making a separate data frame that is 1 row for the whole region, and then rbind-ing it to the 
 # data frame with the rest of the localities
 
-wregion <- as.data.frame(matrix(nrow = 1, ncol = 126)) # creating new data frame
+wregion <- as.data.frame(matrix(nrow = 1, ncol = 138)) # creating new data frame
 colnames(wregion) <- colnames(county_data) # copying column names 
 
 wregion$NAME <- "Charlottesville Region" # setting name 
@@ -466,14 +499,14 @@ wregion$NAME <- "Charlottesville Region" # setting name
 
 wregion[,c("totalpopE", "AllhseE", "ownoccE","rentAllE", "snapE", "noHSE", "pop25olderE","unempE", "ownerCarAccessE", "renterCarAccessE",
           "AllFamE", "AllFamUnder10kE", "AllFamBtw10_14kE", "AllFamBtw15_24kE","AllFamBtw25_34kE", "AllFamUnder35kE", 
-          "AllFamBtw35_100kE", "AllFamOver100kE", "AllWhiteFamE", "WhiteFamUnder10kE", "WhiteFamBtw10_14kE", "WhiteFamBtw15_24kE", 
-          "WhiteFamBtw25_34kE", "WhiteFamUnder35kE", "WhiteFamBtw35_100kE", "WhiteFamOver100kE", "AllBlackFamE", "BlackFamUnder10kE", 
-          "BlackFamBtw10_14kE", "BlackFamBtw15_24kE", "BlackFamBtw25_34kE", "BlackFamUnder35kE", "BlackFamBtw35_100kE", 
-          "BlackFamOver100kE")] <- colSums(county_data[,c("totalpopE", "AllhseE", "ownoccE","rentAllE", "snapE", "noHSE", "pop25olderE", "unempE", "ownerCarAccessE", "renterCarAccessE",
+          "AllFamBtw35_59kE", "AllFamBtw60_100kE","AllFamOver100kE", "AllWhiteFamE", "WhiteFamUnder10kE", "WhiteFamBtw10_14kE", "WhiteFamBtw15_24kE", 
+          "WhiteFamBtw25_34kE", "WhiteFamUnder35kE", "WhiteFamBtw35_59kE", "WhiteFamBtw60_100kE","WhiteFamOver100kE", "AllBlackFamE", "BlackFamUnder10kE", 
+          "BlackFamBtw10_14kE", "BlackFamBtw15_24kE", "BlackFamBtw25_34kE", "BlackFamUnder35kE", "BlackFamBtw35_59kE", "BlackFamBtw60_100kE", 
+          "BlackFamOver100kE")] <- colSums(county_data[,c("totalpopE", "AllhseE", "ownoccE","rentAllE", "snapE", "noHSE", "pop25olderE","unempE", "ownerCarAccessE", "renterCarAccessE",
                                                           "AllFamE", "AllFamUnder10kE", "AllFamBtw10_14kE", "AllFamBtw15_24kE","AllFamBtw25_34kE", "AllFamUnder35kE", 
-                                                          "AllFamBtw35_100kE", "AllFamOver100kE", "AllWhiteFamE", "WhiteFamUnder10kE", "WhiteFamBtw10_14kE", "WhiteFamBtw15_24kE", 
-                                                          "WhiteFamBtw25_34kE", "WhiteFamUnder35kE", "WhiteFamBtw35_100kE", "WhiteFamOver100kE", "AllBlackFamE", "BlackFamUnder10kE", 
-                                                          "BlackFamBtw10_14kE", "BlackFamBtw15_24kE", "BlackFamBtw25_34kE", "BlackFamUnder35kE", "BlackFamBtw35_100kE", 
+                                                          "AllFamBtw35_59kE", "AllFamBtw60_100kE","AllFamOver100kE", "AllWhiteFamE", "WhiteFamUnder10kE", "WhiteFamBtw10_14kE", "WhiteFamBtw15_24kE", 
+                                                          "WhiteFamBtw25_34kE", "WhiteFamUnder35kE", "WhiteFamBtw35_59kE", "WhiteFamBtw60_100kE","WhiteFamOver100kE", "AllBlackFamE", "BlackFamUnder10kE", 
+                                                          "BlackFamBtw10_14kE", "BlackFamBtw15_24kE", "BlackFamBtw25_34kE", "BlackFamUnder35kE", "BlackFamBtw35_59kE", "BlackFamBtw60_100kE", 
                                                           "BlackFamOver100kE")])
 
 # Now calculating percents for each of the different variables of interes based on the sumns calculated above. 
@@ -491,21 +524,24 @@ wregion <- wregion %>%
          perc_AllFamBtw15_24kE = round(AllFamBtw15_24kE/AllFamE * 100, 2),
          perc_AllFamBtw25_34kE = round(AllFamBtw25_34kE/AllFamE * 100, 2),
          perc_AllFamUnder35kE = round(AllFamUnder35kE/AllFamE * 100, 2),
-         perc_AllFamBtw35_100kE = round(AllFamBtw35_100kE/AllFamE * 100, 2),
+         perc_AllFamBtw35_59kE = round(AllFamBtw35_59kE/AllFamE * 100, 2),
+         perc_AllFamBtw60_100kE = round(AllFamBtw60_100kE/AllFamE * 100, 2),
          perc_AllFamOver100kE = round(AllFamOver100kE/AllFamE * 100, 2),
          perc_WhiteFamUnder10kE = round(WhiteFamUnder10kE/AllWhiteFamE * 100, 2),
          perc_WhiteFamBtw10_14kE = round(WhiteFamBtw10_14kE/AllWhiteFamE * 100, 2),
          perc_WhiteFamBtw15_24kE = round(WhiteFamBtw15_24kE/AllWhiteFamE * 100, 2),
          perc_WhiteFamBtw25_34kE = round(WhiteFamBtw25_34kE/AllWhiteFamE * 100, 2),
          perc_WhiteFamUnder35kE = round(WhiteFamUnder35kE/AllWhiteFamE * 100, 2),
-         perc_WhiteFamBtw35_100kE = round(WhiteFamBtw35_100kE/AllWhiteFamE * 100, 2),
+         perc_WhiteFamBtw35_59kE = round(WhiteFamBtw35_59kE/AllWhiteFamE * 100, 2),
+         perc_WhiteFamBtw60_100kE = round(WhiteFamBtw60_100kE/AllWhiteFamE * 100, 2),
          perc_WhiteFamOver100kE = round(WhiteFamOver100kE/AllWhiteFamE * 100, 2),
          perc_BlackFamUnder10kE = round(BlackFamUnder10kE/AllBlackFamE * 100, 2),
          perc_BlackFamBtw10_14kE = round(BlackFamBtw10_14kE/AllBlackFamE * 100, 2),
          perc_BlackFamBtw15_24kE = round(BlackFamBtw15_24kE/AllBlackFamE * 100, 2),
          perc_BlackFamBtw25_34kE = round(BlackFamBtw25_34kE/AllBlackFamE * 100, 2),
          perc_BlackFamUnder35kE = round(BlackFamUnder35kE/AllBlackFamE * 100, 2),
-         perc_BlackFamBtw35_100kE = round(BlackFamBtw35_100kE/AllBlackFamE * 100, 2),
+         perc_BlackFamBtw35_59kE = round(BlackFamBtw35_59kE/AllBlackFamE * 100, 2),
+         perc_BlackFamBtw60_100kE = round(BlackFamBtw60_100kE/AllBlackFamE * 100, 2),
          perc_BlackFamOver100kE = round(BlackFamOver100kE/AllBlackFamE * 100, 2),
          countyName = "Whole Region")
 
