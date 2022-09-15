@@ -51,19 +51,21 @@ highlightcolor <- "#FFAD0A"
 
 ~~2020 was a difficult year. The pandemic. Economic collapse. Racial tensions. A divided nation.~~
 
-__Over the last several years, our country has had to reckon in new ways with issues that are, sadly, not new at all: low-income individuals, especially individuals of color, are suffering disproportionately, both physically and financially. Despite working hard, many families struggle to make ends meet, in part because they're work is not treated with dignity. With rising prices and inflation, these struggles become even more apparent.__
+__Over the last several years, our country has had to reckon in new ways with issues that are, sadly, not new at all: low-income individuals, especially individuals of color, are suffering disproportionately, both physically and financially. Despite working hard, many families struggle to make ends meet, in part because they're work is not treated with dignity. Or at least, many hard-working families are not compensated as though their work has dignity. With rising prices and inflation, these struggles become even more apparent.__
 
 The upheavals of the last several years have us all yearning for security and stability. We want to provide for ourselves and for our families. We want our children to have a better life. In America, the coin of the realm is coin. And without enough coin, every day is a struggle. To maintain a roof over your family's head, to put food on the table, to fix the car that is your family's lifeblood because it carries you to work.
 
 When you are faced daily with those struggles, it is difficult to be the parent you want to be, the worker you know you could be, or the person you were meant to be.
 
-~~We want the life of this world to be made more gentle.~~
-
-~~For too many families in our community, life is not gentle.~~
+~~We want the life of this world to be made more gentle. For too many families in our community, life is not gentle.~~
 
 We should focus our recovery efforts not on restoring the old economy but on rebuilding an equitable economy, intentionally constructed on a foundation of racial justice.
 
-In the work that follows, we provide an update to the Orange Dot Project report first issued in September 2011.^[To find previous versions of the Orange Dot report, go to https://www.pvcc.edu/history-network2workpvcc- program. ~~COVID-19 delayed the publication of this report, as it has disrupted so much over the past year. We intend to resume releasing updated Orange Dot Reports in the Fall of even years, beginning again in 2022.]~~ Knowing that we can only solve issues we can understand, we start with a snapshot of the families in our community who are struggling, and we conclude with some solutions that address those struggles.
+In the work that follows, we provide an update to the Orange Dot Project report first issued in September 2011.^[To find previous versions of the Orange Dot report, go to https://www.pvcc.edu/history-network2workpvcc- program]. 
+
+~~COVID-19 delayed the publication of this report, as it has disrupted so much over the past year. We intend to resume releasing updated Orange Dot Reports in the Fall of even years, beginning again in 2022.~~ 
+
+Knowing that we can only solve issues we can understand, we start with a snapshot of the families in our community who are struggling, and we conclude with some solutions that address those struggles.
 
 What we have learned since our work began in 2011 is that there are too many struggling families in our community, but not too many to help.
 
@@ -71,7 +73,7 @@ What we have learned since our work began in 2011 is that there are too many str
 
 There are 66,633 families living in the Charlottesville region __(which includes Charlottesville, Albemarle, Louisa, Nelson, Buckingham, Greene, and Fluvanna)__.^[Family is defined as two or more related people living in the same household. U.S. Census Bureau (2020). Selected Economic Characteristics. American Community Survey 5-Year Estimates, 2014-2018. Retrieved from https://data.census.gov/cedsci/table?text=dp03&tid=ACSDP5Y2018.DP03&hidePreview=true.]
 
-Of these, 9,413 families (14 percent) do not make enough money to afford the essentials of life—food, shelter, clothing and utilities—and the added costs associated with working— childcare and transportation.^[This report reflects the U.S. Census Bureau's American Community Survey 5-year averages, 2015-2020.]
+Of these, 9,413 families (14 percent) do not make enough money to afford the essentials of life-—food, shelter, clothing and utilities-—and the added costs associated with working (childcare and transportation).^[This report reflects the U.S. Census Bureau's American Community Survey 5-year averages, 2015-2020.]
 
 While this is still too many families, it is heartening to note that the situation improved since the previous report was published in January 2021. In the Orange Dot Report 4.0, we found that there were 10,940 families (17 percent) who did not earn enough to meet their basic needs. Thus, over the following two years our community reduced the number of struggling families by nearly 14 percent. ~~At this rate, our community is on track to help lift 4,000 families to self-sufficiency by 2026~~.^[This is a community success, brought about primarily by the hard work of the job-seekers themselves, made possible by the quality employers who hire them, and propelled by the social and material support supplied by family, friends and a network of community-based organizations and agencies.]
 
