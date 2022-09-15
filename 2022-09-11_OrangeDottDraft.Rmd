@@ -501,8 +501,8 @@ incomebinsCC <- tibble(Income = c("$0 - $9,999", "$10,000 - $14,999", "$15,000 -
 flextable(incomebinsCC) %>% 
   width(width = 5) %>%
   align(align = "center", part = "all") %>% 
-  bg(i = ~Number > 2000, bg = highlightcolor) %>%
-  color(i = ~Number > 2000, color = "black") 
+  bg(i = ~Number > 1000, bg = highlightcolor) %>%
+  color(i = ~Number > 1000, color = "black") 
 
 ```
 
