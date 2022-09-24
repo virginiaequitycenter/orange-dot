@@ -23,7 +23,6 @@ library(LaCroixColoR)
 library(flextable)
 library(officer)
 library(scales)
-library(waffle)
 library(patchwork)
 
 # ACS data
