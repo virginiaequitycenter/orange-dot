@@ -1,7 +1,7 @@
 ---
 title: "(Draft) Orange Dot Report 5.0"
 subtitle: "Family Self-Sufficiency in the Charlottesville Region"
-date: 'September 29, 2022'
+date: 'October 5, 2022'
 author: 'Ridge Schuyler, Michele Claibourn, Lee LeBoeuf, Elizabeth Mitchell'
 output: 
   html_document:
@@ -279,8 +279,8 @@ numplot <- ggplot(cnty_race_long, aes(y = count,
   scale_fill_manual(values=c("#7473A6", "#1BB6AF", "#FFAD0A"), 
                     name = element_blank()) + 
   scale_y_continuous(labels = label_comma(),
-                     limits = c(0,2800)) +
-  annotate("text", x = "Greene", y = 2000, color = "black",
+                     limits = c(0,3200)) +
+  annotate("text", x = "Greene", y = 2200, color = "black",
            label = "9,413 families\n in region", size = 5) +
   theme_minimal() +
   coord_flip() +
@@ -303,7 +303,7 @@ percplot <- ggplot(cnty_race_long, aes(y = perc,
   scale_fill_manual(values=c("#7473A6", "#1BB6AF", "#FFAD0A"), 
                     name = element_blank()) + 
   scale_y_continuous(labels = label_percent(scale = 1),
-                     limits = c(0,53)) +
+                     limits = c(0,55)) +
   geom_hline(yintercept = allperc, color = "gray50", linetype = "dashed") +
   annotate("curve", y = 30, x = 1, yend = 14.5, xend = 1.7, 
            curvature = -0.1, arrow = arrow(length = unit(2, "mm")),  color = "gray50") +
@@ -329,11 +329,10 @@ We need to be intentional about helping all families in our community who are st
 The following sections explore each locality separately, detailing what it costs to be self-sufficient in each of the localities that comprise the region - including the costs of food^[U.S. Department of Agriculture, Center for Nutrition Policy and Promotion (2022). Official USDA Food Plans: Cost of Food at Home at Four Levels, U.S. Average, May 2022, Weekly Cost of the Low-Cost Plan. Retrieved from https://www.fns.usda.gov/sites/default/files/media/file/CostofFoodMay2022Thrifty.pdf], shelter^[Virginia Housing. (2022). 2022 Fair Market Rents. retrieved from https://www.huduser.gov/portal/datasets/fmr/fmrs/FY2022_code/2022summary.odn], clothing^[U.S. Department of Agriculture, Center for Nutrition Policy and Promotion. (2017). Expenditures on Children by Families, Estimated annual expenditures on a child by single-parent families. Retrieved from https://www.fns.usda.gov/sites/default/files/resource-files/crc2015-march2017.pdf and U.S. Bureau of Labor Statistics. (2020). Consumer Expenditures Survey, CE Tables, Age of Reference Person, Apparel and Services by Women, 16 and over. Retrieved from https://www.bls.gov/cex/tables/calendar-year/mean-item-share-average-standard-error/reference-person-age-ranges-2020.pdf], utilities^[Virginia Housing Development Authority. (2022). Allowances for Tenant-Furnished Utilities and Other Services, Two Exposed UA Schedule. Retrieved from https://mc-0e9acafd-48f4-4c49-b478-6257-cdn-endpoint.azureedge.net/-/media/docs/partners/housing-choice-vouchers/utility-allowance/2exposed-walls.pdf?rev=91c81573c2e94b8cb314f871bbad5e65&hash=666946C107D54311AC4222AC1E81F850 and the U.S. Bureau of Labor Statistics. (2020), Consumer Expenditure Survey, Telephone Services. Retrieved from https://www.bls.gov/cex/tables/calendar-year/mean-item-share-average-standard-error/reference-person-age-ranges-2020.pdf], childcare^[Virginia Department of Social Services, Division of Child Care and Early Childhood Development. (2021). Child Care Subsidy Program Guidance Manual. Richmond, Virginia. Retrieved from https://doe.virginia.gov/cc/files/child-care-subsidy-guidance-manual.pdf.], transportation^[U.S. Bureau of Labor Statistics. (2020). Consumer Expenditures Survey, CE Tables, Age of Reference Person, Apparel and Services by Women, 16 and over. Retrieved from https://www.bls.gov/cex/tables/calendar-year/mean-item-share-average-standard-error/reference-person-age-ranges-2020.pdf], and necessary costs^[Garner, T. (2010). Supplemental Poverty Measure Thresholds: Laying the Foundation. Washington DC: Bureau of Labor Statistics.] - and describing how many families in each locality are struggling.
 
 We show, too, how families are faring by race, as above, and by place. Places, or the neighborhoods within localities, are captured with census tracts, areas used by the United States Census Bureau to approximate neighborhoods. Census tracts are roughly equal in population and are bounded by major roads, rivers and railroad tracks. The geographic variation in our region is evident across these census tracts. Charlottesville for example, is a city of roughly 10 square miles that are more densely populated. Albemarle surrounds Charlottesville and dwarfs it physically at 726 square miles, but has both dense neighborhoods and sprawling rural ones. 
+
 While there is variation across the communities that define the greater Charlottesville region, there is one constant: throughout the region there are hundreds of families who struggle every day to put a roof over their heads, food in their bellies, clothes on their backs and heat in their homes.
 
 __In the tables below, the cost of food, clothing, utilities, and transportation are taken from either national or region reports, so they are constant across all localities in the Charlottesville region. However, the cost of shelter and childcare vary widely by locality, and these expenses are also typically the largest expenses and the two that dictate how much a family needs to earn in order to survive without assistance.__
-
-**Note: I think it would be worth stressing somewhere that even if families made >35,000, they'd still struggle to afford childcare and transportation. To afford both of those items as well, a family would realistically likely need to be making >50k** 
 
 ## Albemarle County
 ```{r}
@@ -348,9 +347,11 @@ Albemarle County at a glance:
 
 * Albemarle and Charlottesville are the most expensive localities in terms of housing and childcare.
 
-* Albemarle and Charlottesville have the largest disparities in the percent of Black and White families making <$35k (the percent of Black families making <$35 is `r round(albemarle$perc_BlackFamUnder35kE - albemarle$perc_WhiteFamUnder35kE, 0)`% higher than the percent of White families in Albemarle). 
+* Albemarle and Charlottesville have the largest disparities in the percent of Black and White families making <$35k/year (the percent of Black families making <$35/year is `r round(albemarle$perc_BlackFamUnder35kE - albemarle$perc_WhiteFamUnder35kE, 0)`% higher than the percent of White families in Albemarle). 
 
 * Albemarle, relative to the other localities, has the highest number of families making $25,000-34,999/year. 
+
+* Families making less than <$35k/year tend to be more highly concentrated near the University of Virginia and the Oak Hill neighborhood. 
 
 ### Expenses: Single Householder + 2 Children (1 Toddler)
 ```{r}
@@ -368,6 +369,7 @@ flextable(exAC) %>%
   color(i = ~Annual > 49390, color = "white") 
 ```
 
+It's worth noting here that if families make just over >$35,000/year, it would still be nearly impossible to afford important expenses like childcare and transportation. These families would have almost no ability to save money or create a sense of financial security. To afford every expense in this table, save for your child's future education, a downpayment on a home, or any unexpected cost, a family would realistically likely need to be making >=$50k. However, we focus on families making <$35k/year because in every locality, that amount is at least greater than the survival expenses. 
 
 ### Breakdown of families making under $35,000 in Albemarle County
 ```{r}
@@ -408,7 +410,11 @@ flextable(income_break_ac) %>%
 
 ```
 
-As this table shows, `r paste0(income_break_ac$Cumulative[4], "%")`  of the families who cannot meet their basic needs earn between $15,000-$35,000 annually. This strongly suggests they are working, but not earning the wages, or getting the hours, they need to support their families.
+As this table shows, `r paste0(income_break_ac$Cumulative[4], "%")`  of the families who cannot meet their basic needs earn between $15,000-$35,000 annually. This strongly suggests they are working, but not earning the wages or not getting the hours they need to support their families.
+
+The bar graph below shows the distribution of families in various pay ranges, broken up by race. In a world with racial equity in income, the bars for all families, Black families, and White families would be equal in height. As you can see, Black families are over-represented at the low end of the pay ranges (<$35k/year), and Black families are under-represented at the high end of the pay ranges (>$100k/year). In other words, relative to White families, Black families are more likely to be paid insufficient wages and less likely to be high-earning. 
+
+Relative to the other localities, in Albemarle County, a higher share of families fall into the high-earning pay ranges---this distribution is likely related to the high cost of housing within the county. 
 
 ### Income distribution of Black and White families in Albemarle County
 ```{r}
@@ -444,6 +450,10 @@ ggplot(alb_race_long, aes(y = Percent,
   theme(legend.position = "bottom")
 ```
 
+The maps below show the geo-spatial relationships between income and neighborhood. The color of each census tract in the county is based on the median family income or the percent of families within the tract who make less than $35k/year. The maps show how neighborhoods are often concentrated with either high-earning or low-earning families, which has implications for the resources and opportunities available to the families living within each tract. 
+
+Which neighborhoods or census tracts in Albemarle County have the highest median family incomes? Which have the lowest? Click on each tract to see its median income and a nickname for the tract based on which neighborhood the tract contains. 
+
 ### Median family income in Albemarle County
 ```{r}
 ACmap <- geofull %>%
@@ -478,6 +488,10 @@ leaflet() %>%
   addLegend("bottomright", pal = pal, values = ACmap$medianFamIncomeE, 
             title = "Median family income", opacity = 0.7)
 ```
+
+The Carr's Hill-McCormick Road (UVA) tract has one of the lowest median family incomes at `r paste0(comma(ACmap$medianFamIncomeE[ACmap$tract == "010904"]))`. This tract likely includes graduate students and other low-paid families employed by the University. By contrast, the Ivy and North Garden tracts have some of the highest median family incomes, and they likely include many University professors and high-paid administrators. 
+
+The following map shows the concentration of low-paid families by showing the percent of families in each tract who earn less than $35k/year. For Albemarle County, it shows a similar pattern as the previous map--the highest percentage of low-paid families are concentrated in the Carr's Hill-McCormick Road (UVA), Oak Hill, and Southwood tracts. Most of the other tracts in the county have no more than 20% of families making less than $35k/year. 
 
 ### Percent of families making under $35,000 in Albemarle County
 ```{r}
@@ -518,6 +532,16 @@ There are `r comma(buckingham$AllFamE)` families living in `r buckingham$countyN
 
 Of these, `r comma(buckingham$AllFamUnder35kE)` (`r percent(buckingham$perc_AllFamUnder35kE, scale = 1, accuracy = 0.1)`) do not earn enough to provide for their basic needs and the costs associated with working. This is the highest percent of families struggling in localities across the region.
 
+Buckingham County at a glance:
+
+* Buckingham has the least expensive housing and childcare relative to the other localities in the region, and yet it still has the largest percentage of families earning less than they need to afford basic needs.
+
+* In Buckingham, the percent of Black families making <$35k/year is `r paste0(round(buckingham$perc_BlackFamUnder35kE - buckingham$perc_WhiteFamUnder35kE, 0), "%")` higher than the percent of White families making <$35k/year. 
+
+* Buckingham, relative to the other localities, has the lowest percent of families making over $100k/year--a higher share of Buckingham's families are concentrated in the lower pay ranges. 
+
+* Because so many families are paid <$35k/year in Buckingham, the share of low-paid families is more evenly distributed throughout the locality; the concentration of low-paid families is less obvious in Buckingham relative to the other localities. 
+
 ### Expenses: Single Householder + 2 Children (1 Toddler)
 ```{r}
 exBC <- expenses %>%
@@ -534,6 +558,7 @@ flextable(exBC) %>%
   color(i = ~Annual > 40000, color = "white") 
 ```
 
+It's worth noting here that if families make just over >$35,000/year, it would still be nearly impossible to afford important expenses like childcare and transportation. These families would have almost no ability to save money or create a sense of financial security. To afford every expense in this table, save for your child's future education, a downpayment on a home, or any unexpected cost, a family would realistically likely need to be making >=$50k. However, we focus on families making <$35k/year because in every locality, that amount is at least greater than the survival expenses. 
 
 ### Breakdown of families making under $35,000 in Buckingham County
 ```{r}
@@ -573,7 +598,12 @@ flextable(income_break_bc) %>%
   color(j = "Cumulative", i = ~Cumulative > 70, color = "white") 
 ```
 
-As this table shows, `r paste0(income_break_bc$Cumulative[4], "%")` of the families who cannot meet their basic needs earn between $15,000-$35,000 annually. This strongly suggests they are working, but not earning the wages, or getting the hours, they need to support their families.
+As this table shows, `r paste0(income_break_bc$Cumulative[4], "%")`  of the families who cannot meet their basic needs earn between $15,000-$35,000 annually. This strongly suggests they are working, but not earning the wages or not getting the hours they need to support their families.
+
+The bar graph below shows the distribution of families in various pay ranges, broken up by race. In a world with racial equity in income, the bars for all families, Black families, and White families would be equal in height. As you can see, Black families are over-represented at the low end of the pay ranges (<$35k/year), and Black families are under-represented at the high end of the pay ranges (>$100k/year). In other words, relative to White families, Black families are more likely to be paid insufficient wages and less likely to be high-earning. 
+
+Relative to the other localities, in Buckingham County, a higher share of families overall fall into the low-earning pay ranges. 
+
 
 ### Income distribution of Black and White families in Buckingham County
 ```{r}
@@ -609,6 +639,10 @@ ggplot(buc_race_long, aes(y = Percent,
   theme(legend.position = "bottom")
 ```
 
+The maps below show the geo-spatial relationships between income and neighborhood. The color of each census tract in the county is based on the median family income or the percent of families within the tract who make less than $35k/year. In Buckingham county, the median family income is low (relative to the other counties) in each tract, which has implications for the resources and opportunities available to the families living there. 
+
+Click on each tract to see its median income and a nickname for the tract based on which neighborhood the tract contains. 
+
 ### Median family income in Buckingham County
 ```{r}
 BCmap <- geofull %>%
@@ -631,6 +665,10 @@ leaflet() %>%
   addLegend("bottomright", pal = pal, values = BCmap$medianFamIncomeE, 
             title = "Median family income", opacity = 0.7)
 ```
+
+The New Canton tract has one of the lowest median family incomes at `r paste0(comma(BCmap$medianFamIncomeE[BCmap$tractnames == "New Canton"]))`. However, relative to the other localities, the difference between the lowest median family income and the highest median family income in Buckingham is small---the Mount Rush tract has the highest median family income with `r paste0(comma(BCmap$medianFamIncomeE[BCmap$tractnames == "Mount Rush"]))`. 
+
+The following map shows the concentration of low-paid families by showing the percent of families in each tract who earn <$35k/year. Similar to the other counties, in Buckingham County, the tract with the lowest median family income also has the highest percentage of families making <$35k/year. 
 
 ### Percent of families making under $35,000 in Buckingham County
 ```{r}
@@ -661,6 +699,16 @@ There are `r comma(charlottesville$AllFamE)` families living in `r charlottesvil
 
 Of these, `r comma(charlottesville$AllFamUnder35kE)` (`r percent(charlottesville$perc_AllFamUnder35kE, scale = 1, accuracy = 0.1)`) do not earn enough to provide for their basic needs and the costs associated with working. 
 
+Charlottesville City at a glance:
+
+* Charlottesville and Albemarle County are the most expensive localities in terms of housing and childcare.
+
+* Charlottesville has the largest disparities in the percent of Black and White families making <$35k/year (the percent of Black families making <$35/year is `r round(charlottesville$perc_BlackFamUnder35kE - charlottesville$perc_WhiteFamUnder35kE, 0)`% higher than the percent of White families in Charlottesville). 
+
+* Charlottesville, relative to the other localities, has the largest percent of families making <$35k/year. 
+
+* Families making less than <$35k/year tend to be more highly concentrated near the University of Virginia and the Oak Hill neighborhood. 
+
 ### Expenses: Single Householder + 2 Children (1 Toddler)
 ```{r}
 exCC <- expenses %>%
@@ -676,6 +724,8 @@ flextable(exCC) %>%
   border_inner_h(border = fp_border(color="gray", width=1)) %>%
   color(i = ~Annual > 49390, color = "white") 
 ```
+
+It's worth noting here that if families make just over >$35,000/year, it would still be nearly impossible to afford important expenses like childcare and transportation. These families would have almost no ability to save money or create a sense of financial security. To afford every expense in this table, save for your child's future education, a downpayment on a home, or any unexpected cost, a family would realistically likely need to be making >=$50k. However, we focus on families making <$35k/year because in every locality, that amount is at least greater than the survival expenses. 
 
 ### Breakdown of families making under $35,000 in Charlottesville City
 ```{r}
@@ -715,7 +765,9 @@ flextable(income_break_cc) %>%
   color(j = "Cumulative", i = ~Cumulative > 50, color = "white") 
 ```
 
-As this table shows, `r paste0(income_break_cc$Cumulative[4], "%")` of the families who cannot meet their basic needs earn between $15,000-$35,000 annually. This strongly suggests they are working, but not earning the wages, or getting the hours, they need to support their families.
+As this table shows, `r paste0(income_break_cc$Cumulative[4], "%")` of the families who cannot meet their basic needs earn between $15,000-$35,000 annually. This strongly suggests they are working, but not earning the wages or not getting the hours they need to support their families. In Charlottesville, however, the percent of families making <$35k/year are more equally distributed between 0-14,999 and 15-34,999. This distribution means that more families, relative to the other localities, are in the lowest income range 
+
+The bar graph below shows the distribution of families in various pay ranges, broken up by race. In a world with racial equity in income, the bars for all families, Black families, and White families would be equal in height. As you can see, Black families are over-represented at the low end of the pay ranges (<$35k/year), and Black families are under-represented at the high end of the pay ranges (>$100k/year). In other words, relative to White families, Black families are more likely to be paid insufficient wages and less likely to be high-earning. 
 
 ### Income distribution of Black and White families in Charlottesville City
 ```{r}
@@ -751,6 +803,10 @@ ggplot(cvl_race_long, aes(y = Percent,
   theme(legend.position = "bottom")
 ```
 
+The maps below show the geo-spatial relationships between income and neighborhood. The color of each census tract in the county is based on the median family income or the percent of families within the tract who make less than $35k/year. The maps show how neighborhoods are often concentrated with either high-earning or low-earning families, which has implications for the resources and opportunities available to the families living within each tract. 
+
+Which neighborhoods or census tracts in Charlottesville have the highest median family incomes? Which have the lowest? Click on each tract to see its median income and a nickname for the tract based on which neighborhood the tract contains. 
+
 ### Median family income in Charlottesville City
 ```{r}
 CCmap <- geofull %>%
@@ -773,6 +829,10 @@ leaflet() %>%
   addLegend("bottomright", pal = pal, values = CCmap$medianFamIncomeE, 
             title = "Median family income", opacity = 0.7)
 ```
+
+The 10th & Page-Venable and the JPA-Fontaine tracts have the lowest median family incomes at `r comma(CCmap$medianFamIncomeE[CCmap$tractnames == "10th & Page-Venable"])` and `r comma(CCmap$medianFamIncomeE[CCmap$tractnames == "JPA-Fontaine"])` respectively. By contrast, the Barracks-Rugby tract has the highest median family income at `r comma(CCmap$medianFamIncomeE[CCmap$tractnames == "Barracks-Rugby"])`, making the disparity between the lowest and highest median family incomes well-over $100k. 
+
+The following map shows the concentration of low-paid families by showing the percent of families in each tract who earn less than $35k/year. For Charlottesville, it shows a similar pattern as the previous map--the highest percentage of low-paid families are concentrated in the 10th & Page-Venable and JPA-Fontaine tracts. On the other hand, in addition to having the highest median family income, the Barracks-Rugby tract also has the lowest percent of families making <$35k/year `r comma(CCmap$perc_AllFamUnder35kE[CCmap$tract == "010904"])`
 
 ### Percent of families making under $35,000 in Charlottesville City
 ```{r}
@@ -803,6 +863,16 @@ There are `r comma(fluvanna$AllFamE)` families living in `r fluvanna$countyName`
 
 Of these, `r comma(fluvanna$AllFamUnder35kE)` (`r percent(fluvanna$perc_AllFamUnder35kE, scale = 1, accuracy = 0.1)`) do not earn enough to provide for their basic needs and the costs associated with working. 
 
+Fluvanna County at a glance:
+
+* Fluvanna has the second least expensive childcare relative to the other localities in the region, but it is tied with Albemarle, Charlottesville, Greene, and Nelson for most expensive housing.
+
+* Fluvanna has the lowest percent of all families making <$35k/year, and it has the smallest disparitiees between the percent of White and the percent of Black families making <$35k/year: In Fluvanna, the percent of Black families making <$35k/year is `r paste0(round(fluvanna$perc_BlackFamUnder35kE - fluvanna$perc_WhiteFamUnder35kE, 0), "%")` higher than the percent of White families making <$35k/year. 
+
+* Fluvanna, relative to the other localities, has the largest percent of families making over $60-100k/year. 
+
+* Relative to the other counties, the disparities between the highest tract median family income and the lowest tract median family income are smaller in Fluvanna. In other words, the median family income is more consistent across the different tracts in Fluvanna than it is in other counties. 
+
 ### Expenses: Single Householder + 2 Children (1 Toddler)
 ```{r}
 exFC <- expenses %>%
@@ -818,6 +888,8 @@ flextable(exFC) %>%
   border_inner_h(border = fp_border(color="gray", width=1)) %>%
   color(i = ~Annual > 40000, color = "white") 
 ```
+
+It's worth noting here that if families make just over >$35,000/year, it would still be nearly impossible to afford important expenses like childcare and transportation. These families would have almost no ability to save money or create a sense of financial security. To afford every expense in this table, save for your child's future education, a downpayment on a home, or any unexpected cost, a family would realistically likely need to be making >=$50k. However, we focus on families making <$35k/year because in every locality, that amount is at least greater than the survival expenses. 
 
 ### Breakdown of families making under $35,000 in Fluvanna County
 ```{r}
@@ -857,7 +929,9 @@ flextable(income_break_fc) %>%
   color(j = "Cumulative", i = ~Cumulative > 70, color = "white") 
 ```
 
-As this table shows, `r paste0(income_break_fc$Cumulative[4], "%")` of the families who cannot meet their basic needs earn between $15,000-$35,000 annually. This strongly suggests they are working, but not earning the wages, or getting the hours, they need to support their families.
+As this table shows, `r paste0(income_break_fc$Cumulative[4], "%")` of the families who cannot meet their basic needs earn between $15,000-$35,000 annually. This strongly suggests they are working, but not earning the wages or not getting the hours they need to support their families.
+
+The bar graph below shows the distribution of families in various pay ranges, broken up by race. In a world with racial equity in income, the bars for all families, Black families, and White families would be equal in height. As you can see, Black families are over-represented at the low end of the pay ranges (<$35k/year), and Black families are under-represented at the high end of the pay ranges (>$100k/year). In other words, relative to White families, Black families are more likely to be paid insufficient wages and less likely to be high-earning. 
 
 ### Income distribution of Black and White families in Fluvanna County
 ```{r}
@@ -893,6 +967,10 @@ ggplot(flv_race_long, aes(y = Percent,
   theme(legend.position = "bottom")
 ```
 
+The maps below show the geo-spatial relationships between income and neighborhood. The color of each census tract in the county is based on the median family income or the percent of families within the tract who make less than $35k/year. Having a higher percentage of families making <$35/year in a tracthas implications for the resources and opportunities available to the families living there. 
+
+Click on each tract to see its median income and a nickname for the tract based on which neighborhood the tract contains.
+
 ### Median family income in Fluvanna County
 ```{r}
 FCmap <- geofull %>%
@@ -915,6 +993,10 @@ leaflet() %>%
   addLegend("bottomright", pal = pal, values = FCmap$medianFamIncomeE, 
             title = "Median family income", opacity = 0.7)
 ```
+
+The Columbia/Fork Union tract has the highest median family incomes at `r paste0(comma(FCmap$medianFamIncomeE[FCmap$tractnames == "Columbia/Fork Union"]))`. However, relative to the other localities, the difference between the lowest median family income and the highest median family income in Fluvanna is small. Additionally, the highest median family income in Fluvanna is much lower than the highest median family income in Albemarle or Charlottesville. 
+
+The following map shows the concentration of low-paid families by showing the percent of families in each tract who earn <$35k/year. Similar to the other counties, in Fluvanna County, the tract with the lowest median family income also has the highest percentage of families making <$35k/year. 
 
 ### Percent of families making < $35,000 in Fluvanna County
 ```{r}
@@ -945,6 +1027,12 @@ There are `r comma(greene$AllFamE)` families living in `r greene$countyName` cou
 
 Of these, `r comma(greene$AllFamUnder35kE)` (`r percent(greene$perc_AllFamUnder35kE, scale = 1, accuracy = 0.1)`) do not earn enough to provide for their basic needs and the costs associated with working. 
 
+Greene County at a glance:
+
+* Greene has the second least expensive childcare relative to the other localities in the region, but it is tied with Albemarle, Charlottesville, Fluvanna and Nelson for most expensive housing.
+
+* In Greene, the percent of Black families making <$35k/year is `r paste0(round(greene$perc_BlackFamUnder35kE - greene$perc_WhiteFamUnder35kE, 0), "%")` higher than the percent of White families making <$35k/year. 
+
 ### Expenses: Single Householder + 2 Children (1 Toddler)
 ```{r}
 exGC <- expenses %>%
@@ -960,6 +1048,8 @@ flextable(exGC) %>%
   border_inner_h(border = fp_border(color="gray", width=1)) %>%
   color(i = ~Annual > 40000, color = "white") 
 ```
+
+It's worth noting here that if families make just over >$35,000/year, it would still be nearly impossible to afford important expenses like childcare and transportation. These families would have almost no ability to save money or create a sense of financial security. To afford every expense in this table, save for your child's future education, a downpayment on a home, or any unexpected cost, a family would realistically likely need to be making >=$50k. However, we focus on families making <$35k/year because in every locality, that amount is at least greater than the survival expenses. 
 
 ### Breakdown of families making under $35,000 in Greene County
 ```{r}
@@ -999,7 +1089,9 @@ flextable(income_break_gc) %>%
   color(j = "Cumulative", i = ~Cumulative > 70, color = "white") 
 ```
 
-As this table shows, `r paste0(income_break_gc$Cumulative[4], "%")` of the families who cannot meet their basic needs earn between $15,000-$35,000 annually. This strongly suggests they are working, but not earning the wages, or getting the hours, they need to support their families.
+As this table shows, `r paste0(income_break_gc$Cumulative[4], "%")` of the families who cannot meet their basic needs earn between $15,000-$35,000 annually. This strongly suggests they are working, but not earning the wages or not getting the hours they need to support their families.
+
+The bar graph below shows the distribution of families in various pay ranges, broken up by race. In a world with racial equity in income, the bars for all families, Black families, and White families would be equal in height. As you can see, Black families are over-represented at the low end of the pay ranges (<$35k/year), and Black families are under-represented at the high end of the pay ranges (>$100k/year). In other words, relative to White families, Black families are more likely to be paid insufficient wages and less likely to be high-earning. 
 
 ### Income distribution of Black and White families in Greene County
 ```{r}
@@ -1035,6 +1127,10 @@ ggplot(grn_race_long, aes(y = Percent,
   theme(legend.position = "bottom")
 ```
 
+The maps below show the geo-spatial relationships between income and neighborhood. The color of each census tract in the county is based on the median family income or the percent of families within the tract who make less than $35k/year. Having a higher percentage of families making <$35/year in a tracthas implications for the resources and opportunities available to the families living there. 
+
+Click on each tract to see its median income and a nickname for the tract based on which neighborhood the tract contains.
+
 ### Median family income in Greene County
 ```{r}
 GCmap <- geofull %>%
@@ -1057,6 +1153,10 @@ leaflet() %>%
   addLegend("bottomright", pal = pal, values = GCmap$medianFamIncomeE, 
             title = "Median family income", opacity = 0.7)
 ```
+
+The Stanardsville tract has the lowest median family incomes at `r paste0(comma(GCmap$medianFamIncomeE[GCmap$tractnames == "Stanardsville"]))', and the Midway tract has the highest family median income at `r paste0(comma(GCmap$medianFamIncomeE[GCmap$tractnames == "Midway"]))'. 
+
+The following map shows the concentration of low-paid families by showing the percent of families in each tract who earn <$35k/year. Similar to the other counties, in Greene County, the tract with the lowest median family income also has the highest percentage of families making <$35k/year. 
 
 ### Percent of families making under $35,000 in Greene County
 ```{r}
@@ -1085,7 +1185,15 @@ louisa <- countydat %>% filter(countyName == "Louisa")
 
 There are `r comma(louisa$AllFamE)` families living in `r louisa$countyName` county. 
 
-Of these, `r comma(louisa$AllFamUnder35kE)` (`r percent(louisa$perc_AllFamUnder35kE, scale = 1, accuracy = 0.1)`) do not earn enough to provide for their basic needs and the costs associated with working. Louisa has second highest number of families left behind. 19 percent of the families struggling in our region live in Louisa, where the median income is $79,821 annually. Louisa has the second lowest cost for housing.
+Of these, `r comma(louisa$AllFamUnder35kE)` (`r percent(louisa$perc_AllFamUnder35kE, scale = 1, accuracy = 0.1)`) do not earn enough to provide for their basic needs and the costs associated with working. Louisa has second highest number of families left behind. 
+
+Louisa at a glance:
+
+* 19% of the families struggling in our region live in Louisa, where the median income is $79,821 annually. 
+
+* Louisa has the second lowest cost for housing.
+
+* In Louisa, the percent of Black families making <$35k/year is `r paste0(round(louisa$perc_BlackFamUnder35kE - louisa$perc_WhiteFamUnder35kE, 0), "%")` higher than the percent of White families making <$35k/year. 
 
 ### Expenses: Single Householder + 2 Children (1 Toddler)
 ```{r}
@@ -1102,6 +1210,8 @@ flextable(exLC) %>%
   border_inner_h(border = fp_border(color="gray", width=1)) %>%
   color(i = ~Annual > 40000, color = "white") 
 ```
+
+It's worth noting here that if families make just over >$35,000/year, it would still be nearly impossible to afford important expenses like childcare and transportation. These families would have almost no ability to save money or create a sense of financial security. To afford every expense in this table, save for your child's future education, a downpayment on a home, or any unexpected cost, a family would realistically likely need to be making >=$50k. However, we focus on families making <$35k/year because in every locality, that amount is at least greater than the survival expenses. 
 
 ### Breakdown of families making under $35,000 in Louisa County
 ```{r}
@@ -1141,7 +1251,9 @@ flextable(income_break_lc) %>%
   color(j = "Cumulative", i = ~Cumulative > 70, color = "white") 
 ```
 
-As this table shows, `r paste0(income_break_lc$Cumulative[4], "%")` of the families who cannot meet their basic needs earn between $15,000-$35,000 annually. This strongly suggests they are working, but not earning the wages, or getting the hours, they need to support their families.
+As this table shows, `r paste0(income_break_lc$Cumulative[4], "%")` of the families who cannot meet their basic needs earn between $15,000-$35,000 annually. This strongly suggests they are working, but not earning the wages or not getting the hours they need to support their families.
+
+The bar graph below shows the distribution of families in various pay ranges, broken up by race. In a world with racial equity in income, the bars for all families, Black families, and White families would be equal in height. As you can see, Black families are over-represented at the low end of the pay ranges (<$35k/year), and Black families are under-represented at the high end of the pay ranges (>$100k/year). In other words, relative to White families, Black families are more likely to be paid insufficient wages and less likely to be high-earning. 
 
 ### Income distribution of Black and White families in Louisa County
 ```{r}
@@ -1177,6 +1289,10 @@ ggplot(lsa_race_long, aes(y = Percent,
   theme(legend.position = "bottom")
 ```
 
+The maps below show the geo-spatial relationships between income and neighborhood. The color of each census tract in the county is based on the median family income or the percent of families within the tract who make less than $35k/year. Having a higher percentage of families making <$35/year in a tracthas implications for the resources and opportunities available to the families living there. 
+
+Click on each tract to see its median income and a nickname for the tract based on which neighborhood the tract contains.
+
 ### Median family income in Louisa County
 ```{r}
 LCmap <- geofull %>%
@@ -1199,6 +1315,10 @@ leaflet() %>%
   addLegend("bottomright", pal = pal, values = LCmap$medianFamIncomeE, 
             title = "Median family income", opacity = 0.7)
 ```
+
+The Town of Louisa tract has the lowest median family incomes at `r paste0(comma(LCmap$medianFamIncomeE[LCmap$tractnames == "Town of Louisa"]))', and the Zion Crossroads tract has the highest family median income at `r paste0(comma(LCmap$medianFamIncomeE[LCmap$tractnames == "Zion Crossroads"]))'. 
+
+The following map shows the concentration of low-paid families by showing the percent of families in each tract who earn <$35k/year. Similar to the other counties, in Louisa County, the tract with the lowest median family income also has the highest percentage of families making <$35k/year. 
 
 ### Percent of families making under $35,000 in Louisa County
 ```{r}
@@ -1229,6 +1349,12 @@ There are `r comma(nelson$AllFamE)` families living in `r nelson$countyName` cou
 
 Of these, `r comma(nelson$AllFamUnder35kE)` (`r percent(nelson$perc_AllFamUnder35kE, scale = 1, accuracy = 0.1)`) do not earn enough to provide for their basic needs and the costs associated with working. 
 
+Nelson County at a glance:
+
+* Nelson has the second least expensive childcare relative to the other localities in the region, but it is tied with Albemarle, Charlottesville, Greene, and Nelson for most expensive housing.
+
+* In Nelson, the percent of Black families making <$35k/year is `r paste0(round(nelson$perc_BlackFamUnder35kE - nelson$perc_WhiteFamUnder35kE, 0), "%")` higher than the percent of White families making <$35k/year. 
+
 ### Expenses: Single Householder + 2 Children (1 Toddler)
 ```{r}
 exNC <- expenses %>%
@@ -1244,6 +1370,8 @@ flextable(exNC) %>%
   border_inner_h(border = fp_border(color="gray", width=1)) %>%
   color(i = ~Annual > 40000, color = "white") 
 ```
+
+It's worth noting here that if families make just over >$35,000/year, it would still be nearly impossible to afford important expenses like childcare and transportation. These families would have almost no ability to save money or create a sense of financial security. To afford every expense in this table, save for your child's future education, a downpayment on a home, or any unexpected cost, a family would realistically likely need to be making >=$50k. However, we focus on families making <$35k/year because in every locality, that amount is at least greater than the survival expenses. 
 
 ### Breakdown of families making under $35,000 in Nelson County
 ```{r}
@@ -1283,7 +1411,9 @@ flextable(income_break_nc) %>%
   color(j = "Cumulative", i = ~Cumulative > 70, color = "white") 
 ```
 
-As this table shows, `r paste0(income_break_nc$Cumulative[4], "%")` of the families who cannot meet their basic needs earn between $15,000-$35,000 annually. This strongly suggests they are working, but not earning the wages, or getting the hours, they need to support their families.
+As this table shows, `r paste0(income_break_nc$Cumulative[4], "%")` of the families who cannot meet their basic needs earn between $15,000-$35,000 annually. This strongly suggests they are working, but not earning the wages or not getting the hours they need to support their families.
+
+The bar graph below shows the distribution of families in various pay ranges, broken up by race. In a world with racial equity in income, the bars for all families, Black families, and White families would be equal in height. As you can see, Black families are over-represented at the low end of the pay ranges (<$35k/year), and Black families are under-represented at the high end of the pay ranges (>$100k/year). In other words, relative to White families, Black families are more likely to be paid insufficient wages and less likely to be high-earning. 
 
 ### Income distribution of Black and White families in Nelson County
 ```{r}
@@ -1319,6 +1449,10 @@ ggplot(nel_race_long, aes(y = Percent,
   theme(legend.position = "bottom")
 ```
 
+The maps below show the geo-spatial relationships between income and neighborhood. The color of each census tract in the county is based on the median family income or the percent of families within the tract who make less than $35k/year. Having a higher percentage of families making <$35/year in a tracthas implications for the resources and opportunities available to the families living there. 
+
+Click on each tract to see its median income and a nickname for the tract based on which neighborhood the tract contains.
+
 ### Median family income in Nelson County
 ```{r}
 NCmap <- geofull %>%
@@ -1341,6 +1475,10 @@ leaflet() %>%
   addLegend("bottomright", pal = pal, values = NCmap$medianFamIncomeE, 
             title = "Median family income", opacity = 0.7)
 ```
+
+The Lovingston tract has the lowest median family incomes at `r paste0(comma(NCmap$medianFamIncomeE[NCmap$tractnames == "Lovingston"]))', and the Zion Crossroads tract has the highest family median income at `r paste0(comma(NCmap$medianFamIncomeE[NCmap$tractnames == "Wintergreen-Rockfish Valley"]))'. 
+
+The following map shows the concentration of low-paid families by showing the percent of families in each tract who earn <$35k/year. Similar to the other counties, in Fluvanna County, the tract with the lowest median family income also has the highest percentage of families making <$35k/year. 
 
 ### Percent of families making under $35,000 in Nelson County
 ```{r}
@@ -1400,7 +1538,7 @@ hsperc_pop <- hs_long %>% filter(status == "perc_noHSE") %>%
   geom_text(aes(label=percent(value, scale = 1)), 
             position=position_dodge(width=0.9), 
             vjust=0.25, size=3, color = "white") +
-  scale_x_continuous(labels = label_percent()) +
+  scale_x_continuous() +
   theme_minimal() +
   theme(axis.text.y = element_blank())
 
