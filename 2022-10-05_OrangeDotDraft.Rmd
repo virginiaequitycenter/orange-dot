@@ -489,7 +489,7 @@ leaflet() %>%
             title = "Median family income", opacity = 0.7)
 ```
 
-The Carr's Hill-McCormick Road (UVA) tract has one of the lowest median family incomes at `r paste0(comma(ACmap$medianFamIncomeE[ACmap$tract == "010904"]))`. This tract likely includes graduate students and other low-paid families employed by the University. By contrast, the Ivy and North Garden tracts have some of the highest median family incomes, and they likely include many University professors and high-paid administrators. 
+The `r paste0(ACmap$tractnames[which.min(ACmap$medianFamIncomeE)])` tract has the lowest median family incomes at $`r paste0(comma(ACmap$medianFamIncomeE[which.min(ACmap$medianFamIncomeE)]))`. Due to its proximity to the University, this tract likely includes graduate students and other low-paid families employed by the University. By contrast, the `r paste0(ACmap$tractnames[which.max(ACmap$medianFamIncomeE)])` tract has the highest median family income  at $`r paste0(comma(ACmap$medianFamIncomeE[which.max(ACmap$medianFamIncomeE)]))`, and it likely includes many University professors and high-paid administrators. 
 
 The following map shows the concentration of low-paid families by showing the percent of families in each tract who earn less than $35k/year. For Albemarle County, it shows a similar pattern as the previous map--the highest percentage of low-paid families are concentrated in the Carr's Hill-McCormick Road (UVA), Oak Hill, and Southwood tracts. Most of the other tracts in the county have no more than 20% of families making less than $35k/year. 
 
@@ -666,7 +666,7 @@ leaflet() %>%
             title = "Median family income", opacity = 0.7)
 ```
 
-The New Canton tract has one of the lowest median family incomes at `r paste0(comma(BCmap$medianFamIncomeE[BCmap$tractnames == "New Canton"]))`. However, relative to the other localities, the difference between the lowest median family income and the highest median family income in Buckingham is small---the Mount Rush tract has the highest median family income with `r paste0(comma(BCmap$medianFamIncomeE[BCmap$tractnames == "Mount Rush"]))`. 
+The `r paste0(BCmap$tractnames[which.min(BCmap$medianFamIncomeE)])` tract has the lowest median family incomes at $`r paste0(comma(BCmap$medianFamIncomeE[which.min(BCmap$medianFamIncomeE)]))`. However, relative to the other localities, the difference between the lowest median family income and the highest median family income in Buckingham is small---the `r paste0(BCmap$tractnames[which.max(BCmap$medianFamIncomeE)])` tract has the highest median family income ($`r paste0(comma(BCmap$medianFamIncomeE[which.max(BCmap$medianFamIncomeE)]))`) 
 
 The following map shows the concentration of low-paid families by showing the percent of families in each tract who earn <$35k/year. Similar to the other counties, in Buckingham County, the tract with the lowest median family income also has the highest percentage of families making <$35k/year. 
 
@@ -830,7 +830,7 @@ leaflet() %>%
             title = "Median family income", opacity = 0.7)
 ```
 
-The 10th & Page-Venable and the JPA-Fontaine tracts have the lowest median family incomes at `r comma(CCmap$medianFamIncomeE[CCmap$tractnames == "10th & Page-Venable"])` and `r comma(CCmap$medianFamIncomeE[CCmap$tractnames == "JPA-Fontaine"])` respectively. By contrast, the Barracks-Rugby tract has the highest median family income at `r comma(CCmap$medianFamIncomeE[CCmap$tractnames == "Barracks-Rugby"])`, making the disparity between the lowest and highest median family incomes well-over $100k. 
+The `r paste0(CCmap$tractnames[which.min(CCmap$medianFamIncomeE)])` tract has the lowest median family incomes at $`r paste0(comma(CCmap$medianFamIncomeE[which.min(CCmap$medianFamIncomeE)]))`. By contrast, the `r paste0(CCmap$tractnames[which.max(CCmap$medianFamIncomeE)])` tract has the highest median family income at $`r paste0(comma(CCmap$medianFamIncomeE[which.max(CCmap$medianFamIncomeE)]))`, making the disparity between the lowest and highest median family incomes well-over $100k. 
 
 The following map shows the concentration of low-paid families by showing the percent of families in each tract who earn less than $35k/year. For Charlottesville, it shows a similar pattern as the previous map--the highest percentage of low-paid families are concentrated in the 10th & Page-Venable and JPA-Fontaine tracts. On the other hand, in addition to having the highest median family income, the Barracks-Rugby tract also has the lowest percent of families making <$35k/year `r comma(CCmap$perc_AllFamUnder35kE[CCmap$tract == "010904"])`
 
@@ -994,7 +994,7 @@ leaflet() %>%
             title = "Median family income", opacity = 0.7)
 ```
 
-The Columbia/Fork Union tract has the highest median family incomes at `r paste0(comma(FCmap$medianFamIncomeE[FCmap$tractnames == "Columbia/Fork Union"]))`. However, relative to the other localities, the difference between the lowest median family income and the highest median family income in Fluvanna is small. Additionally, the highest median family income in Fluvanna is much lower than the highest median family income in Albemarle or Charlottesville. 
+The `r paste0(FCmap$tractnames[which.min(FCmap$medianFamIncomeE)])` tract has the lowest median family incomes at $`r paste0(comma(FCmap$medianFamIncomeE[which.min(FCmap$medianFamIncomeE)]))`. By contrast, the `r paste0(FCmap$tractnames[which.max(FCmap$medianFamIncomeE)])` tract has the highest median family income at $`r paste0(comma(FCmap$medianFamIncomeE[which.max(FCmap$medianFamIncomeE)]))`. However, relative to the other localities, the difference between the lowest median family income and the highest median family income in Fluvanna is small. Additionally, the highest median family income in Fluvanna is much lower than the highest median family income in Albemarle or Charlottesville. 
 
 The following map shows the concentration of low-paid families by showing the percent of families in each tract who earn <$35k/year. Similar to the other counties, in Fluvanna County, the tract with the lowest median family income also has the highest percentage of families making <$35k/year. 
 
@@ -1154,7 +1154,7 @@ leaflet() %>%
             title = "Median family income", opacity = 0.7)
 ```
 
-The Stanardsville tract has the lowest median family incomes at `r comma(GCmap$medianFamIncomeE[GCmap$tractnames == "Stanardsville"])`, and the Midway tract has the highest family median income at `r paste0(comma(GCmap$medianFamIncomeE[GCmap$tractnames == "Midway"]))`. 
+The `r paste0(GCmap$tractnames[which.min(GCmap$medianFamIncomeE)])` tract has the lowest median family incomes at $`r paste0(comma(GCmap$medianFamIncomeE[which.min(GCmap$medianFamIncomeE)]))`. By contrast, the `r paste0(GCmap$tractnames[which.max(GCmap$medianFamIncomeE)])` tract has the highest median family income at $`r paste0(comma(GCmap$medianFamIncomeE[which.max(GCmap$medianFamIncomeE)]))`. 
 
 The following map shows the concentration of low-paid families by showing the percent of families in each tract who earn <$35k/year. Similar to the other counties, in Greene County, the tract with the lowest median family income also has the highest percentage of families making <$35k/year. 
 
@@ -1316,7 +1316,7 @@ leaflet() %>%
             title = "Median family income", opacity = 0.7)
 ```
 
-The Town of Louisa tract has the lowest median family incomes at `r paste0(comma(LCmap$medianFamIncomeE[LCmap$tractnames == "Town of Louisa"]))`, and the Zion Crossroads tract has the highest family median income at `r paste0(comma(LCmap$medianFamIncomeE[LCmap$tractnames == "Zion Crossroads"]))`. 
+The `r paste0(LCmap$tractnames[which.min(LCmap$medianFamIncomeE)])` tract has the lowest median family incomes at $`r paste0(comma(LCmap$medianFamIncomeE[which.min(LCmap$medianFamIncomeE)]))`. By contrast, the `r paste0(LCmap$tractnames[which.max(LCmap$medianFamIncomeE)])` tract has the highest median family income at $`r paste0(comma(LCmap$medianFamIncomeE[which.max(LCmap$medianFamIncomeE)]))`. 
 
 The following map shows the concentration of low-paid families by showing the percent of families in each tract who earn <$35k/year. Similar to the other counties, in Louisa County, the tract with the lowest median family income also has the highest percentage of families making <$35k/year. 
 
@@ -1476,7 +1476,7 @@ leaflet() %>%
             title = "Median family income", opacity = 0.7)
 ```
 
-The Lovingston tract has the lowest median family incomes at `r comma(NCmap$medianFamIncomeE[NCmap$tractnames == "Lovingston"])`, and the Zion Crossroads tract has the highest family median income at `r comma(NCmap$medianFamIncomeE[NCmap$tractnames == "Wintergreen-Rockfish Valley"])`. 
+The `r paste0(NCmap$tractnames[which.min(NCmap$medianFamIncomeE)])` tract has the lowest median family incomes at $`r paste0(comma(NCmap$medianFamIncomeE[which.min(NCmap$medianFamIncomeE)]))`. By contrast, the `r paste0(NCmap$tractnames[which.max(NCmap$medianFamIncomeE)])` tract has the highest median family income at $`r paste0(comma(NCmap$medianFamIncomeE[which.max(NCmap$medianFamIncomeE)]))`. 
 
 The following map shows the concentration of low-paid families by showing the percent of families in each tract who earn <$35k/year. Similar to the other counties, in Fluvanna County, the tract with the lowest median family income also has the highest percentage of families making <$35k/year. 
 
