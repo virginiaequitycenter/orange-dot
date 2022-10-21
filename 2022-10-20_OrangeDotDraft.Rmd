@@ -4,7 +4,7 @@ toc-title: "Contents"
 title: "(Draft) Orange Dot Report 5.0"
 subtitle: "Family Self-Sufficiency in the Charlottesville Region"
 date: 'October 20, 2022'
-author: 'Ridge Schuyler, Michele Claibourn, Lee LeBoeuf, Elizabeth Mitchell'
+author: 'Ridge Schuyler, Michele Claibourn, Lee LeBoeuf, Elizabeth Mitchell^[Author Note]'
 output: 
   html_document:
       template: orange-dot-template.html
@@ -199,7 +199,7 @@ Hard Work x Low Wages = Low Income
 The difference between these outcomes is not the hard work individuals put in, but the wages paid out. A full-time worker making Virginia’s minimum wage will have a gross income of 22,000 per year.^[Based on wage of $11/hour.] To reduce the number of struggling families, therefore, requires an increase in their wages. We need a system that identifies the 72 percent of low-income families who are working for a living but who are not valued, and help them increase their value in the eyes of their employers.
 
 <br/>
-```{r, fig.alt= "Two pie charts showing percents of families in the Charlottesville Region paid a living wage. The first shows 86% of families are paid a living wage and 14% are not paid a living wage. The second shows that of that 14% not paid a living wage, 73% are paid close to a living wage and 27% are not paid close to a living wage.", fig.align = "center", out.width = "80%"}
+```{r, fig.alt= "Two pie charts showing percents of families in the Charlottesville Region paid a living wage. The first shows 86% of families are paid a living wage and 14% are not paid a living wage. The second shows that of that 14% not paid a living wage, 73% are paid close to a living wage and 27% are not paid close to a living wage.", fig.align = "center", out.width = "100%"}
 knitr::include_graphics("PictureChart.png")
 ```
 <br/>

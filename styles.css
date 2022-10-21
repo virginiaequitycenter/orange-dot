@@ -91,7 +91,7 @@ table {
 }
 
 .main-container {
-  max-width: 1000px;
+  max-width: 940px;
   margin-right: auto;
   margin-left: auto;
   padding: 2rem;
@@ -103,18 +103,20 @@ table {
 }
 
 #toc-title {
-  margin-left: 20px
+  margin-left: 20px;
+  padding-top: 20px;
 }
 
 #TOC {
   margin: 25px 0px 35px 0px;
-  border: 1rem solid rgba(4, 157, 191, 0.75);
+  background: #EEEEEE;
+  /*border: 1rem solid rgba(4, 157, 191, 0.75);*/
 }
 
 #TOC ul {
   list-style: none;
   margin-left: 20px;
-  padding: 5px;
+  padding: 5px 0 20px 20px;
 }
 
 #TOC li {
@@ -139,29 +141,31 @@ hr {
 }
 
 .module {
-    background: #FFFFFF;
+   background-color: #FFFFFF;
     color: #333333;
     width: 100%;
     height:100%;
+    padding: 2.5rem;
 }
  @media screen and (min-width: 64em) {
     .module {
-      padding: 2.5rem; } }
+      padding: 3rem 2.5rem; } }
   @media screen and (min-width: 42em) and (max-width: 64em) {
     .module {
-      padding: 2.5rem;} }
+      padding: 3rem 2.5rem;} }
   @media screen and (max-width: 42em) {
     .module {
-      padding: 1rem;} }
+      padding: 2rem 1rem;} }
 
 #header {
-  color: #000;
+  color: #333333;
   text-align: center;
- /* background-color: #0F528C;*/
+  padding: 2rem;
+ /* background-color: #0F528C; */
   /* background-color: #7473A6;*/
  /* background-image: linear-gradient(120deg, #4CA7A9, #EE6400); */
  }
-  @media screen and (min-width: 64em) {
+/*  @media screen and (min-width: 64em) {
     #header {
       padding: 3rem 3rem; } }
   @media screen and (min-width: 42em) and (max-width: 64em) {
@@ -169,61 +173,101 @@ hr {
       padding: 3rem 3rem; } }
   @media screen and (max-width: 42em) {
     #header {
-      padding: 2rem 2rem; } }
+      padding: 2rem 2rem; } }*/
 
 .title {
   margin-top: 0;
-  margin-bottom: 0.1rem; }
+  margin-bottom: 0.1rem; 
+   line-height: 1.4;
+}
+
  @media screen and (min-width: 64em) {
     .title {
-      font-size: 3.25rem; } }
+      font-size: 38px; } }
   @media screen and (min-width: 42em) and (max-width: 64em) {
     .title {
-      font-size: 2.25rem; } }
+      font-size: 38px; } }
   @media screen and (max-width: 42em) {
     .title {
-      font-size: 1.75rem; } }
+      font-size: 30px; } }
 
 .subtitle {
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
   margin-top: 1.5rem;
-  font-size: 24px;
   font-weight: bold;
+   line-height: 1.4;
    }
-/*  @media screen and (min-width: 64em) {
+   
+@media screen and (min-width: 64em) {
     .subtitle {
-      font-size: 1.25rem; } }
+      font-size: 28px; } }
   @media screen and (min-width: 42em) and (max-width: 64em) {
     .subtitle {
-      font-size: 1.15rem; } }
+      font-size: 28px; } }
   @media screen and (max-width: 42em) {
     .subtitle {
-      font-size: 1rem; } }*/
+      font-size: 24px; } }
+
+/*.subtitle:after {
+   display: block;
+    content: " ";
+    height: 0.75rem;
+    background-image:linear-gradient(to right, rgb(255, 128, 0),rgb(4, 157, 191));
+    margin: 4rem auto;
+}   
+
+@media screen and (min-width: 64em) {
+    .subtitle:after {
+      max-width: 50%; } }
+  @media screen and (min-width: 42em) and (max-width: 64em) {
+    .subtitle:after {
+      width: 75%; } }
+  @media screen and (max-width: 42em) {
+    .subtitle:after {
+      width: 100%; } } */
       
 .author, .date {
-  font-size: 18px;
   font-weight: normal;
-}
-
-#logos {
-  background-color: #FFFFFF;
-}
-
-
-#header #logos img {
-  height: 100px;
-  padding: 10px;
+   line-height: 1.4;
 }
 
 @media screen and (min-width: 64em) {
-    #header #logos img {
+    .author, .date {
+      font-size: 20px; } }
+  @media screen and (min-width: 42em) and (max-width: 64em) {
+    .author, .date {
+      font-size: 20px; } }
+  @media screen and (max-width: 42em) {
+    .author, .date {
+      font-size: 18px; } }
+
+/*#header a {
+  color: #FFFFFF;
+}
+
+#header a:focus, #header a:hover {
+  color: #FFFFFF;
+  text-decoration: underline;
+}*/
+
+#logos {
+  background-color: #FFFFFF;
+  margin: auto;
+  display: flex;
+  justify-content: space-evenly;
+  max-width: 940px;
+  padding: 20px 0;
+}
+
+@media screen and (min-width: 64em) {
+    #logos img {
       height: 120px;} }
   @media screen and (min-width: 42em) and (max-width: 64em) {
-    #header #logos img {
+    #logos img {
       height: 100px; } }
   @media screen and (max-width: 42em) {
-    #header #logos img {
-      height: 65px;} }
+    #logos img {
+      height: 55px; padding: 0;} }
 
 .shadowbox {
     background-color: #575757;
