@@ -1,6 +1,8 @@
 # Orange Dot Report
 
-This repo produces the Orange Dot Report 5.0. Main files include
+This repo produces the Orange Dot Report 5.0. The report is available at https://virginiaequitycenter.github.io/orange-dot/OrangeDot5-0.html
+
+Main files include
 
 * OrangeDot5-0.Rmd: R markdown file that generates the online report
 * OrangeDot5-0.html: Online report
