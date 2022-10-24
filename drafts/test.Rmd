@@ -1,0 +1,34 @@
+---
+title: "test"
+author: "Michele Claibourn"
+date: "9/16/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+<style>
+  .shadowbox {
+    background-color: gray;
+    border-radius: 25px;
+    color: white;
+    font-weight: bold;
+    width: 400px;
+    padding: 20px;
+    margin: auto;
+  }
+</style>
+
+<div class="shadowbox">
+
+\begin{align*}
+Hard \: Work \; x \; High \: Wages = High \: Income \\
+
+Hard \: Work \; x \; Low \: Wages = Low \: Income \\
+\end{align*}
+
+</div>
