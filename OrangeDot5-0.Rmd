@@ -200,7 +200,7 @@ The difference between these outcomes is not the hard work individuals put in, b
 
 <br/>
 ```{r, fig.alt= "Two pie charts showing percents of families in the Charlottesville Region paid a living wage. The first shows 86% of families are paid a living wage and 14% are not paid a living wage. The second shows that of that 14% not paid a living wage, 73% are paid close to a living wage and 27% are not paid close to a living wage.", fig.align = "center", out.width = "100%"}
-knitr::include_graphics("PictureChart.png")
+knitr::include_graphics("images/PictureChart.png")
 ```
 <br/>
 
@@ -227,7 +227,7 @@ These policies and choices have generated a significant racial wealth gap. The F
 
 <br/>
 ```{r, fig.alt="Distribution of family wealth by race and ethinicity. Wealth gaps in terms of Black and Hispanic families' cents per every dollar of white family wealth shown for percentile groups. Source: Federal Reserve Bank of St. Louis.", fig.align = "center", out.width = "80%"}
-knitr::include_graphics("WealthGap.png")
+knitr::include_graphics("images/WealthGap.png")
 ```
 <br/>
 
@@ -235,7 +235,7 @@ That racial wealth gap is best explained by unequal labor income, according to r
 
 <br/>
 ```{r, fig.alt="Figure showing percent of racial wealth gap from 1962 to 2007. Title: A racial income gap explains the US's wealth gap today. Subtitle: Federal Reserve Bank economists found unequal incomes explain the black-white wealth gap's persistence today more than inherited wealth or investment returns. Source: Federal Reserve Bank of Cleveland research economists Dionissi Aliprantic and Daniel Carroll.", fig.align = "center", out.width = "80%"}
-knitr::include_graphics("IncomeGap.jpg")
+knitr::include_graphics("images/IncomeGap.jpg")
 ```
 <br/>
 
