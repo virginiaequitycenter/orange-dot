@@ -188,12 +188,12 @@ Some families are on fixed incomes or have otherwise reached a more constrained 
 
 The vast majority of families, however, have the capacity to earn a family-sufficient income. They are working, but their labor is not sufficiently valued.
 
-The undervaluing of labor has far-reaching consequences. The myth of American meritocracy promotes the idea that those who work hard and play by the rules will get ahead. The flipside of that myth—if you haven’t gotten ahead, it must be because you don’t work hard enough or play by the rules—leads to negative beliefs about the poor in our society and, subsequently, to reduced support for resources and programs meant to reduce the burdens of poverty. Working hard, however, does not guarantee that individuals will get ahead. Take the formula below:
+The undervaluing of labor has far-reaching consequences. The myth of American meritocracy promotes the idea that those who work hard and play by the rules will get ahead. The flipside of that myth—if you haven’t gotten ahead, it must be because you don’t work hard enough or play by the rules—leads to negative beliefs about the poor in our society and, subsequently, to reduced support for resources and programs meant to reduce the burdens of poverty. Working hard, however, does not guarantee that individuals will get ahead. Take the formulas below:
 
 <div class="shadowbox">
-Hard Work  x  High Wages  =  High Income
+Hard Work &#215; High Wages  =  High Income
 <br/>
-Hard Work  x  Low Wages  =  Low Income
+Hard Work &#215; Low Wages  =  Low Income
 </div>
 
 The difference between these outcomes is not the hard work individuals put in, but the wages paid out. A full-time worker making Virginia’s minimum wage will have a gross income of $22,000 per year.^[Based on wage of $11/hour.] To reduce the number of struggling families, therefore, requires an increase in their wages. We need a system that identifies the 72% of low-income families who are working for a living but who are not valued, and help them increase their value in the eyes of their employers.
