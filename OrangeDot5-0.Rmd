@@ -510,6 +510,7 @@ leaflet() %>%
                 weight = 1, fillOpacity = 0.8, bringToFront = T
               ),
               popup = paste0("Percent of families: ", round(ACmap$perc_AllFamUnder35kE,1), "%", "<br>",
+                             "Number of families: ", ACmap$AllFamUnder35kE, "<br>",
                              "Census Tract: ", ACmap$NAME.x, "<br>",
                              "Area Name: ", ACmap$tractname)) %>% 
   addLegend("bottomright", pal = pal2, values = ACmap$perc_AllFamUnder35kE, 
@@ -682,6 +683,7 @@ leaflet() %>%
                 weight = 1, fillOpacity = 0.8, bringToFront = T
               ),
               popup = paste0("Percent of families: ", round(BCmap$perc_AllFamUnder35kE,1), "%", "<br>",
+                             "Number of families: ", BCmap$AllFamUnder35kE, "<br>",
                              "Census Tract: ", BCmap$NAME.x, "<br>",
                              "Area Name: ", BCmap$tractname)) %>% 
   addLegend("bottomright", pal = pal2, values = BCmap$perc_AllFamUnder35kE, 
@@ -851,6 +853,7 @@ leaflet() %>%
                 weight = 1, fillOpacity = 0.8, bringToFront = T
               ),
               popup = paste0("Percent of families: ", round(CCmap$perc_AllFamUnder35kE,1), "%", "<br>",
+                             "Number of families: ", CCmap$AllFamUnder35kE, "<br>",
                              "Census Tract: ", CCmap$NAME.x, "<br>",
                              "Area Name: ", CCmap$tractname)) %>% 
   addLegend("bottomright", pal = pal2, values = CCmap$perc_AllFamUnder35kE, 
@@ -1022,6 +1025,7 @@ leaflet() %>%
                 weight = 1, fillOpacity = 0.8, bringToFront = T
               ),
               popup = paste0("Percent of families: ", round(FCmap$perc_AllFamUnder35kE,1), "%", "<br>",
+                             "Number of families: ", FCmap$AllFamUnder35kE, "<br>",
                              "Census Tract: ", FCmap$NAME.x, "<br>",
                              "Area Name: ", FCmap$tractname)) %>% 
   addLegend("bottomright", pal = pal2, values = FCmap$perc_AllFamUnder35kE, 
@@ -1188,6 +1192,7 @@ leaflet() %>%
                 weight = 1, fillOpacity = 0.8, bringToFront = T
               ),
               popup = paste0("Percent of families: ", round(GCmap$perc_AllFamUnder35kE,1), "%", "<br>",
+                             "Number of families: ", GCmap$AllFamUnder35kE, "<br>",
                              "Census Tract: ", GCmap$NAME.x, "<br>",
                              "Area Name: ", GCmap$tractname)) %>% 
   addLegend("bottomright", pal = pal2, values = GCmap$perc_AllFamUnder35kE, 
@@ -1356,6 +1361,7 @@ leaflet() %>%
                 weight = 1, fillOpacity = 0.8, bringToFront = T
               ),
               popup = paste0("Percent of families: ", round(LCmap$perc_AllFamUnder35kE,1), "%", "<br>",
+                             "Number of families: ", LCmap$AllFamUnder35kE, "<br>",
                              "Census Tract: ", LCmap$NAME.x, "<br>",
                              "Area Name: ", LCmap$tractname)) %>% 
   addLegend("bottomright", pal = pal2, values = LCmap$perc_AllFamUnder35kE, 
@@ -1522,6 +1528,7 @@ leaflet() %>%
                 weight = 1, fillOpacity = 0.8, bringToFront = T
               ),
               popup = paste0("Percent of families: ", round(NCmap$perc_AllFamUnder35kE,1), "%", "<br>",
+                             "Number of families: ", NCmap$AllFamUnder35kE, "<br>",
                              "Census Tract: ", NCmap$NAME.x, "<br>",
                              "Area Name: ", NCmap$tractname)) %>% 
   addLegend("bottomright", pal = pal2, values = NCmap$perc_AllFamUnder35kE, 
