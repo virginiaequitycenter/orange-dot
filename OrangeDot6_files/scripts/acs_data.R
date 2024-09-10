@@ -1,8 +1,12 @@
 # ACS Data for Orange Dot Report 6.0
 
 # Load packages ----
+library(here)
 library(tidyverse)
 library(tidycensus)
+
+# Set WD
+setwd(here("OrangeDot6_files"))
 
 # Creating basic objects ----
 

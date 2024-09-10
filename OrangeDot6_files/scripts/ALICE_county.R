@@ -2,10 +2,14 @@
 # Source: https://www.unitedforalice.org/state-overview/Virginia
 
 # Load packages ----
+library(here)
 library(tidyverse)
 library(tidycensus)
 library(readxl)
 library(janitor)
+
+# Set WD
+setwd(here("OrangeDot6_files"))
 
 # Localities ----
 county_codes <- c("003", "540", "065", "079", "109", "125", "029")
