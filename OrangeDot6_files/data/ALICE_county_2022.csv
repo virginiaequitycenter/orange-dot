@@ -1,0 +1,8 @@
+state,year,GEOID,locality,county,state_abbr,households,poverty_households,alice_households,above_alice_households,alice_threshold_hh_under_65,alice_threshold_hh_65_years_and_over,source_american_community_survey
+Virginia,2022,51003,"Albemarle County, Virginia",Albemarle,VA,45178,4143,13647,27388,77747.9957595811,65304,1-Year
+Virginia,2022,51029,"Buckingham County, Virginia",Buckingham,VA,5898,879,2275,2744,71666.45764955,44957.6603773585,5-Year
+Virginia,2022,51065,"Fluvanna County, Virginia",Fluvanna,VA,10195,645,3289,6261,77467.3351101136,60924,5-Year
+Virginia,2022,51079,"Greene County, Virginia",Greene,VA,7662,764,2806,4092,82244.1219512195,66864,5-Year
+Virginia,2022,51109,"Louisa County, Virginia",Louisa,VA,14642,1663,3990,8989,62855.1227122712,52080,5-Year
+Virginia,2022,51125,"Nelson County, Virginia",Nelson,VA,6132,1005,1881,3246,64331.6981132075,55368,5-Year
+Virginia,2022,51540,"Charlottesville city, Virginia",Charlottesville city,VA,19511,4147,5829,9535,70284.819227819,66096,5-Year
