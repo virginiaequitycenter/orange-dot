@@ -1,0 +1,8 @@
+family_type,adult_s,infant_s,preshooler_s,schoolager_s,teenager_s,state,year,all_families_table_number,county,housing_costs,child_care_costs,food_costs,transportation_costs,health_care_costs,miscellaneous_costs,taxes,earned_income_tax_credit,child_care_tax_credit,child_tax_credit,hourly_self_sufficiency_wage,monthly_self_sufficiency_wage,annual_self_sufficiency_wage,emergency_savings
+a1i0p1s1t0,1,0,1,1,0,VA,2021,2,Albemarle County,1273.9,1570.6,667.25,285.91,700.1,449.78,1195.57,0,-100,-333.33,32.44,5709.78,68517.31,180.38
+a1i0p1s1t0,1,0,1,1,0,VA,2021,17,Buckingham County,743,831.25,645.73,287.91,701.58,320.95,649.31,-65.77,-100,-333.33,20.91,3680.6,44167.26,116.23
+a1i0p1s1t0,1,0,1,1,0,VA,2021,24,Charlottesville city,1292.42,1570.6,874.66,20,700.1,445.78,1187.24,0,-100,-333.33,32.14,5657.47,67889.63,179.08
+a1i0p1s1t0,1,0,1,1,0,VA,2021,43,Fluvanna County,1347.33,1096.98,704.43,287.91,700.1,413.68,1058.87,0,-100,-333.33,29.41,5175.97,62111.59,144.65
+a1i0p1s1t0,1,0,1,1,0,VA,2021,53,Greene County,1161.86,1096.98,671.16,285.91,700.1,391.6,973.41,0,-100,-333.33,27.54,4847.7,58172.36,137.54
+a1i0p1s1t0,1,0,1,1,0,VA,2021,72,Louisa County,911,1096.98,632.03,287.91,645.15,357.31,841.06,0,-100,-333.33,24.65,4338.1,52057.23,126.5
+a1i0p1s1t0,1,0,1,1,0,VA,2021,83,Nelson County,1119.27,1114.42,633.98,283.91,700.1,385.17,947.59,0,-100,-333.33,27,4751.11,57013.34,135.45
