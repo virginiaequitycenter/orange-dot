@@ -89,3 +89,4 @@ med_faminc_tract <- med_faminc_tract %>%
 # Write CSVs
 write_csv(med_faminc_county, "data/med_faminc_county_2022.csv")
 write_csv(med_faminc_tract, "data/med_faminc_tract_2022.csv")
+
