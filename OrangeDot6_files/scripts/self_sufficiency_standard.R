@@ -54,12 +54,13 @@ mean_ssw <- mean(self_suff_mean$annual_self_sufficiency_wage_mean)
 # Join tables
 self_suff_county <- self_suff_a1p1s1 %>% 
   left_join(self_suff_mean, by = join_by(state, year, county)) %>% 
-  select(state, year, county, housing_costs_a1p1s1, housing_costs_mean, child_care_costs_a1p1s1, child_care_costs_mean,
+  select(state, year, county, annual_self_sufficiency_wage_a1p1s1, annual_self_sufficiency_wage_mean,
+         housing_costs_a1p1s1, housing_costs_mean, child_care_costs_a1p1s1, child_care_costs_mean,
          food_costs_a1p1s1, food_costs_mean, transportation_costs_a1p1s1, transportation_costs_mean,
          health_care_costs_a1p1s1, health_care_costs_mean, miscellaneous_costs_a1p1s1, miscellaneous_costs_mean,
          taxes_a1p1s1, taxes_mean, hourly_self_sufficiency_wage_a1p1s1, hourly_self_sufficiency_wage_mean,
-         monthly_self_sufficiency_wage_a1p1s1, monthly_self_sufficiency_wage_mean, 
-         annual_self_sufficiency_wage_a1p1s1, annual_self_sufficiency_wage_mean)
+         monthly_self_sufficiency_wage_a1p1s1, monthly_self_sufficiency_wage_mean 
+         )
 
 
 
