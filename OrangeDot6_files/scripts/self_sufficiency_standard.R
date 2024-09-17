@@ -32,19 +32,19 @@ self_suff_mean <- self_suff_byfamily %>%
   mutate(total_child = rowSums(across(infant_s:teenager_s), na.rm =TRUE)) %>% 
   filter(adult_s <= 2 & total_child <= 2) %>%
   group_by(county, state, year) %>% 
-  summarise(housing_costs = mean(housing_costs),
-            child_care_costs = mean(child_care_costs),
-            food_costs = mean(food_costs),
-            transportation_costs = mean(transportation_costs),
-            health_care_costs = mean(health_care_costs),
-            miscellaneous_costs = mean(miscellaneous_costs),
-            taxes = mean(taxes),
-            earned_income_tax_credit = mean(earned_income_tax_credit),
-            child_tax_credit = mean(child_tax_credit),
-            hourly_self_sufficiency_wage = mean(hourly_self_sufficiency_wage),
-            monthly_self_sufficiency_wage = mean(monthly_self_sufficiency_wage),
-            annual_self_sufficiency_wage = mean(annual_self_sufficiency_wage),
-            emergency_savings = mean(emergency_savings)) %>% 
+  summarise(housing_costs = round(mean(housing_costs), 2),
+            child_care_costs = round(mean(child_care_costs), 2),
+            food_costs = round(mean(food_costs), 2),
+            transportation_costs = round(mean(transportation_costs), 2),
+            health_care_costs = round(mean(health_care_costs), 2),
+            miscellaneous_costs = round(mean(miscellaneous_costs), 2),
+            taxes = round(mean(taxes), 2),
+            earned_income_tax_credit = round(mean(earned_income_tax_credit), 2),
+            child_tax_credit = round(mean(child_tax_credit), 2),
+            hourly_self_sufficiency_wage = round(mean(hourly_self_sufficiency_wage), 2),
+            monthly_self_sufficiency_wage = round(mean(monthly_self_sufficiency_wage), 2),
+            annual_self_sufficiency_wage = round(mean(annual_self_sufficiency_wage), 2),
+            emergency_savings = round(mean(emergency_savings),2)) %>% 
   rename_with(~paste0(. , "_mean"), 4:16)
   
 
