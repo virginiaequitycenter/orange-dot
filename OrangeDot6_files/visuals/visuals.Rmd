@@ -102,9 +102,9 @@ ssw_tract <- ssw_tract %>%
   st_as_sf()
 
 # Education palette ----
-# pal_inc <- carto_pal(7, "Emrld")
-# "#D3F2A3" "#97E196" "#6CC08B" "#4C9B82" "#217A79" "#105965" "#074050"
-pal_inc <- c("#EE6400","#F37903","#F78C05","#FCA108","#E7AD1B","#ABB046","#6FB272","#33B59D","#2DB0AC","#4CA7A9")
+pal_inc <- carto_pal(7, "Geyser")
+# "#008080" "#70A494" "#B4C8A8" "#F6EDBD" "#EDBB8A" "#DE8A5A" "#CA562C"
+# pal_inc <- c("#EE6400","#F37903","#F78C05","#FCA108","#E7AD1B","#ABB046","#6FB272","#33B59D","#2DB0AC","#4CA7A9")
 
 # pal_inc <- colorBin(pal_vector, 
 #                 domain = med_faminc_tract$estimate)
@@ -120,7 +120,7 @@ alb_inc_map <- med_faminc_tract %>%
   annotation_map_tile(zoomin = 1, progress = "none", cachedir = "../data/tempdata/") +
   geom_sf(aes(fill = estimate), color = "white") +
   geom_sf_text(aes(label = text), size = 2.5, color = "black") +
-  scale_fill_stepsn(colors = pal_inc,
+  scale_fill_stepsn(colors = rev(pal_inc),
                     labels = scales::label_currency(scale = 1),
                     n.breaks = 6,
                     guide = guide_colourbar(title = "Median Family Income",
@@ -148,7 +148,7 @@ alb_ssw_map <- ssw_tract %>%
   annotation_map_tile(zoomin = 1, progress = "none", cachedir = "../data/tempdata/") +
   geom_sf(aes(fill = percent), color = "white") +
   geom_sf_text(aes(label = text), size = 2.5, color = "black") +
-  scale_fill_stepsn(colors = rev(pal_inc),
+  scale_fill_stepsn(colors = pal_inc,
                     labels = scales::label_percent(scale = 1),
                     n.breaks = 6,
                     guide = guide_colourbar(title = "Percent Below SSS",
@@ -179,7 +179,7 @@ buc_inc_map <- med_faminc_tract %>%
   annotation_map_tile(zoomin = 1, progress = "none", cachedir = "../data/tempdata/") +
   geom_sf(aes(fill = estimate), color = "white") +
   geom_sf_text(aes(label = text), size = 2.5, color = "black") +
-  scale_fill_stepsn(colors = pal_inc,
+  scale_fill_stepsn(colors = rev(pal_inc),
                     labels = scales::label_currency(scale = 1),
                     n.breaks = 6,
                     guide = guide_colourbar(title = "Median Family Income",
@@ -207,7 +207,7 @@ buc_ssw_map <- ssw_tract %>%
   annotation_map_tile(zoomin = 1, progress = "none", cachedir = "../data/tempdata/") +
   geom_sf(aes(fill = percent), color = "white") +
   geom_sf_text(aes(label = text), size = 2.5, color = "black") +
-  scale_fill_stepsn(colors = rev(pal_inc),
+  scale_fill_stepsn(colors = pal_inc,
                     labels = scales::label_percent(scale = 1),
                     n.breaks = 6,
                     guide = guide_colourbar(title = "Percent Below SSS",
@@ -239,7 +239,7 @@ cville_inc_map <- med_faminc_tract %>%
   annotation_map_tile(zoomin = 1, progress = "none", cachedir = "../data/tempdata/") +
   geom_sf(aes(fill = estimate), color = "white") +
   geom_sf_text(aes(label = text), size = 2.5, color = "black") +
-  scale_fill_stepsn(colors = pal_inc,
+  scale_fill_stepsn(colors = rev(pal_inc),
                     labels = scales::label_currency(scale = 1),
                     n.breaks = 6,
                     guide = guide_colourbar(title = "Median Family Income",
@@ -267,7 +267,7 @@ cville_ssw_map <- ssw_tract %>%
   annotation_map_tile(zoomin = 1, progress = "none", cachedir = "../data/tempdata/") +
   geom_sf(aes(fill = percent), color = "white") +
   geom_sf_text(aes(label = text), size = 2.5, color = "black") +
-  scale_fill_stepsn(colors = rev(pal_inc),
+  scale_fill_stepsn(colors = pal_inc,
                     labels = scales::label_percent(scale = 1),
                     n.breaks = 6,
                     guide = guide_colourbar(title = "Percent Below SSS",
@@ -298,7 +298,7 @@ fluv_inc_map <- med_faminc_tract %>%
   annotation_map_tile(zoomin = 1, progress = "none", cachedir = "../data/tempdata/") +
   geom_sf(aes(fill = estimate), color = "white") +
   geom_sf_text(aes(label = text), size = 2.5, color = "black") +
-  scale_fill_stepsn(colors = pal_inc,
+  scale_fill_stepsn(colors = rev(pal_inc),
                     labels = scales::label_currency(scale = 1),
                     n.breaks = 6,
                     guide = guide_colourbar(title = "Median Family Income",
@@ -326,7 +326,7 @@ fluv_ssw_map <- ssw_tract %>%
   annotation_map_tile(zoomin = 1, progress = "none", cachedir = "../data/tempdata/") +
   geom_sf(aes(fill = percent), color = "white") +
   geom_sf_text(aes(label = text), size = 2.5, color = "black") +
-  scale_fill_stepsn(colors = rev(pal_inc),
+  scale_fill_stepsn(colors = pal_inc,
                     labels = scales::label_percent(scale = 1),
                     n.breaks = 6,
                     guide = guide_colourbar(title = "Percent Below SSS",
@@ -357,7 +357,7 @@ greene_inc_map <- med_faminc_tract %>%
   annotation_map_tile(zoomin = 1, progress = "none", cachedir = "../data/tempdata/") +
   geom_sf(aes(fill = estimate), color = "white") +
   geom_sf_text(aes(label = text), size = 2.5, color = "black") +
-  scale_fill_stepsn(colors = pal_inc,
+  scale_fill_stepsn(colors = rev(pal_inc),
                     labels = scales::label_currency(scale = 1),
                     n.breaks = 6,
                     guide = guide_colourbar(title = "Median Family Income",
@@ -385,7 +385,7 @@ greene_ssw_map <- ssw_tract %>%
   annotation_map_tile(zoomin = 1, progress = "none", cachedir = "../data/tempdata/") +
   geom_sf(aes(fill = percent), color = "white") +
   geom_sf_text(aes(label = text), size = 2.5, color = "black") +
-  scale_fill_stepsn(colors = rev(pal_inc),
+  scale_fill_stepsn(colors = pal_inc,
                     labels = scales::label_percent(scale = 1),
                     n.breaks = 6,
                     guide = guide_colourbar(title = "Percent Below SSS",
@@ -416,7 +416,7 @@ louisa_inc_map <- med_faminc_tract %>%
   annotation_map_tile(zoomin = 1, progress = "none", cachedir = "../data/tempdata/") +
   geom_sf(aes(fill = estimate), color = "white") +
   geom_sf_text(aes(label = text), size = 2.5, color = "black") +
-  scale_fill_stepsn(colors = pal_inc,
+  scale_fill_stepsn(colors = rev(pal_inc),
                     labels = scales::label_currency(scale = 1),
                     n.breaks = 6,
                     guide = guide_colourbar(title = "Median Family Income",
@@ -444,7 +444,7 @@ louisa_ssw_map <- ssw_tract %>%
   annotation_map_tile(zoomin = 1, progress = "none", cachedir = "../data/tempdata/") +
   geom_sf(aes(fill = percent), color = "white") +
   geom_sf_text(aes(label = text), size = 2.5, color = "black") +
-  scale_fill_stepsn(colors = rev(pal_inc),
+  scale_fill_stepsn(colors = pal_inc,
                     labels = scales::label_percent(scale = 1),
                     n.breaks = 6,
                     guide = guide_colourbar(title = "Percent Below SSS",
@@ -475,7 +475,7 @@ nels_inc_map <- med_faminc_tract %>%
   annotation_map_tile(zoomin = 1, progress = "none", cachedir = "../data/tempdata/") +
   geom_sf(aes(fill = estimate), color = "white") +
   geom_sf_text(aes(label = text), size = 2.5, color = "black") +
-  scale_fill_stepsn(colors = pal_inc,
+  scale_fill_stepsn(colors = rev(pal_inc),
                     labels = scales::label_currency(scale = 1),
                     n.breaks = 6,
                     guide = guide_colourbar(title = "Median Family Income",
@@ -503,7 +503,7 @@ nels_ssw_map <- ssw_tract %>%
   annotation_map_tile(zoomin = 1, progress = "none", cachedir = "../data/tempdata/") +
   geom_sf(aes(fill = percent), color = "white") +
   geom_sf_text(aes(label = text), size = 2.5, color = "black") +
-  scale_fill_stepsn(colors = rev(pal_inc),
+  scale_fill_stepsn(colors = pal_inc,
                     labels = scales::label_percent(scale = 1),
                     n.breaks = 6,
                     guide = guide_colourbar(title = "Percent Below SSS",
