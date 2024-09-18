@@ -1,0 +1,15 @@
+GEOID,locality,year,group,self_suff_wage,ssw_group,estimate,moe,total_families,percent
+51003,"Albemarle County, Virginia",2022,All Families,"~$60,000",above,22321,1035.2420006935577,27331,81.67
+51003,"Albemarle County, Virginia",2022,All Families,"~$60,000",below,5010,550.1727001587774,27331,18.33
+51065,"Fluvanna County, Virginia",2022,All Families,"~$60,000",above,5853,570.7626476916653,7432,78.75
+51065,"Fluvanna County, Virginia",2022,All Families,"~$60,000",below,1579,304.80485560436864,7432,21.25
+51079,"Greene County, Virginia",2022,All Families,"~$60,000",above,4441,529.3222081114678,5753,77.19
+51079,"Greene County, Virginia",2022,All Families,"~$60,000",below,1312,264.8905434325657,5753,22.81
+51125,"Nelson County, Virginia",2022,All Families,"~$60,000",above,2637,358.69903819218695,3915,67.36
+51125,"Nelson County, Virginia",2022,All Families,"~$60,000",below,1278,268.100727339558,3915,32.64
+51540,"Charlottesville city, Virginia",2022,All Families,"~$60,000",above,6432,550.4879653543754,8805,73.05
+51540,"Charlottesville city, Virginia",2022,All Families,"~$60,000",below,2373,385.3712495763014,8805,26.95
+51109,"Louisa County, Virginia",2022,All Families,"~$50,000",above,8144,647.4859071825425,10554,77.17
+51109,"Louisa County, Virginia",2022,All Families,"~$50,000",below,2410,412.3905915512622,10554,22.83
+51029,"Buckingham County, Virginia",2022,All Families,"~$45,000",above,2947,346.5486978766476,3975,74.14
+51029,"Buckingham County, Virginia",2022,All Families,"~$45,000",below,1028,207.8725571113224,3975,25.86

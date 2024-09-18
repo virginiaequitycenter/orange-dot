@@ -1,0 +1,57 @@
+GEOID,locality,year,group,self_suff_wage,ssw_group,estimate,moe,total_families,percent
+51003,"Albemarle County, Virginia",2022,All Families,"~$60,000",above,22321,1035.2420006935577,27331,81.67
+51003,"Albemarle County, Virginia",2022,All Families,"~$60,000",below,5010,550.1727001587774,27331,18.33
+51065,"Fluvanna County, Virginia",2022,All Families,"~$60,000",above,5853,570.7626476916653,7432,78.75
+51065,"Fluvanna County, Virginia",2022,All Families,"~$60,000",below,1579,304.80485560436864,7432,21.25
+51079,"Greene County, Virginia",2022,All Families,"~$60,000",above,4441,529.3222081114678,5753,77.19
+51079,"Greene County, Virginia",2022,All Families,"~$60,000",below,1312,264.8905434325657,5753,22.81
+51125,"Nelson County, Virginia",2022,All Families,"~$60,000",above,2637,358.69903819218695,3915,67.36
+51125,"Nelson County, Virginia",2022,All Families,"~$60,000",below,1278,268.100727339558,3915,32.64
+51540,"Charlottesville city, Virginia",2022,All Families,"~$60,000",above,6432,550.4879653543754,8805,73.05
+51540,"Charlottesville city, Virginia",2022,All Families,"~$60,000",below,2373,385.3712495763014,8805,26.95
+51109,"Louisa County, Virginia",2022,All Families,"~$50,000",above,8144,647.4859071825425,10554,77.17
+51109,"Louisa County, Virginia",2022,All Families,"~$50,000",below,2410,412.3905915512622,10554,22.83
+51029,"Buckingham County, Virginia",2022,All Families,"~$45,000",above,2947,346.5486978766476,3975,74.14
+51029,"Buckingham County, Virginia",2022,All Families,"~$45,000",below,1028,207.8725571113224,3975,25.86
+51003,"Albemarle County, Virginia",2022,Black,"~$60,000",above,1126,249.55961211702507,2075,54.27
+51003,"Albemarle County, Virginia",2022,Black,"~$60,000",below,949,250.55737865806307,2075,45.73
+51003,"Albemarle County, Virginia",2022,Hispanic,"~$60,000",above,1061,258.20728107472104,1509,70.31
+51003,"Albemarle County, Virginia",2022,Hispanic,"~$60,000",below,448,182.84419597023034,1509,29.69
+51003,"Albemarle County, Virginia",2022,"White, Not Hispanic","~$60,000",above,18660,932.8499343409957,21943,85.04
+51003,"Albemarle County, Virginia",2022,"White, Not Hispanic","~$60,000",below,3283,408.6624523980641,21943,14.96
+51065,"Fluvanna County, Virginia",2022,Black,"~$60,000",above,581,225.77865266672134,844,68.84
+51065,"Fluvanna County, Virginia",2022,Black,"~$60,000",below,263,126.65701717630967,844,31.16
+51065,"Fluvanna County, Virginia",2022,Hispanic,"~$60,000",above,75,83.21658488546619,175,42.86
+51065,"Fluvanna County, Virginia",2022,Hispanic,"~$60,000",below,100,119.78731151503484,175,57.14
+51065,"Fluvanna County, Virginia",2022,"White, Not Hispanic","~$60,000",above,4992,499.3936323182345,6165,80.97
+51065,"Fluvanna County, Virginia",2022,"White, Not Hispanic","~$60,000",below,1173,270.20362691866296,6165,19.03
+51079,"Greene County, Virginia",2022,Black,"~$60,000",above,159,101.32620588969075,438,36.3
+51079,"Greene County, Virginia",2022,Black,"~$60,000",below,279,139.3341307792172,438,63.7
+51079,"Greene County, Virginia",2022,Hispanic,"~$60,000",above,164,102.00980345045274,188,87.23
+51079,"Greene County, Virginia",2022,Hispanic,"~$60,000",below,24,70.32069396699666,188,12.77
+51079,"Greene County, Virginia",2022,"White, Not Hispanic","~$60,000",above,3983,496.58433322045107,4890,81.45
+51079,"Greene County, Virginia",2022,"White, Not Hispanic","~$60,000",below,907,220.86873930006482,4890,18.55
+51125,"Nelson County, Virginia",2022,Black,"~$60,000",above,261,138.4160395329963,390,66.92
+51125,"Nelson County, Virginia",2022,Black,"~$60,000",below,129,86.77557259966655,390,33.08
+51125,"Nelson County, Virginia",2022,Hispanic,"~$60,000",above,90,84.02380615040002,130,69.23
+51125,"Nelson County, Virginia",2022,Hispanic,"~$60,000",below,40,76.27581530209953,130,30.77
+51125,"Nelson County, Virginia",2022,"White, Not Hispanic","~$60,000",above,2271,327.33316361163287,3340,67.99
+51125,"Nelson County, Virginia",2022,"White, Not Hispanic","~$60,000",below,1069,245.9288514997783,3340,32.01
+51540,"Charlottesville city, Virginia",2022,Black,"~$60,000",above,598,193.05957629705915,1563,38.26
+51540,"Charlottesville city, Virginia",2022,Black,"~$60,000",below,965,250.3757176724612,1563,61.74
+51540,"Charlottesville city, Virginia",2022,Hispanic,"~$60,000",above,198,102.02940752547768,500,39.6
+51540,"Charlottesville city, Virginia",2022,Hispanic,"~$60,000",below,302,160.52102666006095,500,60.4
+51540,"Charlottesville city, Virginia",2022,"White, Not Hispanic","~$60,000",above,5194,496.7856680702454,6132,84.7
+51540,"Charlottesville city, Virginia",2022,"White, Not Hispanic","~$60,000",below,938,231.54913085563504,6132,15.3
+51109,"Louisa County, Virginia",2022,Black,"~$50,000",above,706,214.40615662802222,1310,53.89
+51109,"Louisa County, Virginia",2022,Black,"~$50,000",below,604,204.2278139725341,1310,46.11
+51109,"Louisa County, Virginia",2022,Hispanic,"~$50,000",above,119,83.77947242612596,153,77.78
+51109,"Louisa County, Virginia",2022,Hispanic,"~$50,000",below,34,77.70456872024965,153,22.22
+51109,"Louisa County, Virginia",2022,"White, Not Hispanic","~$50,000",above,7059,597.7892605258144,8762,80.56
+51109,"Louisa County, Virginia",2022,"White, Not Hispanic","~$50,000",below,1703,336.753619134227,8762,19.44
+51029,"Buckingham County, Virginia",2022,Black,"~$45,000",above,772,181.50482087261483,1258,61.37
+51029,"Buckingham County, Virginia",2022,Black,"~$45,000",below,486,159.16343801262903,1258,38.63
+51029,"Buckingham County, Virginia",2022,Hispanic,"~$45,000",above,32,71.49825172687791,49,65.31
+51029,"Buckingham County, Virginia",2022,Hispanic,"~$45,000",below,17,53.422841556772326,49,34.69
+51029,"Buckingham County, Virginia",2022,"White, Not Hispanic","~$45,000",above,2086,283.5806763515455,2573,81.07
+51029,"Buckingham County, Virginia",2022,"White, Not Hispanic","~$45,000",below,487,113.96929411029973,2573,18.93

@@ -1,0 +1,57 @@
+GEOID,locality,label,group,estimate,moe,total_families,percent,year
+51003,"Albemarle County, Virginia",Income below poverty level,All Families,995,192,27331,3.64,2022
+51003,"Albemarle County, Virginia",Income in the past 12 months at or above poverty level,All Families,26336,785,27331,96.36,2022
+51029,"Buckingham County, Virginia",Income below poverty level,All Families,426,126,3975,10.72,2022
+51029,"Buckingham County, Virginia",Income in the past 12 months at or above poverty level,All Families,3549,269,3975,89.28,2022
+51065,"Fluvanna County, Virginia",Income below poverty level,All Families,309,139,7432,4.16,2022
+51065,"Fluvanna County, Virginia",Income in the past 12 months at or above poverty level,All Families,7123,353,7432,95.84,2022
+51079,"Greene County, Virginia",Income below poverty level,All Families,506,176,5753,8.8,2022
+51079,"Greene County, Virginia",Income in the past 12 months at or above poverty level,All Families,5247,310,5753,91.2,2022
+51109,"Louisa County, Virginia",Income below poverty level,All Families,742,216,10554,7.03,2022
+51109,"Louisa County, Virginia",Income in the past 12 months at or above poverty level,All Families,9812,471,10554,92.97,2022
+51125,"Nelson County, Virginia",Income below poverty level,All Families,358,160,3915,9.14,2022
+51125,"Nelson County, Virginia",Income in the past 12 months at or above poverty level,All Families,3557,304,3915,90.86,2022
+51540,"Charlottesville city, Virginia",Income below poverty level,All Families,868,238,8805,9.86,2022
+51540,"Charlottesville city, Virginia",Income in the past 12 months at or above poverty level,All Families,7937,511,8805,90.14,2022
+51003,"Albemarle County, Virginia",Income below poverty level,"White, Not Hispanic",603,163,21943,2.75,2022
+51003,"Albemarle County, Virginia",Income in the past 12 months at or above poverty level,"White, Not Hispanic",21340,632,21943,97.25,2022
+51029,"Buckingham County, Virginia",Income below poverty level,"White, Not Hispanic",92,42,2573,3.58,2022
+51029,"Buckingham County, Virginia",Income in the past 12 months at or above poverty level,"White, Not Hispanic",2481,196,2573,96.42,2022
+51065,"Fluvanna County, Virginia",Income below poverty level,"White, Not Hispanic",130,76,6165,2.11,2022
+51065,"Fluvanna County, Virginia",Income in the past 12 months at or above poverty level,"White, Not Hispanic",6035,305,6165,97.89,2022
+51079,"Greene County, Virginia",Income below poverty level,"White, Not Hispanic",234,134,4890,4.79,2022
+51079,"Greene County, Virginia",Income in the past 12 months at or above poverty level,"White, Not Hispanic",4656,273,4890,95.21,2022
+51109,"Louisa County, Virginia",Income below poverty level,"White, Not Hispanic",431,165,8762,4.92,2022
+51109,"Louisa County, Virginia",Income in the past 12 months at or above poverty level,"White, Not Hispanic",8331,359,8762,95.08,2022
+51125,"Nelson County, Virginia",Income below poverty level,"White, Not Hispanic",306,145,3340,9.16,2022
+51125,"Nelson County, Virginia",Income in the past 12 months at or above poverty level,"White, Not Hispanic",3034,275,3340,90.84,2022
+51540,"Charlottesville city, Virginia",Income below poverty level,"White, Not Hispanic",292,120,6132,4.76,2022
+51540,"Charlottesville city, Virginia",Income in the past 12 months at or above poverty level,"White, Not Hispanic",5840,389,6132,95.24,2022
+51003,"Albemarle County, Virginia",Income below poverty level,Black,248,113,2075,11.95,2022
+51003,"Albemarle County, Virginia",Income in the past 12 months at or above poverty level,Black,1827,271,2075,88.05,2022
+51029,"Buckingham County, Virginia",Income below poverty level,Black,287,114,1258,22.81,2022
+51029,"Buckingham County, Virginia",Income in the past 12 months at or above poverty level,Black,971,168,1258,77.19,2022
+51065,"Fluvanna County, Virginia",Income below poverty level,Black,102,67,844,12.09,2022
+51065,"Fluvanna County, Virginia",Income in the past 12 months at or above poverty level,Black,742,197,844,87.91,2022
+51079,"Greene County, Virginia",Income below poverty level,Black,229,137,438,52.28,2022
+51079,"Greene County, Virginia",Income in the past 12 months at or above poverty level,Black,209,102,438,47.72,2022
+51109,"Louisa County, Virginia",Income below poverty level,Black,263,106,1310,20.08,2022
+51109,"Louisa County, Virginia",Income in the past 12 months at or above poverty level,Black,1047,207,1310,79.92,2022
+51125,"Nelson County, Virginia",Income below poverty level,Black,12,20,390,3.08,2022
+51125,"Nelson County, Virginia",Income in the past 12 months at or above poverty level,Black,378,104,390,96.92,2022
+51540,"Charlottesville city, Virginia",Income below poverty level,Black,503,174,1563,32.18,2022
+51540,"Charlottesville city, Virginia",Income in the past 12 months at or above poverty level,Black,1060,205,1563,67.82,2022
+51003,"Albemarle County, Virginia",Income below poverty level,Hispanic,56,57,1509,3.71,2022
+51003,"Albemarle County, Virginia",Income in the past 12 months at or above poverty level,Hispanic,1453,199,1509,96.29,2022
+51029,"Buckingham County, Virginia",Income below poverty level,Hispanic,17,12,49,34.69,2022
+51029,"Buckingham County, Virginia",Income in the past 12 months at or above poverty level,Hispanic,32,45,49,65.31,2022
+51065,"Fluvanna County, Virginia",Income below poverty level,Hispanic,68,94,175,38.86,2022
+51065,"Fluvanna County, Virginia",Income in the past 12 months at or above poverty level,Hispanic,107,78,175,61.14,2022
+51079,"Greene County, Virginia",Income below poverty level,Hispanic,18,21,188,9.57,2022
+51079,"Greene County, Virginia",Income in the past 12 months at or above poverty level,Hispanic,170,60,188,90.43,2022
+51109,"Louisa County, Virginia",Income below poverty level,Hispanic,25,34,153,16.34,2022
+51109,"Louisa County, Virginia",Income in the past 12 months at or above poverty level,Hispanic,128,64,153,83.66,2022
+51125,"Nelson County, Virginia",Income below poverty level,Hispanic,0,21,130,0,2022
+51125,"Nelson County, Virginia",Income in the past 12 months at or above poverty level,Hispanic,130,58,130,100,2022
+51540,"Charlottesville city, Virginia",Income below poverty level,Hispanic,24,21,500,4.8,2022
+51540,"Charlottesville city, Virginia",Income in the past 12 months at or above poverty level,Hispanic,476,115,500,95.2,2022
