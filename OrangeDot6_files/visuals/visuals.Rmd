@@ -51,7 +51,6 @@ fam_pov_ssw_dat <- fam_pov_ssw %>%
 fam_pov_ssw_dat <- fam_pov_ssw_dat[order(fam_pov_ssw_dat$name),]
 
 fam_pov_ssw_dat %>% 
-  # filter(locality == "Albemarle County, Virginia") %>% 
   arrange(desc(name)) %>% 
   mutate(group = factor(group,
                        levels = c("Black", "Hispanic", "White, Not Hispanic", "All Families"),
@@ -67,10 +66,6 @@ fam_pov_ssw_dat %>%
   scale_y_continuous(labels = label_percent(scale = 1),
                      name = "") +
   guides(fill = guide_legend(reverse = TRUE)) +
-  # labs(color = "", 
-  #      title = "ALICE Households by Race/Ethnicity", 
-  #     subtitle = locality_name, 
-  #     caption = "Data Sources: ALICE Threshold, 2022; U.S. Census Bureau, American Community Survey, 2022") +
   facet_wrap(~locality, scales = "free") +
   theme_minimal() +
   theme(legend.title=element_blank(),
@@ -92,8 +87,12 @@ med_faminc_tract <- med_faminc_tract %>%
   left_join(tract_geo, by = "GEOID") %>% 
   st_as_sf()
 
+min_inc <- min(med_faminc_tract$estimate, na.rm = TRUE)
+max_inc <- max(med_faminc_tract$estimate, na.rm = TRUE)
+
 # Below Self Sufficiency Standard, by tract ----
 ssw_tract <- read_csv("../data/faminc_ssw_tract_2022.csv") %>%
+  filter(ssw_group == "below") %>%
   mutate(GEOID = as.character(GEOID),
          percent = round(percent,0))
 
@@ -101,36 +100,38 @@ ssw_tract <- ssw_tract %>%
   left_join(tract_geo, by = "GEOID") %>% 
   st_as_sf()
 
-# Education palette ----
+min_ssw <- min(ssw_tract$percent, na.rm = TRUE)
+max_ssw <- max(ssw_tract$percent, na.rm = TRUE)
+
+# Map palettes ----
 pal_inc <- carto_pal(7, "Geyser")
 # "#008080" "#70A494" "#B4C8A8" "#F6EDBD" "#EDBB8A" "#DE8A5A" "#CA562C"
 # pal_inc <- c("#EE6400","#F37903","#F78C05","#FCA108","#E7AD1B","#ABB046","#6FB272","#33B59D","#2DB0AC","#4CA7A9")
 
-# pal_inc <- colorBin(pal_vector, 
-#                 domain = med_faminc_tract$estimate)
-# pal_ssw <- colorBin(pal_vector, 
-#                 domain = ssw_tract$percent)
+pal_ssw <- carto_pal(7, "RedOr")
+# "#F6D2A9" "#F5B78E" "#F19C7C" "#EA8171" "#DD686C" "#CA5268" "#B13F64"
+# pal_ssw <- c("#F6D2A9", "#F5B78E", "#F19C7C", "#EA8171", "#DD686C")
 
 
-# Geospatial visualization: Albemarle
+# Geospatial visualization: Albemarle ----
 alb_inc_map <- med_faminc_tract %>%
   filter(locality == "Albemarle County") %>%
-  mutate(text = paste0("$", prettyNum(estimate, big.mark=",", preserve.width="none"))) %>%
+  mutate(text = paste0("$", prettyNum((round(estimate,-3)/1000), big.mark=",", preserve.width="none"), "K")) %>%
   ggplot() +
   annotation_map_tile(zoomin = 1, progress = "none", cachedir = "../data/tempdata/") +
   geom_sf(aes(fill = estimate), color = "white") +
   geom_sf_text(aes(label = text), size = 2.5, color = "black") +
   scale_fill_stepsn(colors = rev(pal_inc),
                     labels = scales::label_currency(scale = 1),
-                    n.breaks = 6,
+                    n.breaks = 7,
+                    trans = "log",
+                    limits = c(min_inc, max_inc),
                     guide = guide_colourbar(title = "Median Family Income",
                                             title.position = "top",
                                             direction = "vertical",
-                                            # title.hjust = 0.5,
-                                            # nbin = 6,
-                                            theme = theme(legend.key.height  = unit(12, "lines"),
+                                            theme = theme(legend.key.height  = unit(10, "lines"),
                                                           legend.key.width = unit(0.5, "lines"),
-                                                          text = element_text(size = 10)) 
+                                                          text = element_text(size = 10))
                                             )
                     )+
   labs(title = "Median Family Income by Tract",
@@ -142,26 +143,26 @@ alb_inc_map <- med_faminc_tract %>%
 
 alb_ssw_map <- ssw_tract %>%
   filter(locality == "Albemarle County") %>%
-  filter(ssw_group == "below") %>%
   mutate(text = paste0(round(percent,0), "%")) %>%
   ggplot() +
   annotation_map_tile(zoomin = 1, progress = "none", cachedir = "../data/tempdata/") +
   geom_sf(aes(fill = percent), color = "white") +
   geom_sf_text(aes(label = text), size = 2.5, color = "black") +
-  scale_fill_stepsn(colors = pal_inc,
+  scale_fill_stepsn(colors = pal_ssw,
                     labels = scales::label_percent(scale = 1),
-                    n.breaks = 6,
+                    breaks = c(5,7,15,20,40,60),
+                    # nice.breaks = TRUE,
+                    trans = "log",
+                    limits = c(min_ssw, max_ssw),
                     guide = guide_colourbar(title = "Percent Below SSS",
                                             title.position = "top",
                                             direction = "vertical",
-                                            # title.hjust = 0.5,
-                                            # nbin = 6,
-                                            theme = theme(legend.key.height  = unit(12, "lines"),
+                                            theme = theme(legend.key.height  = unit(10, "lines"),
                                                           legend.key.width = unit(0.5, "lines"),
                                                           text = element_text(size = 10)) 
                                             )
                     )+
-  labs(title = "Families with Income below Self Sufficiency Standard by Census Tract",
+  labs(title = "Families with Income below Self Sufficiency Standard",
       subtitle = "Albemarle",
       caption = "") +
   theme_map()+
@@ -181,15 +182,15 @@ buc_inc_map <- med_faminc_tract %>%
   geom_sf_text(aes(label = text), size = 2.5, color = "black") +
   scale_fill_stepsn(colors = rev(pal_inc),
                     labels = scales::label_currency(scale = 1),
-                    n.breaks = 6,
+                    trans = "log",
+                    n.breaks = 7,
+                    limits = c(min_inc, max_inc),
                     guide = guide_colourbar(title = "Median Family Income",
                                             title.position = "top",
                                             direction = "vertical",
-                                            # title.hjust = 0.5,
-                                            # nbin = 6,
-                                            theme = theme(legend.key.height  = unit(12, "lines"),
+                                            theme = theme(legend.key.height  = unit(10, "lines"),
                                                           legend.key.width = unit(0.5, "lines"),
-                                                          text = element_text(size = 10)) 
+                                                          text = element_text(size = 10))
                                             )
                     )+
   labs(title = "Median Family Income by Tract",
@@ -207,20 +208,20 @@ buc_ssw_map <- ssw_tract %>%
   annotation_map_tile(zoomin = 1, progress = "none", cachedir = "../data/tempdata/") +
   geom_sf(aes(fill = percent), color = "white") +
   geom_sf_text(aes(label = text), size = 2.5, color = "black") +
-  scale_fill_stepsn(colors = pal_inc,
+  scale_fill_stepsn(colors = pal_ssw,
                     labels = scales::label_percent(scale = 1),
-                    n.breaks = 6,
+                    breaks = c(5,7,15,20,40,60),
+                    trans = "log",
+                    limits = c(min_ssw, max_ssw),
                     guide = guide_colourbar(title = "Percent Below SSS",
                                             title.position = "top",
                                             direction = "vertical",
-                                            # title.hjust = 0.5,
-                                            # nbin = 6,
-                                            theme = theme(legend.key.height  = unit(12, "lines"),
+                                            theme = theme(legend.key.height  = unit(10, "lines"),
                                                           legend.key.width = unit(0.5, "lines"),
                                                           text = element_text(size = 10)) 
                                             )
                     )+
-  labs(title = "Families with Income below Self Sufficiency Standard by Census Tract",
+  labs(title = "Families with Income below Self Sufficiency Standard",
       subtitle = "Buckingham County",
       caption = "") +
   theme_map()+
@@ -234,22 +235,24 @@ buc_inc_map + buc_ssw_map
 # Geospatial visualization: Charlottesville ----
 cville_inc_map <- med_faminc_tract %>%
   filter(locality == "Charlottesville city") %>%
-  mutate(text = paste0("$", prettyNum(estimate, big.mark=",", preserve.width="none"))) %>%
+  mutate(text = case_when(is.na(estimate) ~ "",
+                          .default = paste0("$", prettyNum(estimate, big.mark=",", preserve.width="none")))) %>%
   ggplot() +
   annotation_map_tile(zoomin = 1, progress = "none", cachedir = "../data/tempdata/") +
   geom_sf(aes(fill = estimate), color = "white") +
   geom_sf_text(aes(label = text), size = 2.5, color = "black") +
   scale_fill_stepsn(colors = rev(pal_inc),
                     labels = scales::label_currency(scale = 1),
-                    n.breaks = 6,
+                    trans = "log",
+                    n.breaks = 7,
+                    limits = c(min_inc, max_inc),
+                    na.value = "grey70",
                     guide = guide_colourbar(title = "Median Family Income",
                                             title.position = "top",
                                             direction = "vertical",
-                                            # title.hjust = 0.5,
-                                            # nbin = 6,
-                                            theme = theme(legend.key.height  = unit(12, "lines"),
+                                            theme = theme(legend.key.height  = unit(10, "lines"),
                                                           legend.key.width = unit(0.5, "lines"),
-                                                          text = element_text(size = 10)) 
+                                                          text = element_text(size = 10))
                                             )
                     )+
   labs(title = "Median Family Income by Tract",
@@ -267,20 +270,20 @@ cville_ssw_map <- ssw_tract %>%
   annotation_map_tile(zoomin = 1, progress = "none", cachedir = "../data/tempdata/") +
   geom_sf(aes(fill = percent), color = "white") +
   geom_sf_text(aes(label = text), size = 2.5, color = "black") +
-  scale_fill_stepsn(colors = pal_inc,
+  scale_fill_stepsn(colors = pal_ssw,
                     labels = scales::label_percent(scale = 1),
-                    n.breaks = 6,
+                    breaks = c(5,7,15,20,40,60),
+                    trans = "log",
+                    limits = c(min_ssw, max_ssw),
                     guide = guide_colourbar(title = "Percent Below SSS",
                                             title.position = "top",
                                             direction = "vertical",
-                                            # title.hjust = 0.5,
-                                            # nbin = 6,
-                                            theme = theme(legend.key.height  = unit(12, "lines"),
+                                            theme = theme(legend.key.height  = unit(10, "lines"),
                                                           legend.key.width = unit(0.5, "lines"),
                                                           text = element_text(size = 10)) 
                                             )
                     )+
-  labs(title = "Families with Income below Self Sufficiency Standard by Census Tract",
+  labs(title = "Families with Income below Self Sufficiency Standard",
       subtitle = "Charlottesville",
       caption = "") +
   theme_map()+
@@ -298,17 +301,16 @@ fluv_inc_map <- med_faminc_tract %>%
   annotation_map_tile(zoomin = 1, progress = "none", cachedir = "../data/tempdata/") +
   geom_sf(aes(fill = estimate), color = "white") +
   geom_sf_text(aes(label = text), size = 2.5, color = "black") +
-  scale_fill_stepsn(colors = rev(pal_inc),
-                    labels = scales::label_currency(scale = 1),
-                    n.breaks = 6,
+  scale_fill_stepsn(colors = rev(pal_inc),labels = scales::label_currency(scale = 1), 
+                    trans = "log",
+                    n.breaks = 7,
+                    limits = c(min_inc, max_inc),
                     guide = guide_colourbar(title = "Median Family Income",
                                             title.position = "top",
                                             direction = "vertical",
-                                            # title.hjust = 0.5,
-                                            # nbin = 6,
-                                            theme = theme(legend.key.height  = unit(12, "lines"),
+                                            theme = theme(legend.key.height  = unit(10, "lines"),
                                                           legend.key.width = unit(0.5, "lines"),
-                                                          text = element_text(size = 10)) 
+                                                          text = element_text(size = 10))
                                             )
                     )+
   labs(title = "Median Family Income by Tract",
@@ -326,20 +328,20 @@ fluv_ssw_map <- ssw_tract %>%
   annotation_map_tile(zoomin = 1, progress = "none", cachedir = "../data/tempdata/") +
   geom_sf(aes(fill = percent), color = "white") +
   geom_sf_text(aes(label = text), size = 2.5, color = "black") +
-  scale_fill_stepsn(colors = pal_inc,
+  scale_fill_stepsn(colors = pal_ssw,
                     labels = scales::label_percent(scale = 1),
-                    n.breaks = 6,
+                    breaks = c(5,7,15,20,40,60),
+                    trans = "log",
+                    limits = c(min_ssw, max_ssw),
                     guide = guide_colourbar(title = "Percent Below SSS",
                                             title.position = "top",
                                             direction = "vertical",
-                                            # title.hjust = 0.5,
-                                            # nbin = 6,
-                                            theme = theme(legend.key.height  = unit(12, "lines"),
+                                            theme = theme(legend.key.height  = unit(10, "lines"),
                                                           legend.key.width = unit(0.5, "lines"),
                                                           text = element_text(size = 10)) 
                                             )
                     )+
-  labs(title = "Families with Income below Self Sufficiency Standard by Census Tract",
+  labs(title = "Families with Income below Self Sufficiency Standard",
       subtitle = "Fluvanna County",
       caption = "") +
   theme_map()+
@@ -359,15 +361,15 @@ greene_inc_map <- med_faminc_tract %>%
   geom_sf_text(aes(label = text), size = 2.5, color = "black") +
   scale_fill_stepsn(colors = rev(pal_inc),
                     labels = scales::label_currency(scale = 1),
-                    n.breaks = 6,
+                    trans = "log",
+                    n.breaks = 7,
+                    limits = c(min_inc, max_inc),
                     guide = guide_colourbar(title = "Median Family Income",
                                             title.position = "top",
                                             direction = "vertical",
-                                            # title.hjust = 0.5,
-                                            # nbin = 6,
-                                            theme = theme(legend.key.height  = unit(12, "lines"),
+                                            theme = theme(legend.key.height  = unit(10, "lines"),
                                                           legend.key.width = unit(0.5, "lines"),
-                                                          text = element_text(size = 10)) 
+                                                          text = element_text(size = 10))
                                             )
                     )+
   labs(title = "Median Family Income by Tract",
@@ -385,20 +387,20 @@ greene_ssw_map <- ssw_tract %>%
   annotation_map_tile(zoomin = 1, progress = "none", cachedir = "../data/tempdata/") +
   geom_sf(aes(fill = percent), color = "white") +
   geom_sf_text(aes(label = text), size = 2.5, color = "black") +
-  scale_fill_stepsn(colors = pal_inc,
+  scale_fill_stepsn(colors = pal_ssw,
                     labels = scales::label_percent(scale = 1),
-                    n.breaks = 6,
+                    breaks = c(5,7,15,20,40,60),
+                    trans = "log",
+                    limits = c(min_ssw, max_ssw),
                     guide = guide_colourbar(title = "Percent Below SSS",
                                             title.position = "top",
                                             direction = "vertical",
-                                            # title.hjust = 0.5,
-                                            # nbin = 6,
-                                            theme = theme(legend.key.height  = unit(12, "lines"),
+                                            theme = theme(legend.key.height  = unit(10, "lines"),
                                                           legend.key.width = unit(0.5, "lines"),
                                                           text = element_text(size = 10)) 
                                             )
                     )+
-  labs(title = "Families with Income below Self Sufficiency Standard by Census Tract",
+  labs(title = "Families with Income below Self Sufficiency Standard",
       subtitle = "Greene County",
       caption = "") +
   theme_map()+
@@ -418,15 +420,15 @@ louisa_inc_map <- med_faminc_tract %>%
   geom_sf_text(aes(label = text), size = 2.5, color = "black") +
   scale_fill_stepsn(colors = rev(pal_inc),
                     labels = scales::label_currency(scale = 1),
-                    n.breaks = 6,
+                    trans = "log",
+                    n.breaks = 7,
+                    limits = c(min_inc, max_inc),
                     guide = guide_colourbar(title = "Median Family Income",
                                             title.position = "top",
                                             direction = "vertical",
-                                            # title.hjust = 0.5,
-                                            # nbin = 6,
-                                            theme = theme(legend.key.height  = unit(12, "lines"),
+                                            theme = theme(legend.key.height  = unit(10, "lines"),
                                                           legend.key.width = unit(0.5, "lines"),
-                                                          text = element_text(size = 10)) 
+                                                          text = element_text(size = 10))
                                             )
                     )+
   labs(title = "Median Family Income by Tract",
@@ -444,20 +446,20 @@ louisa_ssw_map <- ssw_tract %>%
   annotation_map_tile(zoomin = 1, progress = "none", cachedir = "../data/tempdata/") +
   geom_sf(aes(fill = percent), color = "white") +
   geom_sf_text(aes(label = text), size = 2.5, color = "black") +
-  scale_fill_stepsn(colors = pal_inc,
+  scale_fill_stepsn(colors = pal_ssw,
                     labels = scales::label_percent(scale = 1),
-                    n.breaks = 6,
+                    breaks = c(5,7,15,20,40,60),
+                    trans = "log",
+                    limits = c(min_ssw, max_ssw),
                     guide = guide_colourbar(title = "Percent Below SSS",
                                             title.position = "top",
                                             direction = "vertical",
-                                            # title.hjust = 0.5,
-                                            # nbin = 6,
-                                            theme = theme(legend.key.height  = unit(12, "lines"),
+                                            theme = theme(legend.key.height  = unit(10, "lines"),
                                                           legend.key.width = unit(0.5, "lines"),
                                                           text = element_text(size = 10)) 
                                             )
                     )+
-  labs(title = "Families with Income below Self Sufficiency Standard by Census Tract",
+  labs(title = "Families with Income below Self Sufficiency Standard",
       subtitle = "Louisa County",
       caption = "") +
   theme_map()+
@@ -477,15 +479,15 @@ nels_inc_map <- med_faminc_tract %>%
   geom_sf_text(aes(label = text), size = 2.5, color = "black") +
   scale_fill_stepsn(colors = rev(pal_inc),
                     labels = scales::label_currency(scale = 1),
-                    n.breaks = 6,
+                    trans = "log",
+                    n.breaks = 7,
+                    limits = c(min_inc, max_inc),
                     guide = guide_colourbar(title = "Median Family Income",
                                             title.position = "top",
                                             direction = "vertical",
-                                            # title.hjust = 0.5,
-                                            # nbin = 6,
-                                            theme = theme(legend.key.height  = unit(12, "lines"),
+                                            theme = theme(legend.key.height  = unit(10, "lines"),
                                                           legend.key.width = unit(0.5, "lines"),
-                                                          text = element_text(size = 10)) 
+                                                          text = element_text(size = 10))
                                             )
                     )+
   labs(title = "Median Family Income by Tract",
@@ -503,20 +505,20 @@ nels_ssw_map <- ssw_tract %>%
   annotation_map_tile(zoomin = 1, progress = "none", cachedir = "../data/tempdata/") +
   geom_sf(aes(fill = percent), color = "white") +
   geom_sf_text(aes(label = text), size = 2.5, color = "black") +
-  scale_fill_stepsn(colors = pal_inc,
+  scale_fill_stepsn(colors = pal_ssw,
                     labels = scales::label_percent(scale = 1),
-                    n.breaks = 6,
+                    breaks = c(5,7,15,20,40,60),
+                    trans = "log",
+                    limits = c(min_ssw, max_ssw),
                     guide = guide_colourbar(title = "Percent Below SSS",
                                             title.position = "top",
                                             direction = "vertical",
-                                            # title.hjust = 0.5,
-                                            # nbin = 6,
-                                            theme = theme(legend.key.height  = unit(12, "lines"),
+                                            theme = theme(legend.key.height  = unit(10, "lines"),
                                                           legend.key.width = unit(0.5, "lines"),
                                                           text = element_text(size = 10)) 
                                             )
                     )+
-  labs(title = "Families with Income below Self Sufficiency Standard by Census Tract",
+  labs(title = "Families with Income below Self Sufficiency Standard",
       subtitle = "Nelson County",
       caption = "") +
   theme_map()+
