@@ -1,0 +1,69 @@
+GEOID,locality,tract,label,estimate,moe,year,county,tractnames
+51003010100,Albemarle County,Census Tract 101,Median Family Income,106510,26942,2022,Albemarle,Free Union
+51003010201,Albemarle County,Census Tract 102.01,Median Family Income,122400,11013,2022,Albemarle,Charlottesville-Albemarle Airport
+51003010202,Albemarle County,Census Tract 102.02,Median Family Income,194118,39313,2022,Albemarle,Earlysville
+51003010301,Albemarle County,Census Tract 103.01,Median Family Income,127552,23355,2022,Albemarle,Berkmar Drive
+51003010302,Albemarle County,Census Tract 103.02,Median Family Income,175972,53637,2022,Albemarle,Polo Grounds Road
+51003010303,Albemarle County,Census Tract 103.03,Median Family Income,149412,25242,2022,Albemarle,Hollymead
+51003010401,Albemarle County,Census Tract 104.01,Median Family Income,135238,31368,2022,Albemarle,Stony Point-Keswick
+51003010402,Albemarle County,Census Tract 104.02,Median Family Income,136518,46345,2022,Albemarle,Village of Rivanna
+51003010501,Albemarle County,Census Tract 105.01,Median Family Income,149444,19803,2022,Albemarle,Darden-Key West
+51003010502,Albemarle County,Census Tract 105.02,Median Family Income,95536,43596,2022,Albemarle,Pantops
+51003010602,Albemarle County,Census Tract 106.02,Median Family Income,135875,11601,2022,Albemarle,Dunlora-Stone Henge
+51003010603,Albemarle County,Census Tract 106.03,Median Family Income,102361,48713,2022,Albemarle,Branchland
+51003010604,Albemarle County,Census Tract 106.04,Median Family Income,120991,18659,2022,Albemarle,Woodbrook-Carrsbrook
+51003010701,Albemarle County,Census Tract 107.01,Median Family Income,74038,37036,2022,Albemarle,Hydraulic
+51003010702,Albemarle County,Census Tract 107.02,Median Family Income,66921,23873,2022,Albemarle,Commonwealth-Townwood-Berkmar
+51003010801,Albemarle County,Census Tract 108.01,Median Family Income,96970,13742,2022,Albemarle,Barracks-Hessian Hills
+51003010802,Albemarle County,Census Tract 108.02,Median Family Income,95364,13125,2022,Albemarle,Albemarle High School
+51003010901,Albemarle County,Census Tract 109.01,Median Family Income,69538,15247,2022,Albemarle,Old Ivy-Darden School (UVA)
+51003010904,Albemarle County,Census Tract 109.04,Median Family Income,68259,16635,2022,Albemarle,Carr's Hill-McCormick Road (UVA)
+51003011000,Albemarle County,Census Tract 110,Median Family Income,216331,37442,2022,Albemarle,Ivy
+51003011101,Albemarle County,Census Tract 111.01,Median Family Income,105043,13070,2022,Albemarle,Crozet-Beaver Creek
+51003011102,Albemarle County,Census Tract 111.02,Median Family Income,147381,51357,2022,Albemarle,Western Ridge-Westhall
+51003011103,Albemarle County,Census Tract 111.03,Median Family Income,158819,15469,2022,Albemarle,Old Trail
+51003011201,Albemarle County,Census Tract 112.01,Median Family Income,126731,41625,2022,Albemarle,"Yancey Mills, Batesville"
+51003011202,Albemarle County,Census Tract 112.02,Median Family Income,176607,17636,2022,Albemarle,North Garden
+51003011301,Albemarle County,Census Tract 113.01,Median Family Income,109487,12489,2022,Albemarle,"Monticello, Carters Mountain"
+51003011302,Albemarle County,Census Tract 113.02,Median Family Income,60677,53828,2022,Albemarle,"Oak Hill, Southwood"
+51003011303,Albemarle County,Census Tract 113.03,Median Family Income,129792,20274,2022,Albemarle,Avon Street Ext.-Mill Creek
+51003011400,Albemarle County,Census Tract 114,Median Family Income,95352,7556,2022,Albemarle,Southern Albemarle-Scottsville
+51029930101,Buckingham County,Census Tract 9301.01,Median Family Income,66474,15091,2022,Buckingham,James River
+51029930102,Buckingham County,Census Tract 9301.02,Median Family Income,76222,9167,2022,Buckingham,New Canton
+51029930201,Buckingham County,Census Tract 9302.01,Median Family Income,76106,7952,2022,Buckingham,Dillwyn
+51029930202,Buckingham County,Census Tract 9302.02,Median Family Income,98650,15714,2022,Buckingham,Mount Rush
+51065020101,Fluvanna County,Census Tract 201.01,Median Family Income,109286,16262,2022,Fluvanna,Palmyra
+51065020103,Fluvanna County,Census Tract 201.03,Median Family Income,112369,11420,2022,Fluvanna,Lake Monticello
+51065020104,Fluvanna County,Census Tract 201.04,Median Family Income,104507,12231,2022,Fluvanna,Rivanna
+51065020200,Fluvanna County,Census Tract 202,Median Family Income,69013,10814,2022,Fluvanna,Columbia/Fork Union
+51065020300,Fluvanna County,Census Tract 203,Median Family Income,105655,6089,2022,Fluvanna,Cunningham
+51079030101,Greene County,Census Tract 301.01,Median Family Income,71902,8567,2022,Greene,Stanardsville
+51079030102,Greene County,Census Tract 301.02,Median Family Income,87591,10447,2022,Greene,Monroe
+51079030201,Greene County,Census Tract 302.01,Median Family Income,117703,8458,2022,Greene,Midway
+51079030202,Greene County,Census Tract 302.02,Median Family Income,80676,24883,2022,Greene,Ruckersville
+51109950101,Louisa County,Census Tract 9501.01,Median Family Income,126681,54218,2022,Louisa,Bumpus-Mountain Road District-Buckner
+51109950102,Louisa County,Census Tract 9501.02,Median Family Income,86172,19556,2022,Louisa,Cuckoo District
+51109950201,Louisa County,Census Tract 9502.01,Median Family Income,74161,10069,2022,Louisa,Town of Louisa
+51109950202,Louisa County,Census Tract 9502.02,Median Family Income,88077,17927,2022,Louisa,Mineral
+51109950301,Louisa County,Census Tract 9503.01,Median Family Income,115417,21764,2022,Louisa,Zion Crossroads
+51109950302,Louisa County,Census Tract 9503.02,Median Family Income,112348,42273,2022,Louisa,Green Springs
+51109950303,Louisa County,Census Tract 9503.03,Median Family Income,82054,26497,2022,Louisa,Trevillians
+51109950400,Louisa County,Census Tract 9504,Median Family Income,70170,21692,2022,Louisa,Ferncliff-Shannon Hill (Yanceyville)
+51109950500,Louisa County,Census Tract 9505,Median Family Income,92546,13105,2022,Louisa,Gum Springs-Holly Grove
+51125950101,Nelson County,Census Tract 9501.01,Median Family Income,63250,18975,2022,Nelson,Wintergreen-Wingina
+51125950102,Nelson County,Census Tract 9501.02,Median Family Income,80976,14756,2022,Nelson,Lovingston
+51125950201,Nelson County,Census Tract 9502.01,Median Family Income,100662,21183,2022,Nelson,Afton-Schuyler
+51125950202,Nelson County,Census Tract 9502.02,Median Family Income,137569,51121,2022,Nelson,Wintergreen-Rockfish Valley
+51125950300,Nelson County,Census Tract 9503,Median Family Income,79206,8239,2022,Nelson,Roseland
+51540000201,Charlottesville city,Census Tract 2.01,Median Family Income,92083,36327,2022,Charlottesville,Rose Hill-Harris-Venable
+51540000202,Charlottesville city,Census Tract 2.02,Median Family Income,NA,NA,2022,Charlottesville,10th & Page-Venable
+51540000302,Charlottesville city,Census Tract 3.02,Median Family Income,90299,18330,2022,Charlottesville,Woolen Mills
+51540000401,Charlottesville city,Census Tract 4.01,Median Family Income,111513,10983,2022,Charlottesville,Ridge St.
+51540000402,Charlottesville city,Census Tract 4.02,Median Family Income,104844,27695,2022,Charlottesville,Belmont
+51540000501,Charlottesville city,Census Tract 5.01,Median Family Income,61023,14404,2022,Charlottesville,Fifeville-Cherry Avenue
+51540000502,Charlottesville city,Census Tract 5.02,Median Family Income,117721,33996,2022,Charlottesville,Fry's Springs
+51540000600,Charlottesville city,Census Tract 6,Median Family Income,90724,22822,2022,Charlottesville,JPA-Fontaine
+51540000700,Charlottesville city,Census Tract 7,Median Family Income,222375,54366,2022,Charlottesville,Barracks-Rugby
+51540000800,Charlottesville city,Census Tract 8,Median Family Income,125264,8362,2022,Charlottesville,Greenbrier-Meadows
+51540000900,Charlottesville city,Census Tract 9,Median Family Income,128000,49004,2022,Charlottesville,Locust Grove
+51540001000,Charlottesville city,Census Tract 10,Median Family Income,168542,70473,2022,Charlottesville,Downtown Area
