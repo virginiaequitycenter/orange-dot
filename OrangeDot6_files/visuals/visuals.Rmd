@@ -47,24 +47,25 @@ pal_ssw <- carto_pal(7, "RedOr")
 ```
 
 ```{r, echo = FALSE,fig.width=10, fig.height=13}
-# Families with income below povery, below self sufficiency wage & above ssw ----
-fam_pov_ssw <- read_csv("../data/fam_pov_ssw_race_county_2022.csv")
+# Families with income below 35k, between 35k-self sufficiency wage & above ssw ----
+fam_ssw <- read_csv("../data/faminc_ssw_race_county_2022.csv")
 
-fam_pov_ssw_dat <- fam_pov_ssw %>% 
+fam_ssw_dat <- fam_ssw %>% 
   select(-c(estimate,moe)) %>% 
   pivot_wider(names_from = ssw_group, values_from = percent) %>% 
-  mutate(below_ssw = below - poverty) %>% 
-  pivot_longer(above:below_ssw) %>% 
-  filter(name != "below") %>% 
+  pivot_longer(above_ssw:below_thirtyfive) %>% 
   mutate(number = round(total_families*(value/100), 0))
 
-fam_pov_ssw_dat <- fam_pov_ssw_dat[order(fam_pov_ssw_dat$name),]
+fam_ssw_dat <- fam_ssw_dat[order(fam_ssw_dat$name),]
 
-fam_pov_ssw_dat %>% 
+fam_ssw_dat %>% 
   arrange(desc(name)) %>% 
   mutate(group = factor(group,
                        levels = c("Black", "Hispanic", "White, Not Hispanic", "All Families"),
                        labels = c("Black", "Hispanic", "White", "All Families")),
+         name = factor(name,
+                       levels = c("above_ssw", "below_ssw", "below_thirtyfive"),
+                       labels = c("Income above SSW", "Income below SSW & above $35K", "Income below $35K")),
   text = case_when(value >= 20 ~ paste0(round(value, 0), "%\n(", prettyNum(number, big.mark=",", preserve.width="none"), ")"),
                    value < 20 & value >= 1 ~ paste0(round(value, 0), "% (", prettyNum(number, big.mark=",", preserve.width="none"), ")"),
                    value < 1 ~ "")) %>%
@@ -90,13 +91,11 @@ fam_pov_ssw_dat %>%
 
 ```{r, echo=FALSE,fig.width=10, fig.height=14}
 # Income distribution by race/ethnicity by county ----
-faminc_all <- read_csv("../data/faminc_county_2022.csv")
 faminc_race <- read_csv("../data/faminc_race_county_2022.csv") 
 
-faminc <- faminc_all %>% 
-  rbind(faminc_race) %>% 
-  filter(label != "Total Families") %>% 
-  mutate(inc_group = case_when(str_detect(variable, "_002|_003|_004|_005|_006|_007") ~ "Earning below $35K",
+faminc_race <- faminc_race %>% 
+  filter(inc_band != "Total Families") %>% 
+  mutate(inc_band_group = case_when(str_detect(variable, "_002|_003|_004|_005|_006|_007") ~ "Earning below $35K",
                                str_detect(variable, "_008|_009|_010|_011") ~ "Earning $35K-$59.9K",
                                str_detect(variable, "_012|_013") ~ "Earning $60K-$100K",
                                str_detect(variable, "_014|_015|_016|_017") ~ "Earning above $100K"),
@@ -105,8 +104,8 @@ faminc <- faminc_all %>%
                                str_detect(variable, "_012|_013") ~ 3,
                                str_detect(variable, "_014|_015|_016|_017") ~ 4))
 
-faminc_data <- faminc %>% 
-  group_by(GEOID, locality, year, group, inc_group, inc_rank) %>% 
+faminc_data <- faminc_race %>% 
+  group_by(GEOID, locality, year, group, inc_band_group, inc_rank) %>% 
   summarise(estimate = sum(estimate),
             moe = moe_sum(moe = moe, estimate = estimate),
             total_families = first(total_families)) %>% 
@@ -118,11 +117,11 @@ faminc_data %>%
     mutate(group = factor(group,
                          levels = c("Black", "Hispanic", "White, Not Hispanic", "All Families"),
                          labels = c("Black", "Hispanic", "White", "All Families")),
-           inc_group = factor(inc_group,
+           inc_band_group = factor(inc_band_group,
                               levels = c("Earning above $100K",  "Earning $60K-$100K", "Earning $35K-$59.9K", "Earning below $35K")),
     text = case_when(percent >= 1 ~ paste0(round(percent, 0), "%\n(", prettyNum(estimate, big.mark=",", preserve.width="none"), ")"),
                      percent < 1 ~ "")) %>%
-    ggplot(aes(x = group, y = percent, group = group, fill = inc_group, 
+    ggplot(aes(x = group, y = percent, group = group, fill = inc_band_group, 
                label = text)) +
     geom_bar(stat = "identity", color = "white") + 
     geom_text(size = 3, position = position_stack(vjust = 0.5)) +
