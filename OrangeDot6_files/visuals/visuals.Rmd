@@ -68,7 +68,8 @@ fam_ssw_dat %>%
                        labels = c("Income above SSW", "Income below SSW & above $35K", "Income below $35K")),
   text = case_when(value >= 20 ~ paste0(round(value, 0), "%\n(", prettyNum(number, big.mark=",", preserve.width="none"), ")"),
                    value < 20 & value >= 1 ~ paste0(round(value, 0), "% (", prettyNum(number, big.mark=",", preserve.width="none"), ")"),
-                   value < 1 ~ "")) %>%
+                   value < 1 ~ ""),
+  locality_label = paste0(str_to_title(str_remove(locality, ", Virginia")), " (Annual SSW ", self_suff_wage, ")")) %>%
   ggplot(aes(x = group, y = value, group = group, fill = name, 
              label = text)) +
   geom_bar(stat = "identity", color = "white") + 
@@ -78,7 +79,7 @@ fam_ssw_dat %>%
   scale_y_continuous(labels = label_percent(scale = 1),
                      name = "") +
   guides(fill = guide_legend(reverse = TRUE)) +
-  facet_wrap(~locality, scales = "free", ncol = 2) +
+  facet_wrap(~locality_label, scales = "free", ncol = 2) +
   theme_minimal() +
   theme(legend.title=element_blank(),
         legend.position = "top",
