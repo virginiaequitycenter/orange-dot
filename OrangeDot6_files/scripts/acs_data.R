@@ -48,9 +48,10 @@ meta_table <- all_acs_meta()
 # Opens the newly made table
 # View(meta_table)
 
-# Family Income by County ----
-# Source: ACS Table B19101
+# Family Income, by Race, County level ----
 
+# All families
+# Source: ACS Table B19101
 acs_B19101_county <- get_acs(
   geography = "county",
   state = "VA",
@@ -61,140 +62,13 @@ acs_B19101_county <- get_acs(
   survey = "acs5")
 
 faminc_county <- acs_B19101_county %>% 
-  mutate(label = case_when(str_detect(variable, "_001") ~ "Total Families",
-                           str_detect(variable, "_002") ~ "Less than 10000",
-                           str_detect(variable, "_003") ~ "10000 to 14999",
-                           str_detect(variable, "_004") ~ "15000 to 19999",
-                           str_detect(variable, "_005") ~ "20000 to 24999",
-                           str_detect(variable, "_006") ~ "25000 to 29999",
-                           str_detect(variable, "_007") ~ "30000 to 34999",
-                           str_detect(variable, "_008") ~ "35000 to 39999",
-                           str_detect(variable, "_009") ~ "40000 to 44999",
-                           str_detect(variable, "_010") ~ "45000 to 49999",
-                           str_detect(variable, "_011") ~ "50000 to 59999",
-                           str_detect(variable, "_012") ~ "60000 to 74999",
-                           str_detect(variable, "_013") ~ "75000 to 99999",
-                           str_detect(variable, "_014") ~ "100000 to 124999",
-                           str_detect(variable, "_015") ~ "125000 to 149999",
-                           str_detect(variable, "_016") ~ "150000 to 199999",
-                           str_detect(variable, "_017") ~ "200000 or more"),
-         year = year,
-         group = "All Families") %>% 
+  mutate(group = "All Families") %>% 
   rename("locality" = "NAME",
          "total_families" = "summary_est") %>% 
-  select(GEOID, locality, variable, label, group, estimate, moe, total_families, year)
+  select(GEOID, locality, variable, group, estimate, moe, total_families)
 
 # Save CSV
-write_csv(faminc_county, "data/faminc_county_2022.csv")
-
-# Estimated Families making under annual Self Sufficiency Wage, by County ----
-# Localities where mean annual self sufficiency wage is approx $60,000 (fam compositions adults 1|2, child 1|2)
-# Albemarle ($63321)
-# Charlottesville City ($60,876)
-# Fluvanna ($59,819)
-# Greene (55744)
-# Nelson (54249 / 57013 for a1p1s1)
-
-ssw_60k_GEOID <- c("51003", "51540", "51065", "51079", "51125")
-
-faminc_county_60k <- faminc_county %>% 
-  filter(GEOID %in% ssw_60k_GEOID) %>% 
-  filter(label != "Total Families") %>% 
-  mutate(self_suff_wage = "~$60,000",
-         ssw_group = case_when(str_detect(variable, "_002") ~ "below",
-                               str_detect(variable, "_003") ~ "below",
-                               str_detect(variable, "_004") ~ "below",
-                               str_detect(variable, "_005") ~ "below",
-                               str_detect(variable, "_006") ~ "below",
-                               str_detect(variable, "_007") ~ "below",
-                               str_detect(variable, "_008") ~ "below",
-                               str_detect(variable, "_009") ~ "below",
-                               str_detect(variable, "_010") ~ "below",
-                               str_detect(variable, "_011") ~ "below",
-                               str_detect(variable, "_012") ~ "above",
-                               str_detect(variable, "_013") ~ "above",
-                               str_detect(variable, "_014") ~ "above",
-                               str_detect(variable, "_015") ~ "above",
-                               str_detect(variable, "_016") ~ "above",
-                               str_detect(variable, "_017") ~ "above")) %>% 
-  group_by(GEOID, locality, year, group, self_suff_wage, ssw_group) %>% 
-  summarise(estimate = sum(estimate),
-            moe = moe_sum(moe = moe, estimate = estimate),
-            total_families = first(total_families)) %>% 
-  ungroup() %>%
-  mutate(percent = round((estimate/total_families)*100, 2))
-
-# Localities where mean annual self sufficiency wage is approx $50,000 (fam compositions adults 1|2, child 1|2)
-# Louisa ($49157)
-
-ssw_50k_GEOID <- c("51109")
-
-faminc_county_50k <- faminc_county %>% 
-  filter(GEOID %in% ssw_50k_GEOID) %>% 
-  filter(label != "Total Families") %>% 
-  mutate(self_suff_wage = "~$50,000",
-         ssw_group = case_when(str_detect(variable, "_002") ~ "below",
-                               str_detect(variable, "_003") ~ "below",
-                               str_detect(variable, "_004") ~ "below",
-                               str_detect(variable, "_005") ~ "below",
-                               str_detect(variable, "_006") ~ "below",
-                               str_detect(variable, "_007") ~ "below",
-                               str_detect(variable, "_008") ~ "below",
-                               str_detect(variable, "_009") ~ "below",
-                               str_detect(variable, "_010") ~ "below",
-                               str_detect(variable, "_011") ~ "above",
-                               str_detect(variable, "_012") ~ "above",
-                               str_detect(variable, "_013") ~ "above",
-                               str_detect(variable, "_014") ~ "above",
-                               str_detect(variable, "_015") ~ "above",
-                               str_detect(variable, "_016") ~ "above",
-                               str_detect(variable, "_017") ~ "above")) %>% 
-  group_by(GEOID, locality, year, group, self_suff_wage, ssw_group) %>% 
-  summarise(estimate = sum(estimate),
-            moe = moe_sum(moe = moe, estimate = estimate),
-            total_families = first(total_families)) %>% 
-  ungroup() %>%
-  mutate(percent = round((estimate/total_families)*100, 2))
-
-# Localities where mean annual self sufficiency wage is approx $45,000 (fam compositions adults 1|2, child 1|2)
-# Buckingham ($44475)
-
-ssw_45k_GEOID <- c("51029")
-
-faminc_county_45k <- faminc_county %>% 
-  filter(GEOID %in% ssw_45k_GEOID) %>% 
-  filter(label != "Total Families") %>% 
-  mutate(self_suff_wage = "~$45,000",
-         ssw_group = case_when(str_detect(variable, "_002") ~ "below",
-                               str_detect(variable, "_003") ~ "below",
-                               str_detect(variable, "_004") ~ "below",
-                               str_detect(variable, "_005") ~ "below",
-                               str_detect(variable, "_006") ~ "below",
-                               str_detect(variable, "_007") ~ "below",
-                               str_detect(variable, "_008") ~ "below",
-                               str_detect(variable, "_009") ~ "below",
-                               str_detect(variable, "_010") ~ "above",
-                               str_detect(variable, "_011") ~ "above",
-                               str_detect(variable, "_012") ~ "above",
-                               str_detect(variable, "_013") ~ "above",
-                               str_detect(variable, "_014") ~ "above",
-                               str_detect(variable, "_015") ~ "above",
-                               str_detect(variable, "_016") ~ "above",
-                               str_detect(variable, "_017") ~ "above")) %>% 
-  group_by(GEOID, locality, year, group, self_suff_wage, ssw_group) %>% 
-  summarise(estimate = sum(estimate),
-            moe = moe_sum(moe = moe, estimate = estimate),
-            total_families = first(total_families)) %>% 
-  ungroup() %>%
-  mutate(percent = round((estimate/total_families)*100, 2))
-
-# Bind tables
-faminc_ssw_county <- rbind(faminc_county_60k, faminc_county_50k, faminc_county_45k) 
-  
-# Save CSV
-write_csv(faminc_ssw_county, "data/faminc_ssw_county_2022.csv")
-
-# Family Income by Race/Ethnicity, by County ----
+# write_csv(faminc_county, "data/faminc_county_2022.csv")
 
 # White Alone, Not Hispanic
 # Source: ACS Table B19101H
@@ -208,28 +82,10 @@ acs_B19101H_county <- get_acs(
   survey = "acs5")
 
 faminc_white <- acs_B19101H_county %>% 
-  mutate(label = case_when(str_detect(variable, "_001") ~ "Total Families",
-                           str_detect(variable, "_002") ~ "Less than 10000",
-                           str_detect(variable, "_003") ~ "10000 to 14999",
-                           str_detect(variable, "_004") ~ "15000 to 19999",
-                           str_detect(variable, "_005") ~ "20000 to 24999",
-                           str_detect(variable, "_006") ~ "25000 to 29999",
-                           str_detect(variable, "_007") ~ "30000 to 34999",
-                           str_detect(variable, "_008") ~ "35000 to 39999",
-                           str_detect(variable, "_009") ~ "40000 to 44999",
-                           str_detect(variable, "_010") ~ "45000 to 49999",
-                           str_detect(variable, "_011") ~ "50000 to 59999",
-                           str_detect(variable, "_012") ~ "60000 to 74999",
-                           str_detect(variable, "_013") ~ "75000 to 99999",
-                           str_detect(variable, "_014") ~ "100000 to 124999",
-                           str_detect(variable, "_015") ~ "125000 to 149999",
-                           str_detect(variable, "_016") ~ "150000 to 199999",
-                           str_detect(variable, "_017") ~ "200000 or more"),
-         year = year,
-         group = "White, Not Hispanic") %>% 
+  mutate(group = "White, Not Hispanic") %>% 
   rename("locality" = "NAME",
          "total_families" = "summary_est") %>% 
-  select(GEOID, locality, variable, label, group, estimate, moe, total_families, year)
+  select(GEOID, locality, variable, group, estimate, moe, total_families)
 
 # Black Alone
 # Source: ACS Table B19101B
@@ -243,28 +99,10 @@ acs_B19101B_county <- get_acs(
   survey = "acs5")
 
 faminc_black <- acs_B19101B_county %>% 
-  mutate(label = case_when(str_detect(variable, "_001") ~ "Total Families",
-                           str_detect(variable, "_002") ~ "Less than 10000",
-                           str_detect(variable, "_003") ~ "10000 to 14999",
-                           str_detect(variable, "_004") ~ "15000 to 19999",
-                           str_detect(variable, "_005") ~ "20000 to 24999",
-                           str_detect(variable, "_006") ~ "25000 to 29999",
-                           str_detect(variable, "_007") ~ "30000 to 34999",
-                           str_detect(variable, "_008") ~ "35000 to 39999",
-                           str_detect(variable, "_009") ~ "40000 to 44999",
-                           str_detect(variable, "_010") ~ "45000 to 49999",
-                           str_detect(variable, "_011") ~ "50000 to 59999",
-                           str_detect(variable, "_012") ~ "60000 to 74999",
-                           str_detect(variable, "_013") ~ "75000 to 99999",
-                           str_detect(variable, "_014") ~ "100000 to 124999",
-                           str_detect(variable, "_015") ~ "125000 to 149999",
-                           str_detect(variable, "_016") ~ "150000 to 199999",
-                           str_detect(variable, "_017") ~ "200000 or more"),
-         year = year,
-         group = "Black") %>% 
+  mutate(group = "Black") %>% 
   rename("locality" = "NAME",
          "total_families" = "summary_est") %>% 
-  select(GEOID, locality, variable, label, group, estimate, moe, total_families, year)
+  select(GEOID, locality, variable, group, estimate, moe, total_families)
 
 # Hispanic
 # Source: ACS Table B19101I
@@ -278,7 +116,18 @@ acs_B19101I_county <- get_acs(
   survey = "acs5")
 
 faminc_hispanic <- acs_B19101I_county %>% 
-  mutate(label = case_when(str_detect(variable, "_001") ~ "Total Families",
+  mutate(group = "Hispanic") %>% 
+  rename("locality" = "NAME",
+         "total_families" = "summary_est") %>% 
+  select(GEOID, locality, variable, group, estimate, moe, total_families)
+
+# Join tables
+faminc_race_county <- rbind(faminc_county, faminc_white, faminc_black, faminc_hispanic)
+
+# Wrangle data
+faminc_race_county <- faminc_race_county %>% 
+  mutate(year = year,
+         inc_band = case_when(str_detect(variable, "_001") ~ "Total Families",
                            str_detect(variable, "_002") ~ "Less than 10000",
                            str_detect(variable, "_003") ~ "10000 to 14999",
                            str_detect(variable, "_004") ~ "15000 to 19999",
@@ -295,19 +144,27 @@ faminc_hispanic <- acs_B19101I_county %>%
                            str_detect(variable, "_015") ~ "125000 to 149999",
                            str_detect(variable, "_016") ~ "150000 to 199999",
                            str_detect(variable, "_017") ~ "200000 or more"),
-         year = year,
-         group = "Hispanic") %>% 
-  rename("locality" = "NAME",
-         "total_families" = "summary_est") %>% 
-  select(GEOID, locality, variable, label, group, estimate, moe, total_families, year)
-
-# Join Race tables
-faminc_race <- rbind(faminc_white, faminc_black, faminc_hispanic)
+         inc_group = case_when(str_detect(variable, "_002") ~ "below_15k",
+                               str_detect(variable, "_003") ~ "below_15k",
+                               str_detect(variable, "_004") ~ "below_35k",
+                               str_detect(variable, "_005") ~ "below_35k",
+                               str_detect(variable, "_006") ~ "below_35k",
+                               str_detect(variable, "_007") ~ "below_35k",
+                               str_detect(variable, "_008") ~ "below_45k",
+                               str_detect(variable, "_009") ~ "below_45k",
+                               str_detect(variable, "_010") ~ "below_50k",
+                               str_detect(variable, "_011") ~ "below_60k",
+                               str_detect(variable, "_012") ~ "above_60k",
+                               str_detect(variable, "_013") ~ "above_60k",
+                               str_detect(variable, "_014") ~ "above_60k",
+                               str_detect(variable, "_015") ~ "above_60k",
+                               str_detect(variable, "_016") ~ "above_60k",
+                               str_detect(variable, "_017") ~ "above_60k"))
 
 # Save CSV
-write_csv(faminc_race, "data/faminc_race_county_2022.csv")
+write_csv(faminc_race_county, "data/faminc_race_county_2022.csv")
 
-# Estimated Families making under annual Self Sufficiency Wage, by Race, by County ----
+# Estimated Families making under annual Self Sufficiency Wage, by County ----
 # Localities where mean annual self sufficiency wage is approx $60,000 (fam compositions adults 1|2, child 1|2)
 # Albemarle ($63321)
 # Charlottesville City ($60,876)
@@ -317,26 +174,13 @@ write_csv(faminc_race, "data/faminc_race_county_2022.csv")
 
 ssw_60k_GEOID <- c("51003", "51540", "51065", "51079", "51125")
 
-faminc_race_60k <- faminc_race %>% 
+faminc_county_60k <- faminc_race_county %>% 
   filter(GEOID %in% ssw_60k_GEOID) %>% 
-  filter(label != "Total Families") %>% 
+  filter(inc_band != "Total Families") %>% 
   mutate(self_suff_wage = "~$60,000",
-         ssw_group = case_when(str_detect(variable, "_002") ~ "below",
-                               str_detect(variable, "_003") ~ "below",
-                               str_detect(variable, "_004") ~ "below",
-                               str_detect(variable, "_005") ~ "below",
-                               str_detect(variable, "_006") ~ "below",
-                               str_detect(variable, "_007") ~ "below",
-                               str_detect(variable, "_008") ~ "below",
-                               str_detect(variable, "_009") ~ "below",
-                               str_detect(variable, "_010") ~ "below",
-                               str_detect(variable, "_011") ~ "below",
-                               str_detect(variable, "_012") ~ "above",
-                               str_detect(variable, "_013") ~ "above",
-                               str_detect(variable, "_014") ~ "above",
-                               str_detect(variable, "_015") ~ "above",
-                               str_detect(variable, "_016") ~ "above",
-                               str_detect(variable, "_017") ~ "above")) %>% 
+         ssw_group = case_when(str_detect(inc_group,"below_15k|below_35k") ~ "below_thirtyfive",
+                               str_detect(inc_group,"below_45k|below_50k|below_60k") ~ "below_ssw",
+                               str_detect(inc_group,"above_60k") ~ "above_ssw")) %>% 
   group_by(GEOID, locality, year, group, self_suff_wage, ssw_group) %>% 
   summarise(estimate = sum(estimate),
             moe = moe_sum(moe = moe, estimate = estimate),
@@ -349,26 +193,13 @@ faminc_race_60k <- faminc_race %>%
 
 ssw_50k_GEOID <- c("51109")
 
-faminc_race_50k <- faminc_race %>% 
+faminc_county_50k <- faminc_race_county %>% 
   filter(GEOID %in% ssw_50k_GEOID) %>% 
-  filter(label != "Total Families") %>% 
+  filter(inc_band != "Total Families") %>% 
   mutate(self_suff_wage = "~$50,000",
-         ssw_group = case_when(str_detect(variable, "_002") ~ "below",
-                               str_detect(variable, "_003") ~ "below",
-                               str_detect(variable, "_004") ~ "below",
-                               str_detect(variable, "_005") ~ "below",
-                               str_detect(variable, "_006") ~ "below",
-                               str_detect(variable, "_007") ~ "below",
-                               str_detect(variable, "_008") ~ "below",
-                               str_detect(variable, "_009") ~ "below",
-                               str_detect(variable, "_010") ~ "below",
-                               str_detect(variable, "_011") ~ "above",
-                               str_detect(variable, "_012") ~ "above",
-                               str_detect(variable, "_013") ~ "above",
-                               str_detect(variable, "_014") ~ "above",
-                               str_detect(variable, "_015") ~ "above",
-                               str_detect(variable, "_016") ~ "above",
-                               str_detect(variable, "_017") ~ "above")) %>% 
+         ssw_group = case_when(str_detect(inc_group,"below_15k|below_35k") ~ "below_thirtyfive",
+                               str_detect(inc_group,"below_45k|below_50k") ~ "below_ssw",
+                               str_detect(inc_group,"below_60k|above_60k") ~ "above_ssw")) %>% 
   group_by(GEOID, locality, year, group, self_suff_wage, ssw_group) %>% 
   summarise(estimate = sum(estimate),
             moe = moe_sum(moe = moe, estimate = estimate),
@@ -381,26 +212,13 @@ faminc_race_50k <- faminc_race %>%
 
 ssw_45k_GEOID <- c("51029")
 
-faminc_race_45k <- faminc_race %>% 
+faminc_county_45k <- faminc_race_county %>% 
   filter(GEOID %in% ssw_45k_GEOID) %>% 
-  filter(label != "Total Families") %>% 
+  filter(inc_band != "Total Families") %>% 
   mutate(self_suff_wage = "~$45,000",
-         ssw_group = case_when(str_detect(variable, "_002") ~ "below",
-                               str_detect(variable, "_003") ~ "below",
-                               str_detect(variable, "_004") ~ "below",
-                               str_detect(variable, "_005") ~ "below",
-                               str_detect(variable, "_006") ~ "below",
-                               str_detect(variable, "_007") ~ "below",
-                               str_detect(variable, "_008") ~ "below",
-                               str_detect(variable, "_009") ~ "below",
-                               str_detect(variable, "_010") ~ "above",
-                               str_detect(variable, "_011") ~ "above",
-                               str_detect(variable, "_012") ~ "above",
-                               str_detect(variable, "_013") ~ "above",
-                               str_detect(variable, "_014") ~ "above",
-                               str_detect(variable, "_015") ~ "above",
-                               str_detect(variable, "_016") ~ "above",
-                               str_detect(variable, "_017") ~ "above")) %>% 
+         ssw_group = case_when(str_detect(inc_group,"below_15k|below_35k") ~ "below_thirtyfive",
+                               str_detect(inc_group,"below_45k") ~ "below_ssw",
+                               str_detect(inc_group,"below_50k|below_60k|above_60k") ~ "above_ssw")) %>% 
   group_by(GEOID, locality, year, group, self_suff_wage, ssw_group) %>% 
   summarise(estimate = sum(estimate),
             moe = moe_sum(moe = moe, estimate = estimate),
@@ -409,8 +227,8 @@ faminc_race_45k <- faminc_race %>%
   mutate(percent = round((estimate/total_families)*100, 2))
 
 # Bind tables
-faminc_ssw_race_county <- rbind(faminc_ssw_county, faminc_race_60k, faminc_race_50k, faminc_race_45k) 
-
+faminc_ssw_race_county <- rbind(faminc_county_60k, faminc_county_50k, faminc_county_45k) 
+  
 # Save CSV
 write_csv(faminc_ssw_race_county, "data/faminc_ssw_race_county_2022.csv")
 
