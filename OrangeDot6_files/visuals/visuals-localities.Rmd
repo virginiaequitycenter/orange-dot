@@ -18,7 +18,11 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 
-knitr::opts_template$set(fullwidth_bar = list(
+knitr::opts_template$set(fullwidth_table = list(
+  fig.width = 6, fig.height = 4,
+  fig.retina = 2, out.width = '100%'
+),
+fullwidth_bar = list(
   fig.width = 6, fig.height = 5,
   fig.retina = 2, out.width = '100%'
 ),
@@ -108,6 +112,7 @@ fam_ssw_dat <- fam_ssw %>%
   text = case_when(value >= 20 ~ paste0(round(value, 0), "%\n(", prettyNum(number, big.mark=",", preserve.width="none"), ")"),
                    value < 20 & value >= 1 ~ paste0(round(value, 0), "% (", prettyNum(number, big.mark=",", preserve.width="none"), ")"),
                    value < 1 ~ ""),
+  locality = str_to_title(str_remove(locality, ", Virginia")),
   locality_label = paste0(str_to_title(str_remove(locality, ", Virginia")), " (Annual Self-Sufficieny Standard ", self_suff_wage, ")"))
 
 fam_ssw_dat <- fam_ssw_dat[order(fam_ssw_dat$name),]
@@ -121,8 +126,8 @@ fam_ssw_totals <- fam_ssw_dat %>%
   group_by(locality, group) %>% 
   summarise(total_families = first(total_families),
             below_ssw_num = sum(number),
-            below_ssw_per = sum(round(value))) %>% 
-  mutate(locality = str_to_title(str_remove(locality, ", Virginia")))
+            below_ssw_per = sum(round(value)))
+  
   
 # Income distribution by race/ethnicity by county ----
 faminc_race <- read_csv("../data/faminc_race_county_2022.csv") 
@@ -276,7 +281,7 @@ ssw_tract_low_name <- paste(ssw_tract_low$tractnames, collapse = " and ")
 # Section summary texts ----
 
 section_summary_w_hisp <- paste0("
-<p>There are ", total, " families living in ", locality_name, ". Of these, ", below_ssw," (", below_ssw_per,") do not earn enough to provide for their family’s basic needs.</p>
+<p>There are ", total, " families living in ", locality_name, ". Of these families, ", below_ssw," (", below_ssw_per,") do not earn enough to provide for their family’s basic needs.</p>
 <p>", locality_name, " at a glance:</p>
 <ul>
 <li><p>The Self-Sufficiency Standard for an average family in ", locality_name, " is an annual income of ", ssw_annual, ". This is the income working families need to meet their basic necessities. These include: housing, child care, food, transportation, health care, miscellaneous expenses (clothing, telephone, household items), and taxes (minus federal and state tax credits).</p></li>
@@ -292,7 +297,7 @@ section_summary_w_hisp <- paste0("
 ")
 
 section_summary <- paste0("
-<p>There are ", total, " families living in ", locality_name, ". Of these, ", below_ssw," (", below_ssw_per,") do not earn enough to provide for their family’s basic needs.</p>
+<p>There are ", total, " families living in ", locality_name, ". Of these families, ", below_ssw," (", below_ssw_per,") do not earn enough to provide for their family’s basic needs.</p>
 <p>", locality_name, " at a glance:</p>
 <ul>
 <li><p>The Self-Sufficiency Standard for an average family in ", locality_name, " is an annual income of ", ssw_annual, ". This is the income working families need to meet their basic necessities. These include: housing, child care, food, transportation, health care, miscellaneous expenses (clothing, telephone, household items), and taxes (minus federal and state tax credits).</p></li>
@@ -310,35 +315,18 @@ section_summary <- paste0("
 
 ```
 
-<!-- There are `r total` families living in `r locality_name`. Of these, `r below_ssw` (`r below_ssw_per`) do not earn enough to provide for their family's basic needs. -->
-
-<!-- `r locality_name` at a glance: -->
-
-<!-- - The Self-Sufficiency Standard for an average family in `r locality_name` is an annual income of `r ssw_annual`. This is the income working families need to meet their basic necessities. These include: housing, child care, food, transportation, health care, miscellaneous expenses (clothing, telephone, household items), and taxes (minus federal and state tax credits). -->
-
-<!-- - Approximately `r below_ssw` families, or `r below_ssw_per` of families, in `r locality_name` earn below the Self-Sufficiency Standard. -->
-
-<!-- - The percent of Black families earning below the Self-Sufficiency Standard is `r percent(below_ssw_per_black, scale = 1, accuracy = 1)`. The percent of Hispanic families earning below the Self-Sufficiency Standard is `r percent(below_ssw_per_his, scale = 1, accuracy = 1)`. These are `r percent(below_ssw_per_black-below_ssw_per_white, scale = 1, accuracy = 1)` and `r percent(below_ssw_per_his-below_ssw_per_white, scale = 1, accuracy = 1)` higher than the percent of white families earning below the Self-Sufficiency Standard (`r percent(below_ssw_per_white, scale = 1, accuracy = 1)`). -->
-
-<!-- - The median family income for `r locality_name` is `r med_faminc`. The tract with the lowest median family income is `r med_faminc_low_name` at `r med_faminc_low_est`. The tract with the highest median family income is `r med_faminc_high_name` at `r med_faminc_high_est`. -->
-
-<!-- - The tract with the highest percent of families with income below the Self-Sufficiency Standard is `r ssw_tract_high_name` with `r percent(ssw_tract_high_per, scale = 1, accuracy = 1)` of families. The tract with the lowest percent of families earning below the Self-Sufficiency Standard is `r ssw_tract_low_name` with `r percent(ssw_tract_low_per, scale = 1, accuracy = 1)` of families. That is a difference of `r percent(ssw_tract_high_per-ssw_tract_low_per, scale = 1, accuracy = 1)`. -->
-
 
 `r section_summary_w_hisp`
 
-```{r ssw_table_alb, echo=FALSE}
-# County self sufficiency table ----
-selfsuff_table_alb <- selfsuff_table %>% 
-  filter(county == "Albemarle County")
 
-selfsuff_table_alb %>% 
-  select(-c(county)) %>% 
+```{r ssw_table, opts.label='fullwidth_table'}
+# County self sufficiency table ----
+selfsuff_table_print <- selfsuff_table %>% 
+  filter(county == local_name)
+
+selfsuff_table_print %>% 
+  select(-c(county)) %>%
   gt(rowname_col = "name") %>% 
-  # tab_row_group(label = "Deductions",
-  #               rows = 8:10) %>% 
-  # tab_row_group(label = "Costs",
-  #               rows = 1:7) %>% 
   fmt_currency(
     columns = 2:3,
     currency = currency(
@@ -363,7 +351,7 @@ selfsuff_table_alb %>%
     locations = list(cells_column_labels())
   ) %>% 
   tab_header(
-    title = paste0(ssw_table_title, unique(selfsuff_table_alb$county))
+    title = paste0(ssw_table_title, unique(selfsuff_table_print$county))
   ) %>% 
   tab_source_note(
     source_note = uw_sss_source
@@ -372,13 +360,12 @@ selfsuff_table_alb %>%
 ```
 
 
-```{r, opts.label='fullwidth_bar'}
+```{r ssw_bar_w_hisp, opts.label='fullwidth_bar'}
 # Families with income below 35k, between 35k-self sufficiency wage & above ssw ----
-# Families below and above SSW
-fam_ssw_alb <- fam_ssw_dat %>% 
-  filter(locality == "Albemarle County, Virginia")
+fam_ssw_bar <- fam_ssw_dat %>% 
+  filter(locality == local_name)
 
-fam_ssw_alb %>% 
+fam_ssw_bar %>% 
   arrange(desc(name)) %>% 
   ggplot(aes(x = group, y = value, group = group, fill = name, 
              label = text)) +
@@ -390,7 +377,7 @@ fam_ssw_alb %>%
                      name = "") +
   guides(fill = guide_legend(reverse = TRUE)) +
   labs(title = fam_ssw_title, 
-       subtitle = unique(fam_ssw_alb$locality_label),
+       subtitle = unique(fam_ssw_bar$locality_label),
        caption = source_acs) +
   theme_minimal() +
   theme(legend.title=element_blank(),
@@ -458,7 +445,7 @@ alb_inc_map <- med_faminc_tract %>%
                                             )
                     )+
   labs(title = "Median Family Income by Tract",
-      subtitle = unique(fam_ssw_alb$locality_label),
+      subtitle = local_name,
       caption = source_acs) +
   theme_map() +
   theme(legend.position="right")
@@ -486,7 +473,7 @@ alb_ssw_map <- ssw_tract %>%
                                             )
                     )+
   labs(title = "Families with Income below Self Sufficiency Standard",
-      subtitle = "Albemarle",
+      subtitle = local_name,
       caption = "") +
   theme_map()+
   theme(legend.position="right")
@@ -507,70 +494,17 @@ local_name <- "Buckingham County"
 
 `r section_summary`
 
-<!-- There are `r total` families living in `r locality_name`. Of these, `r below_ssw` (`r below_ssw_per`) do not earn enough to provide for their family's basic needs. -->
-
-<!-- `r locality_name` at a glance: -->
-
-<!-- - The Self-Sufficiency Standard for an average family in `r locality_name` is an annual income of `r ssw_annual`. This is the income working families need to meet their basic necessities. These include: housing, child care, food, transportation, health care, miscellaneous expenses (clothing, telephone, household items), and taxes (minus federal and state tax credits). -->
-
-<!-- - Approximately `r below_ssw` families, or `r below_ssw_per` of families, in `r locality_name` earn below the Self-Sufficiency Standard. -->
-
-<!-- - The percent of Black families earning below the Self-Sufficiency Standard is `r percent(below_ssw_per_black, scale = 1, accuracy = 1)`. This is `r percent(below_ssw_per_black-below_ssw_per_white, scale = 1, accuracy = 1)` higher than the percent of white families earning below the Self-Sufficiency Standard (`r percent(below_ssw_per_white, scale = 1, accuracy = 1)`). -->
-
-<!-- - The median family income for `r locality_name` is `r med_faminc`. The tract with the lowest median family income is `r med_faminc_low_name` at `r med_faminc_low_est`. The tract with the highest median family income is `r med_faminc_high_name` at `r med_faminc_high_est`. -->
-
-<!-- - The tract with the highest percent of families with income below the Self-Sufficiency Standard is `r ssw_tract_high_name` with `r percent(ssw_tract_high_per, scale = 1, accuracy = 1)` of families. The tract with the lowest percent of families earning below the Self-Sufficiency Standard is `r ssw_tract_low_name` with `r percent(ssw_tract_low_per, scale = 1, accuracy = 1)` of families. That is a difference of `r percent(ssw_tract_high_per-ssw_tract_low_per, scale = 1, accuracy = 1)`. -->
 
 ```{r ssw_table_buc}
-# County self sufficiency table ----
-selfsuff_table_buc <- selfsuff_table %>% 
-  filter(county == "Buckingham County")
-
-selfsuff_table_buc %>% 
-  select(-c(county)) %>% 
-  gt(rowname_col = "name") %>% 
-  # tab_row_group(label = "Deductions",
-  #               rows = 8:10) %>% 
-  # tab_row_group(label = "Costs",
-  #               rows = 1:7) %>% 
-  fmt_currency(
-    columns = 2:3,
-    currency = currency(
-      html = "&#36;",
-      default = "$"
-    ),
-    decimals = 2
-  ) %>% 
-  tab_style(
-    style = list(
-      cell_fill(color = "#F6D2A9"),
-      cell_text(weight = "bold")
-    ),
-    locations = list(cells_body(rows = 11), cells_stub(rows = 11))
-  ) %>% 
-  tab_style(
-    style = cell_text(align = "center", v_align = "middle"),
-    locations = list(cells_column_labels(), cells_body())
-  ) %>% 
-  tab_style(
-    style = cell_text(weight = "bold"),
-    locations = list(cells_column_labels())
-  ) %>% 
-  tab_header(
-    title = paste0(ssw_table_title, str_to_title(unique(selfsuff_table_buc$county)))
-  ) %>% 
-  tab_source_note(
-    source_note = uw_sss_source
-  )
-  
+<<ssw_table>>
 ```
 
-```{r, echo = FALSE,fig.width=6, fig.height=5}
+```{r ssw_bar, opts.label='fullwidth_bar'}
 # Families with income below 35k, between 35k-self sufficiency wage & above ssw ----
-fam_ssw_buc <- fam_ssw_dat %>% 
-  filter(locality == "Buckingham County, Virginia" & group != "Hispanic Families")
+fam_ssw_bar <- fam_ssw_dat %>% 
+  filter(locality == local_name & group != "Hispanic Families")
 
-fam_ssw_buc %>% 
+fam_ssw_bar %>% 
   arrange(desc(name)) %>% 
   ggplot(aes(x = group, y = value, group = group, fill = name, 
              label = text)) +
@@ -582,7 +516,7 @@ fam_ssw_buc %>%
                      name = "") +
   guides(fill = guide_legend(reverse = TRUE)) +
   labs(title = fam_ssw_title, 
-       subtitle = unique(fam_ssw_buc$locality_label),
+       subtitle = unique(fam_ssw_bar$locality_label),
        caption = source_acs) +
   theme_minimal() +
   theme(legend.title=element_blank(),
@@ -627,7 +561,7 @@ fam_ssw_buc %>%
 
 ```
 
-```{r, echo=FALSE, warning = FALSE, message = FALSE, fig.width=12, fig.height=6}
+```{r, opts.label='fullwidth_map'}
 # Geospatial visualization: Buckingham ----
 buc_inc_map <- med_faminc_tract %>%
   filter(locality == "Buckingham County") %>%
@@ -700,76 +634,11 @@ local_name <- "Charlottesville City"
 `r section_summary_w_hisp`
 
 ```{r ssw_table_cville}
-# County self sufficiency table ----
-selfsuff_table_cville <- selfsuff_table %>% 
-  filter(county == "Charlottesville City")
-
-selfsuff_table_cville %>% 
-  select(-c(county)) %>% 
-  gt(rowname_col = "name") %>% 
-  # tab_row_group(label = "Deductions",
-  #               rows = 8:10) %>% 
-  # tab_row_group(label = "Costs",
-  #               rows = 1:7) %>% 
-  fmt_currency(
-    columns = 2:3,
-    currency = currency(
-      html = "&#36;",
-      default = "$"
-    ),
-    decimals = 2
-  ) %>% 
-  tab_style(
-    style = list(
-      cell_fill(color = "#F6D2A9"),
-      cell_text(weight = "bold")
-    ),
-    locations = list(cells_body(rows = 11), cells_stub(rows = 11))
-  ) %>% 
-  tab_style(
-    style = cell_text(align = "center", v_align = "middle"),
-    locations = list(cells_column_labels(), cells_body())
-  ) %>% 
-  tab_style(
-    style = cell_text(weight = "bold"),
-    locations = list(cells_column_labels())
-  ) %>% 
-  tab_header(
-    title = paste0(ssw_table_title, str_to_title(unique(selfsuff_table_cville$county)))
-  ) %>% 
-  tab_source_note(
-    source_note = uw_sss_source
-  )
-  
+<<ssw_table>>
 ```
 
-```{r, echo = FALSE,fig.width=6, fig.height=5}
-# Families with income below 35k, between 35k-self sufficiency wage & above ssw ----
-fam_ssw_cville <- fam_ssw_dat %>% 
-  filter(locality == "Charlottesville city, Virginia")
-
-fam_ssw_cville %>% 
-  arrange(desc(name)) %>% 
-  ggplot(aes(x = group, y = value, group = group, fill = name, 
-             label = text)) +
-  geom_bar(stat = "identity", color = "white") + 
-  geom_text(size = 3, position = position_stack(vjust = 0.5), lineheight = 1) +
-  scale_fill_manual(values = fam_ssw_pal) +
-  scale_x_discrete(name = "") +
-  scale_y_continuous(labels = label_percent(scale = 1),
-                     name = "") +
-  guides(fill = guide_legend(reverse = TRUE)) +
-  labs(title = fam_ssw_title, 
-       subtitle = unique(fam_ssw_cville$locality_label),
-       caption = source_acs) +
-  theme_minimal() +
-  theme(legend.title=element_blank(),
-        legend.position = "top",
-        panel.grid.major.x = element_blank(),
-        axis.ticks = element_blank(),
-        panel.grid.minor = element_blank(),
-        plot.title.position= "plot",
-        plot.caption.position = "plot")
+```{r ssw_bar_cville, opts.label='fullwidth_bar'}
+<<ssw_bar_w_hisp>>
 ```
 
 ```{r, echo=FALSE,fig.width=7, fig.height=5}
@@ -805,7 +674,7 @@ fam_ssw_cville %>%
 
 ```
 
-```{r, echo=FALSE, warning = FALSE, message = FALSE, fig.width=12, fig.height=6}
+```{r, opts.label='fullwidth_map'}
 
 # Geospatial visualization: Charlottesville ----
 cville_inc_map <- med_faminc_tract %>%
@@ -881,76 +750,11 @@ local_name <- "Fluvanna County"
 `r section_summary`
 
 ```{r ssw_table_flu}
-# County self sufficiency table ----
-selfsuff_table_flu <- selfsuff_table %>% 
-  filter(county == "Fluvanna County")
-
-selfsuff_table_flu %>% 
-  select(-c(county)) %>% 
-  gt(rowname_col = "name") %>% 
-  # tab_row_group(label = "Deductions",
-  #               rows = 8:10) %>% 
-  # tab_row_group(label = "Costs",
-  #               rows = 1:7) %>% 
-  fmt_currency(
-    columns = 2:3,
-    currency = currency(
-      html = "&#36;",
-      default = "$"
-    ),
-    decimals = 2
-  ) %>% 
-  tab_style(
-    style = list(
-      cell_fill(color = "#F6D2A9"),
-      cell_text(weight = "bold")
-    ),
-    locations = list(cells_body(rows = 11), cells_stub(rows = 11))
-  ) %>% 
-  tab_style(
-    style = cell_text(align = "center", v_align = "middle"),
-    locations = list(cells_column_labels(), cells_body())
-  ) %>% 
-  tab_style(
-    style = cell_text(weight = "bold"),
-    locations = list(cells_column_labels())
-  ) %>% 
-  tab_header(
-    title = paste0(ssw_table_title, str_to_title(unique(selfsuff_table_flu$county)))
-  ) %>% 
-  tab_source_note(
-    source_note = uw_sss_source
-  )
-  
+<<ssw_table>>
 ```
 
-```{r, echo = FALSE,fig.width=6, fig.height=5}
-# Families with income below 35k, between 35k-self sufficiency wage & above ssw ----
-fam_ssw_flu <- fam_ssw_dat %>% 
-  filter(locality == "Fluvanna County, Virginia" & group != "Hispanic Families")
-
-fam_ssw_flu %>% 
-  arrange(desc(name)) %>% 
-  ggplot(aes(x = group, y = value, group = group, fill = name, 
-             label = text)) +
-  geom_bar(stat = "identity", color = "white") + 
-  geom_text(size = 3, position = position_stack(vjust = 0.5), lineheight = 1) +
-  scale_fill_manual(values = fam_ssw_pal) +
-  scale_x_discrete(name = "") +
-  scale_y_continuous(labels = label_percent(scale = 1),
-                     name = "") +
-  guides(fill = guide_legend(reverse = TRUE)) +
-  labs(title = fam_ssw_title, 
-       subtitle = unique(fam_ssw_flu$locality_label),
-       caption = source_acs) +
-  theme_minimal() +
-  theme(legend.title=element_blank(),
-        legend.position = "top",
-        panel.grid.major.x = element_blank(),
-        axis.ticks = element_blank(),
-        panel.grid.minor = element_blank(),
-        plot.title.position= "plot",
-        plot.caption.position = "plot")
+```{r ssw_bar_flu, opts.label='fullwidth_bar'}
+<<ssw_bar>>
 ```
 
 ```{r, echo=FALSE,fig.width=6.5, fig.height=4}
@@ -986,7 +790,7 @@ fam_ssw_flu %>%
 
 ```
 
-```{r, echo=FALSE, warning = FALSE, message = FALSE, fig.width=12, fig.height=6}
+```{r, opts.label='fullwidth_map'}
 # Geospatial visualization: Fluvanna County ----
 fluv_inc_map <- med_faminc_tract %>%
   filter(locality == "Fluvanna County") %>%
@@ -1058,76 +862,11 @@ local_name <- "Greene County"
 `r section_summary`
 
 ```{r ssw_table_grn}
-# County self sufficiency table ----
-selfsuff_table_grn <- selfsuff_table %>% 
-  filter(county == "Greene County")
-
-selfsuff_table_grn %>% 
-  select(-c(county)) %>% 
-  gt(rowname_col = "name") %>% 
-  # tab_row_group(label = "Deductions",
-  #               rows = 8:10) %>% 
-  # tab_row_group(label = "Costs",
-  #               rows = 1:7) %>% 
-  fmt_currency(
-    columns = 2:3,
-    currency = currency(
-      html = "&#36;",
-      default = "$"
-    ),
-    decimals = 2
-  ) %>% 
-  tab_style(
-    style = list(
-      cell_fill(color = "#F6D2A9"),
-      cell_text(weight = "bold")
-    ),
-    locations = list(cells_body(rows = 11), cells_stub(rows = 11))
-  ) %>% 
-  tab_style(
-    style = cell_text(align = "center", v_align = "middle"),
-    locations = list(cells_column_labels(), cells_body())
-  ) %>% 
-  tab_style(
-    style = cell_text(weight = "bold"),
-    locations = list(cells_column_labels())
-  ) %>% 
-  tab_header(
-    title = paste0(ssw_table_title, str_to_title(unique(selfsuff_table_grn$county)))
-  ) %>% 
-  tab_source_note(
-    source_note = uw_sss_source
-  )
-  
+<<ssw_table>>
 ```
 
-```{r, echo = FALSE,fig.width=6, fig.height=5}
-# Families with income below 35k, between 35k-self sufficiency wage & above ssw ----
-fam_ssw_grn <- fam_ssw_dat %>% 
-  filter(locality == "Greene County, Virginia" & group != "Hispanic Families")
-
-fam_ssw_grn %>% 
-  arrange(desc(name)) %>% 
-  ggplot(aes(x = group, y = value, group = group, fill = name, 
-             label = text)) +
-  geom_bar(stat = "identity", color = "white") + 
-  geom_text(size = 3, position = position_stack(vjust = 0.5), lineheight = 1) +
-  scale_fill_manual(values = fam_ssw_pal) +
-  scale_x_discrete(name = "") +
-  scale_y_continuous(labels = label_percent(scale = 1),
-                     name = "") +
-  guides(fill = guide_legend(reverse = TRUE)) +
-  labs(title = fam_ssw_title, 
-       subtitle = unique(fam_ssw_grn$locality_label),
-       caption = source_acs) +
-  theme_minimal() +
-  theme(legend.title=element_blank(),
-        legend.position = "top",
-        panel.grid.major.x = element_blank(),
-        axis.ticks = element_blank(),
-        panel.grid.minor = element_blank(),
-        plot.title.position= "plot",
-        plot.caption.position = "plot")
+```{r ssw_bar_grn, opts.label='fullwidth_bar'}
+<<ssw_bar>>
 ```
 
 ```{r, echo=FALSE,fig.width=6.5, fig.height=4}
@@ -1163,7 +902,7 @@ fam_ssw_grn %>%
 
 ```
 
-```{r, echo=FALSE, warning = FALSE, message = FALSE, fig.width=12, fig.height=6}
+```{r, opts.label='fullwidth_map'}
 # Geospatial visualization: Greene County ----
 greene_inc_map <- med_faminc_tract %>%
   filter(locality == "Greene County") %>%
@@ -1236,76 +975,11 @@ local_name <- "Louisa County"
 `r section_summary`
 
 ```{r ssw_table_lou}
-# County self sufficiency table ----
-selfsuff_table_lou <- selfsuff_table %>% 
-  filter(county == "Louisa County")
-
-selfsuff_table_lou %>% 
-  select(-c(county)) %>% 
-  gt(rowname_col = "name") %>% 
-  # tab_row_group(label = "Deductions",
-  #               rows = 8:10) %>% 
-  # tab_row_group(label = "Costs",
-  #               rows = 1:7) %>% 
-  fmt_currency(
-    columns = 2:3,
-    currency = currency(
-      html = "&#36;",
-      default = "$"
-    ),
-    decimals = 2
-  ) %>% 
-  tab_style(
-    style = list(
-      cell_fill(color = "#F6D2A9"),
-      cell_text(weight = "bold")
-    ),
-    locations = list(cells_body(rows = 11), cells_stub(rows = 11))
-  ) %>% 
-  tab_style(
-    style = cell_text(align = "center", v_align = "middle"),
-    locations = list(cells_column_labels(), cells_body())
-  ) %>% 
-  tab_style(
-    style = cell_text(weight = "bold"),
-    locations = list(cells_column_labels())
-  ) %>% 
-  tab_header(
-    title = paste0(ssw_table_title, str_to_title(unique(selfsuff_table_lou$county)))
-  ) %>% 
-  tab_source_note(
-    source_note = uw_sss_source
-  )
-  
+<<ssw_table>>
 ```
 
-```{r, echo = FALSE,fig.width=6, fig.height=5}
-# Families with income below 35k, between 35k-self sufficiency wage & above ssw ----
-fam_ssw_lou <- fam_ssw_dat %>% 
-  filter(locality == "Louisa County, Virginia" & group != "Hispanic Families")
-
-fam_ssw_lou %>% 
-  arrange(desc(name)) %>% 
-  ggplot(aes(x = group, y = value, group = group, fill = name, 
-             label = text)) +
-  geom_bar(stat = "identity", color = "white") + 
-  geom_text(size = 3, position = position_stack(vjust = 0.5), lineheight = 1) +
-  scale_fill_manual(values = fam_ssw_pal) +
-  scale_x_discrete(name = "") +
-  scale_y_continuous(labels = label_percent(scale = 1),
-                     name = "") +
-  guides(fill = guide_legend(reverse = TRUE)) +
-  labs(title = fam_ssw_title, 
-       subtitle = unique(fam_ssw_lou$locality_label),
-       caption = source_acs) +
-  theme_minimal() +
-  theme(legend.title=element_blank(),
-        legend.position = "top",
-        panel.grid.major.x = element_blank(),
-        axis.ticks = element_blank(),
-        panel.grid.minor = element_blank(),
-        plot.title.position= "plot",
-        plot.caption.position = "plot")
+```{r ssw_bar_lou, opts.label='fullwidth_bar'}
+<<ssw_bar>>
 ```
 
 ```{r, echo=FALSE,fig.width=6.5, fig.height=4}
@@ -1341,7 +1015,7 @@ fam_ssw_lou %>%
 
 ```
 
-```{r, echo=FALSE, warning = FALSE, message = FALSE, fig.width=12, fig.height=6}
+```{r, opts.label='fullwidth_map'}
 # Geospatial visualization: Louisa County ----
 louisa_inc_map <- med_faminc_tract %>%
   filter(locality == "Louisa County") %>%
@@ -1414,76 +1088,11 @@ local_name <- "Nelson County"
 `r section_summary`
 
 ```{r ssw_table_nel}
-# County self sufficiency table ----
-selfsuff_table_nel <- selfsuff_table %>% 
-  filter(county == "Nelson County")
-
-selfsuff_table_nel %>% 
-  select(-c(county)) %>% 
-  gt(rowname_col = "name") %>% 
-  # tab_row_group(label = "Deductions",
-  #               rows = 8:10) %>% 
-  # tab_row_group(label = "Costs",
-  #               rows = 1:7) %>% 
-  fmt_currency(
-    columns = 2:3,
-    currency = currency(
-      html = "&#36;",
-      default = "$"
-    ),
-    decimals = 2
-  ) %>% 
-  tab_style(
-    style = list(
-      cell_fill(color = "#F6D2A9"),
-      cell_text(weight = "bold")
-    ),
-    locations = list(cells_body(rows = 11), cells_stub(rows = 11))
-  ) %>% 
-  tab_style(
-    style = cell_text(align = "center", v_align = "middle"),
-    locations = list(cells_column_labels(), cells_body())
-  ) %>% 
-  tab_style(
-    style = cell_text(weight = "bold"),
-    locations = list(cells_column_labels())
-  ) %>% 
-  tab_header(
-    title = paste0(ssw_table_title, str_to_title(unique(selfsuff_table_nel$county)))
-  ) %>% 
-  tab_source_note(
-    source_note = uw_sss_source
-  )
-  
+<<ssw_table>>
 ```
 
-```{r, echo = FALSE,fig.width=6, fig.height=5}
-# Families with income below 35k, between 35k-self sufficiency wage & above ssw ----
-fam_ssw_nel <- fam_ssw_dat %>% 
-  filter(locality == "Nelson County, Virginia" & group != "Hispanic Families")
-
-fam_ssw_nel %>% 
-  arrange(desc(name)) %>% 
-  ggplot(aes(x = group, y = value, group = group, fill = name, 
-             label = text)) +
-  geom_bar(stat = "identity", color = "white") + 
-  geom_text(size = 3, position = position_stack(vjust = 0.5), lineheight = 1) +
-  scale_fill_manual(values = fam_ssw_pal) +
-  scale_x_discrete(name = "") +
-  scale_y_continuous(labels = label_percent(scale = 1),
-                     name = "") +
-  guides(fill = guide_legend(reverse = TRUE)) +
-  labs(title = fam_ssw_title, 
-       subtitle = unique(fam_ssw_nel$locality_label),
-       caption = source_acs) +
-  theme_minimal() +
-  theme(legend.title=element_blank(),
-        legend.position = "top",
-        panel.grid.major.x = element_blank(),
-        axis.ticks = element_blank(),
-        panel.grid.minor = element_blank(),
-        plot.title.position= "plot",
-        plot.caption.position = "plot")
+```{r ssw_bar_nel, opts.label='fullwidth_bar'}
+<<ssw_bar>>
 ```
 
 ```{r, echo=FALSE,fig.width=6.5, fig.height=4}
@@ -1519,7 +1128,7 @@ fam_ssw_nel %>%
 
 ```
 
-```{r, echo=FALSE, warning = FALSE, message = FALSE, fig.width=12, fig.height=6}
+```{r, opts.label='fullwidth_map'}
 # Geospatial visualization: Nelson County ----
 nels_inc_map <- med_faminc_tract %>%
   filter(locality == "Nelson County") %>%
