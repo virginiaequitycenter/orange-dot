@@ -40,12 +40,13 @@ self_suff_mean <- self_suff_byfamily %>%
             miscellaneous_costs = round(mean(miscellaneous_costs), 2),
             taxes = round(mean(taxes), 2),
             earned_income_tax_credit = round(mean(earned_income_tax_credit), 2),
+            child_care_tax_credit = round(mean(child_care_tax_credit), 2),
             child_tax_credit = round(mean(child_tax_credit), 2),
             hourly_self_sufficiency_wage = round(mean(hourly_self_sufficiency_wage), 2),
             monthly_self_sufficiency_wage = round(mean(monthly_self_sufficiency_wage), 2),
             annual_self_sufficiency_wage = round(mean(annual_self_sufficiency_wage), 2),
             emergency_savings = round(mean(emergency_savings),2)) %>% 
-  rename_with(~paste0(. , "_mean"), 4:16)
+  rename_with(~paste0(. , "_mean"), 4:17)
   
 
 
@@ -58,8 +59,11 @@ self_suff_county <- self_suff_a1p1s1 %>%
          housing_costs_a1p1s1, housing_costs_mean, child_care_costs_a1p1s1, child_care_costs_mean,
          food_costs_a1p1s1, food_costs_mean, transportation_costs_a1p1s1, transportation_costs_mean,
          health_care_costs_a1p1s1, health_care_costs_mean, miscellaneous_costs_a1p1s1, miscellaneous_costs_mean,
-         taxes_a1p1s1, taxes_mean, hourly_self_sufficiency_wage_a1p1s1, hourly_self_sufficiency_wage_mean,
-         monthly_self_sufficiency_wage_a1p1s1, monthly_self_sufficiency_wage_mean 
+         taxes_a1p1s1, taxes_mean, earned_income_tax_credit_a1p1s1, earned_income_tax_credit_mean,
+         child_care_tax_credit_a1p1s1, child_care_tax_credit_mean, child_tax_credit_a1p1s1, child_tax_credit_mean,
+         hourly_self_sufficiency_wage_a1p1s1, hourly_self_sufficiency_wage_mean,
+         monthly_self_sufficiency_wage_a1p1s1, monthly_self_sufficiency_wage_mean,
+         emergency_savings_a1p1s1, emergency_savings_mean
          )
 
 
