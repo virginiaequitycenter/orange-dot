@@ -13,6 +13,7 @@ Data for report
 Data for appendix
 
 * occupations_by_wagebin.csv
+* family_compositions_below_ess.csv
 
 Input for analysis
 
