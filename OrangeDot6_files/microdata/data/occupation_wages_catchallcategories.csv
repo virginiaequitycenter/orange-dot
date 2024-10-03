@@ -1,0 +1,24 @@
+occupation_soc_code,employment_1,hourly_mean_wage,annual_mean_wage_2,hourly_median_wage,annual_median_wage_2,employment_per_1_000_jobs,soc_code,occupation,median_wage_bin,median_wage_bin_label
+All Occupations(000000),112600,32.2,66980,23.69,49270,1000,000000,All Occupations,3,48340-60600
+Management Occupations(110000),NA,61.81,128570,51.41,106930,NA,110000,Management Occupations,5,88050-238990
+Business and Financial Operations Occupations(130000),7790,40.7,84660,36.54,76000,69.163,130000,Business and Financial Operations Occupations,4,60640-86950
+Computer and Mathematical Occupations(150000),4060,51.25,106600,48.83,101570,36.078,150000,Computer and Mathematical Occupations,5,88050-238990
+Architecture and Engineering Occupations(170000),1480,44.02,91560,38.71,80520,13.103,170000,Architecture and Engineering Occupations,4,60640-86950
+"Life, Physical, and Social Science Occupations(190000)",3590,35.27,73350,29.92,62240,31.861,190000,"Life, Physical, and Social Science Occupations",4,60640-86950
+Community and Social Service Occupations(210000),1920,26.63,55390,24.65,51270,17.073,210000,Community and Social Service Occupations,3,48340-60600
+Legal Occupations(230000),710,56.15,116800,40.39,84000,6.346,230000,Legal Occupations,4,60640-86950
+Educational Instruction and Library Occupations(250000),11440,42.58,88570,30.32,63060,101.567,250000,Educational Instruction and Library Occupations,4,60640-86950
+"Arts, Design, Entertainment, Sports, and Media Occupations(270000)",1930,29.21,60750,25.41,52860,17.166,270000,"Arts, Design, Entertainment, Sports, and Media Occupations",3,48340-60600
+Healthcare Practitioners and Technical Occupations(290000),9310,50.98,106040,39.4,81960,82.715,290000,Healthcare Practitioners and Technical Occupations,4,60640-86950
+Healthcare Support Occupations(310000),5270,17.63,36670,17.09,35560,46.783,310000,Healthcare Support Occupations,1,25610-37760
+Protective Service Occupations(330000),2490,24.78,51540,23.46,48790,22.105,330000,Protective Service Occupations,3,48340-60600
+Food Preparation and Serving Related Occupations(350000),10440,16.97,35290,14.87,30920,92.674,350000,Food Preparation and Serving Related Occupations,1,25610-37760
+Building and Grounds Cleaning and Maintenance Occupations(370000),3710,17.23,35840,16.08,33440,32.929,370000,Building and Grounds Cleaning and Maintenance Occupations,1,25610-37760
+Personal Care and Service Occupations(390000),2600,19.15,39840,15.96,33200,23.088,390000,Personal Care and Service Occupations,1,25610-37760
+Sales and Related Occupations(410000),9030,23.54,48960,16.74,34810,80.18,410000,Sales and Related Occupations,1,25610-37760
+Office and Administrative Support Occupations(430000),11930,22.08,45930,20.9,43480,105.921,430000,Office and Administrative Support Occupations,2,37860-48320
+"Farming, Fishing, and Forestry Occupations(450000)",370,20.69,43030,18.44,38340,3.305,450000,"Farming, Fishing, and Forestry Occupations",2,37860-48320
+Construction and Extraction Occupations(470000),4610,26.04,54170,23.5,48870,40.914,470000,Construction and Extraction Occupations,3,48340-60600
+"Installation, Maintenance, and Repair Occupations(490000)",3820,25.94,53950,23.65,49190,33.895,490000,"Installation, Maintenance, and Repair Occupations",3,48340-60600
+Production Occupations(510000),2570,22.41,46600,20.3,42230,22.793,510000,Production Occupations,2,37860-48320
+Transportation and Material Moving Occupations(530000),5870,20.35,42320,17.7,36820,52.102,530000,Transportation and Material Moving Occupations,1,25610-37760
