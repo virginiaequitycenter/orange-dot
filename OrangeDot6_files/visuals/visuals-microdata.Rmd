@@ -1,0 +1,397 @@
+---
+title: "Orange Dot 6.0 - Regional Microdata"
+author: "Elizabeth Mitchell"
+date: "2024-10-04"
+output: html_document
+---
+```{css, echo=FALSE}
+.main-container.container-fluid {
+  max-width: none;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 4.167%;
+}
+
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+
+knitr::opts_template$set(fullwidth_table = list(
+  fig.width = 6, fig.height = 4,
+  fig.retina = 2, out.width = '100%'
+),
+fullwidth_bar = list(
+  fig.width = 6, fig.height = 5,
+  fig.retina = 2, out.width = '100%'
+),
+fullwidth_map = list(
+  fig.width=9, fig.height=9,
+  fig.retina = 2, out.width = '100%'
+))
+
+# Load packages ----
+library(tidyverse)
+library(tidycensus)
+library(scales)
+library(RColorBrewer)
+library(ggspatial)
+library(tigris)
+library(readxl)
+library(stringr)
+library(sf)
+library(ggthemes)
+library(rcartocolor)
+library(patchwork)
+library(gt)
+library(ggpol)
+
+# Tract geometries ----
+county_codes <- c("003", "540", "065", "079", "109", "125", "029")
+tract_geo <- tracts(state = "VA", county = county_codes)
+
+# Map palettes ----
+pal_inc <- carto_pal(7, "Geyser")
+# "#008080" "#70A494" "#B4C8A8" "#F6EDBD" "#EDBB8A" "#DE8A5A" "#CA562C"
+# pal_inc <- c("#EE6400","#F37903","#F78C05","#FCA108","#E7AD1B","#ABB046","#6FB272","#33B59D","#2DB0AC","#4CA7A9")
+
+pal_ssw <- carto_pal(7, "RedOr")
+# "#F6D2A9" "#F5B78E" "#F19C7C" "#EA8171" "#DD686C" "#CA5268" "#B13F64"
+# pal_ssw <- c("#F6D2A9", "#F5B78E", "#F19C7C", "#EA8171", "#DD686C")
+
+# Pull in data ----
+
+    # families_by_tenure.csv
+    # families_by_burden.csv
+    # people_by_disability.csv
+    # workers_by_hours.csv
+    # workers_by_medianwages.csv
+
+
+```
+
+```{r}
+fam_by_race <- read_csv("../microdata/data/families_by_race.csv") %>% 
+  mutate(
+    # hhldr_race_ethn = factor(levels = c("Hispanic", "Black", "White")),
+         label_text = case_when(
+           below_ess_finc == "Yes" ~ paste0(prettyNum(count, big.mark=",", preserve.width="none"), " (", round(percent, 0), "% of families below SSS)"),
+           below_ess_finc == "No" ~ paste0(prettyNum(count, big.mark=",", preserve.width="none"), " (", round(percent, 0), "% of families above SSS)")),
+         below_ess_finc = factor(below_ess_finc, levels = c("Yes", "No"),
+                                 labels = c("Income Below Self-Sufficiency Standard", "Income Above Self-Sufficiency Standard")))
+
+fam_by_race %>% 
+  filter(hhldr_race_ethn %in% c("White", "Black", "Hispanic")) %>% 
+  ggplot(aes(x = count, y = factor(hhldr_race_ethn, levels = c("Hispanic", "Black", "White")), group = hhldr_race_ethn, fill = below_ess_finc)) +
+  geom_bar(stat = "identity", position = position_dodge2(width = 0.9, preserve = "single")) +
+  geom_text(aes(label = label_text),
+            position = position_dodge2(width = 0.9, preserve = "single"),
+            vjust = 0.5,
+            hjust = -0.025,
+            size = 3) +
+  scale_y_discrete(name = "") +
+  scale_x_continuous(name = "Number of Families",
+                     breaks = seq(0, 50000, by = 10000),
+                     label=comma,
+                     expand = expansion(mult = c(0, .5))) +
+  scale_fill_manual(values = c("#ff641e", "#b2b8be")) +
+  labs(title = "Families Earning Below and Above the Self-Sufficiency Standard \nby Race/Ethnicity",
+       subtitle = "Thomas Jefferson Planning District",
+       caption = "") +
+  theme_minimal() +
+  theme(legend.title=element_blank(),
+        legend.position = "top",
+        # legend.location = "plot",
+        legend.justification="center",
+          panel.grid.major.y = element_blank(),
+          axis.ticks = element_blank(),
+          panel.grid.minor = element_blank(),
+          plot.title.position= "plot",
+          plot.caption.position = "plot")
+```
+
+```{r}
+
+
+dummy_race = tibble(y = c(-100, 0, 0, 100),
+                    below_ess_finc = c("Income Above Self-Sufficiency Standard", "Income Above Self-Sufficiency Standard",
+                                       "Income Below Self-Sufficiency Standard", "Income Below Self-Sufficiency Standard"))
+
+dat_race <- fam_by_race %>% 
+  filter(hhldr_race_ethn %in% c("White", "Black", "Hispanic")) %>% 
+  mutate(percent = round(percent)) %>% 
+    group_by(percent, below_ess_finc) %>%
+    mutate(y = ifelse(below_ess_finc == "Income Above Self-Sufficiency Standard", -percent, percent),
+           label_text = case_when(
+           below_ess_finc == "Income Below Self-Sufficiency Standard" ~ paste0(round(percent, 0), "% earning below\n(", prettyNum(count, big.mark=",", preserve.width="none"), " families)"),
+           below_ess_finc == "Income Above Self-Sufficiency Standard" ~ paste0(round(percent, 0), "% earning above\n(", prettyNum(count, big.mark=",", preserve.width="none"), " families)"))) %>%
+    ungroup() 
+
+ggplot() +
+  geom_bar(data = dat_race, 
+           mapping = aes(y = y,
+                         x = hhldr_race_ethn,
+                         fill = below_ess_finc),
+           stat = "identity",
+           width = 0.8) +
+  geom_blank(data = dummy_race,
+             mapping = aes(y = y)) +
+  geom_text(data = dat_race, 
+            mapping = aes(x = hhldr_race_ethn, 
+                          y = case_when(below_ess_finc == "Income Above Self-Sufficiency Standard" ~  y-1.2,
+                                        below_ess_finc == "Income Below Self-Sufficiency Standard" ~  y+1.2),
+                          hjust = case_when(below_ess_finc == "Income Above Self-Sufficiency Standard" ~  1,
+                                        below_ess_finc == "Income Below Self-Sufficiency Standard" ~  0),
+                          label = label_text),
+            size = 3
+            ) +
+  scale_x_discrete(name = "") +
+  scale_y_continuous(
+                     expand = expansion(mult = c(0, 0)),
+                     name = "") +
+  scale_fill_manual(values = c("#3B8EA5", "#b2b8be")) +  # Apply custom colors here
+  facet_share(~ below_ess_finc, 
+              dir = "h",
+              scales = "free",
+              reverse_num = TRUE) +
+  coord_flip(clip = "off") +
+  theme_light() +
+  labs(title = "Families Earning Below and Above the Self-Sufficiency Standard \nby Householder Race/Ethnicity",
+       subtitle = "Thomas Jefferson Planning District",
+       caption = "") +
+  theme(legend.position = "none",
+        panel.grid.minor.x = element_blank(),
+        panel.border = element_blank(),
+        strip.text = element_text(size = rel(1), 
+                                  # face = "bold", 
+                                  color = "black"),
+    strip.background = element_rect(fill = "white", colour = "black", size = 0)
+        )
+
+```
+
+
+```{r, fig.height=6, fig.width=7}
+fam_by_age <- read_csv("../microdata/data/families_by_age.csv") %>% 
+  mutate(hhldrage_bin = factor(hhldrage_bin, levels = c("65 and over", "55 to 64", "45 to 54", "35 to 44", "25 to 34", "Under 25")),
+         label_text = case_when(
+           below_ess_finc == "Yes" ~ paste0(prettyNum(count, big.mark=",", preserve.width="none"), " (", round(percent, 0), "% of families below SSS)"),
+           below_ess_finc == "No" ~ paste0(prettyNum(count, big.mark=",", preserve.width="none"), " (", round(percent, 0), "% of families above SSS)")),
+         below_ess_finc = factor(below_ess_finc, levels = c("Yes", "No"),
+                                 labels = c("Income Below Self-Sufficiency Standard", "Income Above Self-Sufficiency Standard")))
+
+fam_by_age %>% 
+  ggplot(aes(x = count, y = hhldrage_bin, group = hhldrage_bin, fill = below_ess_finc)) +
+  geom_bar(stat = "identity", position = position_dodge2(width = 0.9, preserve = "single")) +
+  geom_text(aes(label = label_text),
+            position = position_dodge2(width = 0.9, preserve = "single"),
+            vjust = 0.5,
+            hjust = -0.025,
+            size = 3) +
+  scale_y_discrete(name = "") +
+  scale_x_continuous(name = "Number of Families",
+                     breaks = seq(0, 15000, by = 2500),
+                     label=comma,
+                     expand = expansion(mult = c(0, .5))) +
+  scale_fill_manual(values = c("#ff641e", "#b2b8be")) +
+  labs(title = "Families Earning Below and Above the Self-Sufficiency Standard \nby Householder Age",
+       subtitle = "Thomas Jefferson Planning District",
+       caption = "") +
+  theme_minimal() +
+  theme(legend.title=element_blank(),
+        legend.position = "top",
+        # legend.location = "plot",
+        legend.justification="center",
+          panel.grid.major.y = element_blank(),
+          axis.ticks = element_blank(),
+          panel.grid.minor = element_blank(),
+          plot.title.position= "plot",
+          plot.caption.position = "plot")
+```
+
+```{r, echo=FALSE, fig.height=5, fig.width=8}
+dummy_ess = tibble(y = c(-15000, 0, 0, 15000),
+                    below_ess_finc = c("Income Above Self-Sufficiency Standard", "Income Above Self-Sufficiency Standard",
+                                       "Income Below Self-Sufficiency Standard", "Income Below Self-Sufficiency Standard"))
+
+dat_ess <- fam_by_age %>% 
+    group_by(count, below_ess_finc) %>%
+    # mutate(x = sequence(n())) %>%
+    mutate(y = ifelse(below_ess_finc == "Income Above Self-Sufficiency Standard", -count, count),
+           label_text = case_when(
+           below_ess_finc == "Income Below Self-Sufficiency Standard" ~ paste0(prettyNum(count, big.mark=",", preserve.width="none"), "\n(", round(percent, 0), "% earning below)"),
+           below_ess_finc == "Income Above Self-Sufficiency Standard" ~ paste0(prettyNum(count, big.mark=",", preserve.width="none"), " families \n(", round(percent, 0), "% earning above)"))) %>%
+    ungroup() 
+
+ggplot() +
+  geom_bar(data = dat_ess, 
+           mapping = aes(y = y,
+                         x = hhldrage_bin,
+                         fill = below_ess_finc),
+           stat = "identity",
+           width = 0.8) +
+  geom_blank(data = dummy_ess,
+             mapping = aes(y = y)) +
+  geom_text(data = dat_ess, 
+            mapping = aes(x = hhldrage_bin, 
+                          y = case_when(below_ess_finc == "Income Above Self-Sufficiency Standard" ~  y-500,
+                                        below_ess_finc == "Income Below Self-Sufficiency Standard" ~  y+500),
+                          hjust = case_when(below_ess_finc == "Income Above Self-Sufficiency Standard" ~  1,
+                                        below_ess_finc == "Income Below Self-Sufficiency Standard" ~  0),
+                          label = label_text),
+            size = 3
+            ) +
+  scale_x_discrete(name = "") +
+  scale_y_continuous(
+                     expand = expansion(mult = c(0, 0)),
+                     name = "") +
+  scale_fill_manual(values = c("#3B8EA5", "#b2b8be")) +  # Apply custom colors here
+  facet_share(~ below_ess_finc, 
+              dir = "h",
+              scales = "free",
+              reverse_num = TRUE) +
+  coord_flip(clip = "off") +
+  theme_light() +
+  labs(title = "Families Earning Below and Above the Self-Sufficiency Standard \nby Householder Age",
+       subtitle = "Thomas Jefferson Planning District",
+       caption = "") +
+  theme(legend.position = "none",
+        panel.grid.minor.x = element_blank(),
+        panel.border = element_blank(),
+        strip.text = element_text(size = rel(1), 
+                                  # face = "bold", 
+                                  color = "black"),
+    strip.background = element_rect(fill = "white", colour = "black", size = 0)
+        )
+
+
+```
+
+```{r}
+fam_by_tenure <- read_csv("../microdata/data/families_by_tenure.csv") %>% 
+  mutate(label_text = case_when(
+           below_ess_finc == "Yes" ~ paste0(prettyNum(count, big.mark=",", preserve.width="none"), " (", round(percent, 0), "% of families below SSS)"),
+           below_ess_finc == "No" ~ paste0(prettyNum(count, big.mark=",", preserve.width="none"), " (", round(percent, 0), "% of families above SSS)")),
+         below_ess_finc = factor(below_ess_finc, levels = c("Yes", "No"),
+                                 labels = c("Income Below Self-Sufficiency Standard", "Income Above Self-Sufficiency Standard")))
+
+fam_by_tenure %>% 
+  ggplot(aes(x = count, y = factor(own_rent, levels = c("Own", "Rent")), group=own_rent, fill = below_ess_finc)) +
+  geom_bar(stat = "identity", position = position_dodge2(width = 0.9, preserve = "single")) +
+  geom_text(aes(label = label_text),
+            position = position_dodge2(width = 0.9, preserve = "single"),
+            vjust = 0.5,
+            hjust = -0.025,
+            size = 3) +
+  scale_y_discrete(name = "") +
+  scale_x_continuous(name = "Number of Families",
+                     breaks = seq(0, 50000, by = 10000),
+                     label=comma,
+                     expand = expansion(mult = c(0, .5))) +
+  scale_fill_manual(values = c("#ff641e", "#b2b8be")) +
+  labs(title = "Families Earning Below and Above the Self-Sufficiency Standard \nby Housing Status: Homeowner or Renter",
+       subtitle = "Thomas Jefferson Planning District",
+       caption = "") +
+  theme_minimal() +
+  theme(legend.title=element_blank(),
+        legend.position = "top",
+        # legend.location = "plot",
+        legend.justification="center",
+          panel.grid.major.y = element_blank(),
+          axis.ticks = element_blank(),
+          panel.grid.minor = element_blank(),
+          plot.title.position= "plot",
+          plot.caption.position = "plot")
+```
+
+```{r}
+fam_by_tenure %>% 
+  ggplot(aes(x = percent, y = below_ess_finc, group=below_ess_finc, fill = factor(own_rent, levels = c("Own", "Rent")))) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = case_when(
+           own_rent == "Own" ~ paste0(round(percent, 0), "% are Homeowners\n(", prettyNum(count, big.mark=",", preserve.width="none"), " families)"),
+           own_rent == "Rent" ~ paste0(round(percent, 0), "% are Renters\n(", prettyNum(count, big.mark=",", preserve.width="none"), " families)"))),
+            position = position_stack(vjust = 0.5), 
+            vjust = 0.5,
+            # hjust = -0.025,
+            size = 3) +
+  scale_x_continuous(limits = c(0, 100),
+                     labels = label_percent(scale = 1), 
+                     name = "Percent of Population",
+                     sec.axis = dup_axis()) + 
+  scale_y_discrete(name = "") +
+  scale_fill_manual(values = c("#b2b8be", "#3B8EA5")) +
+  labs(title = "Families Earning Below and Above the Self-Sufficiency Standard \nby Housing Status: Homeowner or Renter",
+       subtitle = "Thomas Jefferson Planning District",
+       caption = "") +
+  theme_minimal() +
+  theme(legend.title=element_blank(),
+        legend.position = "top",
+        # legend.location = "plot",
+        legend.justification="center",
+          panel.grid.major.y = element_blank(),
+          axis.ticks = element_blank(),
+          panel.grid.minor = element_blank(),
+          plot.title.position= "plot",
+          plot.caption.position = "plot")
+```
+
+
+```{r}
+
+
+dummy_tenure = tibble(y = c(-100, 0, 0, 100),
+                    below_ess_finc = c("Income Above Self-Sufficiency Standard", "Income Above Self-Sufficiency Standard",
+                                       "Income Below Self-Sufficiency Standard", "Income Below Self-Sufficiency Standard"))
+
+dat_tenure <- fam_by_tenure %>% 
+  mutate(percent = round(percent)) %>% 
+    group_by(percent, below_ess_finc) %>%
+    mutate(y = ifelse(below_ess_finc == "Income Above Self-Sufficiency Standard", -percent, percent),
+           label_text = case_when(
+           below_ess_finc == "Income Below Self-Sufficiency Standard" ~ paste0(round(percent, 0), "% earning below\n(", prettyNum(count, big.mark=",", preserve.width="none"), " families)"),
+           below_ess_finc == "Income Above Self-Sufficiency Standard" ~ paste0(round(percent, 0), "% earning above\n(", prettyNum(count, big.mark=",", preserve.width="none"), " families)"))) %>%
+    ungroup() 
+
+ggplot() +
+  geom_bar(data = dat_tenure, 
+           mapping = aes(y = y,
+                         x = own_rent,
+                         fill = below_ess_finc),
+           stat = "identity",
+           width = 0.8) +
+  geom_blank(data = dummy_tenure,
+             mapping = aes(y = y)) +
+  geom_text(data = dat_tenure, 
+            mapping = aes(x = own_rent, 
+                          y = case_when(below_ess_finc == "Income Above Self-Sufficiency Standard" ~  y-1.2,
+                                        below_ess_finc == "Income Below Self-Sufficiency Standard" ~  y+1.2),
+                          hjust = case_when(below_ess_finc == "Income Above Self-Sufficiency Standard" ~  1,
+                                        below_ess_finc == "Income Below Self-Sufficiency Standard" ~  0),
+                          label = label_text),
+            size = 3
+            ) +
+  scale_x_discrete(name = "") +
+  scale_y_continuous(
+                     expand = expansion(mult = c(0, 0)),
+                     name = "") +
+  scale_fill_manual(values = c("#3B8EA5", "#b2b8be")) +  # Apply custom colors here
+  facet_share(~ below_ess_finc, 
+              dir = "h",
+              scales = "free",
+              reverse_num = TRUE) +
+  coord_flip(clip = "off") +
+  theme_light() +
+  labs(title = "Families Earning Below and Above the Self-Sufficiency Standard \nby Housing Status: Homeowner or Renter",
+       subtitle = "Thomas Jefferson Planning District",
+       caption = "") +
+  theme(legend.position = "none",
+        panel.grid.minor.x = element_blank(),
+        panel.border = element_blank(),
+        strip.text = element_text(size = rel(1), 
+                                  # face = "bold", 
+                                  color = "black"),
+    strip.background = element_rect(fill = "white", colour = "black", size = 0)
+        )
+
+```
