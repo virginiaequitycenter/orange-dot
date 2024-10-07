@@ -675,3 +675,37 @@ workers_by_medianwages %>%
           plot.caption.position = "plot")
 
 ```
+```{r}
+occupations_by_wagebin <- read_csv("../microdata/data/occupations_by_wagebin.csv")
+
+occupations_filtered <- occupations_by_wagebin %>% 
+  # filter(employment_per_1_000_jobs > 8) %>% 
+  filter(occupation %in% c("Fast Food and Counter Workers", "Cashiers", "Home Health and Personal Care Aides",
+                           "Customer Service Representatives", "Construction Laborers", "Light Truck Drivers", "Maintenance and Repair Workers, General", "Elementary School Teachers, Except Special Education
+", "Electricians", "Automotive Service Technicians and Mechanics", "Office and Administrative Support Workers, All Other", "Registered Nurses", "Radiologic Technologists and Technicians", "Computer User Support Specialists", "General and Operations Managers", "Construction Managers", "Project Management Specialists", "	
+Computer and Information Systems Managers")) %>% 
+  mutate(median_wage_bin_label = factor(median_wage_bin_label, levels = c("25610-37760", "37860-48320", "48340-60600", "60640-86950", "88050-238990"), labels = c("$25,610 - $37,760", "$37,860 - $48,320", "$48,340 - $60,600", "$60,640 - $86,950", "$88,050 - $238,990")))
+
+occupations_filtered %>% 
+  select(-c(median_wage_bin, median_wage_bin_label)) %>%
+  gt(rowname_col = "occupation") %>% 
+  tab_row_group(label = "Occupations Earning $88,050 - $238,990",
+                rows = 14:16) %>%
+  tab_row_group(label = "Occupations Earning $60,640 - $86,950",
+                rows = 11:13) %>%
+  tab_row_group(label = "Occupations Earning $48,340 - $60,600",
+                rows = 8:10) %>%
+  tab_row_group(label = "Occupations Earning $37,860 - $48,320",
+                rows = 5:7) %>%
+  tab_row_group(label = "Occupations Earning $25,610 - $37,760",
+                rows = 1:4) %>%
+  fmt_currency(
+    columns = 2,
+    currency = currency(
+      html = "&#36;",
+      default = "$"
+    ),
+    decimals = 2
+  )
+```
+
