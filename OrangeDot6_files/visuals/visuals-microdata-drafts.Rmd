@@ -603,7 +603,7 @@ people_by_disability %>%
 
 ```
 
-```{r}
+```{r workers_by_hours}
 workers_by_hours <- read_csv("../microdata/data/workers_by_hours.csv") %>% 
   mutate(
     hours_bin = factor(hours_bin, levels = c("Unemployed", "Less than 20", "20 to 29", "30 to 34", "35 to 39", "40 or more")),
@@ -642,7 +642,7 @@ workers_by_hours %>%
 
 ```
 
-```{r}
+```{r workers_by_medianwages}
 workers_by_medianwages <- read_csv("../microdata/data/workers_by_medianwages.csv") %>% 
    mutate(
     median_wage_bin_label = factor(median_wage_bin_label, levels = c("25610-37760", "37860-48320", "48340-60600", "60640-86950", "88050-238990"), labels = c("$25,610 - $37,760", "$37,860 - $48,320", "$48,340 - $60,600", "$60,640 - $86,950", "$88,050 - $238,990")),
@@ -681,7 +681,8 @@ workers_by_medianwages %>%
           plot.caption.position = "plot")
 
 ```
-```{r}
+
+```{r occupations_by_wagebin}
 occupations_by_wagebin <- read_csv("../microdata/data/occupations_by_wagebin.csv")
 
 occupations_filtered <- occupations_by_wagebin %>% 

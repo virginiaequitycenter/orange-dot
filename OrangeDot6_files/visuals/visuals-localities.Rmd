@@ -1,7 +1,10 @@
 ---
 title: "Orange Dot 6.0 - Locality Profiles"
-output: html_document
-# output: word_document
+# output: html_document
+output: 
+  word_document:
+    toc: true
+    toc_depth: 3
 # output:
 #   bookdown::word_document2
 ---
@@ -23,8 +26,8 @@ knitr::opts_template$set(fullwidth_table = list(
   fig.retina = 2, out.width = '100%'
 ),
 fullwidth_bar = list(
-  fig.width = 6, fig.height = 5,
-  fig.retina = 2, out.width = '100%'
+  fig.width = 6.5, fig.height = 5.5,
+  fig.retina = 2
 ),
 fullwidth_map = list(
   fig.width=9, fig.height=9,
@@ -108,12 +111,12 @@ fam_ssw_dat <- fam_ssw %>%
                        labels = c("Black Families", "Hispanic Families", "White Families", "All Families")),
          name = factor(name,
                        levels = c("above_ssw", "below_ssw", "below_thirtyfive"),
-                       labels = c("Income above SSW", "Income below SSW & above $35K", "Income below $35K")),
+                       labels = c("Income above Self-Sufficiency", "Income below Self-Sufficiency & above $35K", "Income below $35K")),
   text = case_when(value >= 20 ~ paste0(round(value, 0), "%\n(", prettyNum(number, big.mark=",", preserve.width="none"), ")"),
                    value < 20 & value >= 1 ~ paste0(round(value, 0), "% (", prettyNum(number, big.mark=",", preserve.width="none"), ")"),
                    value < 1 ~ ""),
   locality = str_to_title(str_remove(locality, ", Virginia")),
-  locality_label = paste0(str_to_title(str_remove(locality, ", Virginia")), " (Annual Self-Sufficieny Standard ", self_suff_wage, ")"))
+  locality_label = paste0(str_to_title(str_remove(locality, ", Virginia")), " (Annual Self-Sufficiency Standard: ", str_remove(self_suff_wage, "~"), ")"))
 
 fam_ssw_dat <- fam_ssw_dat[order(fam_ssw_dat$name),]
 
@@ -201,6 +204,7 @@ source_acs <- "Data Source: American Community Survey, 2022"
 uw_sss_source <- "Data Source: The Self-Sufficiency Standard for Virginia, 2021; The Center for Women’s Welfare, University of Washington"
 
 ```
+
 
 ## Albemarle County
 ```{r}
@@ -370,7 +374,7 @@ fam_ssw_bar %>%
   ggplot(aes(x = group, y = value, group = group, fill = name, 
              label = text)) +
   geom_bar(stat = "identity", color = "white") + 
-  geom_text(size = 3, position = position_stack(vjust = 0.5), lineheight = 1) +
+  geom_text(size = 3.5, position = position_stack(vjust = 0.5), lineheight = 1) +
   scale_fill_manual(values = fam_ssw_pal) +
   scale_x_discrete(name = "") +
   scale_y_continuous(labels = label_percent(scale = 1),
@@ -382,11 +386,14 @@ fam_ssw_bar %>%
   theme_minimal() +
   theme(legend.title=element_blank(),
         legend.position = "top",
+        legend.location = "plot",
+        legend.text = element_text(size = 9),
         panel.grid.major.x = element_blank(),
         axis.ticks = element_blank(),
         panel.grid.minor = element_blank(),
         plot.title.position= "plot",
-        plot.caption.position = "plot")
+        plot.caption.position = "plot",
+        axis.text.x = element_text(color = "black", size = 11))
 ```
 
 ```{r, echo=FALSE,fig.width=7, fig.height=5}
@@ -424,8 +431,8 @@ fam_ssw_bar %>%
 
 ```{r, opts.label='fullwidth_map'}
 # Geospatial visualization: Albemarle ----
-alb_inc_map <- med_faminc_tract %>%
-  filter(locality == "Albemarle County") %>%
+med_faminc_tract %>%
+  filter(locality == local_name) %>%
   mutate(text = paste0("$", prettyNum((round(estimate,-3)/1000), big.mark=",", preserve.width="none"), "K")) %>%
   ggplot() +
   annotation_map_tile(zoomin = 1, progress = "none", cachedir = "../data/tempdata/") +
@@ -450,7 +457,10 @@ alb_inc_map <- med_faminc_tract %>%
   theme_map() +
   theme(legend.position="right")
 
+```
 
+```{r, opts.label='fullwidth_map'}
+# Geospatial visualization: Albemarle ----
 alb_ssw_map <- ssw_tract %>%
   filter(locality == "Albemarle County") %>%
   mutate(text = paste0(round(percent,0), "%")) %>%
@@ -477,8 +487,6 @@ alb_ssw_map <- ssw_tract %>%
       caption = "") +
   theme_map()+
   theme(legend.position="right")
-
-alb_inc_map 
 
 alb_ssw_map
 ```
@@ -509,7 +517,7 @@ fam_ssw_bar %>%
   ggplot(aes(x = group, y = value, group = group, fill = name, 
              label = text)) +
   geom_bar(stat = "identity", color = "white") + 
-  geom_text(size = 3, position = position_stack(vjust = 0.5), lineheight = 1) +
+  geom_text(size = 3.5, position = position_stack(vjust = 0.5), lineheight = 1) +
   scale_fill_manual(values = fam_ssw_pal) +
   scale_x_discrete(name = "") +
   scale_y_continuous(labels = label_percent(scale = 1),
@@ -521,11 +529,14 @@ fam_ssw_bar %>%
   theme_minimal() +
   theme(legend.title=element_blank(),
         legend.position = "top",
+        legend.location = "plot",
+        legend.text = element_text(size = 9),
         panel.grid.major.x = element_blank(),
         axis.ticks = element_blank(),
         panel.grid.minor = element_blank(),
         plot.title.position= "plot",
-        plot.caption.position = "plot")
+        plot.caption.position = "plot",
+        axis.text.x = element_text(color = "black", size = 11))
 ```
 
 ```{r, echo=FALSE,fig.width=6.5, fig.height=4}
