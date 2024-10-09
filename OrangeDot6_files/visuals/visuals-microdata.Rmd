@@ -1,7 +1,7 @@
 ---
 title: "Orange Dot 6.0 - Regional Microdata"
-# output: html_document
-output: word_document
+output: html_document
+# output: word_document
 ---
 ```{css, echo=FALSE}
 .main-container.container-fluid {
@@ -57,7 +57,7 @@ acs_pums <- "Data Source: ACS Public Use Microdata Sample (PUMS), U.S. Census Bu
 ```
 
 
-```{r race_by_percent, fig.width = 9.5, fig.height = 6, fig.retina = 2, out.width = '100%'}
+```{r race_by_percent, fig.width = 9.5, fig.height = 6, fig.retina = 2}
 fam_by_race <- read_csv("../microdata/data/families_by_race.csv") %>% 
   mutate(
     race_ethn = case_when(hhldr_race_ethn %in% c("Hispanic", "Black", "White") ~ hhldr_race_ethn,
@@ -109,7 +109,7 @@ fam_by_race %>%
 ```
 
 
-```{r age_butterfly_percent, fig.width = 10.5, fig.height=6, fig.retina = 2, out.width = '100%'}
+```{r age_butterfly_percent, fig.width = 10.5, fig.height=6, fig.retina = 2}
 fam_by_age <- read_csv("../microdata/data/families_by_age.csv") %>% 
   mutate(hhldrage_bin = factor(hhldrage_bin, levels = c("65 and over", "55 to 64", "45 to 54", "35 to 44", "25 to 34", "Under 25")),
          below_ess_finc = factor(below_ess_finc, levels = c("Yes", "No"),
@@ -176,7 +176,7 @@ ggplot() +
 ```
 
 
-```{r tenure-stacked, fig.width=9.5, fig.height=5, fig.retina = 2, out.width = '100%'}
+```{r tenure-stacked, fig.width=9.5, fig.height=5, fig.retina = 2}
 fam_by_tenure <- read_csv("../microdata/data/families_by_tenure.csv") %>% 
   mutate(label_text = case_when(
     below_ess_finc == "No" ~ paste0(prettyNum(count, big.mark=",", preserve.width="none"), " (", round(percent, 0), "% of families above SSS)"),
@@ -228,7 +228,7 @@ fam_by_tenure %>%
 ```
 
 
-```{r burden, fig.width=9.5, fig.height=5, fig.retina = 2, out.width = '100%'}
+```{r burden, fig.width=9.5, fig.height=5, fig.retina = 2}
 fam_by_burden <- read_csv("../microdata/data/families_by_burden.csv") %>% 
   mutate(label_text = case_when(
     below_ess_finc == "No" ~ paste0(prettyNum(count, big.mark=",", preserve.width="none"), " (", round(percent, 0), "% of families above SSS)"),
@@ -291,7 +291,7 @@ fam_by_burden %>%
 ```
 
 
-```{r disability, fig.width=9.5, fig.height=5, fig.retina = 2, out.width = '100%'}
+```{r disability, fig.width=9.5, fig.height=5, fig.retina = 2}
 people_by_disability <- read_csv("../microdata/data/people_by_disability.csv")
 
 people_by_disability %>% 
@@ -340,7 +340,7 @@ people_by_disability %>%
 
 ```
 
-```{r workers_by_hours, fig.width = 9.5, fig.height = 6, fig.retina = 2, out.width = '100%'}
+```{r workers_by_hours, fig.width = 9.5, fig.height = 6, fig.retina = 2}
 workers_by_hours <- read_csv("../microdata/data/workers_by_hours.csv") %>% 
   mutate(
     hours_bin = factor(hours_bin, levels = c("Unemployed", "Less than 20", "20 to 29", "30 to 34", "35 to 39", "40 or more"), labels = c("Unemployed", "Less than 20 hours", "20 to 29 hours", "30 to 34 hours", "35 to 39 hours", "40 or more hours")),
@@ -385,7 +385,7 @@ workers_by_hours %>%
 
 ```
 
-```{r workers_by_medianwages, fig.width = 10, fig.height = 6, fig.retina = 2, out.width = '100%'}
+```{r workers_by_medianwages, fig.width = 10, fig.height = 6, fig.retina = 2}
 workers_by_medianwages <- read_csv("../microdata/data/workers_by_medianwages.csv") %>% 
    mutate(
     median_wage_bin_label = factor(median_wage_bin_label, levels = c("25610-37760", "37860-48320", "48340-60600", "60640-86950", "88050-238990"), labels = c("$25,610 - $37,760", "$37,860 - $48,320", "$48,340 - $60,600", "$60,640 - $86,950", "$88,050 - $238,990")),
@@ -430,7 +430,7 @@ workers_by_medianwages %>%
         plot.caption = element_text(size = 12))
 
 ```
-```{r occupations_by_wagebin, fig.width = 6, fig.height = 10,  fig.retina = 2, out.width = '100%'}
+```{r occupations_by_wagebin, fig.width = 6, fig.height = 10,  fig.retina = 2}
 occupations_by_wagebin <- read_csv("../microdata/data/occupations_by_wagebin.csv")
 
 occupations_filtered <- occupations_by_wagebin %>% 
