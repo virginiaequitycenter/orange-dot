@@ -6,6 +6,7 @@ Data for report
 * families_by_race.csv
 * families_by_tenure.csv
 * families_by_burden.csv
+* families_below_ess_by_income.csv
 * people_by_disability.csv
 * workers_by_hours.csv
 * workers_by_medianwages.csv
