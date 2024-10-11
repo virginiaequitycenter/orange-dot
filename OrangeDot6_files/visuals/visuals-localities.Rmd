@@ -1,12 +1,19 @@
 ---
 title: "Orange Dot 6.0 - Locality Profiles"
-# output: html_document
 output: 
-  word_document:
+  html_document:
     toc: true
     toc_depth: 3
 # output:
-#   bookdown::word_document2
+#   word_document:
+#     toc: true
+#     toc_depth: 3
+# header-includes: \usepackage[nottoc]{tocbibind}
+# output:
+#   bookdown::word_document2:
+#     toc: yes 
+#     lof: yes 
+#     lot: yes
 ---
 ```{css, echo=FALSE}
 .main-container.container-fluid {
@@ -15,6 +22,24 @@ output:
   margin-right: auto;
   padding: 0 4.167%;
 }
+
+.shadowbox {
+    background-color: #575757;
+    border-radius: 25px;
+    color: white;
+    font-family: "Times New Roman", serif;
+    font-style: italic;
+    /*font-weight: bold;*/
+    text-align: center;
+    max-width: 400px;
+    padding: 20px;
+    margin: 0 auto 10px auto;
+  }
+  
+.shadowbox p {
+  margin-bottom: 0;
+}
+
 
 ```
 
@@ -30,7 +55,7 @@ fullwidth_bar = list(
   fig.retina = 2
 ),
 fullwidth_map = list(
-  fig.width=9, fig.height=9,
+  fig.width = 7, fig.height=8,
   fig.retina = 2, out.width = '100%'
 ))
 
@@ -105,16 +130,19 @@ fam_ssw_dat <- fam_ssw %>%
   select(-c(estimate,moe)) %>% 
   pivot_wider(names_from = ssw_group, values_from = percent) %>% 
   pivot_longer(above_ssw:below_thirtyfive) %>% 
-  mutate(number = round(total_families*(value/100), 0),
+  mutate(total_group_round = round(total_families, -1),
+         number_round = round(total_group_round*(value/100), -1),
+         number = round(total_families*(value/100), 0),
+         percent_round = round(number_round/total_group_round *100, 0),
          group = factor(group,
                        levels = c("Black", "Hispanic", "White, Not Hispanic", "All Families"),
                        labels = c("Black Families", "Hispanic Families", "White Families", "All Families")),
          name = factor(name,
                        levels = c("above_ssw", "below_ssw", "below_thirtyfive"),
                        labels = c("Income above Self-Sufficiency", "Income below Self-Sufficiency & above $35K", "Income below $35K")),
-  text = case_when(value >= 20 ~ paste0(round(value, 0), "%\n(", prettyNum(number, big.mark=",", preserve.width="none"), ")"),
-                   value < 20 & value >= 1 ~ paste0(round(value, 0), "% (", prettyNum(number, big.mark=",", preserve.width="none"), ")"),
-                   value < 1 ~ ""),
+  text = case_when(percent_round >= 20 ~ paste0(round(percent_round, 0), "%\n(", prettyNum(number_round, big.mark=",", preserve.width="none"), ")"),
+                   percent_round < 20 & percent_round >= 1 ~ paste0(round(percent_round, 0), "% (", prettyNum(number_round, big.mark=",", preserve.width="none"), ")"),
+                   percent_round < 1 ~ ""),
   locality = str_to_title(str_remove(locality, ", Virginia")),
   locality_label = paste0(str_to_title(str_remove(locality, ", Virginia")), " (Annual Self-Sufficiency Standard: ", str_remove(self_suff_wage, "~"), ")"))
 
@@ -129,7 +157,11 @@ fam_ssw_totals <- fam_ssw_dat %>%
   group_by(locality, group) %>% 
   summarise(total_families = first(total_families),
             below_ssw_num = sum(number),
-            below_ssw_per = sum(round(value)))
+            below_ssw_per = sum(round(value))) %>% 
+  ungroup() %>% 
+  mutate(total_fam_round = round(total_families, -1),
+         below_ssw_round = round(below_ssw_num, -1),
+         below_per_round = round(below_ssw_round/total_fam_round *100, 0) )
   
   
 # Income distribution by race/ethnicity by county ----
@@ -198,15 +230,147 @@ ssw_tract <- ssw_tract %>%
 min_ssw <- min(ssw_tract$percent, na.rm = TRUE)
 max_ssw <- max(ssw_tract$percent, na.rm = TRUE)
 
-
 # Sources ----
-source_acs <- "Data Source: American Community Survey, 2022"
+source_acs <- "Data Source: U.S. Census Bureau, American Community Survey 5-year estimates, 2018-2022"
 uw_sss_source <- "Data Source: The Self-Sufficiency Standard for Virginia, 2021; The Center for Women’s Welfare, University of Washington"
 
 ```
 
 
-## Albemarle County
+```{r region_summary}
+# All families in region 
+all_fam_region <- fam_ssw_totals %>%
+  filter(group == "All Families") %>% 
+  group_by(group) %>% 
+  summarise(total_families = sum(total_families),
+            below_ssw_num = sum(below_ssw_num),
+            total_fam_round = sum(total_fam_round),
+            below_ssw_round = sum(below_ssw_round)) %>% 
+  ungroup() %>% 
+  mutate(below_ssw_per = round(below_ssw_num/total_families *100, 0),
+         below_per_round = round(below_ssw_round/total_fam_round *100, 0),
+         locality = "Total for Region") %>% 
+  select(locality, group, total_families, below_ssw_num, below_ssw_per, total_fam_round, below_ssw_round, below_per_round)
+
+below_ssw_all_region <- prettyNum(all_fam_region$below_ssw_round, big.mark=",", preserve.width="none")
+below_ssw_per_all_region <- all_fam_region$below_per_round
+total_fam_all_region <- prettyNum(all_fam_region$total_fam_round, big.mark=",", preserve.width="none")
+
+# Black families in region
+black_fam_region <- fam_ssw_totals %>%
+  filter(group == "Black Families") %>% 
+  group_by(group) %>% 
+  summarise(total_fam_round = sum(total_fam_round),
+            below_ssw_round = sum(below_ssw_round)) %>% 
+  ungroup() %>% 
+  mutate(below_per_round = round(below_ssw_round/total_fam_round *100, 0) )
+
+below_ssw_black_region <- prettyNum(black_fam_region$below_ssw_round, big.mark=",", preserve.width="none")
+below_ssw_per_black_region <- black_fam_region$below_per_round
+
+# Hispanic families in region
+his_fam_region <- fam_ssw_totals %>%
+  filter(group == "Hispanic Families") %>% 
+  group_by(group) %>% 
+  summarise(total_fam_round = sum(total_fam_round),
+            below_ssw_round = sum(below_ssw_round)) %>% 
+  ungroup() %>% 
+  mutate(below_per_round = round(below_ssw_round/total_fam_round *100, 0) )
+
+below_ssw_his_region <- prettyNum(his_fam_region$below_ssw_round, big.mark=",", preserve.width="none")
+below_ssw_per_his_region <- his_fam_region$below_per_round
+
+# White families in region
+white_fam_region <- fam_ssw_totals %>%
+  filter(group == "White Families") %>% 
+  group_by(group) %>% 
+  summarise(total_fam_round = sum(total_fam_round),
+            below_ssw_round = sum(below_ssw_round)) %>% 
+  ungroup() %>% 
+  mutate(below_per_round = round(below_ssw_round/total_fam_round *100, 0) )
+
+below_ssw_white_region <- prettyNum(white_fam_region$below_ssw_round, big.mark=",", preserve.width="none")
+below_ssw_per_white_region <- white_fam_region$below_per_round
+
+# Summary table for counties
+all_fam_region_table <- fam_ssw_totals %>%
+  filter(group == "All Families")
+
+all_fam_region_table <- rbind(all_fam_region_table, all_fam_region)
+
+# Creating comparison values from previous Orange Dot reports
+faminc_below35k <- faminc_race %>% 
+  filter(inc_band_group == "Earning below $35K")
+
+# All families under 35K
+faminc_below35k_all <- faminc_below35k %>% 
+  filter(group == "All Families") %>% 
+  group_by(locality) %>% 
+  summarise(total_families = first(total_families),
+            estimate = sum(estimate)) %>% 
+  ungroup() %>% 
+  summarise(total_families = sum(total_families),
+            estimate = sum(estimate)) %>% 
+  mutate(total_fam_round = round(total_families, -1),
+         estimate_round = round(estimate, -1),
+         estimate_per = round(estimate/total_families *100, 0),
+         estimate_per_round = round(estimate_round/total_fam_round *100, 0),
+         locality = "Total for Region",
+         inc_band_group = "Earning below $35K")
+
+```
+
+## Struggling Families in our Region
+
+There are `r total_fam_all_region` families living in the Charlottesville region, defined in this report as the City of Charlottesville and the surrounding counties of Albemarle, Louisa, Nelson, Buckingham, Greene, and Fluvanna.^[Family is defined as two or more people related by birth, marriage, or adoption and living in the same household.]
+
+Of these, `r below_ssw_all_region` families (`r paste0(below_ssw_per_all_region,"%")`) do not earn enough to provide for their family's basic needs.
+
+```{r region_table}
+# Region self sufficiency totals table ----
+
+all_fam_region_table %>% 
+  mutate(below_per_round = below_per_round/100) %>% 
+  ungroup() %>% 
+  select(-c(group, total_families, below_ssw_num, below_ssw_per, total_fam_round)) %>%
+  gt(rowname_col = "locality") %>% 
+  cols_label(
+    below_ssw_round = "Number of Struggling Families",
+    below_per_round = "Percent of Struggling Families"
+  ) %>% 
+  fmt_number(columns = below_ssw_round, 
+             decimals = 0, 
+             sep_mark = ",") %>%
+  fmt_percent(
+    columns = below_per_round,
+    decimals = 0
+  ) %>% 
+  tab_style(
+    style = list(
+      cell_fill(color = "#F6D2A9"),
+      cell_text(weight = "bold")
+    ),
+    locations = list(cells_body(rows = 8), cells_stub(rows = 8))
+  ) %>% 
+  tab_style(
+    style = cell_text(align = "center", v_align = "middle"),
+    locations = list(cells_column_labels(), cells_body())
+  ) %>% 
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = list(cells_column_labels())
+  ) %>% 
+  tab_header(
+    title = "Summary of Struggling Families in the Region"
+  ) %>% 
+  tab_source_note(
+    source_note = "Note: Values are approximate based on the U.S. Census Bureau, American Community Survey 5-year estimates (2018-2022)"
+  )
+  
+```
+
+
+### Albemarle County
 ```{r}
 # Set name
 local_name <- "Albemarle County"
@@ -221,28 +385,28 @@ local_name <- "Albemarle County"
 total_fam <- fam_ssw_totals %>%
   filter(group == "All Families" & locality == local_name)
 
-total <- prettyNum(total_fam$total_families, big.mark=",", preserve.width="none")
+total <- prettyNum(total_fam$total_fam_round, big.mark=",", preserve.width="none")
 locality_name <- total_fam$locality
-below_ssw <- prettyNum(total_fam$below_ssw_num, big.mark=",", preserve.width="none")
-below_ssw_per <- percent(total_fam$below_ssw_per, scale = 1, accuracy = 1)
+below_ssw <- prettyNum(total_fam$below_ssw_round, big.mark=",", preserve.width="none")
+below_ssw_per <- percent(total_fam$below_per_round, scale = 1, accuracy = 1)
 
 # Black families
 black_fam <- fam_ssw_totals %>%
   filter(group == "Black Families" & locality == local_name)
-below_ssw_black <- prettyNum(black_fam$below_ssw_num, big.mark=",", preserve.width="none")
-below_ssw_per_black <- black_fam$below_ssw_per
+below_ssw_black <- prettyNum(black_fam$below_ssw_round, big.mark=",", preserve.width="none")
+below_ssw_per_black <- black_fam$below_per_round
 
 # Hispanic families
 his_fam <- fam_ssw_totals %>%
   filter(group == "Hispanic Families" & locality == local_name)
-below_ssw_his <- prettyNum(his_fam$below_ssw_num, big.mark=",", preserve.width="none")
-below_ssw_per_his <- his_fam$below_ssw_per
+below_ssw_his <- prettyNum(his_fam$below_ssw_round, big.mark=",", preserve.width="none")
+below_ssw_per_his <- his_fam$below_per_round
 
 # White families
 white_fam <- fam_ssw_totals %>%
   filter(group == "White Families" & locality == local_name)
-below_ssw_white <- prettyNum(white_fam$below_ssw_num, big.mark=",", preserve.width="none")
-below_ssw_per_white <- white_fam$below_ssw_per
+below_ssw_white <- prettyNum(white_fam$below_ssw_round, big.mark=",", preserve.width="none")
+below_ssw_per_white <- white_fam$below_per_round
 
 # SSW table
 selfsuff_table_data <- selfsuff_table %>% 
@@ -371,7 +535,7 @@ fam_ssw_bar <- fam_ssw_dat %>%
 
 fam_ssw_bar %>% 
   arrange(desc(name)) %>% 
-  ggplot(aes(x = group, y = value, group = group, fill = name, 
+  ggplot(aes(x = group, y = percent_round, group = group, fill = name, 
              label = text)) +
   geom_bar(stat = "identity", color = "white") + 
   geom_text(size = 3.5, position = position_stack(vjust = 0.5), lineheight = 1) +
@@ -429,25 +593,28 @@ fam_ssw_bar %>%
 
 ```
 
-```{r, opts.label='fullwidth_map'}
+```{r, fig.width=9, fig.height=11, out.width = '100%'}
 # Geospatial visualization: Albemarle ----
-med_faminc_tract %>%
+income_map <- med_faminc_tract %>%
   filter(locality == local_name) %>%
-  mutate(text = paste0("$", prettyNum((round(estimate,-3)/1000), big.mark=",", preserve.width="none"), "K")) %>%
+  mutate(estimate = round(estimate, -3),
+         text = paste0("$", prettyNum((estimate/1000), big.mark=",", preserve.width="none"), "K")) %>%
   ggplot() +
   annotation_map_tile(zoomin = 1, progress = "none", cachedir = "../data/tempdata/") +
   geom_sf(aes(fill = estimate), color = "white") +
-  geom_sf_text(aes(label = text), size = 2.5, color = "black") +
+  geom_sf_text(aes(label = text), size = 3, color = "black") +
   scale_fill_stepsn(colors = rev(pal_inc),
                     labels = scales::label_currency(scale = 1),
-                    n.breaks = 7,
                     trans = "log",
+                    n.breaks = 7,
                     limits = c(min_inc, max_inc),
+                    na.value = "grey70",
                     guide = guide_colourbar(title = "Median Family Income",
                                             title.position = "top",
-                                            direction = "vertical",
-                                            theme = theme(legend.key.height  = unit(10, "lines"),
-                                                          legend.key.width = unit(0.5, "lines"),
+                                            direction = "horizontal",
+                                            title.hjust = 0.5,
+                                            theme = theme(legend.key.height  = unit(0.5, "lines"),
+                                                          legend.key.width = unit(26, "lines"),
                                                           text = element_text(size = 10))
                                             )
                     )+
@@ -455,43 +622,57 @@ med_faminc_tract %>%
       subtitle = local_name,
       caption = source_acs) +
   theme_map() +
-  theme(legend.position="right")
+  theme(legend.position="top",
+        legend.position.inside=c(1, 1.06),
+        legend.justification="center",
+        plot.title = element_text(size = 16),
+        plot.subtitle = element_text(size = 14),
+        plot.caption = element_text(size = 9))
+
+income_map
 
 ```
 
-```{r, opts.label='fullwidth_map'}
+```{r, fig.width=9, fig.height=11, out.width = '100%'}
 # Geospatial visualization: Albemarle ----
-alb_ssw_map <- ssw_tract %>%
-  filter(locality == "Albemarle County") %>%
+below_ss_map <- ssw_tract %>%
+  filter(locality == local_name) %>%
+  filter(ssw_group == "below") %>%
   mutate(text = paste0(round(percent,0), "%")) %>%
   ggplot() +
   annotation_map_tile(zoomin = 1, progress = "none", cachedir = "../data/tempdata/") +
   geom_sf(aes(fill = percent), color = "white") +
-  geom_sf_text(aes(label = text), size = 2.5, color = "black") +
+  geom_sf_text(aes(label = text), size = 3.5, color = "black") +
   scale_fill_stepsn(colors = pal_ssw,
                     labels = scales::label_percent(scale = 1),
                     breaks = c(5,7,15,20,40,60),
-                    # nice.breaks = TRUE,
                     trans = "log",
                     limits = c(min_ssw, max_ssw),
-                    guide = guide_colourbar(title = "Percent Below SSS",
+                    na.value = "grey70",
+                    guide = guide_colourbar(title = "Percent Below Self-Sufficient Wages",
                                             title.position = "top",
-                                            direction = "vertical",
-                                            theme = theme(legend.key.height  = unit(10, "lines"),
-                                                          legend.key.width = unit(0.5, "lines"),
+                                            direction = "horizontal",
+                                            title.hjust = 0.5,
+                                            theme = theme(legend.key.height  = unit(0.5, "lines"),
+                                                          legend.key.width = unit(18, "lines"),
                                                           text = element_text(size = 10)) 
                                             )
                     )+
-  labs(title = "Families with Income below Self Sufficiency Standard",
+  labs(title = "Families with Income below Self-Sufficiency",
       subtitle = local_name,
-      caption = "") +
+      caption = source_acs) +
   theme_map()+
-  theme(legend.position="right")
+  theme(legend.position="top",
+        legend.position.inside=c(1, 1.06),
+        legend.justification="center",
+        plot.title = element_text(size = 16),
+        plot.subtitle = element_text(size = 14),
+        plot.caption = element_text(size = 9))
 
-alb_ssw_map
+below_ss_map
 ```
 
-## Buckingham County
+### Buckingham County
 ```{r, echo=FALSE}
 # Set name
 local_name <- "Buckingham County"
@@ -572,68 +753,88 @@ fam_ssw_bar %>%
 
 ```
 
-```{r, opts.label='fullwidth_map'}
-# Geospatial visualization: Buckingham ----
-buc_inc_map <- med_faminc_tract %>%
-  filter(locality == "Buckingham County") %>%
-  mutate(text = paste0("$", prettyNum(estimate, big.mark=",", preserve.width="none"))) %>%
+```{r geo_income, fig.width = 7, fig.height=8, out.width = '100%'}
+
+income_map <- med_faminc_tract %>%
+  filter(locality == local_name) %>%
+  mutate(text = case_when(is.na(estimate) ~ "",
+                          .default = paste0("$", prettyNum(estimate, big.mark=",", preserve.width="none")))) %>%
   ggplot() +
   annotation_map_tile(zoomin = 1, progress = "none", cachedir = "../data/tempdata/") +
   geom_sf(aes(fill = estimate), color = "white") +
-  geom_sf_text(aes(label = text), size = 2.5, color = "black") +
+  geom_sf_text(aes(label = text), size = 4, color = "black") +
   scale_fill_stepsn(colors = rev(pal_inc),
                     labels = scales::label_currency(scale = 1),
                     trans = "log",
                     n.breaks = 7,
                     limits = c(min_inc, max_inc),
+                    na.value = "grey70",
                     guide = guide_colourbar(title = "Median Family Income",
                                             title.position = "top",
-                                            direction = "vertical",
-                                            theme = theme(legend.key.height  = unit(10, "lines"),
-                                                          legend.key.width = unit(0.5, "lines"),
+                                            direction = "horizontal",
+                                            title.hjust = 0.5,
+                                            theme = theme(legend.key.height  = unit(0.5, "lines"),
+                                                          legend.key.width = unit(26, "lines"),
                                                           text = element_text(size = 10))
                                             )
                     )+
   labs(title = "Median Family Income by Tract",
-      subtitle = "Buckingham County",
-      caption = source_acs <- "Data Source: American Community Survey, 2022") +
+      subtitle = local_name,
+      caption = source_acs) +
   theme_map() +
-  theme(legend.position="right")
+  theme(legend.position="top",
+        legend.position.inside=c(1, 1.06),
+        legend.justification="center",
+        plot.title = element_text(size = 16),
+        plot.subtitle = element_text(size = 14),
+        plot.caption = element_text(size = 9))
+
+income_map
 
 
-buc_ssw_map <- ssw_tract %>%
-  filter(locality == "Buckingham County") %>%
+```
+
+```{r geo_below_ss, fig.width = 7, fig.height=8, out.width = '100%'}
+
+below_ss_map <- ssw_tract %>%
+  filter(locality == local_name) %>%
   filter(ssw_group == "below") %>%
   mutate(text = paste0(round(percent,0), "%")) %>%
   ggplot() +
   annotation_map_tile(zoomin = 1, progress = "none", cachedir = "../data/tempdata/") +
   geom_sf(aes(fill = percent), color = "white") +
-  geom_sf_text(aes(label = text), size = 2.5, color = "black") +
+  geom_sf_text(aes(label = text), size = 4, color = "black") +
   scale_fill_stepsn(colors = pal_ssw,
                     labels = scales::label_percent(scale = 1),
                     breaks = c(5,7,15,20,40,60),
                     trans = "log",
                     limits = c(min_ssw, max_ssw),
-                    guide = guide_colourbar(title = "Percent Below SSS",
+                    na.value = "grey70",
+                    guide = guide_colourbar(title = "Percent Below Self-Sufficient Wages",
                                             title.position = "top",
-                                            direction = "vertical",
-                                            theme = theme(legend.key.height  = unit(10, "lines"),
-                                                          legend.key.width = unit(0.5, "lines"),
+                                            direction = "horizontal",
+                                            title.hjust = 0.5,
+                                            theme = theme(legend.key.height  = unit(0.5, "lines"),
+                                                          legend.key.width = unit(18, "lines"),
                                                           text = element_text(size = 10)) 
                                             )
                     )+
-  labs(title = "Families with Income below Self Sufficiency Standard",
-      subtitle = "Buckingham County",
-      caption = "") +
+  labs(title = "Families with Income below Self-Sufficiency",
+      subtitle = local_name,
+      caption = source_acs) +
   theme_map()+
-  theme(legend.position="right")
+  theme(legend.position="top",
+        legend.position.inside=c(1, 1.06),
+        legend.justification="center",
+        plot.title = element_text(size = 16),
+        plot.subtitle = element_text(size = 14),
+        plot.caption = element_text(size = 9))
 
-buc_inc_map 
+below_ss_map
 
-buc_ssw_map
 ```
 
-## City of Charlottesville
+### City of Charlottesville
 ```{r, echo=FALSE}
 # Set name
 local_name <- "Charlottesville City"
@@ -652,104 +853,15 @@ local_name <- "Charlottesville City"
 <<ssw_bar_w_hisp>>
 ```
 
-```{r, echo=FALSE,fig.width=7, fig.height=5}
-# # Income distribution by race/ethnicity by county ----
-# faminc_cville <- faminc_data %>% 
-#   filter(locality == "Charlottesville city, Virginia")
-# 
-# faminc_cville %>% 
-#   arrange(inc_rank) %>%
-#   ggplot(aes(x = group, y = percent, group = group, fill = inc_band_group, 
-#                label = text)) +
-#   geom_bar(stat = "identity", color = "white") + 
-#   geom_text(size = 3, position = position_stack(vjust = 0.5)) +
-#   scale_fill_manual(values = faminc_pal) +
-#   scale_x_discrete(name = "") +
-#   scale_y_continuous(labels = label_percent(scale = 1),
-#                      name = "") +
-#   guides(fill = guide_legend(reverse = TRUE)) +
-#   coord_flip() + 
-#   labs(title = faminc_title, 
-#        subtitle = unique(faminc_cville$locality_label),
-#        caption = source_acs) +
-#   theme_minimal() +
-#   theme(legend.title=element_blank(),
-#         legend.position = "top",
-#         legend.location = "plot",
-#         legend.justification="center",
-#           panel.grid.major.x = element_blank(),
-#           axis.ticks = element_blank(),
-#           panel.grid.minor = element_blank(),
-#           plot.title.position= "plot",
-#           plot.caption.position = "plot")
-
+```{r geo_income_cville, fig.width = 7, fig.height=8, out.width = '100%'}
+<<geo_income>>
 ```
 
-```{r, opts.label='fullwidth_map'}
-
-# Geospatial visualization: Charlottesville ----
-cville_inc_map <- med_faminc_tract %>%
-  filter(locality == "Charlottesville City") %>%
-  mutate(text = case_when(is.na(estimate) ~ "",
-                          .default = paste0("$", prettyNum(estimate, big.mark=",", preserve.width="none")))) %>%
-  ggplot() +
-  annotation_map_tile(zoomin = 1, progress = "none", cachedir = "../data/tempdata/") +
-  geom_sf(aes(fill = estimate), color = "white") +
-  geom_sf_text(aes(label = text), size = 2.5, color = "black") +
-  scale_fill_stepsn(colors = rev(pal_inc),
-                    labels = scales::label_currency(scale = 1),
-                    trans = "log",
-                    n.breaks = 7,
-                    limits = c(min_inc, max_inc),
-                    na.value = "grey70",
-                    guide = guide_colourbar(title = "Median Family Income",
-                                            title.position = "top",
-                                            direction = "vertical",
-                                            theme = theme(legend.key.height  = unit(10, "lines"),
-                                                          legend.key.width = unit(0.5, "lines"),
-                                                          text = element_text(size = 10))
-                                            )
-                    )+
-  labs(title = "Median Family Income by Tract",
-      subtitle = "Charlottesville",
-      caption = source_acs <- "Data Source: American Community Survey, 2022") +
-  theme_map() +
-  theme(legend.position="right")
-
-
-cville_ssw_map <- ssw_tract %>%
-  filter(locality == "Charlottesville City") %>%
-  filter(ssw_group == "below") %>%
-  mutate(text = paste0(round(percent,0), "%")) %>%
-  ggplot() +
-  annotation_map_tile(zoomin = 1, progress = "none", cachedir = "../data/tempdata/") +
-  geom_sf(aes(fill = percent), color = "white") +
-  geom_sf_text(aes(label = text), size = 2.5, color = "black") +
-  scale_fill_stepsn(colors = pal_ssw,
-                    labels = scales::label_percent(scale = 1),
-                    breaks = c(5,7,15,20,40,60),
-                    trans = "log",
-                    limits = c(min_ssw, max_ssw),
-                    guide = guide_colourbar(title = "Percent Below SSS",
-                                            title.position = "top",
-                                            direction = "vertical",
-                                            theme = theme(legend.key.height  = unit(10, "lines"),
-                                                          legend.key.width = unit(0.5, "lines"),
-                                                          text = element_text(size = 10)) 
-                                            )
-                    )+
-  labs(title = "Families with Income below Self Sufficiency Standard",
-      subtitle = "Charlottesville",
-      caption = "") +
-  theme_map()+
-  theme(legend.position="right")
-
-cville_inc_map 
-
-cville_ssw_map
+```{r geo_below_ss_cville, fig.width = 7, fig.height=8, out.width = '100%'}
+<<geo_below_ss>>
 ```
 
-## Fluvanna County
+### Fluvanna County
 ```{r, echo=FALSE}
 # Set name
 local_name <- "Fluvanna County"
@@ -768,100 +880,16 @@ local_name <- "Fluvanna County"
 <<ssw_bar>>
 ```
 
-```{r, echo=FALSE,fig.width=6.5, fig.height=4}
-# # Income distribution by race/ethnicity by county ----
-# faminc_flu <- faminc_data %>% 
-#   filter(locality == "Fluvanna County, Virginia" & group != "Hispanic Families")
-# 
-# faminc_flu %>% 
-#   arrange(inc_rank) %>%
-#   ggplot(aes(x = group, y = percent, group = group, fill = inc_band_group, 
-#                label = text)) +
-#   geom_bar(stat = "identity", color = "white") + 
-#   geom_text(size = 3, position = position_stack(vjust = 0.5)) +
-#   scale_fill_manual(values = faminc_pal) +
-#   scale_x_discrete(name = "") +
-#   scale_y_continuous(labels = label_percent(scale = 1),
-#                      name = "") +
-#   guides(fill = guide_legend(reverse = TRUE)) +
-#   coord_flip() + 
-#   labs(title = faminc_title, 
-#        subtitle = unique(faminc_flu$locality_label),
-#        caption = source_acs) +
-#   theme_minimal() +
-#   theme(legend.title=element_blank(),
-#         legend.position = "top",
-#         legend.location = "plot",
-#         legend.justification="center",
-#           panel.grid.major.x = element_blank(),
-#           axis.ticks = element_blank(),
-#           panel.grid.minor = element_blank(),
-#           plot.title.position= "plot",
-#           plot.caption.position = "plot")
 
+```{r geo_income_flu, fig.width = 7, fig.height=8, out.width = '100%'}
+<<geo_income>>
 ```
 
-```{r, opts.label='fullwidth_map'}
-# Geospatial visualization: Fluvanna County ----
-fluv_inc_map <- med_faminc_tract %>%
-  filter(locality == "Fluvanna County") %>%
-  mutate(text = paste0("$", prettyNum(estimate, big.mark=",", preserve.width="none"))) %>%
-  ggplot() +
-  annotation_map_tile(zoomin = 1, progress = "none", cachedir = "../data/tempdata/") +
-  geom_sf(aes(fill = estimate), color = "white") +
-  geom_sf_text(aes(label = text), size = 2.5, color = "black") +
-  scale_fill_stepsn(colors = rev(pal_inc),labels = scales::label_currency(scale = 1), 
-                    trans = "log",
-                    n.breaks = 7,
-                    limits = c(min_inc, max_inc),
-                    guide = guide_colourbar(title = "Median Family Income",
-                                            title.position = "top",
-                                            direction = "vertical",
-                                            theme = theme(legend.key.height  = unit(10, "lines"),
-                                                          legend.key.width = unit(0.5, "lines"),
-                                                          text = element_text(size = 10))
-                                            )
-                    )+
-  labs(title = "Median Family Income by Tract",
-      subtitle = "Fluvanna County",
-      caption = source_acs <- "Data Source: American Community Survey, 2022") +
-  theme_map() +
-  theme(legend.position="right")
-
-
-fluv_ssw_map <- ssw_tract %>%
-  filter(locality == "Fluvanna County") %>%
-  filter(ssw_group == "below") %>%
-  mutate(text = paste0(round(percent,0), "%")) %>%
-  ggplot() +
-  annotation_map_tile(zoomin = 1, progress = "none", cachedir = "../data/tempdata/") +
-  geom_sf(aes(fill = percent), color = "white") +
-  geom_sf_text(aes(label = text), size = 2.5, color = "black") +
-  scale_fill_stepsn(colors = pal_ssw,
-                    labels = scales::label_percent(scale = 1),
-                    breaks = c(5,7,15,20,40,60),
-                    trans = "log",
-                    limits = c(min_ssw, max_ssw),
-                    guide = guide_colourbar(title = "Percent Below SSS",
-                                            title.position = "top",
-                                            direction = "vertical",
-                                            theme = theme(legend.key.height  = unit(10, "lines"),
-                                                          legend.key.width = unit(0.5, "lines"),
-                                                          text = element_text(size = 10)) 
-                                            )
-                    )+
-  labs(title = "Families with Income below Self Sufficiency Standard",
-      subtitle = "Fluvanna County",
-      caption = "") +
-  theme_map()+
-  theme(legend.position="right")
-
-fluv_inc_map 
-
-fluv_ssw_map
+```{r geo_below_ss_flu, fig.width = 7, fig.height=8, out.width = '100%'}
+<<geo_below_ss>>
 ```
 
-## Greene County
+### Greene County
 ```{r, echo=FALSE}
 # Set name
 local_name <- "Greene County"
@@ -880,101 +908,16 @@ local_name <- "Greene County"
 <<ssw_bar>>
 ```
 
-```{r, echo=FALSE,fig.width=6.5, fig.height=4}
-# # Income distribution by race/ethnicity by county ----
-# faminc_grn <- faminc_data %>% 
-#   filter(locality == "Greene County, Virginia" & group != "Hispanic Families")
-# 
-# faminc_grn %>% 
-#   arrange(inc_rank) %>%
-#   ggplot(aes(x = group, y = percent, group = group, fill = inc_band_group, 
-#                label = text)) +
-#   geom_bar(stat = "identity", color = "white") + 
-#   geom_text(size = 3, position = position_stack(vjust = 0.5)) +
-#   scale_fill_manual(values = faminc_pal) +
-#   scale_x_discrete(name = "") +
-#   scale_y_continuous(labels = label_percent(scale = 1),
-#                      name = "") +
-#   guides(fill = guide_legend(reverse = TRUE)) +
-#   coord_flip() + 
-#   labs(title = faminc_title, 
-#        subtitle = unique(faminc_grn$locality_label),
-#        caption = source_acs) +
-#   theme_minimal() +
-#   theme(legend.title=element_blank(),
-#         legend.position = "top",
-#         legend.location = "plot",
-#         legend.justification="center",
-#           panel.grid.major.x = element_blank(),
-#           axis.ticks = element_blank(),
-#           panel.grid.minor = element_blank(),
-#           plot.title.position= "plot",
-#           plot.caption.position = "plot")
 
+```{r geo_income_grn, fig.width = 7, fig.height=8, out.width = '100%'}
+<<geo_income>>
 ```
 
-```{r, opts.label='fullwidth_map'}
-# Geospatial visualization: Greene County ----
-greene_inc_map <- med_faminc_tract %>%
-  filter(locality == "Greene County") %>%
-  mutate(text = paste0("$", prettyNum(estimate, big.mark=",", preserve.width="none"))) %>%
-  ggplot() +
-  annotation_map_tile(zoomin = 1, progress = "none", cachedir = "../data/tempdata/") +
-  geom_sf(aes(fill = estimate), color = "white") +
-  geom_sf_text(aes(label = text), size = 2.5, color = "black") +
-  scale_fill_stepsn(colors = rev(pal_inc),
-                    labels = scales::label_currency(scale = 1),
-                    trans = "log",
-                    n.breaks = 7,
-                    limits = c(min_inc, max_inc),
-                    guide = guide_colourbar(title = "Median Family Income",
-                                            title.position = "top",
-                                            direction = "vertical",
-                                            theme = theme(legend.key.height  = unit(10, "lines"),
-                                                          legend.key.width = unit(0.5, "lines"),
-                                                          text = element_text(size = 10))
-                                            )
-                    )+
-  labs(title = "Median Family Income by Tract",
-      subtitle = "Greene County",
-      caption = source_acs <- "Data Source: American Community Survey, 2022") +
-  theme_map() +
-  theme(legend.position="right")
-
-
-greene_ssw_map <- ssw_tract %>%
-  filter(locality == "Greene County") %>%
-  filter(ssw_group == "below") %>%
-  mutate(text = paste0(round(percent,0), "%")) %>%
-  ggplot() +
-  annotation_map_tile(zoomin = 1, progress = "none", cachedir = "../data/tempdata/") +
-  geom_sf(aes(fill = percent), color = "white") +
-  geom_sf_text(aes(label = text), size = 2.5, color = "black") +
-  scale_fill_stepsn(colors = pal_ssw,
-                    labels = scales::label_percent(scale = 1),
-                    breaks = c(5,7,15,20,40,60),
-                    trans = "log",
-                    limits = c(min_ssw, max_ssw),
-                    guide = guide_colourbar(title = "Percent Below SSS",
-                                            title.position = "top",
-                                            direction = "vertical",
-                                            theme = theme(legend.key.height  = unit(10, "lines"),
-                                                          legend.key.width = unit(0.5, "lines"),
-                                                          text = element_text(size = 10)) 
-                                            )
-                    )+
-  labs(title = "Families with Income below Self Sufficiency Standard",
-      subtitle = "Greene County",
-      caption = "") +
-  theme_map()+
-  theme(legend.position="right")
-
-greene_inc_map
-
-greene_ssw_map
+```{r geo_below_ss_grn, fig.width = 7, fig.height=8, out.width = '100%'}
+<<geo_below_ss>>
 ```
 
-## Louisa County
+### Louisa County
 ```{r, echo=FALSE}
 # Set name
 local_name <- "Louisa County"
@@ -993,101 +936,16 @@ local_name <- "Louisa County"
 <<ssw_bar>>
 ```
 
-```{r, echo=FALSE,fig.width=6.5, fig.height=4}
-# # Income distribution by race/ethnicity by county ----
-# faminc_lou <- faminc_data %>% 
-#   filter(locality == "Louisa County, Virginia" & group != "Hispanic Families")
-# 
-# faminc_lou %>% 
-#   arrange(inc_rank) %>%
-#   ggplot(aes(x = group, y = percent, group = group, fill = inc_band_group, 
-#                label = text)) +
-#   geom_bar(stat = "identity", color = "white") + 
-#   geom_text(size = 3, position = position_stack(vjust = 0.5)) +
-#   scale_fill_manual(values = faminc_pal) +
-#   scale_x_discrete(name = "") +
-#   scale_y_continuous(labels = label_percent(scale = 1),
-#                      name = "") +
-#   guides(fill = guide_legend(reverse = TRUE)) +
-#   coord_flip() + 
-#   labs(title = faminc_title, 
-#        subtitle = unique(faminc_lou$locality_label),
-#        caption = source_acs) +
-#   theme_minimal() +
-#   theme(legend.title=element_blank(),
-#         legend.position = "top",
-#         legend.location = "plot",
-#         legend.justification="center",
-#           panel.grid.major.x = element_blank(),
-#           axis.ticks = element_blank(),
-#           panel.grid.minor = element_blank(),
-#           plot.title.position= "plot",
-#           plot.caption.position = "plot")
 
+```{r geo_income_lou, fig.width = 7, fig.height=8, out.width = '100%'}
+<<geo_income>>
 ```
 
-```{r, opts.label='fullwidth_map'}
-# Geospatial visualization: Louisa County ----
-louisa_inc_map <- med_faminc_tract %>%
-  filter(locality == "Louisa County") %>%
-  mutate(text = paste0("$", prettyNum(estimate, big.mark=",", preserve.width="none"))) %>%
-  ggplot() +
-  annotation_map_tile(zoomin = 1, progress = "none", cachedir = "../data/tempdata/") +
-  geom_sf(aes(fill = estimate), color = "white") +
-  geom_sf_text(aes(label = text), size = 2.5, color = "black") +
-  scale_fill_stepsn(colors = rev(pal_inc),
-                    labels = scales::label_currency(scale = 1),
-                    trans = "log",
-                    n.breaks = 7,
-                    limits = c(min_inc, max_inc),
-                    guide = guide_colourbar(title = "Median Family Income",
-                                            title.position = "top",
-                                            direction = "vertical",
-                                            theme = theme(legend.key.height  = unit(10, "lines"),
-                                                          legend.key.width = unit(0.5, "lines"),
-                                                          text = element_text(size = 10))
-                                            )
-                    )+
-  labs(title = "Median Family Income by Tract",
-      subtitle = "Louisa County",
-      caption = source_acs <- "Data Source: American Community Survey, 2022") +
-  theme_map() +
-  theme(legend.position="right")
-
-
-louisa_ssw_map <- ssw_tract %>%
-  filter(locality == "Louisa County") %>%
-  filter(ssw_group == "below") %>%
-  mutate(text = paste0(round(percent,0), "%")) %>%
-  ggplot() +
-  annotation_map_tile(zoomin = 1, progress = "none", cachedir = "../data/tempdata/") +
-  geom_sf(aes(fill = percent), color = "white") +
-  geom_sf_text(aes(label = text), size = 2.5, color = "black") +
-  scale_fill_stepsn(colors = pal_ssw,
-                    labels = scales::label_percent(scale = 1),
-                    breaks = c(5,7,15,20,40,60),
-                    trans = "log",
-                    limits = c(min_ssw, max_ssw),
-                    guide = guide_colourbar(title = "Percent Below SSS",
-                                            title.position = "top",
-                                            direction = "vertical",
-                                            theme = theme(legend.key.height  = unit(10, "lines"),
-                                                          legend.key.width = unit(0.5, "lines"),
-                                                          text = element_text(size = 10)) 
-                                            )
-                    )+
-  labs(title = "Families with Income below Self Sufficiency Standard",
-      subtitle = "Louisa County",
-      caption = "") +
-  theme_map()+
-  theme(legend.position="right")
-
-louisa_inc_map 
-
-louisa_ssw_map
+```{r geo_below_ss_lou, fig.width = 7, fig.height=8, out.width = '100%'}
+<<geo_below_ss>>
 ```
 
-## Nelson County
+### Nelson County
 ```{r, echo=FALSE}
 # Set name
 local_name <- "Nelson County"
@@ -1106,96 +964,11 @@ local_name <- "Nelson County"
 <<ssw_bar>>
 ```
 
-```{r, echo=FALSE,fig.width=6.5, fig.height=4}
-# # Income distribution by race/ethnicity by county ----
-# faminc_nel <- faminc_data %>% 
-#   filter(locality == "Nelson County, Virginia" & group != "Hispanic Families")
-# 
-# faminc_nel %>% 
-#   arrange(inc_rank) %>%
-#   ggplot(aes(x = group, y = percent, group = group, fill = inc_band_group, 
-#                label = text)) +
-#   geom_bar(stat = "identity", color = "white") + 
-#   geom_text(size = 3, position = position_stack(vjust = 0.5)) +
-#   scale_fill_manual(values = faminc_pal) +
-#   scale_x_discrete(name = "") +
-#   scale_y_continuous(labels = label_percent(scale = 1),
-#                      name = "") +
-#   guides(fill = guide_legend(reverse = TRUE)) +
-#   coord_flip() + 
-#   labs(title = faminc_title, 
-#        subtitle = unique(faminc_nel$locality_label),
-#        caption = source_acs) +
-#   theme_minimal() +
-#   theme(legend.title=element_blank(),
-#         legend.position = "top",
-#         legend.location = "plot",
-#         legend.justification="center",
-#           panel.grid.major.x = element_blank(),
-#           axis.ticks = element_blank(),
-#           panel.grid.minor = element_blank(),
-#           plot.title.position= "plot",
-#           plot.caption.position = "plot")
 
+```{r geo_income_nel, fig.width = 7, fig.height=8, out.width = '100%'}
+<<geo_income>>
 ```
 
-```{r, opts.label='fullwidth_map'}
-# Geospatial visualization: Nelson County ----
-nels_inc_map <- med_faminc_tract %>%
-  filter(locality == "Nelson County") %>%
-  mutate(text = paste0("$", prettyNum(estimate, big.mark=",", preserve.width="none"))) %>%
-  ggplot() +
-  annotation_map_tile(zoomin = 1, progress = "none", cachedir = "../data/tempdata/") +
-  geom_sf(aes(fill = estimate), color = "white") +
-  geom_sf_text(aes(label = text), size = 2.5, color = "black") +
-  scale_fill_stepsn(colors = rev(pal_inc),
-                    labels = scales::label_currency(scale = 1),
-                    trans = "log",
-                    n.breaks = 7,
-                    limits = c(min_inc, max_inc),
-                    guide = guide_colourbar(title = "Median Family Income",
-                                            title.position = "top",
-                                            direction = "vertical",
-                                            theme = theme(legend.key.height  = unit(10, "lines"),
-                                                          legend.key.width = unit(0.5, "lines"),
-                                                          text = element_text(size = 10))
-                                            )
-                    )+
-  labs(title = "Median Family Income by Tract",
-      subtitle = "Nelson County",
-      caption = source_acs <- "Data Source: American Community Survey, 2022") +
-  theme_map() +
-  theme(legend.position="right")
-
-
-nels_ssw_map <- ssw_tract %>%
-  filter(locality == "Nelson County") %>%
-  filter(ssw_group == "below") %>%
-  mutate(text = paste0(round(percent,0), "%")) %>%
-  ggplot() +
-  annotation_map_tile(zoomin = 1, progress = "none", cachedir = "../data/tempdata/") +
-  geom_sf(aes(fill = percent), color = "white") +
-  geom_sf_text(aes(label = text), size = 2.5, color = "black") +
-  scale_fill_stepsn(colors = pal_ssw,
-                    labels = scales::label_percent(scale = 1),
-                    breaks = c(5,7,15,20,40,60),
-                    trans = "log",
-                    limits = c(min_ssw, max_ssw),
-                    guide = guide_colourbar(title = "Percent Below SSS",
-                                            title.position = "top",
-                                            direction = "vertical",
-                                            theme = theme(legend.key.height  = unit(10, "lines"),
-                                                          legend.key.width = unit(0.5, "lines"),
-                                                          text = element_text(size = 10)) 
-                                            )
-                    )+
-  labs(title = "Families with Income below Self Sufficiency Standard",
-      subtitle = "Nelson County",
-      caption = "") +
-  theme_map()+
-  theme(legend.position="right")
-
-nels_inc_map
-
-nels_ssw_map
+```{r geo_below_ss_nel, fig.width = 7, fig.height=8, out.width = '100%'}
+<<geo_below_ss>>
 ```

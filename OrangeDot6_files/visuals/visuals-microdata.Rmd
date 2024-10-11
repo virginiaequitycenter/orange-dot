@@ -51,57 +51,128 @@ blue_dot <- "#3B8EA5"
 # geography
 geography_label <- "Thomas Jefferson Planning District"
 # citations
-acs_pums <- "Data Source: ACS Public Use Microdata Sample (PUMS), U.S. Census Bureau."
+acs_pums <- "Data Source: ACS Public Use Microdata Sample (PUMS), 2018-2022; U.S. Census Bureau."
 
 
 ```
 
+```{r race_by_percent_2, fig.width = 9.5, fig.height = 6, fig.retina = 2}
+# fam_by_race_2 <- read_csv("../microdata/data/families_by_race.csv")
+# 
+# fam_by_race_group_total <- fam_by_race_2 %>% 
+#   group_by(hhldr_race_ethn) %>% 
+#   summarise(group_total = sum(count)) %>% 
+#   ungroup()
+# 
+# fam_by_race_by_group_totals <- fam_by_race_2 %>% 
+#   left_join(fam_by_race_group_total) %>% 
+#   select(-percent) %>% 
+#   mutate(count_round = round(count, -2),
+#          group_total_round = round(group_total, -2),
+#     percent_of_group_total = round(count_round/group_total_round *100, 0)) %>% 
+#   mutate(
+#     race_ethn = case_when(hhldr_race_ethn %in% c("Hispanic", "Black", "White") ~ hhldr_race_ethn,
+#                           .default = "All Other Groups"),
+#     race_ethn = factor(race_ethn, levels = c("All Other Groups", "Hispanic", "Black", "White"), labels = c("All Other Groups", "Hispanic Families", "Black Families", "White Families")),
+#          below_ess_finc = factor(below_ess_finc, levels = c("Yes", "No"),
+#                                  labels = c("Income Below Self-Sufficiency Standard", "Income Above Self-Sufficiency Standard")))
+# 
+# fam_by_race_by_group_totals %>% 
+#   filter(hhldr_race_ethn %in% c("White", "Black", "Hispanic")) %>% 
+#   ggplot(aes(x = percent_of_group_total, y = race_ethn, group = race_ethn, fill = below_ess_finc)) +
+#   geom_bar(stat = "identity", position = position_dodge2(width = 0.8, preserve = "single")) +
+#   geom_text(aes(label = paste0(scales::percent(percent_of_group_total / 100, accuracy = 1), " (",
+#                         scales::comma(count_round), " families)")),
+#             position = position_dodge2(width = 0.8, preserve = "single"),
+#             vjust = 0.5,
+#             hjust = -0.05,
+#             size = 5) +
+#   scale_y_discrete(name = "") +
+#   scale_x_continuous(name = "",
+#                      limits = c(0,100),
+#                      breaks = seq(0, 100, by = 25),
+#                      label= label_percent(scale = 1),
+#                      expand = expansion(mult = c(0, 0.18)),
+#                      sec.axis = dup_axis()) +
+#   scale_fill_manual(values = c(orange_dot, green_dot)) +
+#   labs(title = "Race/Ethnicity of Families Earning Below and Above the Self-Sufficiency Standard",
+#        subtitle = geography_label,
+#        caption = acs_pums) +
+#   theme_minimal() +
+#   theme(legend.title=element_blank(),
+#         legend.position = "top",
+#         legend.location = "plot",
+#         legend.justification="center",
+#         legend.text = element_text(size = 13),
+#           panel.grid.major.y = element_blank(),
+#           axis.ticks = element_blank(),
+#           panel.grid.minor = element_blank(),
+#           plot.title.position= "plot",
+#           plot.caption.position = "plot",
+#         axis.text.y = element_text(color = "black", size = 14),
+#         text = element_text(size = 14),
+#         axis.text.x = element_text(size=14),
+#         plot.title = element_text(size = 18),
+#         plot.caption = element_text(size = 12))
+```
+
 
 ```{r race_by_percent, fig.width = 9.5, fig.height = 6, fig.retina = 2}
-fam_by_race <- read_csv("../microdata/data/families_by_race.csv") %>% 
-  mutate(
+fam_by_race <- read_csv("../microdata/data/families_by_race.csv") 
+
+fam_by_ess_totals <- fam_by_race %>% 
+  group_by(below_ess_finc) %>% 
+  summarise(sss_group_total = sum(count)) %>% 
+  ungroup()
+
+fam_by_race_rounded<- fam_by_race %>%
+  left_join(fam_by_ess_totals) %>% 
+  mutate(count_rounded = round(count, -2),
+         sss_group_tot_rounded = round(sss_group_total, -2),
+         percent_rounded = round(count_rounded/sss_group_tot_rounded *100, 0),
     race_ethn = case_when(hhldr_race_ethn %in% c("Hispanic", "Black", "White") ~ hhldr_race_ethn,
                           .default = "All Other Groups"),
-    race_ethn = factor(race_ethn, levels = c("All Other Groups", "Hispanic", "Black", "White"), labels = c("All Other Groups", "Hispanic Families", "Black Families", "White Families")),
-         label_text = case_when(
-           below_ess_finc == "Yes" ~ paste0(prettyNum(count, big.mark=",", preserve.width="none"), " (", round(percent, 0), "% of families below SSS)"),
-           below_ess_finc == "No" ~ paste0(prettyNum(count, big.mark=",", preserve.width="none"), " (", round(percent, 0), "% of families above SSS)")),
+    race_ethn = factor(race_ethn, levels = c("White", "Black", "Hispanic", "All Other Groups"), labels = c("White\nFamilies", "Black\nFamilies", "Hispanic\nFamilies", "All Other Groups")),
+         label_text = paste0(scales::percent(percent_rounded / 100, accuracy = 1), "\n(",
+                        scales::comma(count_rounded), " families)"),
          below_ess_finc = factor(below_ess_finc, levels = c("Yes", "No"),
-                                 labels = c("Income Below Self-Sufficiency Standard", "Income Above Self-Sufficiency Standard")))
+                                 labels = c("Income Below Self-Sufficiency Standard", "Income Above Self-Sufficiency Standard"))
+    )
 
-fam_by_race %>% 
+fam_by_race_rounded %>% 
   filter(hhldr_race_ethn %in% c("White", "Black", "Hispanic")) %>% 
   ggplot(aes(x = percent, y = race_ethn, group = race_ethn, fill = below_ess_finc)) +
-  geom_bar(stat = "identity", position = position_dodge2(width = 0.8, preserve = "single")) +
-  geom_text(aes(label = paste0(scales::percent(percent / 100, accuracy = 1), " (",
-                        scales::comma(count), " families)")),
-            position = position_dodge2(width = 0.8, preserve = "single"),
-            vjust = 0.5,
-            hjust = -0.05,
-            size = 5) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = label_text),
+            vjust = -0.35,
+            hjust = 0.5,
+            size = 4.5) +
   scale_y_discrete(name = "") +
   scale_x_continuous(name = "",
                      limits = c(0,100),
                      breaks = seq(0, 100, by = 25),
-                     label= label_percent(scale = 1),
-                     expand = expansion(mult = c(0, 0.18)),
-                     sec.axis = dup_axis()) +
+                     label= label_percent(scale = 1)) +
   scale_fill_manual(values = c(orange_dot, green_dot)) +
+  coord_flip() +
+  facet_wrap(~ below_ess_finc, scales = "free") +
   labs(title = "Race/Ethnicity of Families Earning Below and Above the Self-Sufficiency Standard",
        subtitle = geography_label,
-       caption = acs_pums) +
+       caption = paste0("Note: Not all groups are included here.\n", acs_pums)) +
   theme_minimal() +
   theme(legend.title=element_blank(),
-        legend.position = "top",
-        legend.location = "plot",
-        legend.justification="center",
-        legend.text = element_text(size = 13),
-          panel.grid.major.y = element_blank(),
+        legend.position = "none",
+        # legend.location = "plot",
+        # legend.justification="center",
+        # legend.text = element_text(size = 13),
+          panel.grid.major.x = element_blank(),
           axis.ticks = element_blank(),
           panel.grid.minor = element_blank(),
           plot.title.position= "plot",
           plot.caption.position = "plot",
-        axis.text.y = element_text(color = "black", size = 14),
+        strip.text = element_text(size = rel(1.15),
+                                  # face = "bold",
+                                  color = "black"),
+        # axis.text.y = element_text(color = "black", size = 14),
         text = element_text(size = 14),
         axis.text.x = element_text(size=14),
         plot.title = element_text(size = 18),
@@ -111,6 +182,10 @@ fam_by_race %>%
 
 ```{r age_butterfly_percent, fig.width = 10.5, fig.height=6, fig.retina = 2}
 fam_by_age <- read_csv("../microdata/data/families_by_age.csv") %>% 
+  left_join(fam_by_ess_totals) %>% 
+  mutate(count_rounded = round(count, -2),
+         sss_group_tot_rounded = round(sss_group_total, -2),
+         percent_rounded = round(count_rounded/sss_group_tot_rounded *100, 0)) %>% 
   mutate(hhldrage_bin = factor(hhldrage_bin, levels = c("65 and over", "55 to 64", "45 to 54", "35 to 44", "25 to 34", "Under 25")),
          below_ess_finc = factor(below_ess_finc, levels = c("Yes", "No"),
                                  labels = c("Income Below Self-Sufficiency Standard", "Income Above Self-Sufficiency Standard")))
@@ -120,11 +195,11 @@ dummy_age_per = tibble(y = c(-50, 0, 0, 50),
                                        "Income Below Self-Sufficiency Standard", "Income Below Self-Sufficiency Standard"))
     
 dat_ess_per <- fam_by_age %>% 
-    group_by(percent, below_ess_finc) %>%
+    group_by(percent_rounded, below_ess_finc) %>%
     mutate(y = ifelse(below_ess_finc == "Income Above Self-Sufficiency Standard", -percent, percent),
            label_text = case_when(
-           below_ess_finc == "Income Below Self-Sufficiency Standard" ~ paste0(round(percent, 0), "%\n(", prettyNum(count, big.mark=",", preserve.width="none"), " families)"),
-           below_ess_finc == "Income Above Self-Sufficiency Standard" ~ paste0(round(percent, 0), "%\n(", prettyNum(count, big.mark=",", preserve.width="none"), " families)"))) %>%
+           below_ess_finc == "Income Below Self-Sufficiency Standard" ~ paste0(percent_rounded, "%\n(", prettyNum(count_rounded, big.mark=",", preserve.width="none"), " families)"),
+           below_ess_finc == "Income Above Self-Sufficiency Standard" ~ paste0(percent_rounded, "%\n(", prettyNum(count_rounded, big.mark=",", preserve.width="none"), " families)"))) %>%
     ungroup()
 
 ggplot() +
@@ -493,14 +568,14 @@ occupations_filtered %>%
     locations = cells_title(groups = "title")
   ) %>% 
   tab_footnote(
-    footnote = "Employment rate per 1,000 jobs",
+    footnote = "Employment rate per 1,000 jobs in the Charlottesville Metro Area",
     locations = cells_column_labels(columns = employment_per_1_000_jobs)
   ) %>% 
   tab_header(
     title = "Common Occupations for Job Seekers by Annual Median Wage"
   ) %>% 
   tab_source_note(
-    source_note = acs_pums
+    source_note = "U.S. Bureau of Labor Statistics, Occupational Employment and Wage Statistics; May 2023"
   )
 ```
 
