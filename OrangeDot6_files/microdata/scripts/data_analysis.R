@@ -12,6 +12,7 @@
 #   People by disability status
 #   Workers by hours worked
 #   Workers by wage bins 
+#   Workers (or families?) by income bins
 # List of family composition counts
 
 
@@ -271,6 +272,25 @@ write_csv(workers_by_medianwages, file = "data/workers_by_medianwages.csv")
 # see also (future reference)
 # https://www.urban.org/data-tools/black-women-precarious-gig-work?&utm_source=urban_ea&utm_campaign=unstable_work_black_women&utm_id=workforce&utm_content=general&engaged&utm_term=workforce
 # https://www.urban.org/sites/default/files/2023-09/Job-quality-and-race-and-gender-equity.pdf
+
+# Family by incomes ---- 
+families_below_es_by_incomes <- hh %>% 
+  filter(!is.na(below_ess_finc) & !is.na(fincp) & below_ess_finc == "Yes") %>% 
+  mutate(income_bins = case_when(
+    fincp < 10000 ~ "$0 to $9,999",
+    fincp >= 10000 & fincp < 20000 ~ "$10,000 to $19,999",
+    fincp >= 20000 & fincp < 30000 ~ "$20,000 to $29,999",
+    fincp >= 30000 & fincp < 40000 ~ "$30,000 to $39,999",
+    fincp >= 40000 & fincp < 50000 ~ "$40,000 to $49,999",
+    fincp >= 50000  ~ "$50,000+",
+  ),
+  income_bins = factor(income_bins, 
+                        levels = c("$0 to $9,999", "$10,000 to $19,999", "$20,000 to $29,999",
+                                   "$30,000 to $39,999", "$40,000 to $49,999", "$50,000+"))) %>% 
+  count(income_bins, wt = wgtp, name = "count") %>% 
+  mutate(percent = count/sum(count)*100)
+
+write_csv(families_below_es_by_incomes, file = "data/families_below_es_by_incomes.csv")
 
 
 # Family Compositions ----
