@@ -1,19 +1,19 @@
 ---
 title: "Orange Dot 6.0 - Locality Profiles"
-output: 
-  html_document:
-    toc: true
-    toc_depth: 3
+# output: 
+#   html_document:
+#     toc: true
+#     toc_depth: 3
 # output:
 #   word_document:
 #     toc: true
 #     toc_depth: 3
 # header-includes: \usepackage[nottoc]{tocbibind}
-# output:
-#   bookdown::word_document2:
-#     toc: yes 
-#     lof: yes 
-#     lot: yes
+output:
+  word_document:
+    reference_docx: "styles.docx"
+    toc: true
+    toc_depth: 3
 ---
 ```{css, echo=FALSE}
 .main-container.container-fluid {
@@ -22,24 +22,6 @@ output:
   margin-right: auto;
   padding: 0 4.167%;
 }
-
-.shadowbox {
-    background-color: #575757;
-    border-radius: 25px;
-    color: white;
-    font-family: "Times New Roman", serif;
-    font-style: italic;
-    /*font-weight: bold;*/
-    text-align: center;
-    max-width: 400px;
-    padding: 20px;
-    margin: 0 auto 10px auto;
-  }
-  
-.shadowbox p {
-  margin-bottom: 0;
-}
-
 
 ```
 
@@ -320,11 +302,9 @@ faminc_below35k_all <- faminc_below35k %>%
 
 ```
 
-## Struggling Families in our Region
+## Families Struggling in Our Region
 
-There are `r total_fam_all_region` families living in the Charlottesville region, defined in this report as the City of Charlottesville and the surrounding counties of Albemarle, Louisa, Nelson, Buckingham, Greene, and Fluvanna.^[Family is defined as two or more people related by birth, marriage, or adoption and living in the same household.]
-
-Of these, `r below_ssw_all_region` families (`r paste0(below_ssw_per_all_region,"%")`) do not earn enough to provide for their family's basic needs.
+There are `r total_fam_all_region` families living in the Charlottesville region, defined in this report as the City of Charlottesville and the surrounding counties of Albemarle, Buckingham, Fluvanna, Greene, Louisa, and Nelson.^[Family is defined as two or more people related by birth, marriage, or adoption and living in the same household.] Of these, `r below_ssw_all_region` families (`r paste0(below_ssw_per_all_region,"%")`) do not earn enough to provide for their family's basic needs.
 
 ```{r region_table}
 # Region self sufficiency totals table ----
@@ -369,6 +349,7 @@ all_fam_region_table %>%
   
 ```
 
+## Locality Profiles
 
 ### Albemarle County
 ```{r}

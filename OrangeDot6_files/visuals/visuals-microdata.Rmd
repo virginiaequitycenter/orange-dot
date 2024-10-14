@@ -1,7 +1,11 @@
 ---
 title: "Orange Dot 6.0 - Regional Microdata"
-output: html_document
-# output: word_document
+# output: html_document
+output:
+  word_document:
+    reference_docx: "styles.docx"
+    toc: true
+    toc_depth: 3
 ---
 ```{css, echo=FALSE}
 .main-container.container-fluid {
@@ -43,6 +47,7 @@ library(ggrepel)
 
 # Palettes ----
 pal_five <- c("#DE8A5A", "#EDBB8A", "#F6EDBD","#B4C8A8", "#70A494")
+pal_six <- c("#CA562C", "#DE8A5A", "#EDBB8A", "#F6EDBD","#B4C8A8", "#70A494")
 orange_dot <- "#CA562C"
 green_dot <- "#B4C8A8"
 grey_dot <-  "#b2b8be"
@@ -460,6 +465,46 @@ workers_by_hours %>%
 
 ```
 
+```{r family_income, fig.width = 10, fig.height = 6, fig.retina = 2}
+
+family_income <- read_csv("../microdata/data/families_below_ess_by_incomes.csv")
+
+family_income %>%
+  ggplot(aes(x = count, y = income_bins, fill = income_bins)) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = paste0(prettyNum(count, big.mark=",", preserve.width="none"), " (", round(percent, 0), "%)")),
+            vjust = 0.5,
+            hjust = -0.1,
+            size = 5) +
+  scale_y_discrete(name = "") +
+  scale_x_continuous(name = "Number of Families",
+                     breaks = seq(0, 4000, by = 1000),
+                     label=comma,
+                     expand = expansion(mult = c(0, .19))
+                     ) +
+  scale_fill_manual(values = c("#EDBB8A", "#EDBB8A","#DE8A5A", "#DE8A5A", "#DE8A5A", "#B4C8A8"))+
+  labs(title = "Annual Incomes for Families Earning Below the Self-Sufficiency Standard",
+       subtitle = geography_label,
+       caption = acs_pums) +
+  theme_minimal() +
+  theme(legend.title=element_blank(),
+        legend.position = "none",
+        # legend.location = "plot",
+        legend.justification="center",
+        legend.text = element_text(size = 12),
+          # panel.grid.major.y = element_blank(),
+          axis.ticks = element_blank(),
+          panel.grid.minor = element_blank(),
+          plot.title.position= "plot",
+          plot.caption.position = "plot",
+        axis.text.y = element_text(color = "black", size = 14),
+        text = element_text(size = 14),
+        axis.text.x = element_text(size=14),
+        plot.title = element_text(size = 18),
+        plot.caption = element_text(size = 12))
+```
+
+
 ```{r workers_by_medianwages, fig.width = 10, fig.height = 6, fig.retina = 2}
 workers_by_medianwages <- read_csv("../microdata/data/workers_by_medianwages.csv") %>% 
    mutate(
@@ -486,7 +531,7 @@ workers_by_medianwages %>%
   scale_fill_manual(values = c("#DE8A5A", "#EDBB8A", "#F6EDBD","#B4C8A8", "#70A494"))+
   labs(title = "Annual Median Wage for Workers Earning Below the Self-Sufficiency Standard",
        subtitle = geography_label,
-       caption = acs_pums) +
+       caption = "Bureau of Labor Statistics, U.S. Department of Labor. Occupational Employment and Wage Statistics, 2023.") +
   theme_minimal() +
   theme(legend.title=element_blank(),
         legend.position = "none",
@@ -507,6 +552,13 @@ workers_by_medianwages %>%
 ```
 ```{r occupations_by_wagebin, fig.width = 6, fig.height = 10,  fig.retina = 2}
 occupations_by_wagebin <- read_csv("../microdata/data/occupations_by_wagebin.csv")
+
+# occupation_appendix <- occupations_by_wagebin %>% 
+#   filter(employment_per_1_000_jobs > 1) %>% 
+#   mutate(median_wage_bin_label = factor(median_wage_bin_label, levels = c("25610-37760", "37860-48320", "48340-60600", "60640-86950", "88050-238990"), labels = c("$25,610 - $37,760", "$37,860 - $48,320", "$48,340 - $60,600", "$60,640 - $86,950", "$88,050 - $238,990")),
+#          employment_per_1_000_jobs = round(employment_per_1_000_jobs,1))
+# 
+# write.xlsx(occupation_appendix, "OccupationsByWageBin.xlsx")
 
 occupations_filtered <- occupations_by_wagebin %>% 
   # filter(employment_per_1_000_jobs > 8) %>% 
@@ -564,7 +616,7 @@ occupations_filtered %>%
     locations = list(cells_column_labels(2:4), cells_body(2:4))
   ) %>% 
   tab_footnote(
-    footnote = "See Appendix for more occupations",
+    footnote = "See appendix for more occupations by annual median wage",
     locations = cells_title(groups = "title")
   ) %>% 
   tab_footnote(
@@ -572,10 +624,77 @@ occupations_filtered %>%
     locations = cells_column_labels(columns = employment_per_1_000_jobs)
   ) %>% 
   tab_header(
-    title = "Common Occupations for Job Seekers by Annual Median Wage"
+    title = "Selection of Occupations by Annual Median Wage Earned in the Charlottesville Metro Area"
   ) %>% 
   tab_source_note(
-    source_note = "U.S. Bureau of Labor Statistics, Occupational Employment and Wage Statistics; May 2023"
+    source_note = "Data Source: U.S. Bureau of Labor Statistics, Occupational Employment and Wage Statistics; May 2023"
+  )
+```
+
+
+## Appendix
+
+```{r occupations_by_wagebin_appendix, fig.width = 6, fig.height = 10,  fig.retina = 2}
+
+occupation_appendix <- occupations_by_wagebin %>%
+  filter(employment_per_1_000_jobs > 1) %>%
+  mutate(median_wage_bin_label = factor(median_wage_bin_label, levels = c("25610-37760", "37860-48320", "48340-60600", "60640-86950", "88050-238990"), labels = c("$25,610 - $37,760", "$37,860 - $48,320", "$48,340 - $60,600", "$60,640 - $86,950", "$88,050 - $238,990")),
+         employment_per_1_000_jobs = round(employment_per_1_000_jobs,1))
+
+# write.xlsx(occupation_appendix, "OccupationsByWageBin.xlsx")
+
+occupation_appendix %>%
+  mutate(employment_per_1_000_jobs = employment_per_1_000_jobs/100,
+         color = "") %>% 
+  select(c(occupation, annual_median_wage_2, color, employment_per_1_000_jobs, median_wage_bin)) %>%
+  gt() %>% 
+  data_color(
+    columns = median_wage_bin,
+    target_columns = color,
+    direction = "column",
+    # method = "numeric",
+    # domain = c(20000,120000),
+    palette = c("#DE8A5A", "#EDBB8A", "#F6EDBD","#B4C8A8", "#70A494"),
+    # na_color = "white"
+  ) %>% 
+  fmt_currency(
+    columns = 2,
+    currency = currency(
+      html = "&#36;",
+      default = "$"
+    ),
+    decimals = 2
+  ) %>% 
+  fmt_percent(
+    columns = employment_per_1_000_jobs,
+    decimals = 0
+  ) %>% 
+  cols_hide(columns = c(median_wage_bin)) %>% 
+  cols_label(
+    occupation = "Occupation",
+    annual_median_wage_2 = "Annual Median Wage",
+        color = "",
+    employment_per_1_000_jobs = "Employment Rate",
+    median_wage_bin = ""
+  ) %>% 
+  tab_style(
+    style = cell_text(align = "center", v_align = "middle"),
+    locations = list(cells_column_labels(2:4), cells_body(2:4))
+  ) %>%
+  tab_style(
+    style = cell_text(v_align = "middle"),
+    locations = list(cells_column_labels(1))
+  ) %>%
+  tab_options(table.font.size="9px") %>% 
+  tab_footnote(
+    footnote = "Employment rate per 1,000 jobs in the Charlottesville Metro Area",
+    locations = cells_column_labels(columns = employment_per_1_000_jobs)
+  ) %>% 
+  tab_header(
+    title = "Occupations by Annual Median Wage Earned in the Charlottesville Metro Area"
+  ) %>% 
+  tab_source_note(
+    source_note = "Data Source: U.S. Bureau of Labor Statistics, Occupational Employment and Wage Statistics; May 2023"
   )
 ```
 
