@@ -4,13 +4,16 @@
 # https://data.bls.gov/oes/#/geoOcc/Multiple%20occupations%20for%20one%20geographical%20area
 
 # Setup ----
+library(here)
 library(tidyverse)
 library(readxl)
 library(janitor)
 
+# Set WD
+setwd(here("OrangeDot6_files"))
 
 # Data ---- 
-bls <- read_excel("downloads/OES_Report.xlsx", skip = 5) %>% 
+bls <- read_excel("data/tempdata/OES_Report.xlsx", skip = 5) %>% 
   clean_names()
 
 # Prep ---- 
@@ -62,9 +65,10 @@ bls_catchall_occ <- bls_catchall_occ %>%
 # To generate tables of occupations and median wages by median wage bin
 occupation_wages <- bls_occ %>% 
   arrange(annual_median_wage_2) %>% 
-  select(occupation, annual_median_wage_2, employment_per_1_000_jobs, median_wage_bin, median_wage_bin_label) 
+  mutate(soc_group_num = substr(soc_code, start=1, stop=2)) %>% 
+  select(occupation, annual_median_wage_2, employment_per_1_000_jobs, median_wage_bin, median_wage_bin_label, soc_code, soc_group_num) 
 
-write_csv(occupation_wages, file = "data/occupations_by_wagebin.csv")
+write_csv(occupation_wages, file = "microdata/data/occupations_by_wagebin.csv")
 
 
 # Save ----

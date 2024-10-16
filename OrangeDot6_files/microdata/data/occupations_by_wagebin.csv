@@ -1,361 +1,361 @@
-occupation,annual_median_wage_2,employment_per_1_000_jobs,median_wage_bin,median_wage_bin_label
-"Ushers, Lobby Attendants, and Ticket Takers",25610,0.85,1,25610-37760
-Home Health and Personal Care Aides,26720,15.519,1,25610-37760
-"Hosts and Hostesses, Restaurant, Lounge, and Coffee Shop",27570,3.074,1,25610-37760
-Childcare Workers,28390,3.187,1,25610-37760
-Amusement and Recreation Attendants,28540,1.878,1,25610-37760
-Cashiers,28580,21.063,1,25610-37760
-Manicurists and Pedicurists,28820,0.881,1,25610-37760
-"Cooks, Fast Food",28840,3.452,1,25610-37760
-Dining Room and Cafeteria Attendants and Bartender Helpers,28900,2.646,1,25610-37760
-"Production Workers, All Other",28960,0.452,1,25610-37760
-"Lifeguards, Ski Patrol, and Other Recreational Protective Service Workers",29040,1.14,1,25610-37760
-Fast Food and Counter Workers,29190,24.331,1,25610-37760
-Parking Attendants,29230,0.274,1,25610-37760
-Food Preparation Workers,29260,4.603,1,25610-37760
-Dishwashers,29330,3.523,1,25610-37760
-Dietetic Technicians,29370,NA,1,25610-37760
-"Food Servers, Nonrestaurant",29370,2.242,1,25610-37760
-Bakers,29370,1.387,1,25610-37760
-Tour and Travel Guides,29640,0.901,1,25610-37760
-Animal Caretakers,29680,2.818,1,25610-37760
-"Library Assistants, Clerical",29730,0.918,1,25610-37760
-Laundry and Dry-Cleaning Workers,29790,1.352,1,25610-37760
-Retail Salespersons,29940,22.081,1,25610-37760
-"Hotel, Motel, and Resort Desk Clerks",30010,2.574,1,25610-37760
-"Janitors and Cleaners, Except Maids and Housekeeping Cleaners",30180,9.312,1,25610-37760
-Helpers--Production Workers,30610,0.394,1,25610-37760
-"Cooks, Short Order",30620,0.685,1,25610-37760
-Cleaners of Vehicles and Equipment,30690,1.001,1,25610-37760
-Demonstrators and Product Promoters,30740,1.097,1,25610-37760
-"Packers and Packagers, Hand",30770,1.054,1,25610-37760
-Refuse and Recyclable Material Collectors,31500,0.881,1,25610-37760
-Orderlies,31910,0.871,1,25610-37760
-Shuttle Drivers and Chauffeurs,31990,2.179,1,25610-37760
-Parts Salespersons,32040,1.087,1,25610-37760
-Concierges,32380,0.506,1,25610-37760
-"Farmworkers, Farm, Ranch, and Aquacultural Animals",32660,0.401,1,25610-37760
-Maids and Housekeeping Cleaners,32770,11.556,1,25610-37760
-Waiters and Waitresses,33060,17.82,1,25610-37760
-"Mail Clerks and Mail Machine Operators, Except Postal Service",33070,0.298,1,25610-37760
-Machine Feeders and Offbearers,33150,0.343,1,25610-37760
-"Farmworkers and Laborers, Crop, Nursery, and Greenhouse",33250,1.326,1,25610-37760
-Physical Therapist Aides,33380,0.425,1,25610-37760
-Recreation Workers,33590,2.075,1,25610-37760
-Stockers and Order Fillers,33740,14.022,1,25610-37760
-Veterinary Assistants and Laboratory Animal Caretakers,33890,2.408,1,25610-37760
-Receptionists and Information Clerks,34160,7.424,1,25610-37760
-"Substitute Teachers, Short-Term",34640,4.744,1,25610-37760
-"Cooks, Restaurant",34950,11.379,1,25610-37760
-Order Clerks,35150,0.477,1,25610-37760
-"Teaching Assistants, Except Postsecondary",35250,8.932,1,25610-37760
-"Laborers and Freight, Stock, and Material Movers, Hand",35460,6.673,1,25610-37760
-Data Entry Keyers,35780,0.709,1,25610-37760
-"Umpires, Referees, and Other Sports Officials",36060,0.425,1,25610-37760
-Floral Designers,36120,0.273,1,25610-37760
-"Cooks, Institution and Cafeteria",36210,3.753,1,25610-37760
-Helpers--Carpenters,36240,0.49,1,25610-37760
-Printing Press Operators,36270,0.743,1,25610-37760
-Miscellaneous Assemblers and Fabricators,36480,1.795,1,25610-37760
-Landscaping and Groundskeeping Workers,36700,8.433,1,25610-37760
-Customer Service Representatives,36710,12.609,1,25610-37760
-Emergency Medical Technicians,36940,1.657,1,25610-37760
-Residential Advisors,36940,0.582,1,25610-37760
-Merchandise Displayers and Window Trimmers,37010,1.297,1,25610-37760
-"Helpers--Pipelayers, Plumbers, Pipefitters, and Steamfitters",37060,0.463,1,25610-37760
-"Hairdressers, Hairstylists, and Cosmetologists",37130,2.372,1,25610-37760
-"Helpers--Installation, Maintenance, and Repair Workers",37160,0.921,1,25610-37760
-Helpers--Electricians,37200,0.617,1,25610-37760
-Counter and Rental Clerks,37270,3.242,1,25610-37760
-Nursing Assistants,37400,15.181,1,25610-37760
-Phlebotomists,37600,0.74,1,25610-37760
-"Preschool Teachers, Except Special Education",37610,2.36,1,25610-37760
-"Shipping, Receiving, and Inventory Clerks",37760,2.684,1,25610-37760
-Skincare Specialists,37860,0.324,2,37860-48320
-"Healthcare Support Workers, All Other",37900,2.012,2,37860-48320
-Security Guards,37920,3.098,2,37860-48320
-Driver/Sales Workers,38000,3.086,2,37860-48320
-Medical Secretaries and Administrative Assistants,38200,5.342,2,37860-48320
-Industrial Truck and Tractor Operators,38270,1.243,2,37860-48320
-Construction Laborers,38290,5.632,2,37860-48320
-"Electrical, electronic, and electromechanical assemblers, except coil winders, tapers, and finishers",38290,1.756,2,37860-48320
-"Interviewers, Except Eligibility and Loan",38300,0.987,2,37860-48320
-Packaging and Filling Machine Operators and Tenders,38370,0.766,2,37860-48320
-Tellers,38410,1.185,2,37860-48320
-Tire Repairers and Changers,38520,0.447,2,37860-48320
-"Court, Municipal, and License Clerks",38640,0.536,2,37860-48320
-Firefighters,38990,2.782,2,37860-48320
-Butchers and Meat Cutters,39140,0.573,2,37860-48320
-"Tax Examiners and Collectors, and Revenue Agents",39390,0.268,2,37860-48320
-Medical Assistants,39500,3.593,2,37860-48320
-Social and Human Service Assistants,39680,2.776,2,37860-48320
-"Office Clerks, General",39990,17.741,2,37860-48320
-"News Analysts, Reporters, and Journalists",40040,0.345,2,37860-48320
-Ophthalmic Medical Technicians,40460,0.92,2,37860-48320
-"Sawing Machine Setters, Operators, and Tenders, Wood",41110,0.436,2,37860-48320
-"Bus Drivers, Transit and Intercity",41120,2.892,2,37860-48320
-Tutors,41170,0.771,2,37860-48320
-Light Truck Drivers,41390,3.711,2,37860-48320
-Public Safety Telecommunicators,41770,0.721,2,37860-48320
-Travel Agents,42470,0.398,2,37860-48320
-Transportation Security Screeners,42520,0.293,2,37860-48320
-Pest Control Workers,42630,0.571,2,37860-48320
-Bartenders,42640,4.609,2,37860-48320
-"Information and Record Clerks, All Other",42660,0.743,2,37860-48320
-"Motor Vehicle Operators, All Other",42690,0.31,2,37860-48320
-"Computer, Automated Teller, and Office Machine Repairers",42880,0.423,2,37860-48320
-"Maintenance and Repair Workers, General",44210,10.271,2,37860-48320
-Highway Maintenance Workers,44280,1.368,2,37860-48320
-"First-Line Supervisors of Entertainment and Recreation Workers, Except Gambling Services",44470,0.822,2,37860-48320
-Pharmacy Technicians,44480,3.775,2,37860-48320
-"Mixing and Blending Machine Setters, Operators, and Tenders",44490,0.29,2,37860-48320
-First-Line Supervisors of Food Preparation and Serving Workers,44630,8.645,2,37860-48320
-"Painters, Construction and Maintenance",44810,1.309,2,37860-48320
-Library Technicians,44870,1.019,2,37860-48320
-Billing and Posting Clerks,45050,1.274,2,37860-48320
-"Separating, Filtering, Clarifying, Precipitating, and Still Machine Setters, Operators, and Tenders",45160,1.343,2,37860-48320
-"Human Resources Assistants, Except Payroll and Timekeeping",45330,0.631,2,37860-48320
-Surveying and Mapping Technicians,45490,0.521,2,37860-48320
-Insurance Claims and Policy Processing Clerks,45490,1.217,2,37860-48320
-Outdoor Power Equipment and Other Small Engine Mechanics,45590,0.274,2,37860-48320
-Dental Assistants,45640,2.274,2,37860-48320
-Rehabilitation Counselors,45810,0.683,2,37860-48320
-First-Line Supervisors of Housekeeping and Janitorial Workers,45970,1.502,2,37860-48320
-First-Line Supervisors of Personal Service Workers,46200,1.073,2,37860-48320
-Civil Engineering Technologists and Technicians,46300,0.636,2,37860-48320
-Cabinetmakers and Bench Carpenters,46680,0.592,2,37860-48320
-Self-Enrichment Teachers,46760,1.694,2,37860-48320
-"Installation, Maintenance, and Repair Workers, All Other",46760,0.768,2,37860-48320
-Exercise Trainers and Group Fitness Instructors,46810,3.509,2,37860-48320
-Correctional Officers and Jailers,46840,5.032,2,37860-48320
-Drywall and Ceiling Tile Installers,46890,0.357,2,37860-48320
-Operating Engineers and Other Construction Equipment Operators,46970,2.569,2,37860-48320
-Logging Equipment Operators,47140,0.618,2,37860-48320
-Bill and Account Collectors,47320,0.41,2,37860-48320
-Photographers,47330,0.391,2,37860-48320
-"Bus Drivers, School",47470,4.204,2,37860-48320
-"Title Examiners, Abstractors, and Searchers",47550,0.478,2,37860-48320
-"Bookkeeping, Accounting, and Auditing Clerks",47610,9.791,2,37860-48320
-"Secretaries and Administrative Assistants, Except Legal, Medical, and Executive",47620,11.55,2,37860-48320
-First-Line Supervisors of Retail Sales Workers,47710,7.682,2,37860-48320
-Coaches and Scouts,47830,2.344,2,37860-48320
-Real Estate Sales Agents,47840,1.95,2,37860-48320
-"Teaching Assistants, Postsecondary",48190,NA,2,37860-48320
-Legal Secretaries and Administrative Assistants,48250,0.485,2,37860-48320
-"Welders, Cutters, Solderers, and Brazers",48320,0.861,2,37860-48320
-Automotive Service Technicians and Mechanics,48340,4.391,3,48340-60600
-Massage Therapists,48370,0.914,3,48340-60600
-"Educational Instruction and Library Workers, All Other",48570,0.705,3,48340-60600
-Heavy and Tractor-Trailer Truck Drivers,48610,5.821,3,48340-60600
-"Inspectors, Testers, Sorters, Samplers, and Weighers",48670,1.294,3,48340-60600
-Cement Masons and Concrete Finishers,48680,1.521,3,48340-60600
-Carpenters,48870,5.529,3,48340-60600
-"Office and Administrative Support Workers, All Other",48900,3.412,3,48340-60600
-Roofers,49030,0.502,3,48340-60600
-Social Science Research Assistants,49040,0.773,3,48340-60600
-"Eligibility Interviewers, Government Programs",49110,0.97,3,48340-60600
-First-Line Supervisors of Firefighting and Prevention Workers,49240,0.33,3,48340-60600
-Veterinary Technologists and Technicians,49250,0.952,3,48340-60600
-"Excavating and Loading Machine and Dragline Operators, Surface Mining",49600,0.55,3,48340-60600
-"Substance abuse, behavioral disorder, and mental health counselors",49820,2.436,3,48340-60600
-"Health Technologists and Technicians, All Other",50080,0.866,3,48340-60600
-"Production, Planning, and Expediting Clerks",50110,1.022,3,48340-60600
-Detectives and Criminal Investigators,50210,1.324,3,48340-60600
-"Life, Physical, and Social Science Technicians, All Other",50270,NA,3,48340-60600
-Chemical Technicians,50300,0.917,3,48340-60600
-Paramedics,50480,0.684,3,48340-60600
-"Dispatchers, Except Police, Fire, and Ambulance",50750,0.914,3,48340-60600
-"Geoscientists, Except Hydrologists and Geographers",50760,0.266,3,48340-60600
-"Protective Service Workers, All Other",50780,0.447,3,48340-60600
-Brickmasons and Blockmasons,50950,0.359,3,48340-60600
-Bus and Truck Mechanics and Diesel Engine Specialists,51420,1.115,3,48340-60600
-Biological Technicians,51750,2.334,3,48340-60600
-Graphic Designers,51920,1.92,3,48340-60600
-Chefs and Head Cooks,52000,1.583,3,48340-60600
-"Securities, Commodities, and Financial Services Sales Agents",52070,3.045,3,48340-60600
-"Plumbers, Pipefitters, and Steamfitters",52090,2.503,3,48340-60600
-Producers and Directors,52690,0.725,3,48340-60600
-Water and Wastewater Treatment Plant and System Operators,53190,0.909,3,48340-60600
-"Special Education Teachers, Preschool",53280,0.302,3,48340-60600
-"Mobile Heavy Equipment Mechanics, Except Engines",53540,0.728,3,48340-60600
-"First-Line Supervisors of Transportation Workers, Except Aircraft Cargo Handling Supervisors",53740,2.528,3,48340-60600
-"Child, Family, and School Social Workers",53890,2.444,3,48340-60600
-Medical Equipment Repairers,53990,0.44,3,48340-60600
-Sheet Metal Workers,54180,0.324,3,48340-60600
-Medical Records Specialists,54390,1.797,3,48340-60600
-Payroll and Timekeeping Clerks,54570,0.909,3,48340-60600
-Police and Sheriff's Patrol Officers,56190,3.766,3,48340-60600
-"Kindergarten Teachers, Except Special Education",56310,1.122,3,48340-60600
-"Community and Social Service Specialists, All Other",56330,0.48,3,48340-60600
-Clinical Laboratory Technologists and Technicians,56380,1.907,3,48340-60600
-"First-Line Supervisors of Landscaping, Lawn Service, and Groundskeeping Workers",56380,1.174,3,48340-60600
-"Heating, Air Conditioning, and Refrigeration Mechanics and Installers",56480,3.31,3,48340-60600
-"Special Education Teachers, Secondary School",56580,1.563,3,48340-60600
-Insurance Sales Agents,56590,2.724,3,48340-60600
-First-Line Supervisors of Correctional Officers,56760,1.533,3,48340-60600
-Postal Service Mail Carriers,56760,1.883,3,48340-60600
-"Coating, Painting, and Spraying Machine Setters, Operators, and Tenders",57130,0.335,3,48340-60600
-Industrial Machinery Mechanics,57310,0.9,3,48340-60600
-Architectural and Civil Drafters,57370,0.356,3,48340-60600
-Mental Health and Substance Abuse Social Workers,57390,0.556,3,48340-60600
-Automotive Body and Related Repairers,57560,0.668,3,48340-60600
-Clergy,58090,0.443,3,48340-60600
-Interior Designers,58180,0.35,3,48340-60600
-Machinists,58210,0.724,3,48340-60600
-Tax Preparers,58260,0.687,3,48340-60600
-"First-Line Supervisors of Farming, Fishing, and Forestry Workers",58290,0.492,3,48340-60600
-Electricians,58630,6.591,3,48340-60600
-"Special Education Teachers, Middle School",58640,0.676,3,48340-60600
-"Opticians, Dispensing",59090,0.785,3,48340-60600
-"Elementary School Teachers, Except Special Education",59260,9.224,3,48340-60600
-"Claims Adjusters, Examiners, and Investigators",59620,0.756,3,48340-60600
-Paralegals and Legal Assistants,59660,1.935,3,48340-60600
-First-Line Supervisors of Office and Administrative Support Workers,59990,8.594,3,48340-60600
-"Sales Representatives of Services, Except Advertising, Insurance, Financial Services, and Travel",60010,7.423,3,48340-60600
-"Educational, Guidance, and Career Counselors and Advisors",60320,3.561,3,48340-60600
-"Sales Representatives, Wholesale and Manufacturing, Except Technical and Scientific Products",60390,4.374,3,48340-60600
-"Secondary School Teachers, Except Special and Career/Technical Education",60600,7.238,3,48340-60600
-Interpreters and Translators,60640,NA,4,60640-86950
-Computer User Support Specialists,60700,3.73,4,60640-86950
-"Meeting, Convention, and Event Planners",60780,2.051,4,60640-86950
-"Special Education Teachers, Kindergarten and Elementary School",60950,1.475,4,60640-86950
-Licensed Practical and Licensed Vocational Nurses,61120,4.398,4,60640-86950
-Insurance Underwriters,61130,0.544,4,60640-86950
-Postal Service Clerks,61150,0.631,4,60640-86950
-Healthcare Social Workers,61230,1.43,4,60640-86950
-Web and Digital Interface Designers,61610,0.789,4,60640-86950
-Power Plant Operators,61640,0.36,4,60640-86950
-Athletic Trainers,61670,0.403,4,60640-86950
-Fundraisers,61940,1.936,4,60640-86950
-"Medical Scientists, Except Epidemiologists",61940,5.475,4,60640-86950
-Writers and Authors,62120,0.535,4,60640-86950
-Editors,62250,1.85,4,60640-86950
-Dietitians and Nutritionists,62280,0.388,4,60640-86950
-"Middle School Teachers, Except Special and Career/Technical Education",62290,5.445,4,60640-86950
-Physical Therapist Assistants,62390,0.712,4,60640-86950
-"Career/Technical Education Teachers, Secondary School",62720,0.975,4,60640-86950
-Food Service Managers,62750,1.386,4,60640-86950
-Surveyors,62830,0.381,4,60640-86950
-Surgical Technologists,62880,1.202,4,60640-86950
-"Environmental Science and Protection Technicians, Including Health",63070,0.473,4,60640-86950
-"Business Operations Specialists, All Other",63250,6.667,4,60640-86950
-"Property, Real Estate, and Community Association Managers",63320,1.377,4,60640-86950
-Landscape Architects,63440,0.498,4,60640-86950
-Advertising Sales Agents,63490,0.575,4,60640-86950
-Construction and Building Inspectors,64170,0.816,4,60640-86950
-Electrical and Electronic Engineering Technologists and Technicians,64200,1.04,4,60640-86950
-Audio and Video Technicians,64200,0.657,4,60640-86950
-"First-Line Supervisors of Protective Service Workers, All Other",64240,0.289,4,60640-86950
-Executive Secretaries and Executive Administrative Assistants,64280,3.265,4,60640-86950
-Compliance Officers,65320,2.265,4,60640-86950
-Cost Estimators,65500,1.413,4,60640-86950
-"First-Line Supervisors of Mechanics, Installers, and Repairers",65680,3.338,4,60640-86950
-"Career/Technical Education Teachers, Postsecondary",65980,0.589,4,60640-86950
-Urban and Regional Planners,66340,0.428,4,60640-86950
-Computer Network Support Specialists,66610,0.821,4,60640-86950
-Training and Development Specialists,67810,2.876,4,60640-86950
-Market Research Analysts and Marketing Specialists,67940,6.102,4,60640-86950
-"Compensation, Benefits, and Job Analysis Specialists",67990,1.161,4,60640-86950
-First-Line Supervisors of Production and Operating Workers,68380,1.97,4,60640-86950
-"Telecommunications Equipment Installers and Repairers, Except Line Installers",68730,0.992,4,60640-86950
-Foresters,69490,0.3,4,60640-86950
-Loan Officers,72050,1.433,4,60640-86950
-Logisticians,72890,0.949,4,60640-86950
-Human Resources Specialists,72990,5.741,4,60640-86950
-Librarians and Media Collections Specialists,73330,2.281,4,60640-86950
-Radiologic Technologists and Technicians,74140,1.447,4,60640-86950
-First-Line Supervisors of Construction Trades and Extraction Workers,74270,6.558,4,60640-86950
-Buyers and Purchasing Agents,74480,3.227,4,60640-86950
-Lodging Managers,75270,0.353,4,60640-86950
-Occupational Health and Safety Specialists,75590,0.601,4,60640-86950
-Accountants and Auditors,78820,10.464,4,60640-86950
-"Financial Specialists, All Other",79000,1.409,4,60640-86950
-Art Directors,79210,0.327,4,60640-86950
-Bioengineers and Biomedical Engineers,79730,0.409,4,60640-86950
-"Healthcare Practitioners and Technical Workers, All Other",79890,0.385,4,60640-86950
-"Biological Scientists, All Other",80140,0.493,4,60640-86950
-Chemists,80520,0.687,4,60640-86950
-Respiratory Therapists,80550,1.086,4,60640-86950
-First-Line Supervisors of Non-Retail Sales Workers,80610,1.771,4,60640-86950
-Gas Plant Operators,81100,0.3,4,60640-86950
-"Education Administrators, All Other",81130,0.761,4,60640-86950
-Instructional Coordinators,81130,2.5,4,60640-86950
-Registered Nurses,81510,28.108,4,60640-86950
-Management Analysts,82990,6.209,4,60640-86950
-Electrical Power-Line Installers and Repairers,83280,0.639,4,60640-86950
-Labor Relations Specialists,84210,0.325,4,60640-86950
-Civil Engineers,85570,1.695,4,60640-86950
-Database Administrators,85660,0.717,4,60640-86950
-Clinical and Counseling Psychologists,86950,0.672,4,60640-86950
-Budget Analysts,88050,0.406,5,88050-238990
-First-Line Supervisors of Police and Detectives,88110,0.932,5,88050-238990
-Web Developers,88120,1.104,5,88050-238990
-Technical Writers,88120,0.388,5,88050-238990
-Speech-Language Pathologists,89120,0.824,5,88050-238990
-"Architects, Except Landscape and Naval",89590,1.385,5,88050-238990
-Mechanical Engineers,89600,1.232,5,88050-238990
-Social and Community Service Managers,90700,0.986,5,88050-238990
-Personal Financial Advisors,91880,2.097,5,88050-238990
-Dental Hygienists,92000,1.173,5,88050-238990
-"Environmental Scientists and Specialists, Including Health",92940,0.513,5,88050-238990
-Project Management Specialists,93110,7.311,5,88050-238990
-Software Quality Assurance Analysts and Testers,93820,1.596,5,88050-238990
-Network and Computer Systems Administrators,95650,2.628,5,88050-238990
-Occupational Therapists,96380,1.096,5,88050-238990
-Computer Programmers,97150,0.385,5,88050-238990
-Operations Research Analysts,97430,0.426,5,88050-238990
-Marriage and Family Therapists,98860,0.353,5,88050-238990
-Industrial Engineers,99750,0.615,5,88050-238990
-Physical Therapists,99820,2.504,5,88050-238990
-Financial and Investment Analysts,99860,1.895,5,88050-238990
-Electrical Engineers,99890,1.149,5,88050-238990
-"Education Administrators, Kindergarten through Secondary",100280,2.415,5,88050-238990
-"Sales Representatives, Wholesale and Manufacturing, Technical and Scientific Products",100550,0.76,5,88050-238990
-"Electronics Engineers, Except Computer",101040,0.933,5,88050-238990
-Computer Systems Analysts,101130,4.067,5,88050-238990
-Construction Managers,101490,2.146,5,88050-238990
-Administrative Services Managers,101810,1.628,5,88050-238990
-Natural Sciences Managers,102910,0.609,5,88050-238990
-Physicists,103480,0.279,5,88050-238990
-"Transportation, Storage, and Distribution Managers",104080,0.496,5,88050-238990
-"Nursing Instructors and Teachers, Postsecondary",104270,0.905,5,88050-238990
-Industrial Production Managers,105020,0.371,5,88050-238990
-General and Operations Managers,105030,18.76,5,88050-238990
-Facilities Managers,105610,0.773,5,88050-238990
-Veterinarians,105990,0.857,5,88050-238990
-"English Language and Literature Teachers, Postsecondary",108000,1.572,5,88050-238990
-Information Security Analysts,109480,1.746,5,88050-238990
-Astronomers,111020,0.692,5,88050-238990
-"Computer Occupations, All Other",111610,1.177,5,88050-238990
-"Engineers, All Other",111610,0.432,5,88050-238990
-"Legal Support Workers, All Other",112440,0.329,5,88050-238990
-"Social Scientists and Related Workers, All Other",114900,3.345,5,88050-238990
-Computer Network Architects,115700,1,5,88050-238990
-Computer and Information Research Scientists,117320,0.32,5,88050-238990
-Data Scientists,117410,1.244,5,88050-238990
-"Physical Scientists, All Other",118540,0.711,5,88050-238990
-Training and Development Managers,119870,0.409,5,88050-238990
-Software Developers,120310,13.029,5,88050-238990
-Physician Assistants,123980,0.75,5,88050-238990
-Medical and Health Services Managers,124910,3.133,5,88050-238990
-Database Architects,125010,0.684,5,88050-238990
-Fundraising Managers,127620,0.652,5,88050-238990
-"Health Specialties Teachers, Postsecondary",129110,NA,5,88050-238990
-"Biological Science Teachers, Postsecondary",130650,1.026,5,88050-238990
-Sales Managers,131380,1.826,5,88050-238990
-Public Relations Managers,132410,1.036,5,88050-238990
-"Managers, All Other",133300,3.452,5,88050-238990
-Purchasing Managers,133890,0.608,5,88050-238990
-Nurse Practitioners,134870,4.45,5,88050-238990
-Pharmacists,136340,2.816,5,88050-238990
-Human Resources Managers,137610,1.361,5,88050-238990
-Lawyers,140360,3.434,5,88050-238990
-Architectural and Engineering Managers,143540,0.788,5,88050-238990
-Financial Managers,152780,3.853,5,88050-238990
-Marketing Managers,155010,1.512,5,88050-238990
-Computer and Information Systems Managers,155320,3.733,5,88050-238990
-"Dentists, General",169950,0.691,5,88050-238990
-"Physicians, All Other",206860,9.069,5,88050-238990
-Family Medicine Physicians,210970,0.663,5,88050-238990
-Nurse Anesthetists,224290,0.815,5,88050-238990
-Chief Executives,238990,1.225,5,88050-238990
+occupation,annual_median_wage_2,employment_per_1_000_jobs,median_wage_bin,median_wage_bin_label,soc_code,soc_group_num
+"Ushers, Lobby Attendants, and Ticket Takers",25610,0.85,1,25610-37760,393031,39
+Home Health and Personal Care Aides,26720,15.519,1,25610-37760,311120,31
+"Hosts and Hostesses, Restaurant, Lounge, and Coffee Shop",27570,3.074,1,25610-37760,359031,35
+Childcare Workers,28390,3.187,1,25610-37760,399011,39
+Amusement and Recreation Attendants,28540,1.878,1,25610-37760,393091,39
+Cashiers,28580,21.063,1,25610-37760,412011,41
+Manicurists and Pedicurists,28820,0.881,1,25610-37760,395092,39
+"Cooks, Fast Food",28840,3.452,1,25610-37760,352011,35
+Dining Room and Cafeteria Attendants and Bartender Helpers,28900,2.646,1,25610-37760,359011,35
+"Production Workers, All Other",28960,0.452,1,25610-37760,519199,51
+"Lifeguards, Ski Patrol, and Other Recreational Protective Service Workers",29040,1.14,1,25610-37760,339092,33
+Fast Food and Counter Workers,29190,24.331,1,25610-37760,353023,35
+Parking Attendants,29230,0.274,1,25610-37760,536021,53
+Food Preparation Workers,29260,4.603,1,25610-37760,352021,35
+Dishwashers,29330,3.523,1,25610-37760,359021,35
+Dietetic Technicians,29370,NA,1,25610-37760,292051,29
+"Food Servers, Nonrestaurant",29370,2.242,1,25610-37760,353041,35
+Bakers,29370,1.387,1,25610-37760,513011,51
+Tour and Travel Guides,29640,0.901,1,25610-37760,397010,39
+Animal Caretakers,29680,2.818,1,25610-37760,392021,39
+"Library Assistants, Clerical",29730,0.918,1,25610-37760,434121,43
+Laundry and Dry-Cleaning Workers,29790,1.352,1,25610-37760,516011,51
+Retail Salespersons,29940,22.081,1,25610-37760,412031,41
+"Hotel, Motel, and Resort Desk Clerks",30010,2.574,1,25610-37760,434081,43
+"Janitors and Cleaners, Except Maids and Housekeeping Cleaners",30180,9.312,1,25610-37760,372011,37
+Helpers--Production Workers,30610,0.394,1,25610-37760,519198,51
+"Cooks, Short Order",30620,0.685,1,25610-37760,352015,35
+Cleaners of Vehicles and Equipment,30690,1.001,1,25610-37760,537061,53
+Demonstrators and Product Promoters,30740,1.097,1,25610-37760,419011,41
+"Packers and Packagers, Hand",30770,1.054,1,25610-37760,537064,53
+Refuse and Recyclable Material Collectors,31500,0.881,1,25610-37760,537081,53
+Orderlies,31910,0.871,1,25610-37760,311132,31
+Shuttle Drivers and Chauffeurs,31990,2.179,1,25610-37760,533053,53
+Parts Salespersons,32040,1.087,1,25610-37760,412022,41
+Concierges,32380,0.506,1,25610-37760,396012,39
+"Farmworkers, Farm, Ranch, and Aquacultural Animals",32660,0.401,1,25610-37760,452093,45
+Maids and Housekeeping Cleaners,32770,11.556,1,25610-37760,372012,37
+Waiters and Waitresses,33060,17.82,1,25610-37760,353031,35
+"Mail Clerks and Mail Machine Operators, Except Postal Service",33070,0.298,1,25610-37760,439051,43
+Machine Feeders and Offbearers,33150,0.343,1,25610-37760,537063,53
+"Farmworkers and Laborers, Crop, Nursery, and Greenhouse",33250,1.326,1,25610-37760,452092,45
+Physical Therapist Aides,33380,0.425,1,25610-37760,312022,31
+Recreation Workers,33590,2.075,1,25610-37760,399032,39
+Stockers and Order Fillers,33740,14.022,1,25610-37760,537065,53
+Veterinary Assistants and Laboratory Animal Caretakers,33890,2.408,1,25610-37760,319096,31
+Receptionists and Information Clerks,34160,7.424,1,25610-37760,434171,43
+"Substitute Teachers, Short-Term",34640,4.744,1,25610-37760,253031,25
+"Cooks, Restaurant",34950,11.379,1,25610-37760,352014,35
+Order Clerks,35150,0.477,1,25610-37760,434151,43
+"Teaching Assistants, Except Postsecondary",35250,8.932,1,25610-37760,259045,25
+"Laborers and Freight, Stock, and Material Movers, Hand",35460,6.673,1,25610-37760,537062,53
+Data Entry Keyers,35780,0.709,1,25610-37760,439021,43
+"Umpires, Referees, and Other Sports Officials",36060,0.425,1,25610-37760,272023,27
+Floral Designers,36120,0.273,1,25610-37760,271023,27
+"Cooks, Institution and Cafeteria",36210,3.753,1,25610-37760,352012,35
+Helpers--Carpenters,36240,0.49,1,25610-37760,473012,47
+Printing Press Operators,36270,0.743,1,25610-37760,515112,51
+Miscellaneous Assemblers and Fabricators,36480,1.795,1,25610-37760,512090,51
+Landscaping and Groundskeeping Workers,36700,8.433,1,25610-37760,373011,37
+Customer Service Representatives,36710,12.609,1,25610-37760,434051,43
+Emergency Medical Technicians,36940,1.657,1,25610-37760,292042,29
+Residential Advisors,36940,0.582,1,25610-37760,399041,39
+Merchandise Displayers and Window Trimmers,37010,1.297,1,25610-37760,271026,27
+"Helpers--Pipelayers, Plumbers, Pipefitters, and Steamfitters",37060,0.463,1,25610-37760,473015,47
+"Hairdressers, Hairstylists, and Cosmetologists",37130,2.372,1,25610-37760,395012,39
+"Helpers--Installation, Maintenance, and Repair Workers",37160,0.921,1,25610-37760,499098,49
+Helpers--Electricians,37200,0.617,1,25610-37760,473013,47
+Counter and Rental Clerks,37270,3.242,1,25610-37760,412021,41
+Nursing Assistants,37400,15.181,1,25610-37760,311131,31
+Phlebotomists,37600,0.74,1,25610-37760,319097,31
+"Preschool Teachers, Except Special Education",37610,2.36,1,25610-37760,252011,25
+"Shipping, Receiving, and Inventory Clerks",37760,2.684,1,25610-37760,435071,43
+Skincare Specialists,37860,0.324,2,37860-48320,395094,39
+"Healthcare Support Workers, All Other",37900,2.012,2,37860-48320,319099,31
+Security Guards,37920,3.098,2,37860-48320,339032,33
+Driver/Sales Workers,38000,3.086,2,37860-48320,533031,53
+Medical Secretaries and Administrative Assistants,38200,5.342,2,37860-48320,436013,43
+Industrial Truck and Tractor Operators,38270,1.243,2,37860-48320,537051,53
+Construction Laborers,38290,5.632,2,37860-48320,472061,47
+"Electrical, electronic, and electromechanical assemblers, except coil winders, tapers, and finishers",38290,1.756,2,37860-48320,512028,51
+"Interviewers, Except Eligibility and Loan",38300,0.987,2,37860-48320,434111,43
+Packaging and Filling Machine Operators and Tenders,38370,0.766,2,37860-48320,519111,51
+Tellers,38410,1.185,2,37860-48320,433071,43
+Tire Repairers and Changers,38520,0.447,2,37860-48320,493093,49
+"Court, Municipal, and License Clerks",38640,0.536,2,37860-48320,434031,43
+Firefighters,38990,2.782,2,37860-48320,332011,33
+Butchers and Meat Cutters,39140,0.573,2,37860-48320,513021,51
+"Tax Examiners and Collectors, and Revenue Agents",39390,0.268,2,37860-48320,132081,13
+Medical Assistants,39500,3.593,2,37860-48320,319092,31
+Social and Human Service Assistants,39680,2.776,2,37860-48320,211093,21
+"Office Clerks, General",39990,17.741,2,37860-48320,439061,43
+"News Analysts, Reporters, and Journalists",40040,0.345,2,37860-48320,273023,27
+Ophthalmic Medical Technicians,40460,0.92,2,37860-48320,292057,29
+"Sawing Machine Setters, Operators, and Tenders, Wood",41110,0.436,2,37860-48320,517041,51
+"Bus Drivers, Transit and Intercity",41120,2.892,2,37860-48320,533052,53
+Tutors,41170,0.771,2,37860-48320,253041,25
+Light Truck Drivers,41390,3.711,2,37860-48320,533033,53
+Public Safety Telecommunicators,41770,0.721,2,37860-48320,435031,43
+Travel Agents,42470,0.398,2,37860-48320,413041,41
+Transportation Security Screeners,42520,0.293,2,37860-48320,339093,33
+Pest Control Workers,42630,0.571,2,37860-48320,372021,37
+Bartenders,42640,4.609,2,37860-48320,353011,35
+"Information and Record Clerks, All Other",42660,0.743,2,37860-48320,434199,43
+"Motor Vehicle Operators, All Other",42690,0.31,2,37860-48320,533099,53
+"Computer, Automated Teller, and Office Machine Repairers",42880,0.423,2,37860-48320,492011,49
+"Maintenance and Repair Workers, General",44210,10.271,2,37860-48320,499071,49
+Highway Maintenance Workers,44280,1.368,2,37860-48320,474051,47
+"First-Line Supervisors of Entertainment and Recreation Workers, Except Gambling Services",44470,0.822,2,37860-48320,391014,39
+Pharmacy Technicians,44480,3.775,2,37860-48320,292052,29
+"Mixing and Blending Machine Setters, Operators, and Tenders",44490,0.29,2,37860-48320,519023,51
+First-Line Supervisors of Food Preparation and Serving Workers,44630,8.645,2,37860-48320,351012,35
+"Painters, Construction and Maintenance",44810,1.309,2,37860-48320,472141,47
+Library Technicians,44870,1.019,2,37860-48320,254031,25
+Billing and Posting Clerks,45050,1.274,2,37860-48320,433021,43
+"Separating, Filtering, Clarifying, Precipitating, and Still Machine Setters, Operators, and Tenders",45160,1.343,2,37860-48320,519012,51
+"Human Resources Assistants, Except Payroll and Timekeeping",45330,0.631,2,37860-48320,434161,43
+Surveying and Mapping Technicians,45490,0.521,2,37860-48320,173031,17
+Insurance Claims and Policy Processing Clerks,45490,1.217,2,37860-48320,439041,43
+Outdoor Power Equipment and Other Small Engine Mechanics,45590,0.274,2,37860-48320,493053,49
+Dental Assistants,45640,2.274,2,37860-48320,319091,31
+Rehabilitation Counselors,45810,0.683,2,37860-48320,211015,21
+First-Line Supervisors of Housekeeping and Janitorial Workers,45970,1.502,2,37860-48320,371011,37
+First-Line Supervisors of Personal Service Workers,46200,1.073,2,37860-48320,391022,39
+Civil Engineering Technologists and Technicians,46300,0.636,2,37860-48320,173022,17
+Cabinetmakers and Bench Carpenters,46680,0.592,2,37860-48320,517011,51
+Self-Enrichment Teachers,46760,1.694,2,37860-48320,253021,25
+"Installation, Maintenance, and Repair Workers, All Other",46760,0.768,2,37860-48320,499099,49
+Exercise Trainers and Group Fitness Instructors,46810,3.509,2,37860-48320,399031,39
+Correctional Officers and Jailers,46840,5.032,2,37860-48320,333012,33
+Drywall and Ceiling Tile Installers,46890,0.357,2,37860-48320,472081,47
+Operating Engineers and Other Construction Equipment Operators,46970,2.569,2,37860-48320,472073,47
+Logging Equipment Operators,47140,0.618,2,37860-48320,454022,45
+Bill and Account Collectors,47320,0.41,2,37860-48320,433011,43
+Photographers,47330,0.391,2,37860-48320,274021,27
+"Bus Drivers, School",47470,4.204,2,37860-48320,533051,53
+"Title Examiners, Abstractors, and Searchers",47550,0.478,2,37860-48320,232093,23
+"Bookkeeping, Accounting, and Auditing Clerks",47610,9.791,2,37860-48320,433031,43
+"Secretaries and Administrative Assistants, Except Legal, Medical, and Executive",47620,11.55,2,37860-48320,436014,43
+First-Line Supervisors of Retail Sales Workers,47710,7.682,2,37860-48320,411011,41
+Coaches and Scouts,47830,2.344,2,37860-48320,272022,27
+Real Estate Sales Agents,47840,1.95,2,37860-48320,419022,41
+"Teaching Assistants, Postsecondary",48190,NA,2,37860-48320,259044,25
+Legal Secretaries and Administrative Assistants,48250,0.485,2,37860-48320,436012,43
+"Welders, Cutters, Solderers, and Brazers",48320,0.861,2,37860-48320,514121,51
+Automotive Service Technicians and Mechanics,48340,4.391,3,48340-60600,493023,49
+Massage Therapists,48370,0.914,3,48340-60600,319011,31
+"Educational Instruction and Library Workers, All Other",48570,0.705,3,48340-60600,259099,25
+Heavy and Tractor-Trailer Truck Drivers,48610,5.821,3,48340-60600,533032,53
+"Inspectors, Testers, Sorters, Samplers, and Weighers",48670,1.294,3,48340-60600,519061,51
+Cement Masons and Concrete Finishers,48680,1.521,3,48340-60600,472051,47
+Carpenters,48870,5.529,3,48340-60600,472031,47
+"Office and Administrative Support Workers, All Other",48900,3.412,3,48340-60600,439199,43
+Roofers,49030,0.502,3,48340-60600,472181,47
+Social Science Research Assistants,49040,0.773,3,48340-60600,194061,19
+"Eligibility Interviewers, Government Programs",49110,0.97,3,48340-60600,434061,43
+First-Line Supervisors of Firefighting and Prevention Workers,49240,0.33,3,48340-60600,331021,33
+Veterinary Technologists and Technicians,49250,0.952,3,48340-60600,292056,29
+"Excavating and Loading Machine and Dragline Operators, Surface Mining",49600,0.55,3,48340-60600,475022,47
+"Substance abuse, behavioral disorder, and mental health counselors",49820,2.436,3,48340-60600,211018,21
+"Health Technologists and Technicians, All Other",50080,0.866,3,48340-60600,292099,29
+"Production, Planning, and Expediting Clerks",50110,1.022,3,48340-60600,435061,43
+Detectives and Criminal Investigators,50210,1.324,3,48340-60600,333021,33
+"Life, Physical, and Social Science Technicians, All Other",50270,NA,3,48340-60600,194099,19
+Chemical Technicians,50300,0.917,3,48340-60600,194031,19
+Paramedics,50480,0.684,3,48340-60600,292043,29
+"Dispatchers, Except Police, Fire, and Ambulance",50750,0.914,3,48340-60600,435032,43
+"Geoscientists, Except Hydrologists and Geographers",50760,0.266,3,48340-60600,192042,19
+"Protective Service Workers, All Other",50780,0.447,3,48340-60600,339099,33
+Brickmasons and Blockmasons,50950,0.359,3,48340-60600,472021,47
+Bus and Truck Mechanics and Diesel Engine Specialists,51420,1.115,3,48340-60600,493031,49
+Biological Technicians,51750,2.334,3,48340-60600,194021,19
+Graphic Designers,51920,1.92,3,48340-60600,271024,27
+Chefs and Head Cooks,52000,1.583,3,48340-60600,351011,35
+"Securities, Commodities, and Financial Services Sales Agents",52070,3.045,3,48340-60600,413031,41
+"Plumbers, Pipefitters, and Steamfitters",52090,2.503,3,48340-60600,472152,47
+Producers and Directors,52690,0.725,3,48340-60600,272012,27
+Water and Wastewater Treatment Plant and System Operators,53190,0.909,3,48340-60600,518031,51
+"Special Education Teachers, Preschool",53280,0.302,3,48340-60600,252051,25
+"Mobile Heavy Equipment Mechanics, Except Engines",53540,0.728,3,48340-60600,493042,49
+"First-Line Supervisors of Transportation Workers, Except Aircraft Cargo Handling Supervisors",53740,2.528,3,48340-60600,531047,53
+"Child, Family, and School Social Workers",53890,2.444,3,48340-60600,211021,21
+Medical Equipment Repairers,53990,0.44,3,48340-60600,499062,49
+Sheet Metal Workers,54180,0.324,3,48340-60600,472211,47
+Medical Records Specialists,54390,1.797,3,48340-60600,292072,29
+Payroll and Timekeeping Clerks,54570,0.909,3,48340-60600,433051,43
+Police and Sheriff's Patrol Officers,56190,3.766,3,48340-60600,333051,33
+"Kindergarten Teachers, Except Special Education",56310,1.122,3,48340-60600,252012,25
+"Community and Social Service Specialists, All Other",56330,0.48,3,48340-60600,211099,21
+Clinical Laboratory Technologists and Technicians,56380,1.907,3,48340-60600,292010,29
+"First-Line Supervisors of Landscaping, Lawn Service, and Groundskeeping Workers",56380,1.174,3,48340-60600,371012,37
+"Heating, Air Conditioning, and Refrigeration Mechanics and Installers",56480,3.31,3,48340-60600,499021,49
+"Special Education Teachers, Secondary School",56580,1.563,3,48340-60600,252058,25
+Insurance Sales Agents,56590,2.724,3,48340-60600,413021,41
+First-Line Supervisors of Correctional Officers,56760,1.533,3,48340-60600,331011,33
+Postal Service Mail Carriers,56760,1.883,3,48340-60600,435052,43
+"Coating, Painting, and Spraying Machine Setters, Operators, and Tenders",57130,0.335,3,48340-60600,519124,51
+Industrial Machinery Mechanics,57310,0.9,3,48340-60600,499041,49
+Architectural and Civil Drafters,57370,0.356,3,48340-60600,173011,17
+Mental Health and Substance Abuse Social Workers,57390,0.556,3,48340-60600,211023,21
+Automotive Body and Related Repairers,57560,0.668,3,48340-60600,493021,49
+Clergy,58090,0.443,3,48340-60600,212011,21
+Interior Designers,58180,0.35,3,48340-60600,271025,27
+Machinists,58210,0.724,3,48340-60600,514041,51
+Tax Preparers,58260,0.687,3,48340-60600,132082,13
+"First-Line Supervisors of Farming, Fishing, and Forestry Workers",58290,0.492,3,48340-60600,451011,45
+Electricians,58630,6.591,3,48340-60600,472111,47
+"Special Education Teachers, Middle School",58640,0.676,3,48340-60600,252057,25
+"Opticians, Dispensing",59090,0.785,3,48340-60600,292081,29
+"Elementary School Teachers, Except Special Education",59260,9.224,3,48340-60600,252021,25
+"Claims Adjusters, Examiners, and Investigators",59620,0.756,3,48340-60600,131031,13
+Paralegals and Legal Assistants,59660,1.935,3,48340-60600,232011,23
+First-Line Supervisors of Office and Administrative Support Workers,59990,8.594,3,48340-60600,431011,43
+"Sales Representatives of Services, Except Advertising, Insurance, Financial Services, and Travel",60010,7.423,3,48340-60600,413091,41
+"Educational, Guidance, and Career Counselors and Advisors",60320,3.561,3,48340-60600,211012,21
+"Sales Representatives, Wholesale and Manufacturing, Except Technical and Scientific Products",60390,4.374,3,48340-60600,414012,41
+"Secondary School Teachers, Except Special and Career/Technical Education",60600,7.238,3,48340-60600,252031,25
+Interpreters and Translators,60640,NA,4,60640-86950,273091,27
+Computer User Support Specialists,60700,3.73,4,60640-86950,151232,15
+"Meeting, Convention, and Event Planners",60780,2.051,4,60640-86950,131121,13
+"Special Education Teachers, Kindergarten and Elementary School",60950,1.475,4,60640-86950,252052,25
+Licensed Practical and Licensed Vocational Nurses,61120,4.398,4,60640-86950,292061,29
+Insurance Underwriters,61130,0.544,4,60640-86950,132053,13
+Postal Service Clerks,61150,0.631,4,60640-86950,435051,43
+Healthcare Social Workers,61230,1.43,4,60640-86950,211022,21
+Web and Digital Interface Designers,61610,0.789,4,60640-86950,151255,15
+Power Plant Operators,61640,0.36,4,60640-86950,518013,51
+Athletic Trainers,61670,0.403,4,60640-86950,299091,29
+Fundraisers,61940,1.936,4,60640-86950,131131,13
+"Medical Scientists, Except Epidemiologists",61940,5.475,4,60640-86950,191042,19
+Writers and Authors,62120,0.535,4,60640-86950,273043,27
+Editors,62250,1.85,4,60640-86950,273041,27
+Dietitians and Nutritionists,62280,0.388,4,60640-86950,291031,29
+"Middle School Teachers, Except Special and Career/Technical Education",62290,5.445,4,60640-86950,252022,25
+Physical Therapist Assistants,62390,0.712,4,60640-86950,312021,31
+"Career/Technical Education Teachers, Secondary School",62720,0.975,4,60640-86950,252032,25
+Food Service Managers,62750,1.386,4,60640-86950,119051,11
+Surveyors,62830,0.381,4,60640-86950,171022,17
+Surgical Technologists,62880,1.202,4,60640-86950,292055,29
+"Environmental Science and Protection Technicians, Including Health",63070,0.473,4,60640-86950,194042,19
+"Business Operations Specialists, All Other",63250,6.667,4,60640-86950,131199,13
+"Property, Real Estate, and Community Association Managers",63320,1.377,4,60640-86950,119141,11
+Landscape Architects,63440,0.498,4,60640-86950,171012,17
+Advertising Sales Agents,63490,0.575,4,60640-86950,413011,41
+Construction and Building Inspectors,64170,0.816,4,60640-86950,474011,47
+Electrical and Electronic Engineering Technologists and Technicians,64200,1.04,4,60640-86950,173023,17
+Audio and Video Technicians,64200,0.657,4,60640-86950,274011,27
+"First-Line Supervisors of Protective Service Workers, All Other",64240,0.289,4,60640-86950,331099,33
+Executive Secretaries and Executive Administrative Assistants,64280,3.265,4,60640-86950,436011,43
+Compliance Officers,65320,2.265,4,60640-86950,131041,13
+Cost Estimators,65500,1.413,4,60640-86950,131051,13
+"First-Line Supervisors of Mechanics, Installers, and Repairers",65680,3.338,4,60640-86950,491011,49
+"Career/Technical Education Teachers, Postsecondary",65980,0.589,4,60640-86950,251194,25
+Urban and Regional Planners,66340,0.428,4,60640-86950,193051,19
+Computer Network Support Specialists,66610,0.821,4,60640-86950,151231,15
+Training and Development Specialists,67810,2.876,4,60640-86950,131151,13
+Market Research Analysts and Marketing Specialists,67940,6.102,4,60640-86950,131161,13
+"Compensation, Benefits, and Job Analysis Specialists",67990,1.161,4,60640-86950,131141,13
+First-Line Supervisors of Production and Operating Workers,68380,1.97,4,60640-86950,511011,51
+"Telecommunications Equipment Installers and Repairers, Except Line Installers",68730,0.992,4,60640-86950,492022,49
+Foresters,69490,0.3,4,60640-86950,191032,19
+Loan Officers,72050,1.433,4,60640-86950,132072,13
+Logisticians,72890,0.949,4,60640-86950,131081,13
+Human Resources Specialists,72990,5.741,4,60640-86950,131071,13
+Librarians and Media Collections Specialists,73330,2.281,4,60640-86950,254022,25
+Radiologic Technologists and Technicians,74140,1.447,4,60640-86950,292034,29
+First-Line Supervisors of Construction Trades and Extraction Workers,74270,6.558,4,60640-86950,471011,47
+Buyers and Purchasing Agents,74480,3.227,4,60640-86950,131020,13
+Lodging Managers,75270,0.353,4,60640-86950,119081,11
+Occupational Health and Safety Specialists,75590,0.601,4,60640-86950,195011,19
+Accountants and Auditors,78820,10.464,4,60640-86950,132011,13
+"Financial Specialists, All Other",79000,1.409,4,60640-86950,132099,13
+Art Directors,79210,0.327,4,60640-86950,271011,27
+Bioengineers and Biomedical Engineers,79730,0.409,4,60640-86950,172031,17
+"Healthcare Practitioners and Technical Workers, All Other",79890,0.385,4,60640-86950,299099,29
+"Biological Scientists, All Other",80140,0.493,4,60640-86950,191029,19
+Chemists,80520,0.687,4,60640-86950,192031,19
+Respiratory Therapists,80550,1.086,4,60640-86950,291126,29
+First-Line Supervisors of Non-Retail Sales Workers,80610,1.771,4,60640-86950,411012,41
+Gas Plant Operators,81100,0.3,4,60640-86950,518092,51
+"Education Administrators, All Other",81130,0.761,4,60640-86950,119039,11
+Instructional Coordinators,81130,2.5,4,60640-86950,259031,25
+Registered Nurses,81510,28.108,4,60640-86950,291141,29
+Management Analysts,82990,6.209,4,60640-86950,131111,13
+Electrical Power-Line Installers and Repairers,83280,0.639,4,60640-86950,499051,49
+Labor Relations Specialists,84210,0.325,4,60640-86950,131075,13
+Civil Engineers,85570,1.695,4,60640-86950,172051,17
+Database Administrators,85660,0.717,4,60640-86950,151242,15
+Clinical and Counseling Psychologists,86950,0.672,4,60640-86950,193033,19
+Budget Analysts,88050,0.406,5,88050-238990,132031,13
+First-Line Supervisors of Police and Detectives,88110,0.932,5,88050-238990,331012,33
+Web Developers,88120,1.104,5,88050-238990,151254,15
+Technical Writers,88120,0.388,5,88050-238990,273042,27
+Speech-Language Pathologists,89120,0.824,5,88050-238990,291127,29
+"Architects, Except Landscape and Naval",89590,1.385,5,88050-238990,171011,17
+Mechanical Engineers,89600,1.232,5,88050-238990,172141,17
+Social and Community Service Managers,90700,0.986,5,88050-238990,119151,11
+Personal Financial Advisors,91880,2.097,5,88050-238990,132052,13
+Dental Hygienists,92000,1.173,5,88050-238990,291292,29
+"Environmental Scientists and Specialists, Including Health",92940,0.513,5,88050-238990,192041,19
+Project Management Specialists,93110,7.311,5,88050-238990,131082,13
+Software Quality Assurance Analysts and Testers,93820,1.596,5,88050-238990,151253,15
+Network and Computer Systems Administrators,95650,2.628,5,88050-238990,151244,15
+Occupational Therapists,96380,1.096,5,88050-238990,291122,29
+Computer Programmers,97150,0.385,5,88050-238990,151251,15
+Operations Research Analysts,97430,0.426,5,88050-238990,152031,15
+Marriage and Family Therapists,98860,0.353,5,88050-238990,211013,21
+Industrial Engineers,99750,0.615,5,88050-238990,172112,17
+Physical Therapists,99820,2.504,5,88050-238990,291123,29
+Financial and Investment Analysts,99860,1.895,5,88050-238990,132051,13
+Electrical Engineers,99890,1.149,5,88050-238990,172071,17
+"Education Administrators, Kindergarten through Secondary",100280,2.415,5,88050-238990,119032,11
+"Sales Representatives, Wholesale and Manufacturing, Technical and Scientific Products",100550,0.76,5,88050-238990,414011,41
+"Electronics Engineers, Except Computer",101040,0.933,5,88050-238990,172072,17
+Computer Systems Analysts,101130,4.067,5,88050-238990,151211,15
+Construction Managers,101490,2.146,5,88050-238990,119021,11
+Administrative Services Managers,101810,1.628,5,88050-238990,113012,11
+Natural Sciences Managers,102910,0.609,5,88050-238990,119121,11
+Physicists,103480,0.279,5,88050-238990,192012,19
+"Transportation, Storage, and Distribution Managers",104080,0.496,5,88050-238990,113071,11
+"Nursing Instructors and Teachers, Postsecondary",104270,0.905,5,88050-238990,251072,25
+Industrial Production Managers,105020,0.371,5,88050-238990,113051,11
+General and Operations Managers,105030,18.76,5,88050-238990,111021,11
+Facilities Managers,105610,0.773,5,88050-238990,113013,11
+Veterinarians,105990,0.857,5,88050-238990,291131,29
+"English Language and Literature Teachers, Postsecondary",108000,1.572,5,88050-238990,251123,25
+Information Security Analysts,109480,1.746,5,88050-238990,151212,15
+Astronomers,111020,0.692,5,88050-238990,192011,19
+"Computer Occupations, All Other",111610,1.177,5,88050-238990,151299,15
+"Engineers, All Other",111610,0.432,5,88050-238990,172199,17
+"Legal Support Workers, All Other",112440,0.329,5,88050-238990,232099,23
+"Social Scientists and Related Workers, All Other",114900,3.345,5,88050-238990,193099,19
+Computer Network Architects,115700,1,5,88050-238990,151241,15
+Computer and Information Research Scientists,117320,0.32,5,88050-238990,151221,15
+Data Scientists,117410,1.244,5,88050-238990,152051,15
+"Physical Scientists, All Other",118540,0.711,5,88050-238990,192099,19
+Training and Development Managers,119870,0.409,5,88050-238990,113131,11
+Software Developers,120310,13.029,5,88050-238990,151252,15
+Physician Assistants,123980,0.75,5,88050-238990,291071,29
+Medical and Health Services Managers,124910,3.133,5,88050-238990,119111,11
+Database Architects,125010,0.684,5,88050-238990,151243,15
+Fundraising Managers,127620,0.652,5,88050-238990,112033,11
+"Health Specialties Teachers, Postsecondary",129110,NA,5,88050-238990,251071,25
+"Biological Science Teachers, Postsecondary",130650,1.026,5,88050-238990,251042,25
+Sales Managers,131380,1.826,5,88050-238990,112022,11
+Public Relations Managers,132410,1.036,5,88050-238990,112032,11
+"Managers, All Other",133300,3.452,5,88050-238990,119199,11
+Purchasing Managers,133890,0.608,5,88050-238990,113061,11
+Nurse Practitioners,134870,4.45,5,88050-238990,291171,29
+Pharmacists,136340,2.816,5,88050-238990,291051,29
+Human Resources Managers,137610,1.361,5,88050-238990,113121,11
+Lawyers,140360,3.434,5,88050-238990,231011,23
+Architectural and Engineering Managers,143540,0.788,5,88050-238990,119041,11
+Financial Managers,152780,3.853,5,88050-238990,113031,11
+Marketing Managers,155010,1.512,5,88050-238990,112021,11
+Computer and Information Systems Managers,155320,3.733,5,88050-238990,113021,11
+"Dentists, General",169950,0.691,5,88050-238990,291021,29
+"Physicians, All Other",206860,9.069,5,88050-238990,291229,29
+Family Medicine Physicians,210970,0.663,5,88050-238990,291215,29
+Nurse Anesthetists,224290,0.815,5,88050-238990,291151,29
+Chief Executives,238990,1.225,5,88050-238990,111011,11

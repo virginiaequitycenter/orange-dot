@@ -550,27 +550,62 @@ workers_by_medianwages %>%
         plot.caption = element_text(size = 12))
 
 ```
+
 ```{r occupations_by_wagebin, fig.width = 6, fig.height = 10,  fig.retina = 2}
 occupations_by_wagebin <- read_csv("../microdata/data/occupations_by_wagebin.csv")
 
-# occupation_appendix <- occupations_by_wagebin %>% 
-#   filter(employment_per_1_000_jobs > 1) %>% 
-#   mutate(median_wage_bin_label = factor(median_wage_bin_label, levels = c("25610-37760", "37860-48320", "48340-60600", "60640-86950", "88050-238990"), labels = c("$25,610 - $37,760", "$37,860 - $48,320", "$48,340 - $60,600", "$60,640 - $86,950", "$88,050 - $238,990")),
-#          employment_per_1_000_jobs = round(employment_per_1_000_jobs,1))
-# 
-# write.xlsx(occupation_appendix, "OccupationsByWageBin.xlsx")
-
 occupations_filtered <- occupations_by_wagebin %>% 
   # filter(employment_per_1_000_jobs > 8) %>% 
-  filter(occupation %in% c("Fast Food and Counter Workers", "Cashiers", "Home Health and Personal Care Aides",
-                           "Customer Service Representatives", "Construction Laborers", "Light Truck Drivers", "Maintenance and Repair Workers, General", "Elementary School Teachers, Except Special Education
-", "Electricians", "Medical Records Specialists", "Office and Administrative Support Workers, All Other", "Registered Nurses", "Radiologic Technologists and Technicians", "Computer User Support Specialists", "General and Operations Managers", "Construction Managers", "Dental Hygienists")) %>% 
-  mutate(median_wage_bin_label = factor(median_wage_bin_label, levels = c("25610-37760", "37860-48320", "48340-60600", "60640-86950", "88050-238990"), labels = c("$25,610 - $37,760", "$37,860 - $48,320", "$48,340 - $60,600", "$60,640 - $86,950", "$88,050 - $238,990")))
+  filter(occupation %in% c("Fast Food and Counter Workers", "Cashiers", "Home Health and Personal Care Aides", "Childcare Workers",
+                           "Customer Service Representatives", "Construction Laborers", "Maintenance and Repair Workers, General", 
+                           "Emergency Medical Technicians", "Nursing Assistants", 
+                           "Healthcare Support Workers, All Other", "Medical Assistants",
+                           "Bus Drivers, Transit and Intercity", "Dental Assistants", "Bus Drivers, School",
+                           "Automotive Service Technicians and Mechanics", "Heavy and Tractor-Trailer Truck Drivers",
+                           "Carpenters", "Production, Planning, and Expediting Clerks",
+                           "Graphic Designers", "Plumbers, Pipefitters, and Steamfitters",
+                           "Electricians", "Medical Records Specialists", "Police and Sheriff's Patrol Officers",
+                           "Clinical Laboratory Technologists and Technicians", "Elementary School Teachers, Except Special Education",
+                           "Secondary School Teachers, Except Special and Career/Technical Education",
+                           "Office and Administrative Support Workers, All Other", "Registered Nurses", 
+                           "Radiologic Technologists and Technicians", "Computer User Support Specialists", 
+                           "Accountants and Auditors", "Nurse Practitioners",
+                           "General and Operations Managers", "Construction Managers", "Dental Hygienists", 
+                           "Heating, Air Conditioning, and Refrigeration Mechanics and Installers", 
+                           "Electrical and Electronic Engineering Technologists and Technicians", 
+                           "Licensed Practical and Licensed Vocational Nurses", "Surgical Technologists")) %>% 
+#   filter(occupation %in% c("Fast Food and Counter Workers", "Cashiers", "Home Health and Personal Care Aides",
+#                            "Customer Service Representatives", "Construction Laborers", "Light Truck Drivers", "Maintenance and Repair Workers, General", "Elementary School Teachers, Except Special Education
+# ", "Electricians", "Medical Records Specialists", "Office and Administrative Support Workers, All Other", "Registered Nurses", "Radiologic Technologists and Technicians", "Computer User Support Specialists", "General and Operations Managers", "Construction Managers", "Dental Hygienists")) %>% 
+  mutate(median_wage_bin_label = factor(median_wage_bin_label, levels = c("25610-37760", "37860-48320", "48340-60600", "60640-86950", "88050-238990"), labels = c("$25,610 - $37,760", "$37,860 - $48,320", "$48,340 - $60,600", "$60,640 - $86,950", "$88,050 - $238,990")),
+         job_group = case_when(soc_group_num == "11" ~ "Management",
+soc_group_num == "13" ~ "Business and Financial Operations",
+soc_group_num == "15" ~ "Computer and Mathematical",
+soc_group_num == "17" ~ "Architecture and Engineering",
+soc_group_num == "19" ~ "Life, Physical, and Social Science",
+soc_group_num == "21" ~ "Community and Social Service",
+soc_group_num == "23" ~ "Legal",
+soc_group_num == "25" ~ "Educational Instruction and Library",
+soc_group_num == "27" ~ "Arts, Design, Entertainment, Sports, and Media",
+soc_group_num == "29" ~ "Healthcare Practitioners and Technical",
+soc_group_num == "31" ~ "Healthcare Support",
+soc_group_num == "33" ~ "Protective Service",
+soc_group_num == "35" ~ "Food Preparation and Serving Related",
+soc_group_num == "37" ~ "Building and Grounds Cleaning and Maintenance",
+soc_group_num == "39" ~ "Personal Care and Service",
+soc_group_num == "41" ~ "Sales and Related",
+soc_group_num == "43" ~ "Office and Administrative Support",
+soc_group_num == "45" ~ "Farming, Fishing, and Forestry",
+soc_group_num == "47" ~ "Construction and Extraction",
+soc_group_num == "49" ~ "Installation, Maintenance, and Repair",
+soc_group_num == "51" ~ "Production",
+soc_group_num == "53" ~ "Transportation and Material Moving"
+))
 
 occupations_filtered %>%
   mutate(employment_per_1_000_jobs = employment_per_1_000_jobs/100,
          color = "") %>% 
-  select(c(occupation, annual_median_wage_2, color, employment_per_1_000_jobs, median_wage_bin)) %>%
+  select(c(occupation, annual_median_wage_2, color, employment_per_1_000_jobs, job_group, median_wage_bin)) %>%
   gt() %>% 
   # tab_row_group(label = "Occupations Earning $88,050 - $238,990",
   #               rows = 14:16) %>%
@@ -609,7 +644,8 @@ occupations_filtered %>%
     annual_median_wage_2 = "Annual Median Wage",
         color = "",
     employment_per_1_000_jobs = "Employment Rate",
-    median_wage_bin = ""
+    median_wage_bin = "",
+    job_group = "Occupation Group"
   ) %>% 
   tab_style(
     style = cell_text(align = "center", v_align = "middle"),
@@ -620,8 +656,16 @@ occupations_filtered %>%
     locations = cells_title(groups = "title")
   ) %>% 
   tab_footnote(
-    footnote = "Employment rate per 1,000 jobs in the Charlottesville Metro Area",
+    footnote = "The annual median wage is the boundary between the highest and lowest paid workers in a given occupation. Half of the workers in a given occupation earn more than the median wage, and half the workers earn less than the median wage.",
+    locations = cells_column_labels(columns = annual_median_wage_2)
+  ) %>% 
+  tab_footnote(
+    footnote = "Employment rate is the number of jobs (employment) in the given occupation per 1,000 jobs in the Charlottesville Metro Area",
     locations = cells_column_labels(columns = employment_per_1_000_jobs)
+  ) %>% 
+  tab_footnote(
+    footnote = "Major occupation groups defined by the Standard Occupational Classification (SOC) system, used by Federal statistical agencies to classify workers and jobs into occupational categories for the purpose of collecting, calculating, analyzing, or disseminating data.",
+    locations = cells_column_labels(columns = job_group)
   ) %>% 
   tab_header(
     title = "Selection of Occupations by Annual Median Wage Earned in the Charlottesville Metro Area"
@@ -633,20 +677,108 @@ occupations_filtered %>%
 
 
 ## Appendix
+```{r occupations_median_age_by_job_group}
+occupations_median_age_by_job_group <- read_csv("../microdata/data/occupation_wages_catchallcategories.csv")
+
+occupations_median_age_by_job_group %>% 
+  arrange(annual_median_wage_2) %>% 
+  select(occupation, hourly_mean_wage, annual_mean_wage_2, hourly_median_wage, annual_median_wage_2, employment_per_1_000_jobs, median_wage_bin) %>% 
+  mutate(employment_per_1_000_jobs = employment_per_1_000_jobs/100,
+         color = "") %>% 
+  select(c(occupation, hourly_mean_wage, annual_mean_wage_2, hourly_median_wage, annual_median_wage_2, color, employment_per_1_000_jobs, median_wage_bin)) %>%
+  gt() %>% 
+  data_color(
+    columns = median_wage_bin,
+    target_columns = color,
+    direction = "column",
+    palette = c("#DE8A5A", "#EDBB8A", "#F6EDBD","#B4C8A8", "#70A494"),
+  ) %>% 
+  fmt_currency(
+    columns = 2:5,
+    currency = currency(
+      html = "&#36;",
+      default = "$"
+    ),
+    decimals = 2
+  ) %>% 
+  fmt_percent(
+    columns = employment_per_1_000_jobs,
+    decimals = 0
+  ) %>% 
+  cols_hide(columns = c(median_wage_bin)) %>% 
+  cols_label(
+    occupation = "Occupation Group",
+    hourly_mean_wage = "Hourly Mean (Average) Wage", 
+    annual_mean_wage_2 = "Annual Mean (Average) Wage", 
+    hourly_median_wage = "Hourly Median Wage",
+    annual_median_wage_2 = "Annual Median Wage",
+        color = "",
+    employment_per_1_000_jobs = "Employment Rate",
+    median_wage_bin = ""
+  ) %>% 
+  tab_style(
+    style = cell_text(align = "center", v_align = "middle"),
+    locations = list(cells_column_labels(2:4), cells_body(2:4))
+  ) %>%
+  tab_footnote(
+    footnote = "The annual median wage is the boundary between the highest and lowest paid workers in a given occupation. Half of the workers in a given occupation earn more than the median wage, and half the workers earn less than the median wage.",
+    locations = cells_column_labels(columns = annual_median_wage_2)
+  ) %>% 
+  tab_footnote(
+    footnote = "Employment rate is the number of jobs (employment) in the given occupation per 1,000 jobs in the Charlottesville Metro Area",
+    locations = cells_column_labels(columns = employment_per_1_000_jobs)
+  ) %>% 
+  tab_footnote(
+    footnote = "Major occupation groups defined by the Standard Occupational Classification (SOC) system, used by Federal statistical agencies to classify workers and jobs into occupational categories for the purpose of collecting, calculating, analyzing, or disseminating data.",
+    locations = cells_column_labels(columns = occupation)
+  ) %>% 
+  tab_header(
+    title = "Occupation Groups by Mean (Average) and Median Wages Earned in the Charlottesville Metro Area"
+  ) %>% 
+  tab_source_note(
+    source_note = "Data Source: U.S. Bureau of Labor Statistics, Occupational Employment and Wage Statistics; May 2023"
+  )
+  
+
+```
+
 
 ```{r occupations_by_wagebin_appendix, fig.width = 6, fig.height = 10,  fig.retina = 2}
 
 occupation_appendix <- occupations_by_wagebin %>%
   filter(employment_per_1_000_jobs > 1) %>%
   mutate(median_wage_bin_label = factor(median_wage_bin_label, levels = c("25610-37760", "37860-48320", "48340-60600", "60640-86950", "88050-238990"), labels = c("$25,610 - $37,760", "$37,860 - $48,320", "$48,340 - $60,600", "$60,640 - $86,950", "$88,050 - $238,990")),
-         employment_per_1_000_jobs = round(employment_per_1_000_jobs,1))
+         employment_per_1_000_jobs = round(employment_per_1_000_jobs,1),
+         job_group = case_when(soc_group_num == "11" ~ "Management",
+soc_group_num == "13" ~ "Business and Financial Operations",
+soc_group_num == "15" ~ "Computer and Mathematical",
+soc_group_num == "17" ~ "Architecture and Engineering",
+soc_group_num == "19" ~ "Life, Physical, and Social Science",
+soc_group_num == "21" ~ "Community and Social Service",
+soc_group_num == "23" ~ "Legal",
+soc_group_num == "25" ~ "Educational Instruction and Library",
+soc_group_num == "27" ~ "Arts, Design, Entertainment, Sports, and Media",
+soc_group_num == "29" ~ "Healthcare Practitioners and Technical",
+soc_group_num == "31" ~ "Healthcare Support",
+soc_group_num == "33" ~ "Protective Service",
+soc_group_num == "35" ~ "Food Preparation and Serving Related",
+soc_group_num == "37" ~ "Building and Grounds Cleaning and Maintenance",
+soc_group_num == "39" ~ "Personal Care and Service",
+soc_group_num == "41" ~ "Sales and Related",
+soc_group_num == "43" ~ "Office and Administrative Support",
+soc_group_num == "45" ~ "Farming, Fishing, and Forestry",
+soc_group_num == "47" ~ "Construction and Extraction",
+soc_group_num == "49" ~ "Installation, Maintenance, and Repair",
+soc_group_num == "51" ~ "Production",
+soc_group_num == "53" ~ "Transportation and Material Moving"
+))
 
 # write.xlsx(occupation_appendix, "OccupationsByWageBin.xlsx")
 
 occupation_appendix %>%
   mutate(employment_per_1_000_jobs = employment_per_1_000_jobs/100,
          color = "") %>% 
-  select(c(occupation, annual_median_wage_2, color, employment_per_1_000_jobs, median_wage_bin)) %>%
+  select(c(occupation, annual_median_wage_2, color, employment_per_1_000_jobs, job_group, median_wage_bin)) %>%
   gt() %>% 
   data_color(
     columns = median_wage_bin,
@@ -675,20 +807,24 @@ occupation_appendix %>%
     annual_median_wage_2 = "Annual Median Wage",
         color = "",
     employment_per_1_000_jobs = "Employment Rate",
-    median_wage_bin = ""
+    median_wage_bin = "",
+    job_group = "Occupation Group"
   ) %>% 
   tab_style(
     style = cell_text(align = "center", v_align = "middle"),
     locations = list(cells_column_labels(2:4), cells_body(2:4))
   ) %>%
-  tab_style(
-    style = cell_text(v_align = "middle"),
-    locations = list(cells_column_labels(1))
-  ) %>%
-  tab_options(table.font.size="9px") %>% 
   tab_footnote(
-    footnote = "Employment rate per 1,000 jobs in the Charlottesville Metro Area",
+    footnote = "The annual median wage is the boundary between the highest and lowest paid workers in a given occupation. Half of the workers in a given occupation earn more than the median wage, and half the workers earn less than the median wage.",
+    locations = cells_column_labels(columns = annual_median_wage_2)
+  ) %>% 
+  tab_footnote(
+    footnote = "Employment rate is the number of jobs (employment) in the given occupation per 1,000 jobs in the Charlottesville Metro Area",
     locations = cells_column_labels(columns = employment_per_1_000_jobs)
+  ) %>% 
+  tab_footnote(
+    footnote = "Major occupation groups defined by the Standard Occupational Classification (SOC) system, used by Federal statistical agencies to classify workers and jobs into occupational categories for the purpose of collecting, calculating, analyzing, or disseminating data.",
+    locations = cells_column_labels(columns = job_group)
   ) %>% 
   tab_header(
     title = "Occupations by Annual Median Wage Earned in the Charlottesville Metro Area"
@@ -698,3 +834,54 @@ occupation_appendix %>%
   )
 ```
 
+```{r family_income_summary, fig.width = 7.25, fig.height = 6, fig.retina = 2}
+
+family_income_summary <- read_csv("../microdata/data/families_below_ess_by_incomes.csv") %>% 
+  mutate(group = case_when(income_bins %in% c("$0 to $9,999","$10,000 to $19,999") ~ "Less than $20K",
+                           income_bins %in% c("$20,000 to $29,999","$30,000 to $39,999", "$40,000 to $49,999") ~ "Between $20K - $50K",
+                           income_bins == "$50,000+" ~ "$50,000+"))
+
+family_income_summary %>%
+  group_by(group) %>% 
+  summarise(count = sum(count),
+            percent = sum(percent)) %>% 
+  ungroup() %>% 
+  mutate(group = factor(group, levels = c("Less than $20K", "Between $20K - $50K", "$50,000+"))) %>% 
+  ggplot(aes(x = count, y = group, fill = group)) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = paste0(prettyNum(round(count, -1), big.mark=",", preserve.width="none"), " families\n(", round(percent, 0), "%)")),
+            vjust = -0.35,
+            # hjust = -0.1,
+            size = 5) +
+  scale_y_discrete(name = "") +
+  scale_x_continuous(name = "Number of Families",
+                     breaks = seq(0, 10000, by = 1000),
+                     label=comma,
+                     expand = expansion(mult = c(0, .16))
+                     ) +
+  scale_fill_manual(values = c("#EDBB8A", "#DE8A5A", "#B4C8A8"))+
+  coord_flip()+
+  labs(
+    # title = "Annual Incomes for Families Earning Below the Self-Sufficiency Standard",
+       # subtitle = geography_label,
+       caption = acs_pums) +
+  theme_minimal() +
+  theme(legend.title=element_blank(),
+        legend.position = "none",
+        # legend.location = "plot",
+        legend.justification="center",
+        legend.text = element_text(size = 12),
+          panel.grid.major = element_blank(),
+          axis.ticks = element_blank(),
+        axis.title.y = element_blank(),
+                axis.text.y.left = element_blank(),
+
+          panel.grid.minor = element_blank(),
+          plot.title.position= "plot",
+          plot.caption.position = "plot",
+        axis.text.y = element_text(color = "black", size = 14),
+        text = element_text(size = 14),
+        axis.text.x = element_text(size=16),
+        plot.title = element_text(size = 20),
+        plot.caption = element_text(size = 12))
+```
