@@ -504,7 +504,7 @@ Some families are on fixed incomes or have otherwise reached a more constrained 
 
 For most families, low-incomeness is not a constant, not an immutable condition that must be worked around, but a variable that must be changed. For a family experiencing economic struggle, the first question should be: What do they need to increase their income?
 
-Most workers in struggling families are in low-waged employment. The figure below sorts occupations into those groups based on the median wages typically earned in the Charlottesville metro region based on the Bureau of Labor Statistics Occupational Employment and Wage statistics.^[https://www.bls.gov/oes/tables.htm] A large portion (42%) of workers in struggling families are in the lowest paid occupations, those typically earning between $25,610 and $37,760 a year – making it difficult to impossible to meet the Self-Sufficiency Standard for single or two-parent households. 
+Most workers in struggling families are in low-waged employment. The figure below sorts occupations into those groups based on the median wages typically earned in the Charlottesville metro region based on the Bureau of Labor Statistics Occupational Employment and Wage statistics.^[U.S. Bureau of Labor Statistics, Occupational Employment and Wage Statistics; May 2023; https://www.bls.gov/oes/tables.htm] A large portion (42%) of workers in struggling families are in the lowest paid occupations, those typically earning between $25,610 and $37,760 a year – making it difficult to impossible to meet the Self-Sufficiency Standard for single or two-parent households. 
 
 
 ```{r workers_by_medianwages, fig.width = 10, fig.height = 6, fig.retina = 2}
@@ -668,7 +668,7 @@ occupations_filtered %>%
     title = "Selection of Occupations by Annual Median Wage Earned in the Charlottesville Metro Area"
   ) %>% 
   tab_source_note(
-    source_note = "Data Source: U.S. Bureau of Labor Statistics, Occupational Employment and Wage Statistics; May 2023"
+    source_note = "Data Source: U.S. Bureau of Labor Statistics, Occupational Employment and Wage Statistics; May 2023; https://www.bls.gov/oes/tables.htm"
   )
 ```
 
@@ -1517,9 +1517,9 @@ Elizabeth Mitchell, Data Scientist of Equitable Analysis, The Equity Center, Uni
 
 Michele Claibourn, Director of Equitable Analysis, The Equity Center, University of Virginia and Assistant Professor, Batten School of Leadership and Public Policy, University of Virginia. 
 
-Ridge Schuyler, Dean of Community Self-Sufficiency Programs, Piedmont Virginia Community College, originated the Orange Dot Report in 2011 and authored three prior updates (2015, 2018, 2021). 
+Ridge Schuyler, Dean, Student Support & Community Partnerships, Piedmont Virginia Community College, originated the Orange Dot Report in 2011 and authored three prior updates (2015, 2018, 2021). 
 
-### Project Repository
+**Project Repository**
 The work supporting the Orange Dot Report 6.0, including our data collection documentation and the corresponding data, is publicly available on Github at https://github.com/virginiaequitycenter/orange-dot/tree/main
 
 This work is licensed under a Creative Commons Attribution 4.0 International License.
