@@ -953,3 +953,43 @@ local_name <- "Nelson County"
 ```{r geo_below_ss_nel, fig.width = 7, fig.height=8, out.width = '100%'}
 <<geo_below_ss>>
 ```
+
+```{r, fig.width=9, fig.height=11, out.width = '100%'}
+# Geospatial visualization: All ----
+income_map <- med_faminc_tract %>%
+  mutate(estimate = round(estimate, -3),
+         # text = paste0("$", prettyNum((estimate/1000), big.mark=",", preserve.width="none"), "K")
+         ) %>%
+  ggplot() +
+  # annotation_map_tile(zoomin = 1, progress = "none", cachedir = "../data/tempdata/") +
+  geom_sf(aes(fill = estimate), color = "white") +
+  # geom_sf_text(aes(label = text), size = 3, color = "black") +
+  scale_fill_stepsn(colors = rev(pal_inc),
+                    labels = scales::label_currency(scale = 1),
+                    trans = "log",
+                    n.breaks = 7,
+                    limits = c(min_inc, max_inc),
+                    na.value = "grey70",
+                    guide = guide_colourbar(title = "Median Family Income",
+                                            title.position = "top",
+                                            direction = "horizontal",
+                                            title.hjust = 0.5,
+                                            theme = theme(legend.key.height  = unit(0.5, "lines"),
+                                                          legend.key.width = unit(26, "lines"),
+                                                          text = element_text(size = 10))
+                                            )
+                    )+
+  # labs(title = "Median Family Income by Tract",
+  #     subtitle = local_name,
+  #     caption = source_acs) +
+  theme_map() +
+  theme(legend.position="top",
+        legend.position.inside=c(1, 1.06),
+        legend.justification="center",
+        plot.title = element_text(size = 16),
+        plot.subtitle = element_text(size = 14),
+        plot.caption = element_text(size = 9))
+
+income_map
+
+```
