@@ -82,6 +82,7 @@ library(tidycensus)
 library(scales)
 library(ggspatial)
 library(tigris)
+options(tigris_use_cache = TRUE)
 library(readxl)
 library(stringr)
 library(sf)
@@ -94,7 +95,7 @@ library(ggrepel)
 
 # Tract geometries ----
 county_codes <- c("003", "540", "065", "079", "109", "125", "029")
-tract_geo <- tracts(state = "VA", county = county_codes)
+tract_geo <- tracts(state = "VA", county = county_codes, year = 2022)
 
 # Map palettes ----
 pal_inc <- carto_pal(7, "Geyser")
@@ -667,7 +668,7 @@ soc_group_num == "53" ~ "Transportation and Material Moving"
 ))
 
 occupations_filtered %>%
-  mutate(employment_per_1_000_jobs = employment_per_1_000_jobs/100,
+  mutate(employment_per_1_000_jobs = round(employment_per_1_000_jobs,1),
          color = "") %>% 
   select(c(occupation, annual_median_wage_2, color, employment_per_1_000_jobs, job_group, median_wage_bin)) %>%
   gt() %>% 
@@ -685,16 +686,12 @@ occupations_filtered %>%
     ),
     decimals = 2
   ) %>% 
-  fmt_percent(
-    columns = employment_per_1_000_jobs,
-    decimals = 0
-  ) %>% 
   cols_hide(columns = c(median_wage_bin)) %>% 
   cols_label(
     occupation = "Occupation",
     annual_median_wage_2 = "Annual Median Wage",
         color = "",
-    employment_per_1_000_jobs = "Employment Rate",
+    employment_per_1_000_jobs = "Employment Rate (per 1,000 jobs)",
     median_wage_bin = "",
     job_group = "Occupation Group"
   ) %>% 
@@ -1584,7 +1581,7 @@ This report was done in partnership between Network2Work\@PVCC and the UVA Equit
 
 The authors of this report are: 
 
-  * Elizabeth Mitchell, Data Scientist of Equitable Analysis, The Equity Center, University of Virginia.
+  * Elizabeth Mitchell, Senior Research Specialist, The Equity Center, University of Virginia.
 
   * Michele Claibourn, Director of Equitable Analysis, The Equity Center, University of Virginia and Assistant Professor, Batten School of Leadership and Public Policy, University of Virginia. 
 
@@ -1594,7 +1591,7 @@ The authors of this report are:
 The work supporting the Orange Dot Report 6.0, including our data collection documentation and the corresponding data, is publicly available on Github at https://github.com/virginiaequitycenter/orange-dot/tree/main
   
 ### Citation
-Elizabeth Mitchell, Michele Claibourn, Ridge Schuyler. “Orange Dot Report 6.0: Family Self-Sufficiency in the Charlottesville Region: Albemarle, Buckingham, Fluvanna, Greene, Louisa, Nelson Counties & the City of Charlottesville, Virginia.” Published October 21, 2024. https://www.virginiaequitycenter.org/orange-dot-report.
+Elizabeth Mitchell, Michele Claibourn, Ridge Schuyler. “Orange Dot Report 6.0: Family Self-Sufficiency in the Charlottesville Region: Albemarle, Buckingham, Fluvanna, Greene, Louisa, Nelson Counties & the City of Charlottesville, Virginia.” Published October 21, 2024. https://virginiaequitycenter.github.io/cville-equity-atlas/reports/orange-dot-6/
 
 This work is licensed under a [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).
 
