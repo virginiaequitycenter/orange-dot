@@ -1,0 +1,1107 @@
+---
+title: "Orange Dot 7 DRAFT"
+# subtitle: ""
+date: "September 2026"
+date-format: "MMMM YYYY"
+# author: "Community-Centered Analysis at the UVA Center for Community Partnerships"
+# license: "CC BY"
+# citation:
+#   type: report
+#   url: communitypartnerships.virginia.edu
+format:
+  html:
+    toc: true
+    theme: cosmo
+    embed-resources: true
+  # docx:
+  #   toc: true
+  #   toc-title: "Table of Contents"
+  #   # lof: true
+  #   # number-sections: true
+  #   number-depth: 3
+  #   # fig-align: left
+  #   # fig-width: 3
+  #   # fig-height: 2
+  #   # # fig-format: png
+  #   # fig-dpi: 200
+  #   embed-resources: true
+  #   reference-doc: styles.docx
+execute:
+  cache: false
+  echo: false
+  message: false
+  warning: false
+---
+
+```{r setup}
+#| include: false
+
+# Load packages ----
+library(tidyverse)
+library(scales)
+library(tigris)
+library(sf)
+library(ggspatial)
+library(ggthemes)
+library(patchwork)
+library(rcartocolor)
+library(gt)
+
+
+# Tract geometries ----
+county_codes <- c("003", "540", "065", "079", "109", "125", "029")
+tract_geo <- tracts(state = "VA", county = county_codes, year = 2024)
+
+# Map palettes ----
+pal_inc <- rev(carto_pal(7, "Geyser"))
+# "#008080" "#70A494" "#B4C8A8" "#F6EDBD" "#EDBB8A" "#DE8A5A" "#CA562C"
+
+pal_ssw <- carto_pal(7, "RedOr")
+# "#F6D2A9" "#F5B78E" "#F19C7C" "#EA8171" "#DD686C" "#CA5268" "#B13F64"
+# pal_ssw <- c("#F6D2A9", "#F5B78E", "#F19C7C", "#EA8171", "#DD686C")
+
+# Palettes ----
+pal_five <- c("#DE8A5A", "#EDBB8A", "#F6EDBD","#B4C8A8", "#70A494")
+pal_six <- c("#CA562C", "#DE8A5A", "#EDBB8A", "#F6EDBD","#B4C8A8", "#70A494")
+orange_dot <- "#CA562C"
+green_dot <- "#B4C8A8"
+grey_dot <-  "#b2b8be"
+blue_dot <- "#3B8EA5"
+```
+
+## Families Struggling in Our Region
+
+```{r region_table}
+# Read in data
+all_fam_region <- read_csv("../data/family_race_county_summary.csv") |> 
+  filter(group=="All Families") |> 
+  filter(inc_v_budget=="inc_under_budget") |> 
+  select("locality","year","group","est_prop_adj","total_families","percent")
+
+all_fam_region <- all_fam_region[order(all_fam_region$locality), ]
+
+
+all_fam_region_total <- all_fam_region |> 
+  group_by(year, group) |> 
+  summarise(est_prop_adj = sum(est_prop_adj),
+            total_families = sum(total_families)) |> 
+  mutate(percent = round(est_prop_adj/total_families *100, 2)) |> 
+  mutate(locality = "Total for Region", .before = year) |> 
+  ungroup()
+
+all_fam_region_table <- rbind(all_fam_region, all_fam_region_total)
+
+# Region self sufficiency totals table ----
+all_fam_region_table %>% 
+  mutate(percent = percent/100) %>% 
+  # ungroup() %>% 
+  select(c(locality, est_prop_adj, percent)) %>%
+  gt(rowname_col = "locality") %>% 
+  cols_label(
+    est_prop_adj = "Number of Struggling Families",
+    percent = "Percent of Struggling Families"
+  ) %>% 
+  fmt_number(columns = est_prop_adj, 
+             decimals = 0, 
+             sep_mark = ",") %>%
+  fmt_percent(
+    columns = percent,
+    decimals = 0
+  ) %>% 
+  tab_style(
+    style = list(
+      cell_fill(color = "#F6D2A9"),
+      cell_text(weight = "bold")
+    ),
+    locations = list(cells_body(rows = 8), cells_stub(rows = 8))
+  ) %>%
+  tab_style(
+    style = cell_text(align = "center", v_align = "middle"),
+    locations = list(cells_column_labels(), cells_body())
+  ) %>% 
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = list(cells_column_labels())
+  ) %>% 
+  tab_header(
+    title = "Summary of Struggling Families in the Region"
+  ) %>% 
+  tab_source_note(
+    source_note = "Note: Values are approximate based on the U.S. Census Bureau, American Community Survey 5-year estimates (2020-2024)"
+  )
+
+```
+
+```{r region_table_type}
+# Read in data
+fam_type_region <- read_csv("../data/family_type_county_2024.csv") |> 
+  filter(inc_v_budget=="inc_under_budget") |> 
+  select("locality","year","child_in_home","est_prop_adj","total_families_by_group","percent") |> 
+  mutate(child_in_home = case_when(str_detect(child_in_home, "With own") ~ "with_child",
+                                   str_detect(child_in_home, "No own") ~ "no_child")) |> 
+  pivot_wider(names_from = child_in_home, values_from = c(est_prop_adj, total_families_by_group, percent))
+
+fam_type_region <- fam_type_region[order(fam_type_region$locality), ]
+
+fam_type_region_total <- fam_type_region |> 
+  group_by(year) |> 
+  summarise(est_prop_adj_with_child = sum(est_prop_adj_with_child),
+            est_prop_adj_no_child = sum(est_prop_adj_no_child),
+            total_families_by_group_with_child = sum(total_families_by_group_with_child),
+            total_families_by_group_no_child = sum(total_families_by_group_no_child)) |> 
+  mutate(percent_with_child = round(est_prop_adj_with_child/total_families_by_group_with_child *100, 2),
+         percent_no_child = round(est_prop_adj_no_child/total_families_by_group_no_child *100, 2)) |> 
+  mutate(locality = "Total for Region", .before = year) |> 
+  ungroup()
+
+fam_type_region_table <- rbind(fam_type_region, fam_type_region_total)
+
+# Region self sufficiency totals table ----
+fam_type_region_table %>% 
+  mutate(percent_with_child = percent_with_child/100,
+         percent_no_child = percent_no_child/100) %>% 
+  # ungroup() %>% 
+  select(c(locality, est_prop_adj_with_child, percent_with_child, est_prop_adj_no_child, percent_no_child)) %>%
+  gt(rowname_col = "locality") %>% 
+  cols_label(
+    est_prop_adj_with_child = "Number",
+    percent_with_child = "Percent",
+    est_prop_adj_no_child = "Number",
+    percent_no_child = "Percent"
+  ) %>% 
+  tab_spanner(
+    label = "Struggling Families With Children Under 18 yrs.",
+    columns = c(est_prop_adj_with_child,percent_with_child)
+  ) %>% 
+  tab_spanner(
+    label = "Struggling Families With No Children Under 18 yrs.",
+    columns = c(est_prop_adj_no_child, percent_no_child)
+  ) %>%
+  fmt_number(columns = c(est_prop_adj_with_child, est_prop_adj_no_child), 
+             decimals = 0, 
+             sep_mark = ",") %>%
+  fmt_percent(
+    columns = c(percent_with_child, percent_no_child),
+    decimals = 0
+  ) %>% 
+  tab_style(
+    style = list(
+      cell_fill(color = "#F6D2A9"),
+      cell_text(weight = "bold")
+    ),
+    locations = list(cells_body(rows = 8), cells_stub(rows = 8))
+  ) %>%
+  tab_style(
+    style = cell_text(align = "center", v_align = "middle"),
+    locations = list(cells_column_labels(), cells_body())
+  ) %>% 
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = list(cells_column_spanners())
+  ) %>% 
+  tab_header(
+    title = "Summary of Struggling Families With and Without Children Under 18 in the Region"
+  ) %>% 
+  tab_source_note(
+    source_note = "Note: Values are approximate based on the U.S. Census Bureau, American Community Survey 5-year estimates (2020-2024)"
+  )
+
+```
+
+### Undervalued Labor  (TJ Planning District)
+```{r}
+workers_by_hours <- read_csv("../data/pums_workers_by_hours.csv") %>% 
+  mutate(
+    hours_bin = factor(hours_bin, levels = c("Unemployed", "Less than 20", "20 to 29", "30 to 34", "35 to 39", "40 or more"), labels = c("Unemployed", "Less than 20 hours", "20 to 29 hours", "30 to 34 hours", "35 to 39 hours", "40 or more hours")),
+         label_text = case_when(
+           below_budget_finc == "Yes" ~ paste0(prettyNum(count, big.mark=",", preserve.width="none"), " (", round(percent, 0), "%)"),
+           below_budget_finc == "No" ~ paste0(prettyNum(count, big.mark=",", preserve.width="none"), " (", round(percent, 0), "%)")),
+         below_budget_finc = factor(below_budget_finc, levels = c("Yes", "No"),
+                                 labels = c("Income Below Budget", "Income Above Budget")))
+
+workers_by_hours %>% 
+  filter(below_budget_finc == "Income Below Budget") %>% 
+  ggplot(aes(x = count, y = hours_bin)) +
+  geom_bar(stat = "identity", fill = blue_dot) +
+  geom_text(aes(label = label_text),
+            vjust = 0.5,
+            hjust = -0.1,
+            size = 4.5) +
+  scale_y_discrete(name = "") +
+  scale_x_continuous(name = "Number of Workers",
+                     breaks = seq(0, 12000, by = 2500),
+                     label=comma,
+                     expand = expansion(mult = c(0, .3))) +
+  labs(title = "Weekly Hours Worked for Workers Earning Below Survival Budget",
+       # subtitle = geography_label,
+       # caption = acs_pums
+       ) +
+  theme_minimal() +
+  theme(legend.title=element_blank(),
+        legend.position = "top",
+        legend.text = element_text(size = 12),
+        # legend.location = "plot",
+        legend.justification="center",
+          # panel.grid.major.y = element_blank(),
+          axis.ticks = element_blank(),
+          panel.grid.minor = element_blank(),
+          plot.title.position= "plot",
+          plot.caption.position = "plot",
+        axis.text.y = element_text(color = "black", size = 12),
+        text = element_text(size = 12),
+        axis.text.x = element_text(size=12),
+        plot.title = element_text(size = 16),
+        plot.caption = element_text(size = 12))
+```
+```{r}
+workers_by_medianwages <- read_csv("../data/pums_workers_by_medianwages.csv") %>% 
+   mutate(
+    median_wage_bin_label = factor(median_wage_bin_label, levels = c("28320-38540", "38580-49300", "49420-59790",
+                                                   "60010-74100", "74110-100930", "101210-317900"), labels = c("$28,320 - $38,540", "$38,580 - $49,300", "$49,420 - $59,790", "$60,010 - $74,100", "$74,110 - $100,930", "$101,210 - $317,900")),
+         label_text = case_when(
+           below_budget_finc == "Yes" ~ paste0(prettyNum(count, big.mark=",", preserve.width="none"), " (", round(percent, 0), "%)"),
+           below_budget_finc == "No" ~ paste0(prettyNum(count, big.mark=",", preserve.width="none"), " (", round(percent, 0), "%)")),
+         below_budget_finc = factor(below_budget_finc, levels = c("Yes", "No"),
+                                 labels = c("Income Below Budget", "Income Above Budget")))
+
+workers_by_medianwages %>% 
+  filter(below_budget_finc == "Income Below Budget") %>% 
+  ggplot(aes(x = count, y = median_wage_bin_label, fill = median_wage_bin_label)) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = label_text),
+            vjust = 0.5,
+            hjust = -0.1,
+            size = 4.5) +
+  scale_y_discrete(name = "") +
+  scale_x_continuous(name = "Number of Workers",
+                     breaks = seq(0, 12000, by = 1500),
+                     label=comma,
+                     expand = expansion(mult = c(0, .3))) +
+  scale_fill_manual(values = c("#DE8A5A", "#EDBB8A", "#F6EDBD","#B4C8A8", "#B4C8A8", "#70A494"))+
+  labs(title = "Median Annual Wage for Workers Earning Below Survival Budget",
+       # subtitle = geography_label,
+       caption = "Bureau of Labor Statistics, U.S. Department of Labor. Occupational Employment and Wage Statistics, 2025.") +
+  theme_minimal() +
+  theme(legend.title=element_blank(),
+        legend.position = "none",
+        # legend.location = "plot",
+        legend.justification="center",
+        legend.text = element_text(size = 12),
+          # panel.grid.major.y = element_blank(),
+          axis.ticks = element_blank(),
+          panel.grid.minor = element_blank(),
+          plot.title.position= "plot",
+          plot.caption.position = "plot",
+        axis.text.y = element_text(color = "black", size = 12),
+        text = element_text(size = 12),
+        axis.text.x = element_text(size=12),
+        plot.title = element_text(size = 16),
+        plot.caption = element_text(size = 12))
+```
+
+
+## Locality Profiles
+
+### Albemarle County
+
+#### Families
+
+```{r all_fam_budget, out.width = '100%'}
+
+# Read in data
+all_fam_budget <- read_csv("../data/budgets_all_families_2024.csv") |> 
+  select("County","Categories","Average Family") |> 
+  rename(Monthly = "Average Family") |> 
+  filter(! Categories %in% c("ANNUAL TOTAL", "Hourly Wage")) |> 
+  mutate(Categories = case_when(Categories=="Monthly Total" ~ "Total Income Needed to Meet Budget",
+                                .default = Categories),
+         Annual = Monthly *12)
+
+all_fam_budget_table <- all_fam_budget %>% 
+  filter(County == "Albemarle")
+
+all_fam_budget_table %>% 
+  select(-c(County)) %>%
+  gt(rowname_col = "Categories") %>% 
+  fmt_currency(
+    columns = 2:3,
+    currency = currency(
+      html = "&#36;",
+      default = "$"
+    ),
+    decimals = 2
+  ) %>% 
+  tab_style(
+    style = list(
+      cell_fill(color = "#F6D2A9"),
+      cell_text(weight = "bold")
+    ),
+    locations = list(cells_body(rows = 9), cells_stub(rows = 9))
+  ) %>% 
+  tab_style(
+    style = cell_text(align = "center", v_align = "middle"),
+    locations = list(cells_column_labels(), cells_body())
+  ) %>% 
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = list(cells_column_labels())
+  ) %>% 
+  tab_header(
+    title = "Average Survival Budget for Families in Albemarle County"
+  ) %>% 
+  tab_source_note(
+    source_note = "Note: The Average Family Survival Budget is calculated using the ALICE 2024 Survival Budget by family compositions."
+  ) |> 
+  cols_width(Categories ~ pct(50)) |> 
+  tab_options(
+    table.width = pct(100)
+  )
+```
+
+```{r income_bands}
+#| label: fig-income-bands
+#| fig-cap: "Number and percent of families by family annual income below $100,000, 2024 for Albemarle County"
+
+# Read in data
+inc_bands_region <- read_csv("../data/income_bands_race_county_2024.csv") |> 
+  filter(group == "All Families") |> 
+  filter(inc_band != "Total Families") |> 
+  group_by(GEOID, locality, year, group, inc_group) |> 
+  summarise(estimate = sum(estimate),
+            total_families = first(total_families)) |> 
+  mutate(inc_group = factor(inc_group, levels = c("below_15k", "below_30k", "below_45k", "below_60k", "below_75k", "below_100k", "above_100k"), labels = c("Less than $15,000","$15,000-$29,999", "$30,000-$44,999", "$45,000-$59,999", "$60,000-$74,999", "$75,000-$99,999", "$100,000 or more")),
+         percent = round(estimate/total_families * 100, 2))
+
+inc_band_local <- inc_bands_region |> filter(locality=="Albemarle County, Virginia") 
+
+inc_band_local |> 
+  filter(inc_group != "$100,000 or more") |> 
+  ggplot(aes(x = estimate, y = inc_group, fill = inc_group)) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = paste0(prettyNum(estimate, big.mark=",", preserve.width="none"), " (", round(percent, 0), "%)")),
+            vjust = 0.5,
+            hjust = -0.1,
+            size = 5) +
+  scale_y_discrete(name = "Family Annual Income") +
+  scale_x_continuous(name = "Number of Families",
+                     breaks = seq(0, 4000, by = 1000),
+                     label=comma,
+                     expand = expansion(mult = c(0, .3))
+                     ) +
+  scale_fill_manual(values = c("#DE8A5A", "#DE8A5A", "#EDBB8A","#EDBB8A", "#EDBB8A","#B4C8A8"))+
+  labs(title = "Number of Families by Annual Income Bands",
+       subtitle = "Albemarle County",
+       # caption = acs_pums
+       ) +
+  theme_minimal() +
+  theme(legend.title=element_blank(),
+        legend.position = "none",
+        panel.grid.major.y = element_blank(),
+        axis.ticks = element_blank(),
+        panel.grid.minor = element_blank(),
+        plot.title.position= "plot",
+        plot.caption.position = "plot",
+        axis.text = element_text(color = "black", size = 11))
+  # theme(legend.title=element_blank(),
+  #       legend.position = "none",
+  #       # legend.location = "plot",
+  #       legend.justification="center",
+  #       legend.text = element_text(size = 12),
+  #         # panel.grid.major.y = element_blank(),
+  #         axis.ticks = element_blank(),
+  #         panel.grid.minor = element_blank(),
+  #         plot.title.position= "plot",
+  #         plot.caption.position = "plot",
+  #       axis.text.y = element_text(color = "black", size = 14),
+  #       text = element_text(size = 14),
+  #       axis.text.x = element_text(size=14),
+  #       plot.title = element_text(size = 18),
+  #       plot.caption = element_text(size = 12))
+```
+
+
+```{r income-bands-type}
+#| column: page-inset-right
+#| fig-width: 9
+#| fig-height: 4.5
+#| label: fig-income-bands-type
+#| fig-cap: "Number and percent of families by family annual income below $100,000, 2024 for Albemarle County"
+
+# Read in data
+inc_bands_type <- read_csv("../data/income_bands_fam_type_county_2024.csv") 
+
+inc_band_wchild <- inc_bands_type |> 
+  filter(child_in_home == "With own children of the householder under 18 years") |>
+  group_by(GEOID, locality, year, child_in_home, inc_group) |> 
+  summarise(estimate = sum(estimate),
+            total_families_by_group = first(total_families_by_group)) |> 
+  mutate(inc_group = factor(inc_group, levels = c("below_15k", "below_30k", "below_45k", "below_60k", "below_75k", "below_100k", "above_100k"), labels = c("Less than $15,000","$15,000-$29,999", "$30,000-$44,999", "$45,000-$59,999", "$60,000-$74,999", "$75,000-$99,999", "$100,000 or more")),
+         percent = round(estimate/total_families_by_group * 100, 2))
+
+inc_band_wchild_local <- inc_band_wchild |> filter(locality=="Albemarle County, Virginia") 
+
+w_child_bar <- inc_band_wchild_local |> 
+  filter(inc_group != "$100,000 or more") |> 
+  ggplot(aes(x = estimate, y = inc_group, fill = inc_group)) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = paste0(prettyNum(estimate, big.mark=",", preserve.width="none"), " (", round(percent, 0), "%)")),
+            vjust = 0.5,
+            hjust = -0.1,
+            size = 4) +
+  scale_y_discrete(name = "Family Annual Income") +
+  scale_x_continuous(name = "Number of Families",
+                     breaks = seq(0, 4000, by = 1000),
+                     limits = c(0,3000),
+                     label=comma,
+                     expand = expansion(mult = c(0, .3))
+                     ) +
+  scale_fill_manual(values = c("#DE8A5A", "#DE8A5A", "#EDBB8A","#EDBB8A","#EDBB8A","#B4C8A8"))+
+  labs(title = "With Children Under 18",
+       # subtitle = "Albemarle County",
+       # caption = acs_pums
+       ) +
+  theme_minimal() +
+  theme(legend.title=element_blank(),
+        legend.position = "none",
+        panel.grid.major.y = element_blank(),
+        axis.ticks = element_blank(),
+        panel.grid.minor = element_blank(),
+        plot.title.position= "plot",
+        plot.caption.position = "plot",
+        axis.text = element_text(color = "black", size = 11))
+
+inc_band_nochild <- inc_bands_type |> 
+  filter(child_in_home == "No own children of the householder under 18 years") |>
+  group_by(GEOID, locality, year, child_in_home, inc_group) |> 
+  summarise(estimate = sum(estimate),
+            total_families_by_group = first(total_families_by_group)) |> 
+  mutate(inc_group = factor(inc_group, levels = c("below_15k", "below_30k", "below_45k", "below_60k", "below_75k", "below_100k", "above_100k"), labels = c("Less than $15,000","$15,000-$29,999", "$30,000-$44,999", "$45,000-$59,999", "$60,000-$74,999", "$75,000-$99,999", "$100,000 or more")),
+         percent = round(estimate/total_families_by_group * 100, 2))
+
+inc_band_nochild_local <- inc_band_nochild |> filter(locality=="Albemarle County, Virginia") 
+
+no_child_bar <- inc_band_nochild_local |> 
+  filter(inc_group != "$100,000 or more") |> 
+  ggplot(aes(x = estimate, y = inc_group, fill = inc_group)) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = paste0(prettyNum(estimate, big.mark=",", preserve.width="none"), " (", round(percent, 0), "%)")),
+            vjust = 0.5,
+            hjust = -0.1,
+            size = 4) +
+  scale_y_discrete(name = "Family Annual Income") +
+  scale_x_continuous(name = "Number of Families",
+                     breaks = seq(0, 4000, by = 1000),
+                     limits = c(0,3000),
+                     label=comma,
+                     expand = expansion(mult = c(0, .3))
+                     ) +
+  scale_fill_manual(values = c("#DE8A5A", "#DE8A5A", "#EDBB8A","#EDBB8A", "#EDBB8A","#B4C8A8"))+
+  labs(title = "With No Children under 18",
+       # subtitle = "Albemarle County",
+       # caption = acs_pums
+       ) +
+  theme_minimal() +
+  theme(legend.title=element_blank(),
+        legend.position = "none",
+        panel.grid.major.y = element_blank(),
+        axis.ticks = element_blank(),
+        panel.grid.minor = element_blank(),
+        plot.title.position= "plot",
+        plot.caption.position = "plot",
+        axis.text = element_text(color = "black", size = 11))
+
+(w_child_bar + no_child_bar) +
+#   plot_layout(widths = c(1.75, 1)) +
+  plot_annotation(title = "Number of Families by Annual Income Bands",
+                  subtitle = "Albemarle County",
+                  # caption = source_text,
+                  # theme = theme(plot.title = element_text(size = 18),
+                  #               plot.subtitle = element_text(size = 16),
+                  #               plot.caption = element_text(size = 14))
+                  )
+```
+
+
+```{r family_race}
+#| label: fig-family-race
+#| fig-cap: "Percent and number of families earning above and below the average family survival budget, 2024 for Albemarle County"
+ 
+# Read in data
+all_fam_race <- read_csv("../data/family_race_county_summary.csv")
+
+# Families with income self sufficiency wage & above ssw ----
+all_fam_race_bar <- all_fam_race %>% 
+  filter(locality == "Albemarle County, Virginia")
+
+all_fam_race_bar %>% 
+  mutate(text = paste0(round(percent, 0), "%\n(", prettyNum(round(est_prop_adj,0), big.mark=",", preserve.width="none"), ")")) |> 
+  arrange(desc(inc_v_budget)) %>% 
+  ggplot(aes(x = group, y = percent, group = group, fill = inc_v_budget, 
+             label = text)) +
+  geom_bar(stat = "identity", color = "white") + 
+  geom_text(size = 3.5, position = position_stack(vjust = 0.5), lineheight = 1) +
+  scale_fill_manual(values = c("#B4C8A8", "#DE8A5A")) +
+  scale_x_discrete(name = "") +
+  scale_y_continuous(labels = label_percent(scale = 1),
+                     name = "") +
+  guides(fill = guide_legend(reverse = TRUE)) +
+  labs(title = "Families Earning Income Above and Below Survival Budget Needs",
+       # subtitle = unique(fam_ssw_bar$locality_label),
+       # caption = source_acs
+       ) +
+  theme_minimal() +
+  theme(legend.title=element_blank(),
+        legend.position = "top",
+        legend.location = "plot",
+        legend.text = element_text(size = 9),
+        panel.grid.major.x = element_blank(),
+        axis.ticks = element_blank(),
+        panel.grid.minor = element_blank(),
+        plot.title.position= "plot",
+        plot.caption.position = "plot",
+        axis.text.x = element_text(color = "black", size = 11))
+```
+
+```{r inc-tract-margin}
+#| column: margin
+#| 
+# Read in data
+med_inc_tract <- read_csv("../data/med_faminc_tract_2024.csv") |>  
+  filter(county == "Albemarle")
+
+med_inc_tract <- med_inc_tract %>% 
+  mutate(GEOID = as.character(GEOID),
+         tractnames = case_when(med_inc_below == TRUE ~ paste0(tractnames,"*"),
+                                .default = tractnames)) %>%
+  rename(tract = NAME) |> 
+  filter(year == 2024) %>% 
+  left_join(tract_geo, by = join_by(GEOID == GEOID)) %>%
+  st_as_sf() 
+
+med_inc_tract <- med_inc_tract[order(med_inc_tract$tractnames, decreasing=FALSE),]
+
+medinc_rank_data <- med_inc_tract %>% 
+  mutate(estimate = round(estimate, -3)) |> 
+  group_by(estimate) %>% 
+  summarise(tractnames = paste(tractnames, collapse = "\n")) %>% 
+  na.exclude() %>% 
+  arrange(estimate) %>% 
+  st_drop_geometry
+
+medinc_rank <- medinc_rank_data %>%
+  mutate(color = "") %>% 
+  select(c(tractnames, color, estimate)) %>%
+  gt() %>% 
+  fmt_currency(
+    columns = estimate,
+    currency = "USD",
+    decimals = 0
+  ) %>% 
+  data_color(
+    columns = estimate,
+    target_columns = color,
+    direction = "column",
+    palette = pal_inc,
+  )  %>% 
+  cols_label(
+    estimate = "Median Family Income", tractnames = "Census Tract",
+    color = ""
+  ) %>%
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_body(
+      columns = c(tractnames,estimate),
+      rows = estimate < first(med_inc_tract$avg_allfamily_budget)
+    )
+  ) %>%
+  tab_style(
+    style = cell_text(align = "center", v_align = "middle"),
+    locations = list(cells_column_labels(2:3), cells_body(2:3))
+  ) %>% 
+  tab_options(table.font.size = pct(75),
+              data_row.padding = px(3)) %>% 
+  tab_source_note(
+    source_note = "* Census tracts listed in bold have a median family income below the locality's average family survival budget."
+  )
+
+medinc_rank
+
+```
+
+```{r inc-tract-map}
+#| fig-height: 11
+#| fig-width: 9
+#| label: fig-inc-tract-map
+#| fig-cap: "Median family income by census tract, 2024, for Albemarle County."
+
+min_inc <- min(med_inc_tract$estimate, na.rm = TRUE)
+max_inc <- max(med_inc_tract$estimate, na.rm = TRUE)
+
+med_inc_map <- med_inc_tract %>%
+  mutate(estimate = round(estimate, -3),
+         text = paste0("$", prettyNum((estimate/1000), big.mark=",", preserve.width="none"), "K")) %>%
+  ggplot() +
+  annotation_map_tile(zoomin = 1, progress = "none", cachedir = "../data/tempdata/") +
+  geom_sf(aes(fill = round(estimate,0)), color = "white") +
+  geom_sf_text(aes(label = text), size = 3.5, color = "black") +
+  scale_fill_stepsn(colors = pal_inc,
+                    labels = scales::label_currency(scale = 1),
+                    # n.breaks = 6,
+                    trans = "log",
+                    n.breaks = 7,
+                    limits = c(min_inc, max_inc),
+                    na.value = "grey70",
+                    guide = guide_colourbar(title = "Median Family Income",
+                                            title.position = "top",
+                                            direction = "horizontal",
+                                            title.hjust = 0.5,
+                                            theme = theme(legend.key.height  = unit(0.5, "lines"),
+                                                          legend.key.width = unit(26, "lines"),
+                                                          text = element_text(size = 10)) 
+                                            )
+                    )+
+  labs(title = "Median Family Income by Census Tract",
+      # subtitle = local_name,
+      # caption = source_acs
+      ) +
+  theme_map()+
+  theme(legend.position="top",
+        legend.position.inside=c(1, 1.06),
+        legend.justification="center",
+        plot.title = element_text(size = 16),
+        plot.subtitle = element_text(size = 14),
+        plot.caption = element_text(size = 9))
+
+med_inc_map
+```
+
+```{r below-tract-margin}
+#| column: margin
+#| 
+# Read in data
+under_budget_tract <- read_csv("../data/family_tract_summary.csv") |> 
+  filter(inc_v_budget=="inc_under_budget")%>% 
+  filter(county == "Albemarle")
+
+under_budget_tract <- under_budget_tract %>% 
+  mutate(GEOID = as.character(GEOID),
+         percent = round(percent,0)) %>%
+  rename(tract = NAME) |> 
+  filter(year == 2024) %>% 
+  left_join(tract_geo, by = join_by(GEOID == GEOID)) %>%
+  st_as_sf() 
+
+# AHDI Albemarle tracts, geospatial ----
+under_budget_tract <- under_budget_tract[order(under_budget_tract$tractnames, decreasing=FALSE),]
+
+
+alb_rank_data <- under_budget_tract %>% 
+  group_by(percent) %>% 
+  summarise(tractnames = paste(tractnames, collapse = "\n")) %>% 
+  na.exclude() %>% 
+  arrange(desc(percent)) %>% 
+  st_drop_geometry
+
+alb_ahdi_rank <- alb_rank_data %>%
+  mutate(color = "") %>% 
+  mutate(percent = percent/100) %>% 
+  select(c(tractnames, color, percent)) %>%
+  gt() %>% 
+  fmt_percent(
+    columns = percent,
+    decimals = 0
+  ) %>% 
+  data_color(
+    columns = percent,
+    target_columns = color,
+    direction = "column",
+    palette = pal_ssw,
+  )  %>% 
+  cols_label(
+    percent = "Percent", tractnames = "Census Tract",
+    color = ""
+  ) %>%
+  tab_style(
+    style = cell_text(align = "center", v_align = "middle"),
+    locations = list(cells_column_labels(2:3), cells_body(2:3))
+  ) %>% 
+  tab_options(table.font.size = pct(75),
+              data_row.padding = px(3))
+
+alb_ahdi_rank
+
+```
+
+```{r below-tract-map}
+#| fig-height: 11
+#| fig-width: 9
+#| label: fig-below-tract-map
+#| fig-cap: "Percent of families with annual income below the survival budget by census tract, 2024, for Albemarle County."
+
+min_per <- min(under_budget_tract$percent, na.rm = TRUE)
+max_per <- max(under_budget_tract$percent, na.rm = TRUE)
+
+under_budget_map <- under_budget_tract %>%
+  mutate(text = paste0(round(percent,0), "%")) %>%
+  ggplot() +
+  annotation_map_tile(zoomin = 1, progress = "none", cachedir = "../data/tempdata/") +
+  geom_sf(aes(fill = round(percent,0)), color = "white") +
+  geom_sf_text(aes(label = text), size = 3.5, color = "black") +
+  scale_fill_stepsn(colors = pal_ssw,
+                    labels = scales::label_percent(scale = 1),
+                    n.breaks = 6,
+                    # trans = "log",
+                    # n.breaks = 7,
+                    # breaks = c(5,7,15,20,40,60),
+                    # trans = "log",
+                    limits = c(min_per, max_per),
+                    na.value = "grey70",
+                    guide = guide_colourbar(title = "Percent Below Self-Sufficient Wages",
+                                            title.position = "top",
+                                            direction = "horizontal",
+                                            title.hjust = 0.5,
+                                            theme = theme(legend.key.height  = unit(0.5, "lines"),
+                                                          legend.key.width = unit(18, "lines"),
+                                                          text = element_text(size = 10)) 
+                                            )
+                    )+
+  labs(title = "Families with Income below Self-Sufficiency",
+      # subtitle = local_name,
+      # caption = source_acs
+      ) +
+  theme_map()+
+  theme(legend.position="top",
+        legend.position.inside=c(1, 1.06),
+        legend.justification="center",
+        plot.title = element_text(size = 16),
+        plot.subtitle = element_text(size = 14),
+        plot.caption = element_text(size = 9))
+  # geom_sf_text(aes(label = text), size = 3.25, color = "black") +
+  # scale_fill_stepsn(colors = pal_ssw,
+  #                   labels = scales::label_percent(scale = 1),
+  #                   n.breaks = 6,
+  #                   guide = guide_colourbar(title = "Percent Families",
+  #                                           title.position = "top",
+  #                                           direction = "vertical",
+  #                                           # title.hjust = 0.5,
+  #                                           # nbin = 6,
+  #                                           theme = theme(legend.key.height  = unit(12, "lines"),
+  #                                                         legend.key.width = unit(0.5, "lines"),
+  #                                                         text = element_text(size = 11))
+  #                                           )
+  #                   )+
+  # theme_map() +
+  # theme(legend.position ="right",
+  #       plot.title = element_text(size = 14),
+  #       plot.subtitle = element_text(size = 14))
+
+under_budget_map
+```
+
+#### Households 65+
+```{r over65-budget, out.width = '100%'}
+
+# Read in data
+over_65_budget <- read_csv("../data/budgets_65plus_households_2024.csv") |> 
+  select("County","Categories","Average Budget 65+ Household") |> 
+  rename(Monthly = "Average Budget 65+ Household") |> 
+  filter(! Categories %in% c("ANNUAL TOTAL", "Hourly Wage")) |> 
+  mutate(Categories = case_when(Categories=="Monthly Total" ~ "Total Income Needed to Meet Budget",
+                                .default = Categories),
+         Annual = Monthly *12)
+
+over_65_budget_table <- over_65_budget %>% 
+  filter(County == "Albemarle")
+
+over_65_budget_table %>% 
+  select(-c(County)) %>%
+  gt(rowname_col = "Categories") %>% 
+  fmt_currency(
+    columns = 2:3,
+    currency = currency(
+      html = "&#36;",
+      default = "$"
+    ),
+    decimals = 2
+  ) %>% 
+  tab_style(
+    style = list(
+      cell_fill(color = "#F6D2A9"),
+      cell_text(weight = "bold")
+    ),
+    locations = list(cells_body(rows = 9), cells_stub(rows = 9))
+  ) %>% 
+  tab_style(
+    style = cell_text(align = "center", v_align = "middle"),
+    locations = list(cells_column_labels(), cells_body())
+  ) %>% 
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = list(cells_column_labels())
+  ) %>% 
+  tab_header(
+    title = "Average Survival Budget for Households 65+ in Albemarle County"
+  ) %>% 
+  tab_source_note(
+    source_note = "Note: The Average Household Survival Budget is calculated using the ALICE 2024 Survival Budget by family compositions."
+  ) |> 
+  cols_width(Categories ~ pct(50)) |> 
+  tab_options(
+    table.width = pct(100)
+  )
+```
+
+```{r income-bands-65plus}
+#| label: fig-income-bands-65plus
+#| fig-cap: "Number and percent of households 65+ by annual household income below $100,000, 2024 for Albemarle County"
+
+# Read in data
+inc_bands_65plus_region <- read_csv("../data/income_bands_65over_tract_2024.csv") |> 
+  separate(NAME, into=c("tract","locality", "state"), sep="; ", remove=FALSE) |> 
+  rename(inc_band = variable) |> 
+  filter(inc_band != "Total Households 65+") |> 
+  group_by(locality, year, group, inc_group, inc_band) |> 
+  summarise(estimate = sum(estimate),
+            total_hh_65over = sum(total_hh_65over)) |> 
+  group_by(locality, year, group, inc_group) |> 
+  summarise(estimate = sum(estimate),
+            total_hh_65over = first(total_hh_65over)) |> 
+  mutate(inc_group = factor(inc_group, levels = c("below_15k", "below_30k", "below_45k", "below_60k", "below_75k", "below_100k", "above_100k"), labels = c("Less than $15,000","$15,000-$29,999", "$30,000-$44,999", "$45,000-$59,999", "$60,000-$74,999", "$75,000-$99,999", "$100,000 or more")),
+         percent = round(estimate/total_hh_65over * 100, 2))
+
+inc_band_65plus_local <- inc_bands_65plus_region |> filter(locality=="Albemarle County") 
+
+inc_band_65plus_local |> 
+  # filter(inc_group != "$100,000 or more") |> 
+  ggplot(aes(x = estimate, y = inc_group, fill = inc_group)) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = paste0(prettyNum(estimate, big.mark=",", preserve.width="none"), " (", round(percent, 0), "%)")),
+            vjust = 0.5,
+            hjust = -0.1,
+            size = 5) +
+  scale_y_discrete(name = "Households 65+ Annual Income") +
+  scale_x_continuous(name = "Number of Households 65+",
+                     breaks = seq(0, 4000, by = 1000),
+                     label=comma,
+                     expand = expansion(mult = c(0, .3))
+                     ) +
+  scale_fill_manual(values = c("#DE8A5A", "#DE8A5A", "#EDBB8A","#EDBB8A","#B4C8A8","#B4C8A8","grey"))+
+  labs(title = "Number of Households 65+ by Annual Income Bands",
+       subtitle = "Albemarle County",
+       # caption = acs_pums
+       ) +
+  theme_minimal() +
+  theme(legend.title=element_blank(),
+        legend.position = "none",
+        panel.grid.major.y = element_blank(),
+        axis.ticks = element_blank(),
+        panel.grid.minor = element_blank(),
+        plot.title.position= "plot",
+        plot.caption.position = "plot",
+        axis.text = element_text(color = "black", size = 11))
+
+```
+
+```{r below-65plus-margin}
+#| column: margin
+#| 
+# Read in data
+over65_budget_tract <- read_csv("../data/over65_tract_summary.csv") |> 
+  filter(inc_v_budget=="inc_under_budget")%>% 
+  filter(county == "Albemarle")
+
+over65_budget_tract <- over65_budget_tract %>% 
+  mutate(GEOID = as.character(GEOID),
+         percent = round(percent,0)) %>%
+  rename(tract = NAME) |> 
+  filter(year == 2024) %>% 
+  left_join(tract_geo, by = join_by(GEOID == GEOID)) %>%
+  st_as_sf() 
+
+over65_budget_tract <- over65_budget_tract[order(over65_budget_tract$tractnames, decreasing=FALSE),]
+
+
+over65_rank_data <- over65_budget_tract %>% 
+  group_by(percent) %>% 
+  summarise(tractnames = paste(tractnames, collapse = "\n")) %>% 
+  na.exclude() %>% 
+  arrange(desc(percent)) %>% 
+  st_drop_geometry
+
+over65_rank <- over65_rank_data %>%
+  mutate(color = "") %>% 
+  mutate(percent = percent/100) %>% 
+  select(c(tractnames, color, percent)) %>%
+  gt() %>% 
+  fmt_percent(
+    columns = percent,
+    decimals = 0
+  ) %>% 
+  data_color(
+    columns = percent,
+    target_columns = color,
+    direction = "column",
+    palette = pal_ssw,
+  )  %>% 
+  cols_label(
+    percent = "Percent", tractnames = "Census Tract",
+    color = ""
+  ) %>%
+  tab_style(
+    style = cell_text(align = "center", v_align = "middle"),
+    locations = list(cells_column_labels(2:3), cells_body(2:3))
+  ) %>% 
+  tab_options(table.font.size = pct(75),
+              data_row.padding = px(3))
+
+over65_rank
+
+```
+
+```{r below-65plus-tract-map}
+#| fig-height: 11
+#| fig-width: 9
+#| label: fig-below-65plus-tract-map
+#| fig-cap: "Percent of households 65+ with annual income below the survival budget by census tract, 2024, for Albemarle County."
+
+min_per_65 <- min(over65_budget_tract$percent, na.rm = TRUE)
+max_per_65 <- max(over65_budget_tract$percent, na.rm = TRUE)
+
+over65_budget_map <- over65_budget_tract %>%
+  mutate(text = paste0(round(percent,0), "%")) %>%
+  ggplot() +
+  annotation_map_tile(zoomin = 1, progress = "none", cachedir = "../data/tempdata/") +
+  geom_sf(aes(fill = round(percent,0)), color = "white") +
+  geom_sf_text(aes(label = text), size = 3.5, color = "black") +
+  scale_fill_stepsn(colors = pal_ssw,
+                    labels = scales::label_percent(scale = 1),
+                    n.breaks = 6,
+                    # trans = "log",
+                    # n.breaks = 7,
+                    # breaks = c(5,7,15,20,40,60),
+                    # trans = "log",
+                    limits = c(min_per_65, max_per_65),
+                    na.value = "grey70",
+                    guide = guide_colourbar(title = "Percent Below Self-Sufficient Wages",
+                                            title.position = "top",
+                                            direction = "horizontal",
+                                            title.hjust = 0.5,
+                                            theme = theme(legend.key.height  = unit(0.5, "lines"),
+                                                          legend.key.width = unit(18, "lines"),
+                                                          text = element_text(size = 10)) 
+                                            )
+                    )+
+  labs(title = "Households 65+ with Income below Self-Sufficiency",
+      # subtitle = local_name,
+      # caption = source_acs
+      ) +
+  theme_map()+
+  theme(legend.position="top",
+        legend.position.inside=c(1, 1.06),
+        legend.justification="center",
+        plot.title = element_text(size = 16),
+        plot.subtitle = element_text(size = 14),
+        plot.caption = element_text(size = 9))
+
+over65_budget_map
+```
+
+
+```{r, fig.width=12, fig.height=10.25}
+# #| label: fig-inc-below-map
+# #| fig-cap: "Percent of families with annual income below the survival budget by census tract, 2024, for Albemarle County."
+# 
+# # Read in data
+# under_budget_tract <- read_csv("../data/family_tract_summary.csv") |> 
+#   filter(inc_v_budget=="inc_under_budget")%>% 
+#   filter(county == "Albemarle")
+# 
+# under_budget_tract <- under_budget_tract %>% 
+#   mutate(GEOID = as.character(GEOID),
+#          percent = round(percent,0)) %>%
+#   rename(tract = NAME) |> 
+#   filter(year == 2024) %>% 
+#   left_join(tract_geo, by = join_by(GEOID == GEOID)) %>%
+#   st_as_sf() 
+# 
+# # Geospatial visualization ----
+# pal_labor <- carto_pal(7, "RedOr")
+# 
+# under_budget_map <- under_budget_tract %>%
+#   mutate(text = paste0(round(percent,0), "%")) %>%
+#   ggplot() +
+#   annotation_map_tile(zoomin = 1, progress = "none", cachedir = "../data/tempdata/") +
+#   geom_sf(aes(fill = round(percent,0)), color = "white") +
+#   geom_sf_text(aes(label = text), size = 3.25, color = "black") +
+#   scale_fill_stepsn(colors = pal_ssw,
+#                     labels = scales::label_percent(scale = 1),
+#                     n.breaks = 6,
+#                     guide = guide_colourbar(title = "Percent Below Self-Sufficient Wages",
+#                                             title.position = "top",
+#                                             direction = "horizontal",
+#                                             title.hjust = 0.5,
+#                                             # nbin = 6,
+#                                             theme = theme(legend.key.height  = unit(0.5, "lines"),
+#                                                           legend.key.width = unit(12, "lines"),
+#                                                           text = element_text(size = 11)) 
+#                                             )
+#                     )+
+#   theme_map()+
+#   theme(legend.position.inside=c(1, 1.04),
+#         legend.justification="right",
+#         plot.title = element_text(size = 14),
+#         plot.subtitle = element_text(size = 14))
+# 
+# 
+# # Gap chart ----
+# alb_labor <- under_budget_tract %>%
+#   group_by(percent) %>%
+#   summarise(tractnames = paste(tractnames, collapse = "; ")) %>%
+#   na.exclude()
+# 
+# names <- alb_labor$tractnames
+# labor <- alb_labor$percent
+# 
+# alb_labor_gap <-  ggplot(alb_labor, aes(x = 0, y = percent, label = names)) +
+#     geom_line(color = "grey", size = 1)+
+#     geom_point(aes(color=as.factor(percent)), size=5)+
+#     geom_text(label = str_wrap(names, width = 60), hjust = 0, nudge_x = 0.005,
+#               nudge_y = case_when(alb_labor$percent %in% c(3,4) ~ 0.2,
+#                                   alb_labor$percent %in% c(0,1,2) ~ -0.1,
+#                              .default = 0.01),
+#               # nudge_y = .05,
+#               size = 3.5,
+#               # angle=55,
+#               lineheight = 0.7) +
+#    scale_color_carto_d(name = "Percent Youth in the Labor Force: ",
+#                            type = "diverging", palette = "RedOr", direction = 1) +
+#     scale_x_continuous(limits = c(0,.1),
+#                        expand = c(0.03, 0))+
+#     scale_y_continuous(breaks = labor,
+#                        labels = paste0(labor,"%")
+#                        ) +
+#   theme_minimal()+
+#     theme(axis.line.x = element_blank(),
+#           axis.ticks.x = element_blank(),
+#           axis.text.x = element_blank(),
+#           axis.title.x = element_blank(),
+#           axis.title.y = element_blank(),
+#           panel.grid.minor = element_blank(),
+#           panel.grid.major = element_blank(),
+#           axis.text.y = element_text(size = 11),
+#           axis.ticks = element_line(linewidth = .5),
+#           axis.ticks.length.y = unit(.25, "cm"),
+#           plot.title.position= "plot",
+#           plot.caption.position = "plot",
+#           plot.caption = element_text(hjust = 0),
+#           legend.position="none")
+# 
+#   (under_budget_map + patchwork::free(alb_labor_gap)) +
+#   plot_layout(widths = c(1.75, 1)) +
+#   plot_annotation(title = "Families with Income below Surival Budget Needs",
+#                   subtitle = "Albemarle County",
+#                   # caption = source_text,
+#                   theme = theme(plot.title = element_text(size = 18),
+#                                 plot.subtitle = element_text(size = 16),
+#                                 plot.caption = element_text(size = 14)))
+```
