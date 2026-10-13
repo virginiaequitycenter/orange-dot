@@ -258,19 +258,19 @@ workers_by_hours %>%
 ```
 
 ```{r}
-workers_by_medianwages <- read_csv("../data/pums_workers_by_medianwages.csv") %>% 
-   mutate(
-    median_wage_bin_label = factor(median_wage_bin_label, levels = c("28320-38540", "38580-49300", "49420-59790",
-                                                   "60010-74100", "74110-100930", "101210-317900"), labels = c("$28,320 - $38,540", "$38,580 - $49,300", "$49,420 - $59,790", "$60,010 - $74,100", "$74,110 - $100,930", "$101,210 - $317,900")),
-         label_text = case_when(
+workers_by_wages <- read_csv("../data/pums_workers_by_wage_bins.csv") %>% 
+   mutate(wage_bin_label = factor(wage_bin_label,
+                                 levels = c("Less than $15,000","$15,000-$29,999", "$30,000-$44,999", "$45,000-$59,999", 
+                                            "$60,000-$74,999", "$75,000-$99,999", "$100,000 or more")),
+          label_text = case_when(
            below_budget_finc == "Yes" ~ paste0(prettyNum(count, big.mark=",", preserve.width="none"), " (", round(percent, 0), "%)"),
            below_budget_finc == "No" ~ paste0(prettyNum(count, big.mark=",", preserve.width="none"), " (", round(percent, 0), "%)")),
          below_budget_finc = factor(below_budget_finc, levels = c("Yes", "No"),
                                  labels = c("Income Below Budget", "Income Above Budget")))
 
-workers_by_medianwages %>% 
+workers_by_wages %>% 
   filter(below_budget_finc == "Income Below Budget") %>% 
-  ggplot(aes(x = count, y = median_wage_bin_label, fill = median_wage_bin_label)) +
+  ggplot(aes(x = count, y = wage_bin_label, fill = wage_bin_label)) +
   geom_bar(stat = "identity") +
   geom_text(aes(label = label_text),
             vjust = 0.5,
@@ -281,10 +281,11 @@ workers_by_medianwages %>%
                      breaks = seq(0, 12000, by = 1500),
                      label=comma,
                      expand = expansion(mult = c(0, .3))) +
-  scale_fill_manual(values = c("#DE8A5A", "#EDBB8A", "#F6EDBD","#B4C8A8", "#B4C8A8", "#70A494"))+
-  labs(title = "Median Annual Wage for Workers Earning Below Survival Budget",
+  scale_fill_manual(values = c("#DE8A5A", "#EDBB8A", "#EDBB8A", "#F6EDBD","#B4C8A8", "#B4C8A8", "#70A494"))+
+  labs(title = "Annual Wage for Workers Earning Below Survival Budget",
        # subtitle = geography_label,
-       caption = "Bureau of Labor Statistics, U.S. Department of Labor. Occupational Employment and Wage Statistics, 2025.") +
+       # caption = acs_pums
+       ) +
   theme_minimal() +
   theme(legend.title=element_blank(),
         legend.position = "none",

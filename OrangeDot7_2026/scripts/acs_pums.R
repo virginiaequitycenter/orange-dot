@@ -15,7 +15,6 @@ library(janitor)
 library(readxl)
 library(stringi)
 
-
 # Set WD ----
 setwd(here("OrangeDot7_2026"))
 
@@ -98,6 +97,53 @@ budget_region_rename <- budget_region |>
          family_type = case_when(!str_detect(family_type, "s") ~ stri_sub_replace(family_type, from = 7, length = 0, replacement = "0s"),
                                  .default = family_type))
 
+# Generate regional budget estimates for PUMS ----
+budget_est_df <- budget_region_rename |> 
+  mutate(adults = as.integer(str_sub(family_type, 1,1)),
+         infants = as.integer(str_sub(family_type, 3,3)),
+         preschool = as.integer(str_sub(family_type, 5,5)),
+         schoolage = as.integer(str_sub(family_type, 7,7)))
+
+est <- lm(median_budget ~ adults + infants + preschool + schoolage,
+          data = budget_est_df)
+
+summary(est)
+
+budget_est_df$predicted <- predict(est)
+
+ggplot(budget_est_df, aes(x = median_budget, y = predicted)) +
+  geom_point() +
+  geom_abline()
+
+# generate estimates based on combined budgets
+# could probably reduce this -- but it costs nothing
+# to have all of these combinations
+adults <- c(1,2,3)
+infants <- c(0,1,2,3)
+preschool <- c(0,1,2,3)
+schoolage <- c(0,1,2,3,4)
+
+budget_estimates <- expand.grid(
+  adults = adults,
+  infants = infants,
+  preschool = preschool,
+  schoolage = schoolage
+)
+
+budget_estimates$budget <- predict(est, newdata = budget_estimates)
+
+# create family type 
+# replace combinations that were directly downloaded
+# and save for use
+budget_estimates <- budget_estimates |> 
+  mutate(family_type = paste0(adults, "a", infants, "i", preschool, "p", schoolage, "s")) |> 
+  left_join(budget_region_rename, by = "family_type") |> 
+  mutate(budget = round(budget, 0),
+         budget = if_else(!is.na(median_budget), median_budget, budget)) |> 
+  select(family_type, budget)
+
+write_csv(budget_estimates, "data/regional_budget_estimates.csv")
+
 # Data Prep PUMS ----
 # Read in data ---- 
 household <- read_csv("data/rawdata/microdata/cvl_acspums_household.csv") %>% clean_names()
@@ -158,22 +204,22 @@ collapsed_person_reduced <- person_reduced %>%
 household_type <- household_reduced %>% 
   left_join(collapsed_person_reduced, by = "serialno")
 
-## Merge self-sufficiency and pums data ---- 
+## Merge budgets and pums data ---- 
 household_type <- household_type %>% 
-  left_join(budget_region_rename, by = "family_type")
+  left_join(budget_estimates, by = "family_type")
 
 ## Identify families/households income below budget ----
 household_type_inc <- household_type %>%
-  drop_na(median_budget) |> 
+  drop_na(budget) |> 
   mutate(
     income = ifelse(!is.na(fincp), fincp, hincp),
     below_budget_inc = case_when(
-      income >= median_budget ~ "No",
-      income < median_budget ~ "Yes",
+      income >= budget ~ "No",
+      income < budget ~ "Yes",
       TRUE ~ NA_character_), 
     below_budget_finc = case_when(
-      fincp >= median_budget ~ "No", 
-      fincp < median_budget ~ "Yes",
+      fincp >= budget ~ "No", 
+      fincp < budget ~ "Yes",
       TRUE ~ NA_character_),
     below_35_finc = case_when(
       fincp >= 35000 ~ "No",
@@ -196,6 +242,6 @@ count(person_type, below_budget_finc)
 count(person_type, below_35_finc)
 
 # Save data ----
-write_csv(household_type_inc, file = "data/pums_household_processed.csv")
-write_csv(person_type, file = "data/pums_person_processed.csv")
+write_csv(household_type_inc, file = "data/pums_household_processed_updated.csv")
+write_csv(person_type, file = "data/pums_person_processed_updated.csv")
 
