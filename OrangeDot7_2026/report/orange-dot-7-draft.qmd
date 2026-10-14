@@ -303,7 +303,192 @@ workers_by_wages %>%
         plot.title = element_text(size = 16),
         plot.caption = element_text(size = 12))
 ```
+```{r}
+occupations_by_wagebin <- read_csv("../data/bls_occupations_by_wagebin.csv")
 
+occupations_filtered <- occupations_by_wagebin %>% 
+  filter(occupation %in% c("Fast Food and Counter Workers", "Cashiers", "Home Health and Personal Care Aides", "Childcare Workers",
+                           "Customer Service Representatives", "Construction Laborers", "Maintenance and Repair Workers, General", 
+                           "Emergency Medical Technicians", "Nursing Assistants", 
+                           "Healthcare Support Workers, All Other", "Medical Assistants",
+                           "Bus Drivers, Transit and Intercity", "Dental Assistants", "Bus Drivers, School",
+                           "Automotive Service Technicians and Mechanics", "Heavy and Tractor-Trailer Truck Drivers",
+                           "Carpenters", "Production, Planning, and Expediting Clerks",
+                           "Graphic Designers", "Plumbers, Pipefitters, and Steamfitters",
+                           "Electricians", "Medical Records Specialists", "Police and Sheriff's Patrol Officers",
+                           "Clinical Laboratory Technologists and Technicians", "Elementary School Teachers, Except Special Education",
+                           "Secondary School Teachers, Except Special and Career/Technical Education",
+                           "Office and Administrative Support Workers, All Other", "Registered Nurses", 
+                           "Radiologic Technologists and Technicians", "Computer User Support Specialists", 
+                           "Accountants and Auditors", "Nurse Practitioners",
+                           "General and Operations Managers", "Construction Managers", "Dental Hygienists", 
+                           "Heating, Air Conditioning, and Refrigeration Mechanics and Installers", 
+                           "Electrical and Electronic Engineering Technologists and Technicians", 
+                           "Licensed Practical and Licensed Vocational Nurses", "Surgical Technologists")) %>% 
+  mutate(
+    # median_wage_bin_label = factor(median_wage_bin_label, levels = c("25610-37760", "37860-48320", "48340-60600", "60640-86950", "88050-238990"), labels = c("$25,610 - $37,760", "$37,860 - $48,320", "$48,340 - $60,600", "$60,640 - $86,950", "$88,050 - $238,990")),
+         job_group = case_when(soc_group_num == "11" ~ "Management",
+soc_group_num == "13" ~ "Business and Financial Operations",
+soc_group_num == "15" ~ "Computer and Mathematical",
+soc_group_num == "17" ~ "Architecture and Engineering",
+soc_group_num == "19" ~ "Life, Physical, and Social Science",
+soc_group_num == "21" ~ "Community and Social Service",
+soc_group_num == "23" ~ "Legal",
+soc_group_num == "25" ~ "Educational Instruction and Library",
+soc_group_num == "27" ~ "Arts, Design, Entertainment, Sports, and Media",
+soc_group_num == "29" ~ "Healthcare Practitioners and Technical",
+soc_group_num == "31" ~ "Healthcare Support",
+soc_group_num == "33" ~ "Protective Service",
+soc_group_num == "35" ~ "Food Preparation and Serving Related",
+soc_group_num == "37" ~ "Building and Grounds Cleaning and Maintenance",
+soc_group_num == "39" ~ "Personal Care and Service",
+soc_group_num == "41" ~ "Sales and Related",
+soc_group_num == "43" ~ "Office and Administrative Support",
+soc_group_num == "45" ~ "Farming, Fishing, and Forestry",
+soc_group_num == "47" ~ "Construction and Extraction",
+soc_group_num == "49" ~ "Installation, Maintenance, and Repair",
+soc_group_num == "51" ~ "Production",
+soc_group_num == "53" ~ "Transportation and Material Moving"
+))
+
+occupations_filtered %>%
+  mutate(employment_per_1_000_jobs = round(employment_per_1_000_jobs,1),
+         color = "") %>% 
+  select(c(occupation, annual_median_wage_2, color, employment_per_1_000_jobs, job_group, median_wage_bin)) %>%
+  gt() %>% 
+  data_color(
+    columns = median_wage_bin,
+    target_columns = color,
+    direction = "column",
+    palette = c("#DE8A5A", "#EDBB8A", "#F6EDBD","#B4C8A8", "#70A494"),
+  ) %>% 
+  fmt_currency(
+    columns = 2,
+    currency = currency(
+      html = "&#36;",
+      default = "$"
+    ),
+    decimals = 2
+  ) %>% 
+  cols_hide(columns = c(median_wage_bin)) %>% 
+  cols_label(
+    occupation = "Occupation",
+    annual_median_wage_2 = "Annual Median Wage",
+        color = "",
+    employment_per_1_000_jobs = "Employment Rate (per 1,000 jobs)",
+    median_wage_bin = "",
+    job_group = "Occupation Group"
+  ) %>% 
+  tab_style(
+    style = cell_text(align = "center", v_align = "middle"),
+    locations = list(cells_column_labels(2:4), cells_body(2:4))
+  ) %>% 
+  tab_footnote(
+    footnote = "A full list of occupations and wages is available here: https://github.com/virginiaequitycenter/orange-dot/blob/main/OrangeDot6_files/microdata/data/occupation_wages.csv",
+    locations = cells_title(groups = "title")
+  ) %>% 
+  tab_footnote(
+    footnote = "The annual median wage is the boundary between the highest and lowest paid workers in a given occupation. Half of the workers in a given occupation earn more than the median wage, and half the workers earn less than the median wage.",
+    locations = cells_column_labels(columns = annual_median_wage_2)
+  ) %>% 
+  tab_footnote(
+    footnote = "Employment rate is the number of jobs (employment) in the given occupation per 1,000 jobs in the Charlottesville Metro Area",
+    locations = cells_column_labels(columns = employment_per_1_000_jobs)
+  ) %>% 
+  tab_footnote(
+    footnote = "Major occupation groups defined by the Standard Occupational Classification (SOC) system, used by Federal statistical agencies to classify workers and jobs into occupational categories for the purpose of collecting, calculating, analyzing, or disseminating data.",
+    locations = cells_column_labels(columns = job_group)
+  ) %>% 
+  tab_header(
+    title = "Selection of Occupations by Annual Median Wage Earned in the Charlottesville Metro Area"
+  ) %>% 
+  tab_source_note(
+    source_note = "Data Source: U.S. Bureau of Labor Statistics, Occupational Employment and Wage Statistics; May 2023; https://www.bls.gov/oes/tables.htm"
+  )
+
+# By job rate ----
+occupations_by_rate <- occupations_by_wagebin |> 
+  filter(occupation != "All Occupations") |> 
+  filter(employment_per_1_000_jobs >= 10) |> 
+  mutate(job_group = case_when(soc_group_num == "11" ~ "Management",
+soc_group_num == "13" ~ "Business and Financial Operations",
+soc_group_num == "15" ~ "Computer and Mathematical",
+soc_group_num == "17" ~ "Architecture and Engineering",
+soc_group_num == "19" ~ "Life, Physical, and Social Science",
+soc_group_num == "21" ~ "Community and Social Service",
+soc_group_num == "23" ~ "Legal",
+soc_group_num == "25" ~ "Educational Instruction and Library",
+soc_group_num == "27" ~ "Arts, Design, Entertainment, Sports, and Media",
+soc_group_num == "29" ~ "Healthcare Practitioners and Technical",
+soc_group_num == "31" ~ "Healthcare Support",
+soc_group_num == "33" ~ "Protective Service",
+soc_group_num == "35" ~ "Food Preparation and Serving Related",
+soc_group_num == "37" ~ "Building and Grounds Cleaning and Maintenance",
+soc_group_num == "39" ~ "Personal Care and Service",
+soc_group_num == "41" ~ "Sales and Related",
+soc_group_num == "43" ~ "Office and Administrative Support",
+soc_group_num == "45" ~ "Farming, Fishing, and Forestry",
+soc_group_num == "47" ~ "Construction and Extraction",
+soc_group_num == "49" ~ "Installation, Maintenance, and Repair",
+soc_group_num == "51" ~ "Production",
+soc_group_num == "53" ~ "Transportation and Material Moving"
+))
+
+occupations_by_rate %>%
+  mutate(employment_per_1_000_jobs = round(employment_per_1_000_jobs,1),
+         color = "") %>% 
+  select(c(occupation, annual_median_wage_2, color, employment_per_1_000_jobs, job_group, median_wage_bin)) %>%
+  gt() %>% 
+  data_color(
+    columns = median_wage_bin,
+    target_columns = color,
+    direction = "column",
+    palette = c("#DE8A5A", "#EDBB8A", "#F6EDBD","#B4C8A8", "#70A494"),
+  ) %>% 
+  fmt_currency(
+    columns = 2,
+    currency = currency(
+      html = "&#36;",
+      default = "$"
+    ),
+    decimals = 2
+  ) %>% 
+  cols_hide(columns = c(median_wage_bin)) %>% 
+  cols_label(
+    occupation = "Occupation",
+    annual_median_wage_2 = "Annual Median Wage",
+        color = "",
+    employment_per_1_000_jobs = "Employment Rate (per 1,000 jobs)",
+    median_wage_bin = "",
+    job_group = "Occupation Group"
+  ) %>% 
+  tab_style(
+    style = cell_text(align = "center", v_align = "middle"),
+    locations = list(cells_column_labels(2:4), cells_body(2:4))
+  ) %>% 
+  tab_footnote(
+    footnote = "A full list of occupations and wages is available here: https://github.com/virginiaequitycenter/orange-dot/blob/main/OrangeDot6_files/microdata/data/occupation_wages.csv",
+    locations = cells_title(groups = "title")
+  ) %>% 
+  tab_footnote(
+    footnote = "The annual median wage is the boundary between the highest and lowest paid workers in a given occupation. Half of the workers in a given occupation earn more than the median wage, and half the workers earn less than the median wage.",
+    locations = cells_column_labels(columns = annual_median_wage_2)
+  ) %>% 
+  tab_footnote(
+    footnote = "Employment rate is the number of jobs (employment) in the given occupation per 1,000 jobs in the Charlottesville Metro Area",
+    locations = cells_column_labels(columns = employment_per_1_000_jobs)
+  ) %>% 
+  tab_footnote(
+    footnote = "Major occupation groups defined by the Standard Occupational Classification (SOC) system, used by Federal statistical agencies to classify workers and jobs into occupational categories for the purpose of collecting, calculating, analyzing, or disseminating data.",
+    locations = cells_column_labels(columns = job_group)
+  ) %>% 
+  tab_header(
+    title = "Selection of Occupations by Annual Median Wage Earned in the Charlottesville Metro Area"
+  ) %>% 
+  tab_source_note(
+    source_note = "Data Source: U.S. Bureau of Labor Statistics, Occupational Employment and Wage Statistics; May 2026; https://www.bls.gov/oes/tables.htm"
+  )
+```
 
 ## Locality Profiles
 
@@ -1525,3 +1710,35 @@ local_name <- "Nelson"
 [Return to Localities ↩︎](#locality-profiles)
 
 :::
+
+## Appendix
+```{r print-all-sheets, results='asis'}
+library(readxl)
+library(knitr)
+library(purrr)
+library(DT)
+
+# Specify your Excel file path
+excel_path <- "../data/household_budgets_2024.xlsx"
+
+# Get all sheet names
+sheet_names <- excel_sheets(excel_path)
+
+# Loop through each sheet, read it, and print a formatted table
+walk(sheet_names, function(s) {
+  cat(paste0("\n\n### Sheet: ", s, "\n\n"))
+  
+  df <- read_excel(excel_path, sheet = s)
+  
+  # Print the table using kable
+  # print(kable(df, caption = paste("Data from sheet:", s)))
+#   print(datatable(
+#   df, 
+#   options = list(scrollX = TRUE)
+# ))
+ print( df |> gt() |> 
+          tab_header(
+    title = s
+  ))
+})
+```
