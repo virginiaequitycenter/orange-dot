@@ -1,21 +1,17 @@
 ---
-title: "Orange Dot 7 DRAFT"
-# subtitle: ""
-date: "September 2026"
+title: "Orange Dot 7.0 DRAFT"
+subtitle: "Family Self-Sufficiency in the Charlottesville Region: Albemarle, Buckingham, Fluvanna, Greene, Louisa, Nelson Counties & the City of Charlottesville, Virginia"
+date: "October 2026"
 date-format: "MMMM YYYY"
-# author: "Community-Centered Analysis at the UVA Center for Community Partnerships"
-# license: "CC BY"
-# citation:
-#   type: report
-#   url: communitypartnerships.virginia.edu
+author: "Elizabeth Mitchell, Michele Claibourn, and Ridge Schuyler"
 format:
   html:
     toc: true
     toc-depth: 4
     theme: cosmo
     embed-resources: true
-    grid:
-      body-width: 950px
+    # grid:
+    #   body-width: 950px
   # docx:
   #   toc: true
   #   toc-title: "Table of Contents"
@@ -26,8 +22,8 @@ format:
   #   # fig-width: 3
   #   # fig-height: 2
   #   # # fig-format: png
-  #   # fig-dpi: 200
-  #   embed-resources: true
+  #   fig-dpi: 300
+  #   # embed-resources: true
   #   reference-doc: styles.docx
 execute:
   cache: false
@@ -35,6 +31,64 @@ execute:
   message: false
   warning: false
 ---
+```{css}
+section.level2 h2 {
+padding: 4px 22px;
+margin: 0 0 22px;
+border-left: 6px solid #3991d1;
+}
+
+h5, .h5, h4, .h4, h3, .h3 {
+  font-weight: 600;
+}
+h4, .h4, h3, .h3 {
+  font-size: calc(1.27rem + 0.24vw);
+}
+
+h5, .h5 {
+  font-size: calc(1.07rem + 0.24vw);
+}
+
+h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
+  margin-top: 0;
+  margin-bottom: .5rem;
+  /*font-weight: 400;*/
+  line-height: 1.2;
+  color: #373a3c;
+}
+
+.tab-content {
+    padding: 12px;
+    /*background: #f7faff;*/
+  }
+  
+  table {
+    background-color: #FFFFFF;
+  }
+  
+  .container-fluid {
+    padding: 0;
+  }
+  
+  .figure-title h3 {
+  font-size: 24px;
+  }
+  .shadowbox {
+    background-color: #575757;
+    border-radius: 25px;
+    color: white;
+    font-weight: 600;
+    text-align: center;
+    max-width: 450px;
+    padding: 20px;
+    margin: 0 auto 10px auto;
+  }
+  
+  .shadowbox p {
+    margin-bottom: 0;
+  }
+  
+```
 
 ```{r setup}
 #| include: false
@@ -81,7 +135,10 @@ source_pums <- "Data Source: ACS Public Use Microdata Sample (PUMS), 2020-2024; 
 
 ## Families Struggling in Our Region
 
-```{r region_table}
+```{r, results='asis'}
+#| label: region-summary
+#| html-table-processing: none
+
 # Read in data
 all_fam_region_table <- read_csv("../data/summary_all_families.csv") |> 
   filter(inc_v_budget=="inc_under_budget")
@@ -127,7 +184,10 @@ all_fam_region_table %>%
 
 ```
 
-```{r region_table_type}
+```{r, results='asis'}
+#| label: region-summary-type
+#| html-table-processing: none
+
 # Read in data
 fam_type_region_table <- read_csv("../data/summary_by_family_type.csv") |> 
   filter(inc_v_budget=="inc_under_budget")
@@ -185,6 +245,10 @@ fam_type_region_table %>%
 ```
 
 ```{r fig-region-race-ethn}
+#| fig-height: 5
+#| fig-align: "center"
+#| fig-cap: "Percent and number of struggling families by race and ethinicity for the Charlottesville region, including Albemarle, Buckingham, Fluvanna, Greene, Louisa, Nelson Counties and the City of Charlottesville. 56% of Black families and 47% of Hispanic families do not earn enough to meet their basic needs, compared to 28% of white families."
+
 # Read in data
 region_fam_race <- read_csv("../data/summary_race_ethn_region.csv")
 
@@ -220,8 +284,14 @@ region_fam_race %>%
         axis.text.x = element_text(color = "black", size = 11))
 ```
 
-### Undervalued Labor (TJ Planning District)
+## Undervalued Labor
 ```{r fig-worker-hours}
+#| fig-height: 4.5
+#| fig-width: 9
+#| fig-align: "center"
+#| out-width: "100%"
+#| fig-cap: "Estimated number and percent of workers in the TJ Planning District in families with income less than the household survival budget by weekly hours worked. 64% of these workers worked 40 or more hours a week; 88% worked 20 or more hours a week."
+
 workers_by_hours <- read_csv("../data/pums_workers_by_hours.csv") %>% 
   mutate(
     hours_bin = factor(hours_bin, levels = c("Unemployed", "Less than 20", "20 to 29", "30 to 34", "35 to 39", "40 or more"), labels = c("Unemployed", "Less than 20 hours", "20 to 29 hours", "30 to 34 hours", "35 to 39 hours", "40 or more hours")),
@@ -246,7 +316,7 @@ workers_by_hours %>%
                      expand = expansion(mult = c(0, .3))) +
   labs(title = "Weekly Hours Worked for Workers Earning Below Survival Budget",
        subtitle = geography_label,
-       caption = source_pums
+       caption = paste0("The Thomas Jefferson Planning District includes the City of Charlottesville, and Albemarle, Fluvanna,\n Greene, Louisa, and Nelson counties. Buckingham County is not included in the microdata sample.\n ",source_pums)
        ) +
   theme_minimal() +
   theme(legend.title=element_blank(),
@@ -267,6 +337,12 @@ workers_by_hours %>%
 ```
 
 ```{r fig-worker-wages}
+#| fig-height: 4.5
+#| fig-width: 9
+#| fig-align: "center"
+#| out-width: "100%"
+#| fig-cap: "Estimated number and percent of workers in the TJ Planning District in families with income less than the household survival budget by their annual wage. 77% of these workers earned less than $45,000 a year."
+
 workers_by_wages <- read_csv("../data/pums_workers_by_wage_bins.csv") %>% 
    mutate(wage_bin_label = factor(wage_bin_label,
                                  levels = c("Less than $15,000","$15,000-$29,999", "$30,000-$44,999", "$45,000-$59,999", 
@@ -293,7 +369,7 @@ workers_by_wages %>%
   scale_fill_manual(values = c("#DE8A5A", "#EDBB8A", "#EDBB8A", "#F6EDBD","#B4C8A8", "#B4C8A8", "#70A494"))+
   labs(title = "Annual Wage for Workers Earning Below Survival Budget",
        subtitle = geography_label,
-       caption = source_pums
+       caption = paste0("The Thomas Jefferson Planning District includes the City of Charlottesville, and Albemarle, Fluvanna,\n Greene, Louisa, and Nelson counties. Buckingham County is not included in the microdata sample.\n ",source_pums)
        ) +
   theme_minimal() +
   theme(legend.title=element_blank(),
@@ -312,7 +388,8 @@ workers_by_wages %>%
         plot.title = element_text(size = 16),
         plot.caption = element_text(size = 11))
 ```
-```{r}
+
+```{r occupations-by-wage}
 occupations_by_wagebin <- read_csv("../data/bls_occupations_by_wagebin.csv")
 
 occupations_filtered <- occupations_by_wagebin %>% 
@@ -322,18 +399,37 @@ occupations_filtered <- occupations_by_wagebin %>%
                            "Healthcare Support Workers, All Other", "Medical Assistants",
                            "Bus Drivers, Transit and Intercity", "Dental Assistants", "Bus Drivers, School",
                            "Automotive Service Technicians and Mechanics", "Heavy and Tractor-Trailer Truck Drivers",
-                           "Carpenters", "Production, Planning, and Expediting Clerks",
+                           "Carpenters", 
+                           # "Production, Planning, and Expediting Clerks",
                            "Graphic Designers", "Plumbers, Pipefitters, and Steamfitters",
                            "Electricians", "Medical Records Specialists", "Police and Sheriff's Patrol Officers",
                            "Clinical Laboratory Technologists and Technicians", "Elementary School Teachers, Except Special Education",
                            "Secondary School Teachers, Except Special and Career/Technical Education",
                            "Office and Administrative Support Workers, All Other", "Registered Nurses", 
                            "Radiologic Technologists and Technicians", "Computer User Support Specialists", 
-                           "Accountants and Auditors", "Nurse Practitioners",
-                           "General and Operations Managers", "Construction Managers", "Dental Hygienists", 
+                           "Accountants and Auditors", 
+                           # "Nurse Practitioners",
+                           "General and Operations Managers", 
+                           # "Construction Managers", 
+                           "Dental Hygienists", 
                            "Heating, Air Conditioning, and Refrigeration Mechanics and Installers", 
                            "Electrical and Electronic Engineering Technologists and Technicians", 
-                           "Licensed Practical and Licensed Vocational Nurses", "Surgical Technologists")) %>% 
+                           "Licensed Practical and Licensed Vocational Nurses", "Surgical Technologists",
+#                            "Food preparation",
+# "Cooks, Restaurant",
+# "Transportation and Material Moving Occupations",
+# "Healthcare Support Occupations" ,
+# "Office Clerks, General",
+"Production occupations",
+# "Protective service occupations",
+"Secretaries and Administrative Assistants, Except Legal, Medical, and Executive",
+# "Construction and Extraction Occupations",
+"Installation, Maintenance, and Repair Occupations",
+"Community and Social Service Occupations"
+# "Arts, Design, Entertainment, Sports, and Media Occupations",
+# "Life, Physical, and Social Science Occupations",
+# "Healthcare practitioners and Technical occupations"
+)) %>% 
   mutate(
     # median_wage_bin_label = factor(median_wage_bin_label, levels = c("25610-37760", "37860-48320", "48340-60600", "60640-86950", "88050-238990"), labels = c("$25,610 - $37,760", "$37,860 - $48,320", "$48,340 - $60,600", "$60,640 - $86,950", "$88,050 - $238,990")),
          job_group = case_when(soc_group_num == "11" ~ "Management",
@@ -393,7 +489,7 @@ occupations_filtered %>%
     locations = list(cells_column_labels(2:4), cells_body(2:4))
   ) %>% 
   tab_footnote(
-    footnote = "A full list of occupations and wages is available here: https://github.com/virginiaequitycenter/orange-dot/blob/main/OrangeDot6_files/microdata/data/occupation_wages.csv",
+    footnote = "A full list of occupations and wages is available here: https://github.com/virginiaequitycenter/orange-dot/blob/main/OrangeDot7_2026/data/bls_occupations_by_wagebin.csv",
     locations = cells_title(groups = "title")
   ) %>% 
   tab_footnote(
@@ -412,109 +508,18 @@ occupations_filtered %>%
     title = "Selection of Occupations by Annual Median Wage Earned in the Charlottesville Metro Area"
   ) %>% 
   tab_source_note(
-    source_note = "Data Source: U.S. Bureau of Labor Statistics, Occupational Employment and Wage Statistics; May 2023; https://www.bls.gov/oes/tables.htm"
+    source_note = "Data Source: U.S. Bureau of Labor Statistics, Occupational Employment and Wage Statistics; May 2025; https://www.bls.gov/oes/tables.htm"
   )
 
-# By job rate ----
-occupations_by_rate <- occupations_by_wagebin |> 
-  filter(occupation != "All Occupations") |> 
-  filter(employment_per_1_000_jobs >= 10) |> 
-  mutate(job_group = case_when(soc_group_num == "11" ~ "Management",
-soc_group_num == "13" ~ "Business and Financial Operations",
-soc_group_num == "15" ~ "Computer and Mathematical",
-soc_group_num == "17" ~ "Architecture and Engineering",
-soc_group_num == "19" ~ "Life, Physical, and Social Science",
-soc_group_num == "21" ~ "Community and Social Service",
-soc_group_num == "23" ~ "Legal",
-soc_group_num == "25" ~ "Educational Instruction and Library",
-soc_group_num == "27" ~ "Arts, Design, Entertainment, Sports, and Media",
-soc_group_num == "29" ~ "Healthcare Practitioners and Technical",
-soc_group_num == "31" ~ "Healthcare Support",
-soc_group_num == "33" ~ "Protective Service",
-soc_group_num == "35" ~ "Food Preparation and Serving Related",
-soc_group_num == "37" ~ "Building and Grounds Cleaning and Maintenance",
-soc_group_num == "39" ~ "Personal Care and Service",
-soc_group_num == "41" ~ "Sales and Related",
-soc_group_num == "43" ~ "Office and Administrative Support",
-soc_group_num == "45" ~ "Farming, Fishing, and Forestry",
-soc_group_num == "47" ~ "Construction and Extraction",
-soc_group_num == "49" ~ "Installation, Maintenance, and Repair",
-soc_group_num == "51" ~ "Production",
-soc_group_num == "53" ~ "Transportation and Material Moving"
-))
-
-occupations_by_rate %>%
-  mutate(employment_per_1_000_jobs = round(employment_per_1_000_jobs,1),
-         color = "") %>% 
-  select(c(occupation, annual_median_wage_2, color, employment_per_1_000_jobs, job_group, median_wage_bin)) %>%
-  gt() %>% 
-  data_color(
-    columns = median_wage_bin,
-    target_columns = color,
-    direction = "column",
-    palette = c("#DE8A5A", "#EDBB8A", "#F6EDBD","#B4C8A8", "#70A494"),
-  ) %>% 
-  fmt_currency(
-    columns = 2,
-    currency = currency(
-      html = "&#36;",
-      default = "$"
-    ),
-    decimals = 2
-  ) %>% 
-  cols_hide(columns = c(median_wage_bin)) %>% 
-  cols_label(
-    occupation = "Occupation",
-    annual_median_wage_2 = "Annual Median Wage",
-        color = "",
-    employment_per_1_000_jobs = "Employment Rate (per 1,000 jobs)",
-    median_wage_bin = "",
-    job_group = "Occupation Group"
-  ) %>% 
-  tab_style(
-    style = cell_text(align = "center", v_align = "middle"),
-    locations = list(cells_column_labels(2:4), cells_body(2:4))
-  ) %>% 
-  tab_footnote(
-    footnote = "A full list of occupations and wages is available here: https://github.com/virginiaequitycenter/orange-dot/blob/main/OrangeDot6_files/microdata/data/occupation_wages.csv",
-    locations = cells_title(groups = "title")
-  ) %>% 
-  tab_footnote(
-    footnote = "The annual median wage is the boundary between the highest and lowest paid workers in a given occupation. Half of the workers in a given occupation earn more than the median wage, and half the workers earn less than the median wage.",
-    locations = cells_column_labels(columns = annual_median_wage_2)
-  ) %>% 
-  tab_footnote(
-    footnote = "Employment rate is the number of jobs (employment) in the given occupation per 1,000 jobs in the Charlottesville Metro Area",
-    locations = cells_column_labels(columns = employment_per_1_000_jobs)
-  ) %>% 
-  tab_footnote(
-    footnote = "Major occupation groups defined by the Standard Occupational Classification (SOC) system, used by Federal statistical agencies to classify workers and jobs into occupational categories for the purpose of collecting, calculating, analyzing, or disseminating data.",
-    locations = cells_column_labels(columns = job_group)
-  ) %>% 
-  tab_header(
-    title = "Selection of Occupations by Annual Median Wage Earned in the Charlottesville Metro Area"
-  ) %>% 
-  tab_source_note(
-    source_note = "Data Source: U.S. Bureau of Labor Statistics, Occupational Employment and Wage Statistics; May 2026; https://www.bls.gov/oes/tables.htm"
-  )
 ```
 
 ## Locality Profiles
 
-::: {.panel-tabset .nav-pills}
-### Albemarle County
 ```{r}
-# Set name
-local_name <- "Albemarle"
-```
-
-#### Families
-
-```{r}
-#| label: all-fam-budget
+#| label: local-summary-text
 #| eval: false
 
-# Read in data
+# Budget table
 all_fam_budget <- read_csv("../data/budgets_all_families_2024.csv") |> 
   select("County","Categories","Average Family") |> 
   rename(Monthly = "Average Family") |> 
@@ -525,6 +530,212 @@ all_fam_budget <- read_csv("../data/budgets_all_families_2024.csv") |>
 
 all_fam_budget_table <- all_fam_budget %>% 
   filter(County == local_name)
+
+budget_annual<- all_fam_budget_table %>% 
+  filter(Categories == "Total Income Needed to Meet Budget")
+budget_annual_text<- paste0("$", prettyNum(budget_annual$Annual, big.mark=",", preserve.width="none"))
+
+# Total Families and Total Below Budget
+total_fam <- all_fam_region_table %>%
+  filter(str_detect(locality,local_name))
+
+total <- prettyNum(total_fam$total_families, big.mark=",", preserve.width="none")
+locality_name <- total_fam$locality
+below_budget <- prettyNum(round(total_fam$estimate,0), big.mark=",", preserve.width="none")
+below_budget_per <- percent(total_fam$percent, scale = 1, accuracy = 1)
+
+# Read in data
+all_fam_race <- read_csv("../data/family_race_county_summary.csv")
+
+# Black families
+black_fam <- all_fam_race %>%
+  filter(str_detect(locality,local_name)) |> 
+  filter(group == "Black" & inc_v_budget == "inc_under_budget")
+below_black <- prettyNum(round(black_fam$est_prop_adj,0), big.mark=",", preserve.width="none")
+below_per_black <- black_fam$percent
+
+# Hispanic families
+hisp_fam <- all_fam_race %>%
+  filter(str_detect(locality,local_name)) |> 
+  filter(group == "Hispanic" & inc_v_budget == "inc_under_budget")
+below_hisp <- prettyNum(round(hisp_fam$est_prop_adj,0), big.mark=",", preserve.width="none")
+below_per_hisp <- hisp_fam$percent
+
+# White families
+white_fam <- all_fam_race %>%
+  filter(str_detect(locality,local_name)) |> 
+  filter(group == "White, Not Hispanic" & inc_v_budget == "inc_under_budget")
+below_white <- prettyNum(round(white_fam$est_prop_adj,0), big.mark=",", preserve.width="none")
+below_per_white <- white_fam$percent
+
+# Median Family income
+# county
+med_faminc_county <- read_csv("../data/med_faminc_county_2024.csv") %>% 
+  filter(str_detect(locality,local_name))
+med_faminc <- paste0("$", prettyNum(med_faminc_county$estimate, big.mark=",", preserve.width="none"))
+
+# all tracts region
+med_inc_tract <- read_csv("../data/med_faminc_tract_2024.csv") |> 
+  mutate(estimate = round(estimate, -3))
+
+# region min and max
+min_inc <- min(med_inc_tract$estimate, na.rm = TRUE)
+max_inc <- max(med_inc_tract$estimate, na.rm = TRUE)
+
+# local tracts 
+med_inc_tract <- med_inc_tract  |>  
+  filter(county == local_name) |> 
+  mutate(GEOID = as.character(GEOID),
+         tractnames = case_when(med_inc_below == TRUE ~ paste0(tractnames,"*"),
+                                .default = tractnames)) %>%
+  rename(tract = NAME) |> 
+  filter(year == 2024) %>% 
+  left_join(tract_geo, by = join_by(GEOID == GEOID)) %>%
+  st_as_sf() 
+
+med_inc_tract <- med_inc_tract[order(med_inc_tract$tractnames, decreasing=FALSE),]
+  
+med_faminc_low <- med_inc_tract %>% 
+  filter(str_detect(county,local_name)) |>
+  filter(estimate == min(estimate, na.rm = TRUE)) |> 
+  mutate(tractnames = str_remove(tractnames, "/*")) 
+med_faminc_low_est <- paste0("$", prettyNum(unique(med_faminc_low$estimate), big.mark=",", preserve.width="none"))
+med_faminc_low_name <- paste(med_faminc_low$tractnames, collapse = " and ")
+
+med_faminc_high <- med_inc_tract %>% 
+  filter(str_detect(county,local_name)) |> 
+  filter(estimate == max(estimate, na.rm = TRUE)) |> 
+  mutate(tractnames = str_remove(tractnames, "/*")) 
+med_faminc_high_est <- paste0("$", prettyNum(unique(med_faminc_high$estimate), big.mark=",", preserve.width="none"))
+med_faminc_high_name <- paste(med_faminc_high$tractnames, collapse = " and ")
+
+# Under budget by tract
+under_budget_tract <- read_csv("../data/family_tract_summary.csv") |> 
+  mutate(percent = round(percent,0)) |> 
+  filter(inc_v_budget=="inc_under_budget")
+
+min_under <- min(under_budget_tract$percent, na.rm = TRUE)
+max_under <- max(under_budget_tract$percent, na.rm = TRUE)
+
+under_budget_tract <- under_budget_tract|> 
+  filter(county == local_name)
+
+under_budget_tract <- under_budget_tract %>% 
+  mutate(GEOID = as.character(GEOID),
+         percent = round(percent,0)) %>%
+  rename(tract = NAME) |> 
+  filter(year == 2024) %>% 
+  left_join(tract_geo, by = join_by(GEOID == GEOID)) %>%
+  st_as_sf() 
+
+under_budget_tract <- under_budget_tract[order(under_budget_tract$tractnames, decreasing=FALSE),]
+
+under_tract_high <- under_budget_tract %>% 
+  filter(county == local_name) %>% 
+  filter(percent == max(percent, na.rm = TRUE))
+tract_high_per <- unique(under_tract_high$percent)
+tract_high_name <- paste(under_tract_high$tractnames, collapse = " and ")
+
+under_tract_low <- under_budget_tract %>% 
+  filter(county == local_name) %>% 
+  filter(percent == min(percent, na.rm = TRUE))
+tract_low_per <- unique(under_tract_low$percent)
+tract_low_name <- paste(under_tract_low$tractnames, collapse = " and ")
+
+# 65 and over
+over_65_budget <- read_csv("../data/budgets_65plus_households_2024.csv") |> 
+  select("County","Categories","Average Budget 65+ Household") |> 
+  rename(Monthly = "Average Budget 65+ Household") |> 
+  filter(! Categories %in% c("ANNUAL TOTAL", "Hourly Wage")) |> 
+  mutate(Categories = case_when(Categories=="Monthly Total" ~ "Total Income Needed to Meet Budget",
+                                .default = Categories),
+         Annual = Monthly *12)
+
+over_65_budget_table <- over_65_budget %>% 
+  filter(County == local_name)
+
+budget_65_annual<- over_65_budget_table %>% 
+  filter(Categories == "Total Income Needed to Meet Budget")
+budget_65_annual_text<- paste0("$", prettyNum(budget_65_annual$Annual, big.mark=",", preserve.width="none"))
+
+# 65+, Under budget by tract
+over65_budget_tract <- read_csv("../data/over65_tract_summary.csv") |> 
+  mutate(percent = round(percent,0))
+
+min_65under <- min(over65_budget_tract$percent, na.rm = TRUE)
+max_65under <- max(over65_budget_tract$percent, na.rm = TRUE)
+
+over65_budget_tract <- over65_budget_tract|> 
+  filter(inc_v_budget=="inc_under_budget")%>% 
+  filter(county == local_name)
+
+over65_budget_tract <- over65_budget_tract %>% 
+  mutate(GEOID = as.character(GEOID),
+         percent = round(percent,0)) %>%
+  rename(tract = NAME) |> 
+  filter(year == 2024) %>% 
+  left_join(tract_geo, by = join_by(GEOID == GEOID)) %>%
+  st_as_sf() 
+
+over65_budget_tract <- over65_budget_tract[order(over65_budget_tract$tractnames, decreasing=FALSE),]
+
+over65_under_tract_high <- over65_budget_tract %>% 
+  filter(county == local_name) %>% 
+  filter(percent == max(percent, na.rm = TRUE))
+over65_tract_high_per <- unique(over65_under_tract_high$percent)
+over65_tract_high_name <- paste(over65_under_tract_high$tractnames, collapse = " and ")
+
+over65_under_tract_low <- over65_budget_tract %>% 
+  filter(county == local_name) %>% 
+  filter(percent == min(percent, na.rm = TRUE))
+over65_tract_low_per <- unique(over65_under_tract_low$percent)
+over65_tract_low_name <- paste(over65_under_tract_low$tractnames, collapse = " and ")
+
+# Section summary texts ----
+
+# Text summary with hispanic population ----
+section_summary_with_hisp <- paste0("
+<p>There are ", total, " families living in ", locality_name, ". Of these families, ", below_budget," (", below_budget_per,") do not earn enough to provide for their family’s basic needs.</p>
+<h5>", locality_name, " at a glance:</h5>
+<ul>
+<li><p>The annual household survival budget for an average family in ", locality_name, " is ", budget_annual_text, ". This is the approximate income working families need to meet their basic necessities. The household survival budget includes: housing, child care, food, transportation, health care, and technology (phone and internet), plus taxes and a 10% contingency fund for one-time unanticipated costs.</p></li>
+
+<li><p>Approximately ", below_budget, " families, or ", below_budget_per, " of families, in ", locality_name, " earn below their household's survival budget.</p></li>
+
+<li><p>The percent of Black families not earning enough to meet their basic needs is ", percent(below_per_black, scale = 1, accuracy = 1), ". The percent of Hispanic families not earning enough to meet their basic needs is ", percent(below_per_hisp, scale = 1, accuracy = 1), ". These are ", percent(below_per_black-below_per_white, scale = 1, accuracy = 1), " and ", percent(below_per_hisp-below_per_white, scale = 1, accuracy = 1), " higher than the percent of white families earning below the survival budget (", percent(below_per_white, scale = 1, accuracy = 1), ").</p></li>
+
+<li><p>The median family income for ", locality_name, " is ", med_faminc, ". The tract with the lowest median family income is ", med_faminc_low_name, " at ", med_faminc_low_est, ". The tract with the highest median family income is ", med_faminc_high_name, " at ", med_faminc_high_est, ".</p></li>
+
+<li><p>The tract with the highest percent of families with income below the average survival budget is ", tract_high_name, " with ", percent(tract_high_per, scale = 1, accuracy = 1), " of families. The tract with the lowest percent of families not earning enough to meet their basic needs is ", tract_low_name, " with ", percent(tract_low_per, scale = 1, accuracy = 1), " of families. That is a difference of ", percent(tract_high_per-tract_low_per, scale = 1, accuracy = 1), ".</p></li>
+
+<li><p>The annual survival budget for an average household 65 years and over in ", locality_name, " is ", budget_65_annual_text, ". The tract with the highest percent of households 65 years and over with income below the average survival budget is ", over65_tract_high_name, " with ", percent(over65_tract_high_per, scale = 1, accuracy = 1), ". The tract with the lowest percent of households 65 years and over not earning enough to meet their basic needs is ", over65_tract_low_name, " with ", percent(over65_tract_low_per, scale = 1, accuracy = 1), ".</p></li>
+</ul>
+")
+
+# text summary without hispanic pop ----
+section_summary <- paste0("
+<p>There are ", total, " families living in ", locality_name, ". Of these families, ", below_budget," (", below_budget_per,") do not earn enough to provide for their family’s basic needs.</p>
+<h5>", locality_name, " at a glance:</h5>
+<ul>
+<li><p>The annual survival budget for an average family in ", locality_name, " is ", budget_annual_text, ". This is the income working families need to meet their basic necessities. The survival budget include: housing, child care, food, transportation, health care, and technology (phone and internet), plus taxes and a 10% contingency fund for one-time unanticipated costs.</p></li>
+
+<li><p>Approximately ", below_budget, " families, or ", below_budget_per, " of families, in ", locality_name, " earn below their household's survival budget.</p></li>
+
+<li><p>The percent of Black families not earning enough to meet their basic needs is ", percent(below_per_black, scale = 1, accuracy = 1), ". This is ", percent(below_per_black-below_per_white, scale = 1, accuracy = 1), " higher than the percent of white families earning below the survival budget (", percent(below_per_white, scale = 1, accuracy = 1), ").</p></li>
+
+<li><p>The median family income for ", locality_name, " is ", med_faminc, ". The tract with the lowest median family income is ", med_faminc_low_name, " at ", med_faminc_low_est, ". The tract with the highest median family income is ", med_faminc_high_name, " at ", med_faminc_high_est, ".</p></li>
+
+<li><p>The tract with the highest percent of families with income below the average survival budget is ", tract_high_name, " with ", percent(tract_high_per, scale = 1, accuracy = 1), " of families. The tract with the lowest percent of families not earning enough to meet their basic needs is ", tract_low_name, " with ", percent(tract_low_per, scale = 1, accuracy = 1), " of families. That is a difference of ", percent(tract_high_per-tract_low_per, scale = 1, accuracy = 1), ".</p></li>
+
+<li><p>The annual survival budget for an average household 65 years and over in ", locality_name, " is ", budget_65_annual_text, ". The tract with the highest percent of households 65 years and over with income below the average survival budget is ", over65_tract_high_name, " with ", percent(over65_tract_high_per, scale = 1, accuracy = 1), ". The tract with the lowest percent of households 65 years and over not earning enough to meet their basic needs is ", over65_tract_low_name, " with ", percent(over65_tract_low_per, scale = 1, accuracy = 1), ".</p></li>
+</ul>
+")
+
+```
+
+```{r}
+#| label: all-fam-budget
+#| eval: false
 
 all_fam_budget_table %>% 
   select(-c(County)) %>%
@@ -557,16 +768,12 @@ all_fam_budget_table %>%
   ) %>% 
   opt_align_table_header(align = "left") |>
   tab_source_note(
-    source_note = "Note: The Average Family Survival Budget is calculated using the ALICE 2024 Survival Budget by family compositions."
+    source_note = "Note: The Average Family Survival Budget is calculated using the ALICE 2024 Household Survival Budgets. The average budget is calculated for each locality based on families with one or two adults and one or two children. Family compositions include children ages 0-2 years (infant), 3-4 years (preschooler), and 5-17 years (school-aged). See the Appendix for detailed budgets for specific family compositions."
   ) |> 
   cols_width(Categories ~ pct(50)) |> 
   tab_options(
     table.width = pct(100)
   )
-```
-
-```{r all_fam_budget_alb, out.width = '100%'}
-#| ref.label: all-fam-budget
 ```
 
 ```{r}
@@ -581,7 +788,9 @@ inc_bands_region <- read_csv("../data/income_bands_race_county_2024.csv") |>
   summarise(estimate = sum(estimate),
             total_families = first(total_families)) |> 
   mutate(inc_group = factor(inc_group, levels = c("below_15k", "below_30k", "below_45k", "below_60k", "below_75k", "below_100k", "above_100k"), labels = c("Less than $15,000","$15,000-$29,999", "$30,000-$44,999", "$45,000-$59,999", "$60,000-$74,999", "$75,000-$99,999", "$100,000 or more")),
-         percent = round(estimate/total_families * 100, 2))
+         percent = round(estimate/total_families * 100, 2),
+         locality = str_remove(locality, ", Virginia"),
+         locality = str_to_title(locality))
 
 inc_band_local <- inc_bands_region |> filter(str_detect(locality,local_name)) 
 
@@ -600,8 +809,8 @@ inc_band_local |>
                      expand = expansion(mult = c(0, .3))
                      ) +
   scale_fill_manual(values = c("#DE8A5A", "#DE8A5A", "#EDBB8A","#EDBB8A", "#EDBB8A","#B4C8A8"))+
-  labs(title = "Number of Families by Annual Income Bands",
-       subtitle = local_name,
+  labs(title = paste0("Families by Annual Income Band for ", inc_band_local$locality),
+       # subtitle = local_name,
        caption = source_acs
        ) +
   theme_minimal() +
@@ -616,18 +825,15 @@ inc_band_local |>
         plot.caption = element_text(size = 10))
 ```
 
-```{r fig-income-bands-alb}
-#| ref.label: fig-income-bands
-#| fig-cap: "Number and percent of families by family annual income below $100,000, 2024 for Albemarle County"
-```
-
 ```{r}
 #| label: fig-income-bands-type
 #| eval: false
 #| fig-width: 10
 
 # Read in data
-inc_bands_type <- read_csv("../data/income_bands_fam_type_county_2024.csv") 
+inc_bands_type <- read_csv("../data/income_bands_fam_type_county_2024.csv") |> 
+  mutate(locality = str_remove(locality, ", Virginia"),
+         locality = str_to_title(locality))
 
 inc_band_wchild <- inc_bands_type |> 
   filter(child_in_home == "With own children of the householder under 18 years") |>
@@ -706,8 +912,8 @@ no_child_bar <- inc_band_nochild_local |>
         axis.text = element_text(color = "black", size = 10))
 
 (w_child_bar + no_child_bar) +
-  plot_annotation(title = "Number of Families by Annual Income Bands",
-                  subtitle = local_name,
+  plot_annotation(title = paste0("Families by Annual Income Band and Type for ", inc_band_local$locality),
+                  # subtitle = local_name,
                   caption = source_acs,
                   theme = theme(
                     # plot.title = element_text(size = 18),
@@ -716,21 +922,12 @@ no_child_bar <- inc_band_nochild_local |>
                   )
 ```
 
-```{r fig-income-bands-type-alb}
-#| ref.label: fig-income-bands-type
-#| fig-width: 9
-#| fig-height: 4.5
-```
-
 ```{r}
 #| label: fig-family-race
 #| eval: false
 
 # Localities with sufficient Hispanic population
 hisp_pop <- c("Albemarle County, Virginia", "Charlottesville city, Virginia")
-
-# Read in data
-all_fam_race <- read_csv("../data/family_race_county_summary.csv")
 
 all_fam_race_bar <- all_fam_race %>% 
   filter(str_detect(locality,local_name)) |> 
@@ -771,33 +968,9 @@ all_fam_race_bar %>%
         plot.caption = element_text(size = 10))
 ```
 
-```{r fig-family-race-alb}
-#| ref.label: "fig-family-race"
-#| fig-cap: "Percent and number of families earning above and below the average family survival budget, 2024 for Albemarle County"
-```
-
 ```{r}
 #| label: fig-inc-tract-map
 #| eval: false
-
-# Read in data
-med_inc_tract <- read_csv("../data/med_faminc_tract_2024.csv") |> 
-  mutate(estimate = round(estimate, -3))
-  
-min_inc <- min(med_inc_tract$estimate, na.rm = TRUE)
-max_inc <- max(med_inc_tract$estimate, na.rm = TRUE)
-  
-med_inc_tract <- med_inc_tract  |>  
-  filter(county == local_name) |> 
-  mutate(GEOID = as.character(GEOID),
-         tractnames = case_when(med_inc_below == TRUE ~ paste0(tractnames,"*"),
-                                .default = tractnames)) %>%
-  rename(tract = NAME) |> 
-  filter(year == 2024) %>% 
-  left_join(tract_geo, by = join_by(GEOID == GEOID)) %>%
-  st_as_sf() 
-
-med_inc_tract <- med_inc_tract[order(med_inc_tract$tractnames, decreasing=FALSE),]
 
 med_inc_map <- med_inc_tract %>%
   mutate(estimate = round(estimate, -3),
@@ -894,43 +1067,9 @@ medinc_rank
 
 ```
 
-::: {layout="[70,30]"}
-```{r fig-inc-tract-map-alb}
-#| fig-height: 11
-#| fig-width: 9
-#| ref.label: "fig-inc-tract-map"
-#| fig-cap: "Median family income by census tract, 2024, for Albemarle County."
-```
-
-```{r inc_tract_margin_alb}
-#| ref.label: "inc-tract-margin"
-```
-:::
-
 ```{r}
 #| label: fig-below-tract-map
 #| eval: false
-
-# Read in data
-under_budget_tract <- read_csv("../data/family_tract_summary.csv") |> 
-  mutate(percent = round(percent,0))
-
-min_under <- min(under_budget_tract$percent, na.rm = TRUE)
-max_under <- max(under_budget_tract$percent, na.rm = TRUE)
-
-under_budget_tract <- under_budget_tract|> 
-  filter(inc_v_budget=="inc_under_budget")%>% 
-  filter(county == local_name)
-
-under_budget_tract <- under_budget_tract %>% 
-  mutate(GEOID = as.character(GEOID),
-         percent = round(percent,0)) %>%
-  rename(tract = NAME) |> 
-  filter(year == 2024) %>% 
-  left_join(tract_geo, by = join_by(GEOID == GEOID)) %>%
-  st_as_sf() 
-
-under_budget_tract <- under_budget_tract[order(under_budget_tract$tractnames, decreasing=FALSE),]
 
 under_budget_map <- under_budget_tract %>%
   mutate(text = paste0(round(percent,0), "%")) %>%
@@ -1032,35 +1171,9 @@ under_budget_rank
 
 ```
 
-::: {layout="[70,30]"}
-```{r fig-below-tract-map-alb}
-#| fig-height: 11
-#| fig-width: 9
-#| ref.label: fig-below-tract-map
-#| fig-cap: "Percent of families with annual income below the survival budget by census tract, 2024, for Albemarle County."
-```
-
-```{r below_tract_margin_alb}
-#| ref.label: below-tract-margin
-```
-::: 
-
-#### Households 65+
 ```{r}
 #| label: over-65-budget
 #| eval: false
-
-# Read in data
-over_65_budget <- read_csv("../data/budgets_65plus_households_2024.csv") |> 
-  select("County","Categories","Average Budget 65+ Household") |> 
-  rename(Monthly = "Average Budget 65+ Household") |> 
-  filter(! Categories %in% c("ANNUAL TOTAL", "Hourly Wage")) |> 
-  mutate(Categories = case_when(Categories=="Monthly Total" ~ "Total Income Needed to Meet Budget",
-                                .default = Categories),
-         Annual = Monthly *12)
-
-over_65_budget_table <- over_65_budget %>% 
-  filter(County == local_name)
 
 over_65_budget_table %>% 
   select(-c(County)) %>%
@@ -1089,20 +1202,16 @@ over_65_budget_table %>%
     locations = list(cells_column_labels())
   ) %>% 
   tab_header(
-    title = paste0("Average Survival Budget for Households 65+ in ", local_name)
+    title = paste0("Average Survival Budget for Households 65 years and over in ", local_name)
   ) %>% 
   opt_align_table_header(align = "left") |>
   tab_source_note(
-    source_note = "Note: The Average Household Survival Budget is calculated using the ALICE 2024 Survival Budget by family compositions."
+    source_note = "Note: The Average Household Survival Budget is calculated using the ALICE 2024 Household Survival Budgets. The average budget for households 65 years and over is calculated for each locality based on households with one or two adults aged 65 years and over. See the Appendix for detailed budgets for specific family compositions."
   ) |> 
   cols_width(Categories ~ pct(50)) |> 
   tab_options(
     table.width = pct(100)
   )
-```
-
-```{r over-65-budget-alb, out.width = '100%'}
-#| ref.label: over-65-budget
 ```
 
 ```{r}
@@ -1134,13 +1243,13 @@ inc_band_65plus_local |>
             hjust = -0.1,
             size = 5) +
   scale_y_discrete(name = "Households 65+ Annual Income") +
-  scale_x_continuous(name = "Number of Households 65+",
+  scale_x_continuous(name = "Number of Households 65 years and over",
                      breaks = seq(0, 4000, by = 1000),
                      label=comma,
                      expand = expansion(mult = c(0, .3))
                      ) +
   scale_fill_manual(values = c("#DE8A5A", "#DE8A5A", "#EDBB8A","#EDBB8A","#B4C8A8","#B4C8A8","grey"))+
-  labs(title = "Number of Households 65+ by Annual Income Bands",
+  labs(title = "Number of Households 65 years and over by Annual Income Bands",
        subtitle = local_name,
        caption = source_acs
        ) +
@@ -1157,35 +1266,9 @@ inc_band_65plus_local |>
 
 ```
 
-```{r fig-income-bands-65plus-alb}
-#| ref.label: fig-income-bands-65plus
-#| fig-cap: "Number and percent of households 65+ by annual household income below $100,000, 2024 for Albemarle County"
-```
-
 ```{r}
 #| label: fig-below-65plus-tract-map
 #| eval: false
-
-# Read in data
-over65_budget_tract <- read_csv("../data/over65_tract_summary.csv") |> 
-  mutate(percent = round(percent,0))
-
-min_65under <- min(over65_budget_tract$percent, na.rm = TRUE)
-max_65under <- max(over65_budget_tract$percent, na.rm = TRUE)
-
-over65_budget_tract <- over65_budget_tract|> 
-  filter(inc_v_budget=="inc_under_budget")%>% 
-  filter(county == local_name)
-
-over65_budget_tract <- over65_budget_tract %>% 
-  mutate(GEOID = as.character(GEOID),
-         percent = round(percent,0)) %>%
-  rename(tract = NAME) |> 
-  filter(year == 2024) %>% 
-  left_join(tract_geo, by = join_by(GEOID == GEOID)) %>%
-  st_as_sf() 
-
-over65_budget_tract <- over65_budget_tract[order(over65_budget_tract$tractnames, decreasing=FALSE),]
 
 over65_budget_map <- over65_budget_tract %>%
   mutate(text = paste0(round(percent,0), "%")) %>%
@@ -1197,10 +1280,6 @@ over65_budget_map <- over65_budget_tract %>%
   scale_fill_continuous(palette = pal_ssw,
                     labels = scales::label_percent(scale = 1),
                     n.breaks = 8,
-                    # trans = "log",
-                    # n.breaks = 7,
-                    # breaks = c(5,7,15,20,40,60),
-                    # trans = "log",
                     limits = c(min_65under, max_65under),
                     na.value = "grey70",
                     guide = guide_colourbar(title = "Percent Below Survival Budget Wages",
@@ -1212,7 +1291,7 @@ over65_budget_map <- over65_budget_tract %>%
                                                           text = element_text(size = 10)) 
                                             )
                     )+
-  labs(title = "Households 65+ with Income below Average Survival Budget",
+  labs(title = "Households 65 years and over with Income below Average Survival Budget",
       subtitle = local_name,
       caption = source_acs
       ) +
@@ -1269,20 +1348,136 @@ over65_rank
 
 ```
 
+
+::: {.panel-tabset .nav-pills}
+### Albemarle County
+```{r}
+# Set name
+local_name <- "Albemarle"
+```
+
+::: {.content-hidden when-format="docx"} 
+#### Albemarle County
+:::
+```{r local-summary-text-alb}
+#| ref.label: local-summary-text
+```
+
+`r section_summary_with_hisp`
+
+##### Families
+```{r all_fam_budget_alb, out.width = '100%'}
+#| ref.label: all-fam-budget
+```
+
+```{r fig-income-bands-alb}
+#| ref.label: fig-income-bands
+#| fig-width: 9
+#| fig-height: 4.5
+#| fig-cap: "Number and percent of families by family annual income, for family incomes below $100,000, 2024, for Albemarle County"
+#| out-width: "100%"
+```
+
+```{r fig-income-bands-type-alb}
+#| ref.label: fig-income-bands-type
+#| fig-width: 9
+#| fig-height: 4.5
+#| fig-cap: "Number and percent of families with and without children under 18 years old by family annual income, for family incomes below $100,000, 2024, for Albemarle County"
+#| out-width: "100%"
+```
+
+```{r fig-family-race-alb}
+#| ref.label: "fig-family-race"
+#| fig-cap: "Percent and number of families earning above and below the average family survival budget, 2024 for Albemarle County"
+#| fig-height: 5
+#| fig-align: "center"
+```
+
+::: {.content-hidden when-format="docx"} 
+::: {layout="[70,30]"}
+```{r fig-inc-tract-map-alb}
+#| fig-height: 11
+#| fig-width: 9
+#| ref.label: "fig-inc-tract-map"
+#| fig-cap: "Median family income by census tract, 2024, for Albemarle County."
+```
+
+```{r inc_tract_margin_alb}
+#| ref.label: "inc-tract-margin"
+```
+:::
+:::
+
+::: {.content-hidden when-format="html"}
+```{r inc-tract-alb}
+#| fig-height: 11
+#| fig-width: 9
+#| ref.label: ["fig-inc-tract-map","inc-tract-margin"]
+```
+::: 
+
+::: {.content-hidden when-format="docx"}
+::: {layout="[70,30]"}
+```{r fig-below-tract-map-alb}
+#| fig-height: 11
+#| fig-width: 9
+#| ref.label: fig-below-tract-map
+#| fig-cap: "Percent of families with annual income below the survival budget by census tract, 2024, for Albemarle County."
+```
+
+```{r below_tract_margin_alb}
+#| ref.label: below-tract-margin
+```
+::: 
+:::
+
+::: {.content-hidden when-format="html"}
+```{r below-tract-alb}
+#| fig-height: 11
+#| fig-width: 9
+#| ref.label: ["fig-below-tract-map","below-tract-margin"]
+```
+::: 
+
+##### Households 65 years and over
+```{r over-65-budget-alb, out.width = '100%'}
+#| ref.label: over-65-budget
+```
+
+```{r fig-income-bands-65plus-alb}
+#| ref.label: fig-income-bands-65plus
+#| fig-width: 9
+#| fig-height: 4.5
+#| fig-cap: "Number and percent of households 65 years and over by annual household income, 2024, for Albemarle County"
+#| out-width: "100%"
+```
+
+::: {.content-hidden when-format="docx"}
 ::: {layout="[70,30]"}
 ```{r fig-below-65plus-tract-map-alb}
 #| fig-height: 11
 #| fig-width: 9
 #| ref.label: fig-below-65plus-tract-map
-#| fig-cap: "Percent of households 65+ with annual income below the survival budget by census tract, 2024, for Albemarle County."
+#| fig-cap: "Percent of households 65 years and over with annual income below the survival budget by census tract, 2024, for Albemarle County."
 ```
 
 ```{r below-65plus-margin-alb}
 #| ref.label: below-65plus-margin
 ```
 :::
+:::
 
+::: {.content-hidden when-format="html"}
+```{r below-65plus-tract-alb}
+#| fig-height: 11
+#| fig-width: 9
+#| ref.label: ["fig-below-65plus-tract-map","below-65plus-margin"]
+```
+::: 
+
+::: {.content-hidden when-format="docx"} 
 [Return to Localities ↩︎](#locality-profiles)
+:::
 
 ### Buckingham County
 ```{r}
@@ -1290,26 +1485,44 @@ over65_rank
 local_name <- "Buckingham"
 ```
 
+::: {.content-hidden when-format="docx"}
+#### Buckingham County
+:::
+```{r}
+#| ref.label: local-summary-text
+```
+
+`r section_summary`
+
+##### Families
 ```{r all_fam_budget_buc, out.width = '100%'}
 #| ref.label: all-fam-budget
 ```
 
 ```{r fig-income-bands-buc}
 #| ref.label: fig-income-bands
-#| fig-cap: "Number and percent of families by family annual income below $100,000, 2024 for Buckingham County"
+#| fig-width: 9
+#| fig-height: 4.5
+#| fig-cap: "Number and percent of families by family annual income, for family incomes below $100,000, 2024, for Buckingham County"
+#| out-width: "100%"
 ```
 
 ```{r fig-income-bands-type-buc}
 #| ref.label: fig-income-bands-type
 #| fig-width: 9
 #| fig-height: 4.5
+#| fig-cap: "Number and percent of families with and without children under 18 years old by family annual income, for family incomes below $100,000, 2024, for Buckingham County"
+#| out-width: "100%"
 ```
 
 ```{r fig-family-race-buc}
 #| ref.label: "fig-family-race"
 #| fig-cap: "Percent and number of families earning above and below the average family survival budget, 2024 for Buckingham County"
+#| fig-height: 5
+#| fig-align: "center"
 ```
 
+::: {.content-hidden when-format="docx"}
 ::: {layout="[70,30]"}
 ```{r fig-inc-tract-map-buc}
 #| fig-height: 8
@@ -1322,7 +1535,17 @@ local_name <- "Buckingham"
 #| ref.label: "inc-tract-margin"
 ```
 ::: 
+:::
 
+::: {.content-hidden when-format="html"}
+```{r inc-tract-buc}
+#| fig-height: 8
+#| fig-width: 7
+#| ref.label: ["fig-inc-tract-map","inc-tract-margin"]
+```
+::: 
+
+::: {.content-hidden when-format="docx"}
 ::: {layout="[70,30]"}
 ```{r fig-below-tract-map-buc}
 #| fig-height: 8
@@ -1335,30 +1558,55 @@ local_name <- "Buckingham"
 #| ref.label: below-tract-margin
 ```
 :::
+:::
 
+::: {.content-hidden when-format="html"}
+```{r below-tract-buc}
+#| fig-height: 8
+#| fig-width: 7
+#| ref.label: ["fig-below-tract-map","below-tract-margin"]
+```
+::: 
+
+##### Households 65 years and over
 ```{r over_65_budget_buc, out.width = '100%'}
 #| ref.label: over-65-budget
 ```
 
 ```{r fig-income-bands-65plus-buc}
 #| ref.label: fig-income-bands-65plus
-#| fig-cap: "Number and percent of households 65+ by annual household income below $100,000, 2024 for Buckingham County"
+#| fig-width: 9
+#| fig-height: 4.5
+#| fig-cap: "Number and percent of households 65 years and over by annual household income, 2024, for Buckingham County"
+#| out-width: "100%"
 ```
 
+::: {.content-hidden when-format="docx"}
 ::: {layout="[70,30]"}
 ```{r fig-below-65plus-tract-map-buc}
 #| fig-height: 8
 #| fig-width: 7
 #| ref.label: fig-below-65plus-tract-map
-#| fig-cap: "Percent of households 65+ with annual income below the survival budget by census tract, 2024, for Buckingham County."
+#| fig-cap: "Percent of households 65 years and over with annual income below the survival budget by census tract, 2024, for Buckingham County."
 ```
 
 ```{r below_65plus_margin_buc}
 #| ref.label: below-65plus-margin
 ```
 :::
+:::
 
+::: {.content-hidden when-format="html"}
+```{r below-65plus-tract-buc}
+#| fig-height: 8
+#| fig-width: 7
+#| ref.label: ["fig-below-65plus-tract-map","below-65plus-margin"]
+```
+::: 
+
+::: {.content-hidden when-format="docx"} 
 [Return to Localities ↩︎](#locality-profiles)
+:::
 
 ### Charlottesville
 ```{r}
@@ -1366,26 +1614,44 @@ local_name <- "Buckingham"
 local_name <- "Charlottesville"
 ```
 
+::: {.content-hidden when-format="docx"}
+#### City of Charlottesville
+:::
+```{r local-summary-text-cville}
+#| ref.label: local-summary-text
+```
+
+`r section_summary_with_hisp`
+
+##### Families
 ```{r all_fam_budget_cville, out.width = '100%'}
 #| ref.label: all-fam-budget
 ```
 
 ```{r fig-income-bands-cville}
 #| ref.label: fig-income-bands
-#| fig-cap: "Number and percent of families by family annual income below $100,000, 2024 for Charlottesville City"
+#| fig-width: 9
+#| fig-height: 4.5
+#| fig-cap: "Number and percent of families by family annual income, for family incomes below $100,000, 2024, for Charlottesville City"
+#| out-width: "100%"
 ```
 
 ```{r fig-income-bands-type-cville}
 #| ref.label: fig-income-bands-type
 #| fig-width: 9
 #| fig-height: 4.5
+#| fig-cap: "Number and percent of families with and without children under 18 years old by family annual income, for family incomes below $100,000, 2024, for Charlottesville City"
+#| out-width: "100%"
 ```
 
 ```{r fig-family-race-cville}
 #| ref.label: "fig-family-race"
 #| fig-cap: "Percent and number of families earning above and below the average family survival budget, 2024 for Charlottesville City"
+#| fig-height: 5
+#| fig-align: "center"
 ```
 
+::: {.content-hidden when-format="docx"}
 ::: {layout="[70,30]"}
 ```{r fig-inc-tract-map-cville}
 #| fig-height: 8
@@ -1398,7 +1664,17 @@ local_name <- "Charlottesville"
 #| ref.label: "inc-tract-margin"
 ```
 ::: 
+:::
 
+::: {.content-hidden when-format="html"}
+```{r inc-tract-cville}
+#| fig-height: 8
+#| fig-width: 7
+#| ref.label: ["fig-inc-tract-map","inc-tract-margin"]
+```
+::: 
+
+::: {.content-hidden when-format="docx"}
 ::: {layout="[70,30]"}
 ```{r fig-below-tract-map-cville}
 #| fig-height: 8
@@ -1411,30 +1687,55 @@ local_name <- "Charlottesville"
 #| ref.label: below-tract-margin
 ```
 :::
+:::
 
+::: {.content-hidden when-format="html"}
+```{r below-tract-cville}
+#| fig-height: 8
+#| fig-width: 7
+#| ref.label: ["fig-below-tract-map","below-tract-margin"]
+```
+::: 
+
+##### Households 65 years and over
 ```{r over_65_budget_cville, out.width = '100%'}
 #| ref.label: over-65-budget
 ```
 
 ```{r fig-income-bands-65plus-cville}
 #| ref.label: fig-income-bands-65plus
-#| fig-cap: "Number and percent of households 65+ by annual household income below $100,000, 2024 for Charlottesville City"
+#| fig-width: 9
+#| fig-height: 4.5
+#| fig-cap: "Number and percent of households 65 years and over by annual household income, 2024, for Charlottesville City"
+#| out-width: "100%"
 ```
 
+::: {.content-hidden when-format="docx"}
 ::: {layout="[70,30]"}
 ```{r fig-below-65plus-tract-map-cville}
 #| fig-height: 8
 #| fig-width: 7
 #| ref.label: fig-below-65plus-tract-map
-#| fig-cap: "Percent of households 65+ with annual income below the survival budget by census tract, 2024, for Charlottesville City"
+#| fig-cap: "Percent of households 65 years and over with annual income below the survival budget by census tract, 2024, for Charlottesville City"
 ```
 
 ```{r below_65plus_margin_cville}
 #| ref.label: below-65plus-margin
 ```
 :::
+:::
 
+::: {.content-hidden when-format="html"}
+```{r below-65plus-tract-cville}
+#| fig-height: 8
+#| fig-width: 7
+#| ref.label: ["fig-below-65plus-tract-map","below-65plus-margin"]
+```
+::: 
+
+::: {.content-hidden when-format="docx"} 
 [Return to Localities ↩︎](#locality-profiles)
+:::
 
 ### Fluvanna County
 ```{r}
@@ -1442,26 +1743,44 @@ local_name <- "Charlottesville"
 local_name <- "Fluvanna"
 ```
 
+::: {.content-hidden when-format="docx"}
+#### Fluvanna County
+:::
+```{r local-summary-text-flu}
+#| ref.label: local-summary-text
+```
+
+`r section_summary`
+
+##### Families
 ```{r all_fam_budget_flu, out.width = '100%'}
 #| ref.label: all-fam-budget
 ```
 
 ```{r fig-income-bands-flu}
 #| ref.label: fig-income-bands
-#| fig-cap: "Number and percent of families by family annual income below $100,000, 2024 for Fluvanna County"
+#| fig-width: 9
+#| fig-height: 4.5
+#| fig-cap: "Number and percent of families by family annual income, for family incomes below $100,000, 2024, for Fluvanna County"
+#| out-width: "100%"
 ```
 
 ```{r fig-income-bands-type-flu}
 #| ref.label: fig-income-bands-type
 #| fig-width: 9
 #| fig-height: 4.5
+#| fig-cap: "Number and percent of families with and without children under 18 years old by family annual income, for family incomes below $100,000, 2024, for Fluvanna County"
+#| out-width: "100%"
 ```
 
 ```{r fig-family-race-flu}
 #| ref.label: "fig-family-race"
 #| fig-cap: "Percent and number of families earning above and below the average family survival budget, 2024 for Fluvanna County"
+#| fig-height: 5
+#| fig-align: "center"
 ```
 
+::: {.content-hidden when-format="docx"}
 ::: {layout="[70,30]"}
 ```{r fig-inc-tract-map-flu}
 #| fig-height: 8
@@ -1474,7 +1793,17 @@ local_name <- "Fluvanna"
 #| ref.label: "inc-tract-margin"
 ```
 ::: 
+:::
 
+::: {.content-hidden when-format="html"}
+```{r inc-tract-flu}
+#| fig-height: 8
+#| fig-width: 7
+#| ref.label: ["fig-inc-tract-map","inc-tract-margin"]
+```
+::: 
+
+::: {.content-hidden when-format="docx"}
 ::: {layout="[70,30]"}
 ```{r fig-below-tract-map-flu}
 #| fig-height: 8
@@ -1487,30 +1816,55 @@ local_name <- "Fluvanna"
 #| ref.label: below-tract-margin
 ```
 :::
+:::
 
+::: {.content-hidden when-format="html"}
+```{r below-tract-flu}
+#| fig-height: 8
+#| fig-width: 7
+#| ref.label: ["fig-below-tract-map","below-tract-margin"]
+```
+::: 
+
+##### Households 65 years and over
 ```{r over_65_budget_flu, out.width = '100%'}
 #| ref.label: over-65-budget
 ```
 
 ```{r fig-income-bands-65plus-flu}
 #| ref.label: fig-income-bands-65plus
-#| fig-cap: "Number and percent of households 65+ by annual household income below $100,000, 2024 for Fluvanna County"
+#| fig-width: 9
+#| fig-height: 4.5
+#| fig-cap: "Number and percent of households 65 years and over by annual household income, 2024, for Fluvanna County"
+#| out-width: "100%"
 ```
 
+::: {.content-hidden when-format="docx"}
 ::: {layout="[70,30]"}
 ```{r fig-below-65plus-tract-map-flu}
 #| fig-height: 8
 #| fig-width: 7
 #| ref.label: fig-below-65plus-tract-map
-#| fig-cap: "Percent of households 65+ with annual income below the survival budget by census tract, 2024, for Fluvanna County."
+#| fig-cap: "Percent of households 65 years and over with annual income below the survival budget by census tract, 2024, for Fluvanna County."
 ```
 
 ```{r below_65plus_margin_flu}
 #| ref.label: below-65plus-margin
 ```
 :::
+:::
 
+::: {.content-hidden when-format="html"}
+```{r below-65plus-tract-flu}
+#| fig-height: 8
+#| fig-width: 7
+#| ref.label: ["fig-below-65plus-tract-map","below-65plus-margin"]
+```
+::: 
+
+::: {.content-hidden when-format="docx"} 
 [Return to Localities ↩︎](#locality-profiles)
+:::
 
 ### Greene County
 ```{r}
@@ -1518,26 +1872,44 @@ local_name <- "Fluvanna"
 local_name <- "Greene"
 ```
 
+::: {.content-hidden when-format="docx"}
+#### Greene County
+:::
+```{r local-summary-text-grn}
+#| ref.label: local-summary-text
+```
+
+`r section_summary`
+
+##### Families
 ```{r all_fam_budget_grn, out.width = '100%'}
 #| ref.label: all-fam-budget
 ```
 
 ```{r fig-income-bands-grn}
 #| ref.label: fig-income-bands
-#| fig-cap: "Number and percent of families by family annual income below $100,000, 2024 for Greene County"
+#| fig-width: 9
+#| fig-height: 4.5
+#| fig-cap: "Number and percent of families by family annual income, for family incomes below $100,000, 2024, for Greene County"
+#| out-width: "100%"
 ```
 
 ```{r fig-income-bands-type-grn}
 #| ref.label: fig-income-bands-type
 #| fig-width: 9
 #| fig-height: 4.5
+#| fig-cap: "Number and percent of families with and without children under 18 years old by family annual income, for family incomes below $100,000, 2024, for Greene County"
+#| out-width: "100%"
 ```
 
 ```{r fig-family-race-grn}
 #| ref.label: "fig-family-race"
 #| fig-cap: "Percent and number of families earning above and below the average family survival budget, 2024 for Greene County"
+#| fig-height: 5
+#| fig-align: "center"
 ```
 
+::: {.content-hidden when-format="docx"}
 ::: {layout="[70,30]"}
 ```{r fig-inc-tract-map-grn}
 #| fig-height: 8
@@ -1550,7 +1922,17 @@ local_name <- "Greene"
 #| ref.label: "inc-tract-margin"
 ```
 ::: 
+:::
 
+::: {.content-hidden when-format="html"}
+```{r inc-tract-grn}
+#| fig-height: 8
+#| fig-width: 7
+#| ref.label: ["fig-inc-tract-map","inc-tract-margin"]
+```
+::: 
+
+::: {.content-hidden when-format="docx"}
 ::: {layout="[70,30]"}
 ```{r fig-below-tract-map-grn}
 #| fig-height: 8
@@ -1563,57 +1945,99 @@ local_name <- "Greene"
 #| ref.label: below-tract-margin
 ```
 :::
+:::
 
+::: {.content-hidden when-format="html"}
+```{r below-tract-grn}
+#| fig-height: 8
+#| fig-width: 7
+#| ref.label: ["fig-below-tract-map","below-tract-margin"]
+```
+::: 
+
+##### Households 65 years and over
 ```{r over_65_budget_grn, out.width = '100%'}
 #| ref.label: over-65-budget
 ```
 
 ```{r fig-income-bands-65plus-grn}
 #| ref.label: fig-income-bands-65plus
-#| fig-cap: "Number and percent of households 65+ by annual household income below $100,000, 2024 for Greene County"
+#| fig-width: 9
+#| fig-height: 4.5
+#| fig-cap: "Number and percent of households 65 years and over by annual household income, 2024, for Greene County"
+#| out-width: "100%"
 ```
 
+::: {.content-hidden when-format="docx"}
 ::: {layout="[70,30]"}
 ```{r fig-below-65plus-tract-map-grn}
 #| fig-height: 8
 #| fig-width: 7
 #| ref.label: fig-below-65plus-tract-map
-#| fig-cap: "Percent of households 65+ with annual income below the survival budget by census tract, 2024, for Greene County."
+#| fig-cap: "Percent of households 65 years and over with annual income below the survival budget by census tract, 2024, for Greene County."
 ```
 
 ```{r below_65plus_margin_grn}
 #| ref.label: below-65plus-margin
 ```
 :::
+:::
 
+::: {.content-hidden when-format="html"}
+```{r below-65plus-tract-grn}
+#| fig-height: 8
+#| fig-width: 7
+#| ref.label: ["fig-below-65plus-tract-map","below-65plus-margin"]
+```
+::: 
+
+::: {.content-hidden when-format="docx"} 
 [Return to Localities ↩︎](#locality-profiles)
+:::
 
 ### Louisa County
 ```{r}
 # Set name
 local_name <- "Louisa"
 ```
+::: {.content-hidden when-format="docx"}
+#### Louisa County
+:::
+```{r local-summary-text-lou}
+#| ref.label: local-summary-text
+```
 
+`r section_summary`
+
+##### Families
 ```{r all_fam_budget_lou, out.width = '100%'}
 #| ref.label: all-fam-budget
 ```
 
 ```{r fig-income-bands-lou}
 #| ref.label: fig-income-bands
-#| fig-cap: "Number and percent of families by family annual income below $100,000, 2024 for Louisa County"
+#| fig-width: 9
+#| fig-height: 4.5
+#| fig-cap: "Number and percent of families by family annual income, for family incomes below $100,000, 2024, for Louisa County"
+#| out-width: "100%"
 ```
 
 ```{r fig-income-bands-type-lou}
 #| ref.label: fig-income-bands-type
 #| fig-width: 9
 #| fig-height: 4.5
+#| fig-cap: "Number and percent of families with and without children under 18 years old by family annual income, for family incomes below $100,000, 2024, for Louisa County"
+#| out-width: "100%"
 ```
 
 ```{r fig-family-race-lou}
 #| ref.label: "fig-family-race"
 #| fig-cap: "Percent and number of families earning above and below the average family survival budget, 2024 for Louisa County"
+#| fig-height: 5
+#| fig-align: "center"
 ```
 
+::: {.content-hidden when-format="docx"}
 ::: {layout="[70,30]"}
 ```{r fig-inc-tract-map-lou}
 #| fig-height: 8
@@ -1626,7 +2050,17 @@ local_name <- "Louisa"
 #| ref.label: "inc-tract-margin"
 ```
 ::: 
+:::
 
+::: {.content-hidden when-format="html"}
+```{r inc-tract-lou}
+#| fig-height: 8
+#| fig-width: 7
+#| ref.label: ["fig-inc-tract-map","inc-tract-margin"]
+```
+::: 
+
+::: {.content-hidden when-format="docx"}
 ::: {layout="[70,30]"}
 ```{r fig-below-tract-map-lou}
 #| fig-height: 8
@@ -1639,57 +2073,99 @@ local_name <- "Louisa"
 #| ref.label: below-tract-margin
 ```
 :::
+:::
 
+::: {.content-hidden when-format="html"}
+```{r below-tract-lou}
+#| fig-height: 8
+#| fig-width: 7
+#| ref.label: ["fig-below-tract-map","below-tract-margin"]
+```
+::: 
+
+##### Households 65 years and over
 ```{r over_65_budget_lou, out.width = '100%'}
 #| ref.label: over-65-budget
 ```
 
 ```{r fig-income-bands-65plus-lou}
 #| ref.label: fig-income-bands-65plus
-#| fig-cap: "Number and percent of households 65+ by annual household income below $100,000, 2024 for Louisa County"
+#| fig-width: 9
+#| fig-height: 4.5
+#| fig-cap: "Number and percent of households 65 years and over by annual household income, 2024, for Louisa County"
+#| out-width: "100%"
 ```
 
+::: {.content-hidden when-format="docx"}
 ::: {layout="[70,30]"}
 ```{r fig-below-65plus-tract-map-lou}
 #| fig-height: 8
 #| fig-width: 7
 #| ref.label: fig-below-65plus-tract-map
-#| fig-cap: "Percent of households 65+ with annual income below the survival budget by census tract, 2024, for Louisa County."
+#| fig-cap: "Percent of households 65 years and over with annual income below the survival budget by census tract, 2024, for Louisa County."
 ```
 
 ```{r below_65plus_margin_lou}
 #| ref.label: below-65plus-margin
 ```
 :::
+:::
 
+::: {.content-hidden when-format="html"}
+```{r below-65plus-tract-lou}
+#| fig-height: 8
+#| fig-width: 7
+#| ref.label: ["fig-below-65plus-tract-map","below-65plus-margin"]
+```
+::: 
+
+::: {.content-hidden when-format="docx"} 
 [Return to Localities ↩︎](#locality-profiles)
+:::
 
 ### Nelson County
 ```{r}
 # Set name
 local_name <- "Nelson"
 ```
+::: {.content-hidden when-format="docx"}
+#### Nelson County
+:::
+```{r local-summary-text-nel}
+#| ref.label: local-summary-text
+```
 
+`r section_summary`
+
+##### Families
 ```{r all_fam_budget_nel, out.width = '100%'}
 #| ref.label: all-fam-budget
 ```
 
 ```{r fig-income-bands-nel}
 #| ref.label: fig-income-bands
-#| fig-cap: "Number and percent of families by family annual income below $100,000, 2024 for Nelson County"
+#| fig-width: 9
+#| fig-height: 4.5
+#| fig-cap: "Number and percent of families by family annual income, for family incomes below $100,000, 2024, for Nelson County"
+#| out-width: "100%"
 ```
 
 ```{r fig-income-bands-type-nel}
 #| ref.label: fig-income-bands-type
 #| fig-width: 9
 #| fig-height: 4.5
+#| fig-cap: "Number and percent of families with and without children under 18 years old by family annual income, for family incomes below $100,000, 2024, for Nelson County"
+#| out-width: "100%"
 ```
 
 ```{r fig-family-race-nel}
 #| ref.label: "fig-family-race"
 #| fig-cap: "Percent and number of families earning above and below the average family survival budget, 2024 for Nelson County"
+#| fig-height: 5
+#| fig-align: "center"
 ```
 
+::: {.content-hidden when-format="docx"}
 ::: {layout="[70,30]"}
 ```{r fig-inc-tract-map-nel}
 #| fig-height: 8
@@ -1702,7 +2178,17 @@ local_name <- "Nelson"
 #| ref.label: "inc-tract-margin"
 ```
 ::: 
+:::
 
+::: {.content-hidden when-format="html"}
+```{r inc-tract-map-nel}
+#| fig-height: 8
+#| fig-width: 7
+#| ref.label: ["fig-inc-tract-map","inc-tract-margin"]
+```
+::: 
+
+::: {.content-hidden when-format="docx"}
 ::: {layout="[70,30]"}
 ```{r fig-below-tract-map-nel}
 #| fig-height: 8
@@ -1715,37 +2201,83 @@ local_name <- "Nelson"
 #| ref.label: below-tract-margin
 ```
 :::
+:::
 
+::: {.content-hidden when-format="html"}
+```{r below-tract-map-nel}
+#| fig-height: 8
+#| fig-width: 7
+#| ref.label: ["fig-below-tract-map","below-tract-margin"]
+```
+::: 
+
+##### Households 65 years and over
 ```{r over_65_budget_nel, out.width = '100%'}
 #| ref.label: over-65-budget
 ```
 
 ```{r fig-income-bands-65plus-nel}
 #| ref.label: fig-income-bands-65plus
-#| fig-cap: "Number and percent of households 65+ by annual household income below $100,000, 2024 for Nelson County"
+#| fig-width: 9
+#| fig-height: 4.5
+#| fig-cap: "Number and percent of households 65 years and over by annual household income, 2024, for Nelson County"
+#| out-width: "100%"
 ```
 
+::: {.content-hidden when-format="docx"}
 ::: {layout="[70,30]"}
 ```{r fig-below-65plus-tract-map-nel}
 #| fig-height: 8
 #| fig-width: 7
 #| ref.label: fig-below-65plus-tract-map
-#| fig-cap: "Percent of households 65+ with annual income below the survival budget by census tract, 2024, for Nelson County."
+#| fig-cap: "Percent of households 65 years and over with annual income below the survival budget by census tract, 2024, for Nelson County."
 ```
 
 ```{r below_65plus_margin_nel}
 #| ref.label: below-65plus-margin
 ```
 :::
+:::
 
+::: {.content-hidden when-format="html"}
+```{r below-65plus-tract-map-nel}
+#| fig-height: 8
+#| fig-width: 7
+#| ref.label: ["fig-below-65plus-tract-map","below-65plus-margin"]
+```
+::: 
+
+::: {.content-hidden when-format="docx"} 
 [Return to Localities ↩︎](#locality-profiles)
+:::
 
 :::
 
+## Credits
+
+This report was done in partnership between Network2Work USA and the UVA Center for Community Partnerships. 
+
+The authors of this report are: 
+
+  * Elizabeth Mitchell, Senior Research Specialist, Center for Community Partnerships, University of Virginia
+
+  * Michele Claibourn, Director of Community-Centered Analysis, Center for Community Partnerships, University of Virginia and Assistant Professor, Batten School of Leadership and Public Policy, University of Virginia 
+
+  * Ridge Schuyler, Founding Director and CEO of Network2Work USA, originated the Orange Dot Report in 2011 
+  
+### Project Repository
+The work supporting the Orange Dot Report 7.0, including our data collection documentation and the corresponding data, is publicly available on Github at https://github.com/virginiaequitycenter/orange-dot/tree/main
+  
+### Citation
+Elizabeth Mitchell, Michele Claibourn, Ridge Schuyler. “Orange Dot Report 7.0: Family Self-Sufficiency in the Charlottesville Region: Albemarle, Buckingham, Fluvanna, Greene, Louisa, Nelson Counties & the City of Charlottesville, Virginia.” Published November 2026.
+
+This work is licensed under a [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).
+
 ## Appendix
 
-
 ### Family Survival Budgets by Locality
+
+::: {.content-hidden when-format="docx"} 
 ::: {.panel-tabset .nav-pills}
 ```{r print-all-sheets, results='asis', out.width='100%'}
 library(readxl)
@@ -1805,3 +2337,93 @@ walk(sheet_names, function(s) {
 :::
 
 [Download Survival Budgets by Family Composition](family-survival-budgets-2024.xlsx){.external target="_blank"}
+:::
+
+### List of Occupations by Employment Rate 
+```{r}
+# By job rate ----
+occupations_by_rate <- occupations_by_wagebin |> 
+  filter(occupation != "All Occupations") |> 
+  filter(employment_per_1_000_jobs >= 10) |> 
+  mutate(job_group = case_when(soc_group_num == "11" ~ "Management",
+soc_group_num == "13" ~ "Business and Financial Operations",
+soc_group_num == "15" ~ "Computer and Mathematical",
+soc_group_num == "17" ~ "Architecture and Engineering",
+soc_group_num == "19" ~ "Life, Physical, and Social Science",
+soc_group_num == "21" ~ "Community and Social Service",
+soc_group_num == "23" ~ "Legal",
+soc_group_num == "25" ~ "Educational Instruction and Library",
+soc_group_num == "27" ~ "Arts, Design, Entertainment, Sports, and Media",
+soc_group_num == "29" ~ "Healthcare Practitioners and Technical",
+soc_group_num == "31" ~ "Healthcare Support",
+soc_group_num == "33" ~ "Protective Service",
+soc_group_num == "35" ~ "Food Preparation and Serving Related",
+soc_group_num == "37" ~ "Building and Grounds Cleaning and Maintenance",
+soc_group_num == "39" ~ "Personal Care and Service",
+soc_group_num == "41" ~ "Sales and Related",
+soc_group_num == "43" ~ "Office and Administrative Support",
+soc_group_num == "45" ~ "Farming, Fishing, and Forestry",
+soc_group_num == "47" ~ "Construction and Extraction",
+soc_group_num == "49" ~ "Installation, Maintenance, and Repair",
+soc_group_num == "51" ~ "Production",
+soc_group_num == "53" ~ "Transportation and Material Moving"
+))
+
+occupations_by_rate %>%
+  mutate(employment_per_1_000_jobs = round(employment_per_1_000_jobs,1)) %>% 
+  arrange(desc(employment_per_1_000_jobs)) |> 
+  select(c(occupation, annual_median_wage_2, employment_per_1_000_jobs, job_group)) %>%
+  gt() %>% 
+  # data_color(
+  #   columns = median_wage_bin,
+  #   target_columns = color,
+  #   direction = "column",
+  #   palette = c("#DE8A5A", "#EDBB8A", "#F6EDBD","#B4C8A8", "#70A494"),
+  # ) %>% 
+  fmt_currency(
+    columns = 2,
+    currency = currency(
+      html = "&#36;",
+      default = "$"
+    ),
+    decimals = 2
+  ) %>% 
+  # cols_hide(columns = c(median_wage_bin)) %>% 
+  cols_label(
+    occupation = "Occupation",
+    annual_median_wage_2 = "Annual Median Wage",
+        # color = "",
+    employment_per_1_000_jobs = "Employment Rate (per 1,000 jobs)",
+    # median_wage_bin = "",
+    job_group = "Occupation Group"
+  ) %>% 
+  tab_style(
+    style = cell_text(align = "center", v_align = "middle"),
+    locations = list(cells_column_labels(2:4), cells_body(2:4))
+  ) %>% 
+  tab_footnote(
+    footnote = "A full list of occupations and wages is available here: https://github.com/virginiaequitycenter/orange-dot/blob/main/OrangeDot7_2026/data/bls_occupations_by_wagebin.csv",
+    locations = cells_title(groups = "title")
+  ) %>% 
+  tab_footnote(
+    footnote = "The annual median wage is the boundary between the highest and lowest paid workers in a given occupation. Half of the workers in a given occupation earn more than the median wage, and half the workers earn less than the median wage.",
+    locations = cells_column_labels(columns = annual_median_wage_2)
+  ) %>% 
+  tab_footnote(
+    footnote = "Employment rate is the number of jobs (employment) in the given occupation per 1,000 jobs in the Charlottesville Metro Area",
+    locations = cells_column_labels(columns = employment_per_1_000_jobs)
+  ) %>% 
+  tab_footnote(
+    footnote = "Major occupation groups defined by the Standard Occupational Classification (SOC) system, used by Federal statistical agencies to classify workers and jobs into occupational categories for the purpose of collecting, calculating, analyzing, or disseminating data.",
+    locations = cells_column_labels(columns = job_group)
+  ) %>% 
+  tab_header(
+    title = "Occupations with the highest Employment Rate in the Charlottesville Metro Area",
+    subtitle = "List of occupations with employment rate of 10 per 1,000 jobs or higher, with annual median wage"
+  ) %>% 
+  tab_source_note(
+    source_note = "Data Source: U.S. Bureau of Labor Statistics, Occupational Employment and Wage Statistics; May 2025; https://www.bls.gov/oes/tables.htm"
+  )
+```
+
+
