@@ -1,0 +1,9 @@
+locality,year,group,inc_v_budget,estimate,total_families,percent,description
+Total for Region,2024,All Families,inc_over_budget,47393.56118680569,69861,67.84,Families earning at or above survival budget
+Total for Region,2024,All Families,inc_under_budget,22467.438813194316,69861,32.16,Families earning below survival budget
+Total for Region,2024,Black,inc_over_budget,3475.515646923897,7969,43.61,Families earning at or above survival budget
+Total for Region,2024,Black,inc_under_budget,4493.484353076103,7969,56.39,Families earning below survival budget
+Total for Region,2024,Hispanic,inc_over_budget,1822.3207998821717,3456,52.73,Families earning at or above survival budget
+Total for Region,2024,Hispanic,inc_under_budget,1633.679200117828,3456,47.27,Families earning below survival budget
+Total for Region,2024,"White, Not Hispanic",inc_over_budget,39357.779999009974,54348,72.42,Families earning at or above survival budget
+Total for Region,2024,"White, Not Hispanic",inc_under_budget,14990.220000990024,54348,27.58,Families earning below survival budget

@@ -1,0 +1,137 @@
+GEOID,county,tractnames,NAME,year,group,avg_allfamily_budget,inc_v_budget,estimate,moe,est_prop,est_prop_adj,total_families,percent
+51003010100,Albemarle,Free Union,Census Tract 101; Albemarle County; Virginia,2024,All Families,81660,inc_over_budget,810,191.1334612253961,810,993.3973358934358,1300,76.42
+51003010100,Albemarle,Free Union,Census Tract 101; Albemarle County; Virginia,2024,All Families,81660,inc_under_budget,490,197.83326312832227,306.60266410656425,306.60266410656425,1300,23.58
+51003010201,Albemarle,Charlottesville-Albemarle Airport,Census Tract 102.01; Albemarle County; Virginia,2024,All Families,81660,inc_over_budget,1250,238.70274401439124,1250,1374.7101884075364,1667,82.47
+51003010201,Albemarle,Charlottesville-Albemarle Airport,Census Tract 102.01; Albemarle County; Virginia,2024,All Families,81660,inc_under_budget,417,175.10282693320517,292.2898115924637,292.2898115924637,1667,17.53
+51003010202,Albemarle,Earlysville,Census Tract 102.02; Albemarle County; Virginia,2024,All Families,81660,inc_over_budget,887,156.5822467586923,887,919.2779311172446,1140,80.64
+51003010202,Albemarle,Earlysville,Census Tract 102.02; Albemarle County; Virginia,2024,All Families,81660,inc_under_budget,253,144.49221432312538,220.7220688827553,220.7220688827553,1140,19.36
+51003010301,Albemarle,Berkmar Drive,Census Tract 103.01; Albemarle County; Virginia,2024,All Families,81660,inc_over_budget,380,127.94920867281672,380,424.7489499579983,566,75.04
+51003010301,Albemarle,Berkmar Drive,Census Tract 103.01; Albemarle County; Virginia,2024,All Families,81660,inc_under_budget,186,78.16648898345122,141.25105004200168,141.25105004200168,566,24.96
+51003010302,Albemarle,Polo Grounds Road,Census Tract 103.02; Albemarle County; Virginia,2024,All Families,81660,inc_over_budget,292,76.3740793725201,292,303.7374294971799,313,97.04
+51003010302,Albemarle,Polo Grounds Road,Census Tract 103.02; Albemarle County; Virginia,2024,All Families,81660,inc_under_budget,21,45.9782557302906,9.262570502820113,9.262570502820113,313,2.96
+51003010303,Albemarle,Hollymead,Census Tract 103.03; Albemarle County; Virginia,2024,All Families,81660,inc_over_budget,1088,281.3289889080043,1088,1184.1002040081603,1512,78.31
+51003010303,Albemarle,Hollymead,Census Tract 103.03; Albemarle County; Virginia,2024,All Families,81660,inc_under_budget,424,177.60067567439037,327.89979599183965,327.89979599183965,1512,21.69
+51003010401,Albemarle,Stony Point-Keswick,Census Tract 104.01; Albemarle County; Virginia,2024,All Families,81660,inc_over_budget,962,304.0361820573334,962,1055.1658466338654,1268,83.21
+51003010401,Albemarle,Stony Point-Keswick,Census Tract 104.01; Albemarle County; Virginia,2024,All Families,81660,inc_under_budget,306,121.12803143781376,212.83415336613464,212.83415336613464,1268,16.79
+51003010402,Albemarle,Village of Rivanna,Census Tract 104.02; Albemarle County; Virginia,2024,All Families,81660,inc_over_budget,790,163.18700928689145,790,914.7101884075363,1237,73.95
+51003010402,Albemarle,Village of Rivanna,Census Tract 104.02; Albemarle County; Virginia,2024,All Families,81660,inc_under_budget,447,134.5399568901373,322.2898115924637,322.2898115924637,1237,26.05
+51003010501,Albemarle,Darden-Key West,Census Tract 105.01; Albemarle County; Virginia,2024,All Families,81660,inc_over_budget,733,199.86495440671933,733,839.3704548181927,963,87.16
+51003010501,Albemarle,Darden-Key West,Census Tract 105.01; Albemarle County; Virginia,2024,All Families,81660,inc_under_budget,230,114.77804668141029,123.62954518180727,123.62954518180727,963,12.84
+51003010502,Albemarle,Pantops,Census Tract 105.02; Albemarle County; Virginia,2024,All Families,81660,inc_over_budget,443,148.7783586413024,443,502.4207368294732,771,65.16
+51003010502,Albemarle,Pantops,Census Tract 105.02; Albemarle County; Virginia,2024,All Families,81660,inc_under_budget,328,173.41280229556295,268.5792631705268,268.5792631705268,771,34.84
+51003010602,Albemarle,Dunlora-Stone Henge,Census Tract 106.02; Albemarle County; Virginia,2024,All Families,81660,inc_over_budget,826,194.79733057719247,826,871.482539301572,1007,86.54
+51003010602,Albemarle,Dunlora-Stone Henge,Census Tract 106.02; Albemarle County; Virginia,2024,All Families,81660,inc_under_budget,181,100.74224535913422,135.51746069842793,135.51746069842793,1007,13.46
+51003010603,Albemarle,Branchland,Census Tract 106.03; Albemarle County; Virginia,2024,All Families,81660,inc_over_budget,315,193.9974226632921,315,406.6986679467179,485,83.86
+51003010603,Albemarle,Branchland,Census Tract 106.03; Albemarle County; Virginia,2024,All Families,81660,inc_under_budget,170,132.10980281568814,78.30133205328212,78.30133205328212,485,16.14
+51003010604,Albemarle,Woodbrook-Carrsbrook,Census Tract 106.04; Albemarle County; Virginia,2024,All Families,81660,inc_over_budget,835,179.0809872655386,835,895.8879155166206,1185,75.6
+51003010604,Albemarle,Woodbrook-Carrsbrook,Census Tract 106.04; Albemarle County; Virginia,2024,All Families,81660,inc_under_budget,350,151.4133415521895,289.11208448337936,289.11208448337936,1185,24.4
+51003010701,Albemarle,Hydraulic,Census Tract 107.01; Albemarle County; Virginia,2024,All Families,81660,inc_over_budget,118,76.40026177965623,118,170.08484339373575,636,26.74
+51003010701,Albemarle,Hydraulic,Census Tract 107.01; Albemarle County; Virginia,2024,All Families,81660,inc_under_budget,518,214.4597864402555,465.91515660626425,465.91515660626425,636,73.26
+51003010702,Albemarle,Commonwealth-Townwood-Berkmar,Census Tract 107.02; Albemarle County; Virginia,2024,All Families,81660,inc_over_budget,146,81.79242018671412,146,175.34357374294973,604,29.03
+51003010702,Albemarle,Commonwealth-Townwood-Berkmar,Census Tract 107.02; Albemarle County; Virginia,2024,All Families,81660,inc_under_budget,458,180.43835512440253,428.65642625705027,428.65642625705027,604,70.97
+51003010801,Albemarle,Barracks-Hessian Hills,Census Tract 108.01; Albemarle County; Virginia,2024,All Families,81660,inc_over_budget,461,150.78461459976612,461,575.4399375975039,808,71.22
+51003010801,Albemarle,Barracks-Hessian Hills,Census Tract 108.01; Albemarle County; Virginia,2024,All Families,81660,inc_under_budget,347,123.4179889643321,232.5600624024961,232.5600624024961,808,28.78
+51003010802,Albemarle,Albemarle High School,Census Tract 108.02; Albemarle County; Virginia,2024,All Families,81660,inc_over_budget,206,86.83317338436964,206,321.9071162846514,708,45.47
+51003010802,Albemarle,Albemarle High School,Census Tract 108.02; Albemarle County; Virginia,2024,All Families,81660,inc_under_budget,502,190.30764566879597,386.0928837153486,386.0928837153486,708,54.53
+51003010901,Albemarle,Old Ivy-Darden School (UVA),Census Tract 109.01; Albemarle County; Virginia,2024,All Families,81660,inc_over_budget,66,31.575306807693888,66,79.93819752790111,193,41.42
+51003010901,Albemarle,Old Ivy-Darden School (UVA),Census Tract 109.01; Albemarle County; Virginia,2024,All Families,81660,inc_under_budget,127,81.91458966508958,113.06180247209889,113.06180247209889,193,58.58
+51003010904,Albemarle,Carr's Hill-McCormick Road (UVA),Census Tract 109.04; Albemarle County; Virginia,2024,All Families,81660,inc_over_budget,82,46.400431032480725,82,132.61766470658827,274,48.4
+51003010904,Albemarle,Carr's Hill-McCormick Road (UVA),Census Tract 109.04; Albemarle County; Virginia,2024,All Families,81660,inc_under_budget,192,98,141.38233529341173,141.38233529341173,274,51.6
+51003011000,Albemarle,Ivy,Census Tract 110; Albemarle County; Virginia,2024,All Families,81660,inc_over_budget,1530,255.26065110000798,1530,1568.8802352094083,1781,88.09
+51003011000,Albemarle,Ivy,Census Tract 110; Albemarle County; Virginia,2024,All Families,81660,inc_under_budget,251,127.6597039006436,212.11976479059163,212.11976479059163,1781,11.91
+51003011101,Albemarle,Crozet-Beaver Creek,Census Tract 111.01; Albemarle County; Virginia,2024,All Families,81660,inc_over_budget,454,174.9371315644566,454,476.0076803072123,765,62.22
+51003011101,Albemarle,Crozet-Beaver Creek,Census Tract 111.01; Albemarle County; Virginia,2024,All Families,81660,inc_under_budget,311,132.495282934903,288.9923196927877,288.9923196927877,765,37.78
+51003011102,Albemarle,Western Ridge-Westhall,Census Tract 111.02; Albemarle County; Virginia,2024,All Families,81660,inc_over_budget,697,225.44622418661174,697,782.8299531981279,1079,72.55
+51003011102,Albemarle,Western Ridge-Westhall,Census Tract 111.02; Albemarle County; Virginia,2024,All Families,81660,inc_under_budget,382,183.20753259623362,296.1700468018721,296.1700468018721,1079,27.45
+51003011103,Albemarle,Old Trail,Census Tract 111.03; Albemarle County; Virginia,2024,All Families,81660,inc_over_budget,1018,228.01973598791838,1018,1069.351254050162,1230,86.94
+51003011103,Albemarle,Old Trail,Census Tract 111.03; Albemarle County; Virginia,2024,All Families,81660,inc_under_budget,212,90.48204241726643,160.648745949838,160.648745949838,1230,13.06
+51003011201,Albemarle,"Yancey Mills, Batesville",Census Tract 112.01; Albemarle County; Virginia,2024,All Families,81660,inc_over_budget,777,159.14144651849813,777,921.5171006840274,1236,74.56
+51003011201,Albemarle,"Yancey Mills, Batesville",Census Tract 112.01; Albemarle County; Virginia,2024,All Families,81660,inc_under_budget,459,162.3730273167314,314.48289931597265,314.48289931597265,1236,25.44
+51003011202,Albemarle,North Garden,Census Tract 112.02; Albemarle County; Virginia,2024,All Families,81660,inc_over_budget,914,155.11608556174951,914,946.2779311172446,1152,82.14
+51003011202,Albemarle,North Garden,Census Tract 112.02; Albemarle County; Virginia,2024,All Families,81660,inc_under_budget,238,95.21554494934112,205.7220688827553,205.7220688827553,1152,17.86
+51003011301,Albemarle,"Monticello, Carters Mountain",Census Tract 113.01; Albemarle County; Virginia,2024,All Families,81660,inc_over_budget,884,236.9177072318572,884,1035.119404776191,1369,75.61
+51003011301,Albemarle,"Monticello, Carters Mountain",Census Tract 113.01; Albemarle County; Virginia,2024,All Families,81660,inc_under_budget,485,164.77863939236784,333.88059522380894,333.88059522380894,1369,24.39
+51003011302,Albemarle,"Oak Hill, Southwood",Census Tract 113.02; Albemarle County; Virginia,2024,All Families,81660,inc_over_budget,306,187.47799870918186,306,327.2740909636385,878,37.27
+51003011302,Albemarle,"Oak Hill, Southwood",Census Tract 113.02; Albemarle County; Virginia,2024,All Families,81660,inc_under_budget,572,218.51086929487056,550.7259090363615,550.7259090363615,878,62.73
+51003011303,Albemarle,Avon Street Ext.-Mill Creek,Census Tract 113.03; Albemarle County; Virginia,2024,All Families,81660,inc_over_budget,721,171.49635564641017,721,775.285611424457,978,79.27
+51003011303,Albemarle,Avon Street Ext.-Mill Creek,Census Tract 113.03; Albemarle County; Virginia,2024,All Families,81660,inc_under_budget,257,95.0263121456368,202.714388575543,202.714388575543,978,20.73
+51003011400,Albemarle,Southern Albemarle-Scottsville,Census Tract 114; Albemarle County; Virginia,2024,All Families,81660,inc_over_budget,698,171.7701953192113,698,800.7025081003239,1291,62.02
+51003011400,Albemarle,Southern Albemarle-Scottsville,Census Tract 114; Albemarle County; Virginia,2024,All Families,81660,inc_under_budget,593,150.8509197850646,490.297491899676,490.297491899676,1291,37.98
+51065020101,Fluvanna,Palmyra,Census Tract 201.01; Fluvanna County; Virginia,2024,All Families,81257.54,inc_over_budget,1074,259.8268654315793,1074,1170.7098019920797,1569,74.62
+51065020101,Fluvanna,Palmyra,Census Tract 201.01; Fluvanna County; Virginia,2024,All Families,81257.54,inc_under_budget,495,183.96467052127156,398.2901980079203,398.2901980079203,1569,25.38
+51065020103,Fluvanna,Lake Monticello,Census Tract 201.03; Fluvanna County; Virginia,2024,All Families,81257.54,inc_over_budget,670,176.8304272459918,670,715.7309916396656,985,72.66
+51065020103,Fluvanna,Lake Monticello,Census Tract 201.03; Fluvanna County; Virginia,2024,All Families,81257.54,inc_under_budget,315,109.12836478203089,269.2690083603344,269.2690083603344,985,27.34
+51065020104,Fluvanna,Rivanna,Census Tract 201.04; Fluvanna County; Virginia,2024,All Families,81257.54,inc_over_budget,1160,285.87759618410115,1160,1494.3610208408336,2019,74.01
+51065020104,Fluvanna,Rivanna,Census Tract 201.04; Fluvanna County; Virginia,2024,All Families,81257.54,inc_under_budget,859,231.25527021021597,524.6389791591663,524.6389791591663,2019,25.99
+51065020200,Fluvanna,Columbia/Fork Union,Census Tract 202; Fluvanna County; Virginia,2024,All Families,81257.54,inc_over_budget,291,122.71919165313956,291,333.73223808952355,1320,25.28
+51065020200,Fluvanna,Columbia/Fork Union,Census Tract 202; Fluvanna County; Virginia,2024,All Families,81257.54,inc_under_budget,1029,289.7533433801929,986.2677619104765,986.2677619104765,1320,74.72
+51065020300,Fluvanna,Cunningham,Census Tract 203; Fluvanna County; Virginia,2024,All Families,81257.54,inc_over_budget,1013,247.98588669519077,1013,1249.151842073683,1656,75.43
+51065020300,Fluvanna,Cunningham,Census Tract 203; Fluvanna County; Virginia,2024,All Families,81257.54,inc_under_budget,643,196.69773765857096,406.84815792631696,406.84815792631696,1656,24.57
+51079030101,Greene,Stanardsville,Census Tract 301.01; Greene County; Virginia,2024,All Families,85715.08,inc_over_budget,410,121.49897118905987,410,560.2728493139725,1104,50.75
+51079030101,Greene,Stanardsville,Census Tract 301.01; Greene County; Virginia,2024,All Families,85715.08,inc_under_budget,694,168.9733706830754,543.7271506860275,543.7271506860275,1104,49.25
+51079030102,Greene,Monroe,Census Tract 301.02; Greene County; Virginia,2024,All Families,85715.08,inc_over_budget,653,206.94202086574876,653,760.9907548301932,1317,57.78
+51079030102,Greene,Monroe,Census Tract 301.02; Greene County; Virginia,2024,All Families,85715.08,inc_under_budget,664,207.78354121537154,556.0092451698068,556.0092451698068,1317,42.22
+51079030201,Greene,Midway,Census Tract 302.01; Greene County; Virginia,2024,All Families,85715.08,inc_over_budget,1416,306.36253034599383,1416,1541.7035241409658,2217,69.54
+51079030201,Greene,Midway,Census Tract 302.01; Greene County; Virginia,2024,All Families,85715.08,inc_under_budget,801,234.19222873528489,675.2964758590343,675.2964758590343,2217,30.46
+51079030202,Greene,Ruckersville,Census Tract 302.02; Greene County; Virginia,2024,All Families,85715.08,inc_over_budget,511,143.65583872575453,511,561.2814096563862,1124,49.94
+51079030202,Greene,Ruckersville,Census Tract 302.02; Greene County; Virginia,2024,All Families,85715.08,inc_under_budget,613,214.68581695119033,562.7185903436138,562.7185903436138,1124,50.06
+51125950101,Nelson,Wintergreen-Wingina,Census Tract 9501.01; Nelson County; Virginia,2024,All Families,78245.54,inc_over_budget,290,109.88175462741756,290,395.29095803832155,782,50.55
+51125950101,Nelson,Wintergreen-Wingina,Census Tract 9501.01; Nelson County; Virginia,2024,All Families,78245.54,inc_under_budget,492,153.44380078712857,386.70904196167845,386.70904196167845,782,49.45
+51125950102,Nelson,Lovingston,Census Tract 9501.02; Nelson County; Virginia,2024,All Families,78245.54,inc_over_budget,309,109.1924905842888,309,391.66645465818635,588,66.61
+51125950102,Nelson,Lovingston,Census Tract 9501.02; Nelson County; Virginia,2024,All Families,78245.54,inc_under_budget,279,107.19141756689292,196.33354534181365,196.33354534181365,588,33.39
+51125950201,Nelson,Afton-Schuyler,Census Tract 9502.01; Nelson County; Virginia,2024,All Families,78245.54,inc_over_budget,315,114.48143954370944,315,406.36818672746915,579,70.18
+51125950201,Nelson,Afton-Schuyler,Census Tract 9502.01; Nelson County; Virginia,2024,All Families,78245.54,inc_under_budget,264,107.46627377926528,172.63181327253088,172.63181327253088,579,29.82
+51125950202,Nelson,Wintergreen-Rockfish Valley,Census Tract 9502.02; Nelson County; Virginia,2024,All Families,78245.54,inc_over_budget,608,164.50531906294094,608,670.652470898836,914,73.38
+51125950202,Nelson,Wintergreen-Rockfish Valley,Census Tract 9502.02; Nelson County; Virginia,2024,All Families,78245.54,inc_under_budget,306,143.95832730342485,243.347529101164,243.347529101164,914,26.62
+51125950300,Nelson,Roseland,Census Tract 9503; Nelson County; Virginia,2024,All Families,78245.54,inc_over_budget,445,129.406336784564,445,529.406801072043,963,54.97
+51125950300,Nelson,Roseland,Census Tract 9503; Nelson County; Virginia,2024,All Families,78245.54,inc_under_budget,518,167.37383308032352,433.5931989279571,433.5931989279571,963,45.03
+51540000201,Charlottesville,Rose Hill-Harris-Venable,Census Tract 2.01; Charlottesville city; Virginia,2024,All Families,87017.54,inc_over_budget,284,95.88013350011565,284,315.67602944117766,521,60.59
+51540000201,Charlottesville,Rose Hill-Harris-Venable,Census Tract 2.01; Charlottesville city; Virginia,2024,All Families,87017.54,inc_under_budget,237,137.66626311482418,205.32397055882234,205.32397055882234,521,39.41
+51540000202,Charlottesville,10th & Page-Venable,Census Tract 2.02; Charlottesville city; Virginia,2024,All Families,87017.54,inc_over_budget,112,104.79980916013159,112,112,458,24.45
+51540000202,Charlottesville,10th & Page-Venable,Census Tract 2.02; Charlottesville city; Virginia,2024,All Families,87017.54,inc_under_budget,346,210.43763921884317,346,346,458,75.55
+51540000302,Charlottesville,Woolen Mills,Census Tract 3.02; Charlottesville city; Virginia,2024,All Families,87017.54,inc_over_budget,362,116.50751048752178,362,506.3596095843834,861,58.81
+51540000302,Charlottesville,Woolen Mills,Census Tract 3.02; Charlottesville city; Virginia,2024,All Families,87017.54,inc_under_budget,499,240.83604381404376,354.6403904156166,354.6403904156166,861,41.19
+51540000401,Charlottesville,Ridge St.,Census Tract 4.01; Charlottesville city; Virginia,2024,All Families,87017.54,inc_over_budget,355,103.01456207740729,355,382.5217960718429,717,53.35
+51540000401,Charlottesville,Ridge St.,Census Tract 4.01; Charlottesville city; Virginia,2024,All Families,87017.54,inc_under_budget,362,164.7725705328408,334.4782039281571,334.4782039281571,717,46.65
+51540000402,Charlottesville,Belmont,Census Tract 4.02; Charlottesville city; Virginia,2024,All Families,87017.54,inc_over_budget,673,196.84511677966512,673,753.4882715308613,1068,70.55
+51540000402,Charlottesville,Belmont,Census Tract 4.02; Charlottesville city; Virginia,2024,All Families,87017.54,inc_under_budget,395,181.5626613596529,314.51172846913875,314.51172846913875,1068,29.45
+51540000501,Charlottesville,Fifeville-Cherry Avenue,Census Tract 5.01; Charlottesville city; Virginia,2024,All Families,87017.54,inc_over_budget,241,96.05206921248495,241,306.9484547381896,788,38.95
+51540000501,Charlottesville,Fifeville-Cherry Avenue,Census Tract 5.01; Charlottesville city; Virginia,2024,All Families,87017.54,inc_under_budget,547,185.48854412065452,481.0515452618104,481.0515452618104,788,61.05
+51540000502,Charlottesville,Fry's Springs,Census Tract 5.02; Charlottesville city; Virginia,2024,All Families,87017.54,inc_over_budget,782,196.88829320200833,782,811.0796335853433,1238,65.52
+51540000502,Charlottesville,Fry's Springs,Census Tract 5.02; Charlottesville city; Virginia,2024,All Families,87017.54,inc_under_budget,456,177.03954360537648,426.9203664146566,426.9203664146566,1238,34.48
+51540000600,Charlottesville,JPA-Fontaine,Census Tract 6; Charlottesville city; Virginia,2024,All Families,87017.54,inc_over_budget,100,40.47221268969612,100,103.63495419816793,203,51.05
+51540000600,Charlottesville,JPA-Fontaine,Census Tract 6; Charlottesville city; Virginia,2024,All Families,87017.54,inc_under_budget,103,91.21951545584969,99.36504580183207,99.36504580183207,203,48.95
+51540000700,Charlottesville,Barracks-Rugby,Census Tract 7; Charlottesville city; Virginia,2024,All Families,87017.54,inc_over_budget,549,116.53325705565771,549,569.2518876755071,709,80.29
+51540000700,Charlottesville,Barracks-Rugby,Census Tract 7; Charlottesville city; Virginia,2024,All Families,87017.54,inc_under_budget,160,89.26365441768559,139.74811232449298,139.74811232449298,709,19.71
+51540000800,Charlottesville,Greenbrier-Meadows,Census Tract 8; Charlottesville city; Virginia,2024,All Families,87017.54,inc_over_budget,749,162.5484543143982,749,777.5603544141766,946,82.19
+51540000800,Charlottesville,Greenbrier-Meadows,Census Tract 8; Charlottesville city; Virginia,2024,All Families,87017.54,inc_under_budget,197,92.0869154657707,168.43964558582343,168.43964558582343,946,17.81
+51540000900,Charlottesville,Locust Grove,Census Tract 9; Charlottesville city; Virginia,2024,All Families,87017.54,inc_over_budget,272,84.72307831990054,272,326.52431297251894,521,62.67
+51540000900,Charlottesville,Locust Grove,Census Tract 9; Charlottesville city; Virginia,2024,All Families,87017.54,inc_under_budget,249,103.5132841716463,194.47568702748106,194.47568702748106,521,37.33
+51540001000,Charlottesville,Downtown Area,Census Tract 10; Charlottesville city; Virginia,2024,All Families,87017.54,inc_over_budget,787,272.81862106535175,787,803.0976543061722,873,91.99
+51540001000,Charlottesville,Downtown Area,Census Tract 10; Charlottesville city; Virginia,2024,All Families,87017.54,inc_under_budget,86,66.82065548915246,69.90234569382774,69.90234569382774,873,8.01
+51029930101,Buckingham,James River,Census Tract 9301.01; Buckingham County; Virginia,2024,All Families,66639.69,inc_over_budget,609,156.2241978696002,609,656.929905993733,1130,58.14
+51029930101,Buckingham,James River,Census Tract 9301.01; Buckingham County; Virginia,2024,All Families,66639.69,inc_under_budget,521,141.10279940525632,473.0700940062671,473.0700940062671,1130,41.86
+51029930102,Buckingham,New Canton,Census Tract 9301.02; Buckingham County; Virginia,2024,All Families,66639.69,inc_over_budget,376,134.29072938963435,376,425.60187945863055,778,54.7
+51029930102,Buckingham,New Canton,Census Tract 9301.02; Buckingham County; Virginia,2024,All Families,66639.69,inc_under_budget,402,139.97856978837868,352.39812054136945,352.39812054136945,778,45.3
+51029930201,Buckingham,Dillwyn,Census Tract 9302.01; Buckingham County; Virginia,2024,All Families,66639.69,inc_over_budget,557,146.52644812456214,557,611.6177998533235,1004,60.92
+51029930201,Buckingham,Dillwyn,Census Tract 9302.01; Buckingham County; Virginia,2024,All Families,66639.69,inc_under_budget,447,125.41531007018241,392.38220014667644,392.38220014667644,1004,39.08
+51029930202,Buckingham,Mount Rush,Census Tract 9302.02; Buckingham County; Virginia,2024,All Families,66639.69,inc_over_budget,582,168.44583699219166,582,724.1177445163011,1162,62.32
+51029930202,Buckingham,Mount Rush,Census Tract 9302.02; Buckingham County; Virginia,2024,All Families,66639.69,inc_under_budget,580,178.15162081777422,437.88225548369894,437.88225548369894,1162,37.68
+51109950101,Louisa,Bumpus-Mountain Road District-Buckner,Census Tract 9501.01; Louisa County; Virginia,2024,All Families,70373.54,inc_over_budget,607,238.11551818392687,607,618.7186132408827,864,71.61
+51109950101,Louisa,Bumpus-Mountain Road District-Buckner,Census Tract 9501.01; Louisa County; Virginia,2024,All Families,70373.54,inc_under_budget,257,142.44999122499095,245.28138675911725,245.28138675911725,864,28.39
+51109950102,Louisa,Cuckoo District,Census Tract 9501.02; Louisa County; Virginia,2024,All Families,70373.54,inc_over_budget,1031,261.1876719908503,1031,1039.9431522101472,1584,65.65
+51109950102,Louisa,Cuckoo District,Census Tract 9501.02; Louisa County; Virginia,2024,All Families,70373.54,inc_under_budget,553,183.73078130786905,544.0568477898527,544.0568477898527,1584,34.35
+51109950201,Louisa,Town of Louisa,Census Tract 9502.01; Louisa County; Virginia,2024,All Families,70373.54,inc_over_budget,893,200.01499943754217,893,954.368527235149,1551,61.53
+51109950201,Louisa,Town of Louisa,Census Tract 9502.01; Louisa County; Virginia,2024,All Families,70373.54,inc_under_budget,658,227.5346127515548,596.631472764851,596.631472764851,1551,38.47
+51109950202,Louisa,Mineral,Census Tract 9502.02; Louisa County; Virginia,2024,All Families,70373.54,inc_over_budget,937,205.01463362404158,937,989.7337595839724,1484,66.69
+51109950202,Louisa,Mineral,Census Tract 9502.02; Louisa County; Virginia,2024,All Families,70373.54,inc_under_budget,547,144.47837208385207,494.26624041602764,494.26624041602764,1484,33.31
+51109950301,Louisa,Zion Crossroads,Census Tract 9503.01; Louisa County; Virginia,2024,All Families,70373.54,inc_over_budget,969,192.681083658983,969,997.3713794252951,1232,80.96
+51109950301,Louisa,Zion Crossroads,Census Tract 9503.01; Louisa County; Virginia,2024,All Families,70373.54,inc_under_budget,263,110.4581368664165,234.62862057470494,234.62862057470494,1232,19.04
+51109950302,Louisa,Green Springs,Census Tract 9503.02; Louisa County; Virginia,2024,All Families,70373.54,inc_over_budget,760,297.32305662359926,760,764.0089992666178,904,84.51
+51109950302,Louisa,Green Springs,Census Tract 9503.02; Louisa County; Virginia,2024,All Families,70373.54,inc_under_budget,144,80.01249902359005,139.9910007333822,139.9910007333822,904,15.49
+51109950303,Louisa,Trevillians,Census Tract 9503.03; Louisa County; Virginia,2024,All Families,70373.54,inc_over_budget,383,133.04510513355987,383,407.9791492766185,794,51.38
+51109950303,Louisa,Trevillians,Census Tract 9503.03; Louisa County; Virginia,2024,All Families,70373.54,inc_under_budget,411,164.3319810627256,386.0208507233815,386.0208507233815,794,48.62
+51109950400,Louisa,Ferncliff-Shannon Hill (Yanceyville),Census Tract 9504; Louisa County; Virginia,2024,All Families,70373.54,inc_over_budget,527,132.15899515356494,527,558.7636095739716,1007,55.49
+51109950400,Louisa,Ferncliff-Shannon Hill (Yanceyville),Census Tract 9504; Louisa County; Virginia,2024,All Families,70373.54,inc_under_budget,480,173.65483005087995,448.2363904260284,448.2363904260284,1007,44.51
+51109950500,Louisa,Gum Springs-Holly Grove,Census Tract 9505; Louisa County; Virginia,2024,All Families,70373.54,inc_over_budget,1197,318.54199095252733,1197,1250.6589132608842,1931,64.77
+51109950500,Louisa,Gum Springs-Holly Grove,Census Tract 9505; Louisa County; Virginia,2024,All Families,70373.54,inc_under_budget,734,259.4744688789246,680.3410867391159,680.3410867391159,1931,35.23

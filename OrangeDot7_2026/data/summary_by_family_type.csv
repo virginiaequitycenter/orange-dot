@@ -1,0 +1,17 @@
+locality,year,inc_v_budget,estimate_with_child,estimate_no_child,total_families_by_group_with_child,total_families_by_group_no_child,percent_with_child,percent_no_child,description
+Albemarle County,2024,inc_over_budget,8844.618803952158,13343.190319031904,12375,16021,71.47,83.29,Families earning at or above survival budget
+Albemarle County,2024,inc_under_budget,3530.381196047842,2677.809680968097,12375,16021,28.53,16.71,Families earning below survival budget
+Buckingham County,2024,inc_over_budget,982.2750250016668,1879.5499099819965,1509,2565,65.09,73.28,Families earning at or above survival budget
+Buckingham County,2024,inc_under_budget,526.7249749983332,685.4500900180036,1509,2565,34.91,26.72,Families earning below survival budget
+Charlottesville City,2024,inc_over_budget,2671.829241569663,3592.3821588105875,4373,4530,61.1,79.3,Families earning at or above survival budget
+Charlottesville City,2024,inc_under_budget,1701.1707584303372,937.6178411894126,4373,4530,38.9,20.7,Families earning below survival budget
+Fluvanna County,2024,inc_over_budget,1920.6053582143288,3662.654265426542,2674,4875,71.83,75.13,Families earning at or above survival budget
+Fluvanna County,2024,inc_under_budget,753.3946417856715,1212.345734573457,2674,4875,28.17,24.87,Families earning below survival budget
+Greene County,2024,inc_over_budget,1227.4239481579264,2596.8912594172943,2405,3357,51.04,77.36,Families earning at or above survival budget
+Greene County,2024,inc_under_budget,1177.5760518420736,760.1087405827055,2405,3357,48.96,22.64,Families earning below survival budget
+Louisa County,2024,inc_over_budget,2544.9996506433763,5780.527252725273,4152,7199,61.3,80.3,Families earning at or above survival budget
+Louisa County,2024,inc_under_budget,1607.0003493566237,1418.4727472747277,4152,7199,38.7,19.7,Families earning below survival budget
+Nelson County,2024,inc_over_budget,590.0460998439937,2150.792079207921,1036,2790,56.95,77.09,Families earning at or above survival budget
+Nelson County,2024,inc_under_budget,445.9539001560062,639.2079207920792,1036,2790,43.05,22.91,Families earning below survival budget
+Total for Region,2024,inc_over_budget,18781.798127383114,33005.98724460152,28524,41337,65.85,79.85,Families earning at or above survival budget
+Total for Region,2024,inc_under_budget,9742.201872616888,8331.012755398484,28524,41337,34.15,20.15,Families earning below survival budget

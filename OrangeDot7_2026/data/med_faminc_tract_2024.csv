@@ -1,0 +1,69 @@
+GEOID,NAME,label,estimate,moe,year,county,tractnames,avg_allfamily_budget,med_inc_below
+51003010100,Census Tract 101; Albemarle County; Virginia,Median Family Income,134038,33845,2024,Albemarle,Free Union,81660,FALSE
+51003010201,Census Tract 102.01; Albemarle County; Virginia,Median Family Income,140728,11852,2024,Albemarle,Charlottesville-Albemarle Airport,81660,FALSE
+51003010202,Census Tract 102.02; Albemarle County; Virginia,Median Family Income,190000,24121,2024,Albemarle,Earlysville,81660,FALSE
+51003010301,Census Tract 103.01; Albemarle County; Virginia,Median Family Income,137500,19740,2024,Albemarle,Berkmar Drive,81660,FALSE
+51003010302,Census Tract 103.02; Albemarle County; Virginia,Median Family Income,200208,25134,2024,Albemarle,Polo Grounds Road,81660,FALSE
+51003010303,Census Tract 103.03; Albemarle County; Virginia,Median Family Income,163864,38961,2024,Albemarle,Hollymead,81660,FALSE
+51003010401,Census Tract 104.01; Albemarle County; Virginia,Median Family Income,163103,34310,2024,Albemarle,Stony Point-Keswick,81660,FALSE
+51003010402,Census Tract 104.02; Albemarle County; Virginia,Median Family Income,138616,37120,2024,Albemarle,Village of Rivanna,81660,FALSE
+51003010501,Census Tract 105.01; Albemarle County; Virginia,Median Family Income,165697,16923,2024,Albemarle,Darden-Key West,81660,FALSE
+51003010502,Census Tract 105.02; Albemarle County; Virginia,Median Family Income,123547,39170,2024,Albemarle,Pantops,81660,FALSE
+51003010602,Census Tract 106.02; Albemarle County; Virginia,Median Family Income,150881,9920,2024,Albemarle,Dunlora-Stone Henge,81660,FALSE
+51003010603,Census Tract 106.03; Albemarle County; Virginia,Median Family Income,103725,4321,2024,Albemarle,Branchland,81660,FALSE
+51003010604,Census Tract 106.04; Albemarle County; Virginia,Median Family Income,144779,18102,2024,Albemarle,Woodbrook-Carrsbrook,81660,FALSE
+51003010701,Census Tract 107.01; Albemarle County; Virginia,Median Family Income,61327,10640,2024,Albemarle,Hydraulic,81660,TRUE
+51003010702,Census Tract 107.02; Albemarle County; Virginia,Median Family Income,67143,19262,2024,Albemarle,Commonwealth-Townwood-Berkmar,81660,TRUE
+51003010801,Census Tract 108.01; Albemarle County; Virginia,Median Family Income,103846,12559,2024,Albemarle,Barracks-Hessian Hills,81660,FALSE
+51003010802,Census Tract 108.02; Albemarle County; Virginia,Median Family Income,82083,37961,2024,Albemarle,Albemarle High School,81660,FALSE
+51003010901,Census Tract 109.01; Albemarle County; Virginia,Median Family Income,74129,18237,2024,Albemarle,Old Ivy-Darden School (UVA),81660,TRUE
+51003010904,Census Tract 109.04; Albemarle County; Virginia,Median Family Income,81029,27628,2024,Albemarle,Carr's Hill-McCormick Road (UVA),81660,TRUE
+51003011000,Census Tract 110; Albemarle County; Virginia,Median Family Income,222417,41273,2024,Albemarle,Ivy,81660,FALSE
+51003011101,Census Tract 111.01; Albemarle County; Virginia,Median Family Income,157703,88735,2024,Albemarle,Crozet-Beaver Creek,81660,FALSE
+51003011102,Census Tract 111.02; Albemarle County; Virginia,Median Family Income,117125,42042,2024,Albemarle,Western Ridge-Westhall,81660,FALSE
+51003011103,Census Tract 111.03; Albemarle County; Virginia,Median Family Income,173659,18842,2024,Albemarle,Old Trail,81660,FALSE
+51003011201,Census Tract 112.01; Albemarle County; Virginia,Median Family Income,145938,39452,2024,Albemarle,"Yancey Mills, Batesville",81660,FALSE
+51003011202,Census Tract 112.02; Albemarle County; Virginia,Median Family Income,177016,32141,2024,Albemarle,North Garden,81660,FALSE
+51003011301,Census Tract 113.01; Albemarle County; Virginia,Median Family Income,124234,29697,2024,Albemarle,"Monticello, Carters Mountain",81660,FALSE
+51003011302,Census Tract 113.02; Albemarle County; Virginia,Median Family Income,50114,27912,2024,Albemarle,"Oak Hill, Southwood",81660,TRUE
+51003011303,Census Tract 113.03; Albemarle County; Virginia,Median Family Income,145625,16215,2024,Albemarle,Avon Street Ext.-Mill Creek,81660,FALSE
+51003011400,Census Tract 114; Albemarle County; Virginia,Median Family Income,103777,10321,2024,Albemarle,Southern Albemarle-Scottsville,81660,FALSE
+51029930101,Census Tract 9301.01; Buckingham County; Virginia,Median Family Income,82500,26065,2024,Buckingham,James River,66639.69,FALSE
+51029930102,Census Tract 9301.02; Buckingham County; Virginia,Median Family Income,69934,24754,2024,Buckingham,New Canton,66639.69,FALSE
+51029930201,Census Tract 9302.01; Buckingham County; Virginia,Median Family Income,82436,7592,2024,Buckingham,Dillwyn,66639.69,FALSE
+51029930202,Census Tract 9302.02; Buckingham County; Virginia,Median Family Income,75208,21542,2024,Buckingham,Mount Rush,66639.69,FALSE
+51065020101,Census Tract 201.01; Fluvanna County; Virginia,Median Family Income,123116,14739,2024,Fluvanna,Palmyra,81257.54,FALSE
+51065020103,Census Tract 201.03; Fluvanna County; Virginia,Median Family Income,122774,23252,2024,Fluvanna,Lake Monticello,81257.54,FALSE
+51065020104,Census Tract 201.04; Fluvanna County; Virginia,Median Family Income,105511,15735,2024,Fluvanna,Rivanna,81257.54,FALSE
+51065020200,Census Tract 202; Fluvanna County; Virginia,Median Family Income,54430,6445,2024,Fluvanna,Columbia/Fork Union,81257.54,TRUE
+51065020300,Census Tract 203; Fluvanna County; Virginia,Median Family Income,113512,9126,2024,Fluvanna,Cunningham,81257.54,FALSE
+51079030101,Census Tract 301.01; Greene County; Virginia,Median Family Income,82135,8046,2024,Greene,Stanardsville,85715.08,TRUE
+51079030102,Census Tract 301.02; Greene County; Virginia,Median Family Income,99141,18052,2024,Greene,Monroe,85715.08,FALSE
+51079030201,Census Tract 302.01; Greene County; Virginia,Median Family Income,127450,17997,2024,Greene,Midway,85715.08,FALSE
+51079030202,Census Tract 302.02; Greene County; Virginia,Median Family Income,89783,35529,2024,Greene,Ruckersville,85715.08,FALSE
+51109950101,Census Tract 9501.01; Louisa County; Virginia,Median Family Income,109375,64435,2024,Louisa,Bumpus-Mountain Road District-Buckner,70373.54,FALSE
+51109950102,Census Tract 9501.02; Louisa County; Virginia,Median Family Income,100331,10493,2024,Louisa,Cuckoo District,70373.54,FALSE
+51109950201,Census Tract 9502.01; Louisa County; Virginia,Median Family Income,81942,17487,2024,Louisa,Town of Louisa,70373.54,FALSE
+51109950202,Census Tract 9502.02; Louisa County; Virginia,Median Family Income,95100,20039,2024,Louisa,Mineral,70373.54,FALSE
+51109950301,Census Tract 9503.01; Louisa County; Virginia,Median Family Income,112397,23762,2024,Louisa,Zion Crossroads,70373.54,FALSE
+51109950302,Census Tract 9503.02; Louisa County; Virginia,Median Family Income,154083,41033,2024,Louisa,Green Springs,70373.54,FALSE
+51109950303,Census Tract 9503.03; Louisa County; Virginia,Median Family Income,63056,47278,2024,Louisa,Trevillians,70373.54,TRUE
+51109950400,Census Tract 9504; Louisa County; Virginia,Median Family Income,77898,16084,2024,Louisa,Ferncliff-Shannon Hill (Yanceyville),70373.54,FALSE
+51109950500,Census Tract 9505; Louisa County; Virginia,Median Family Income,101594,26852,2024,Louisa,Gum Springs-Holly Grove,70373.54,FALSE
+51125950101,Census Tract 9501.01; Nelson County; Virginia,Median Family Income,77788,14705,2024,Nelson,Wintergreen-Wingina,78245.54,TRUE
+51125950102,Census Tract 9501.02; Nelson County; Virginia,Median Family Income,103203,24967,2024,Nelson,Lovingston,78245.54,FALSE
+51125950201,Census Tract 9502.01; Nelson County; Virginia,Median Family Income,103244,20667,2024,Nelson,Afton-Schuyler,78245.54,FALSE
+51125950202,Census Tract 9502.02; Nelson County; Virginia,Median Family Income,147813,42046,2024,Nelson,Wintergreen-Rockfish Valley,78245.54,FALSE
+51125950300,Census Tract 9503; Nelson County; Virginia,Median Family Income,88836,27224,2024,Nelson,Roseland,78245.54,FALSE
+51540000201,Census Tract 2.01; Charlottesville city; Virginia,Median Family Income,107969,30950,2024,Charlottesville,Rose Hill-Harris-Venable,87017.54,FALSE
+51540000202,Census Tract 2.02; Charlottesville city; Virginia,Median Family Income,38447,26451,2024,Charlottesville,10th & Page-Venable,87017.54,TRUE
+51540000302,Census Tract 3.02; Charlottesville city; Virginia,Median Family Income,99108,3260,2024,Charlottesville,Woolen Mills,87017.54,FALSE
+51540000401,Census Tract 4.01; Charlottesville city; Virginia,Median Family Income,96528,44981,2024,Charlottesville,Ridge St.,87017.54,FALSE
+51540000402,Census Tract 4.02; Charlottesville city; Virginia,Median Family Income,126136,46363,2024,Charlottesville,Belmont,87017.54,FALSE
+51540000501,Census Tract 5.01; Charlottesville city; Virginia,Median Family Income,72679,34837,2024,Charlottesville,Fifeville-Cherry Avenue,87017.54,TRUE
+51540000502,Census Tract 5.02; Charlottesville city; Virginia,Median Family Income,131500,27717,2024,Charlottesville,Fry's Springs,87017.54,FALSE
+51540000600,Census Tract 6; Charlottesville city; Virginia,Median Family Income,NA,NA,2024,Charlottesville,JPA-Fontaine,87017.54,NA
+51540000700,Census Tract 7; Charlottesville city; Virginia,Median Family Income,238750,46397,2024,Charlottesville,Barracks-Rugby,87017.54,FALSE
+51540000800,Census Tract 8; Charlottesville city; Virginia,Median Family Income,176212,13491,2024,Charlottesville,Greenbrier-Meadows,87017.54,FALSE
+51540000900,Census Tract 9; Charlottesville city; Virginia,Median Family Income,103458,26015,2024,Charlottesville,Locust Grove,87017.54,FALSE
+51540001000,Census Tract 10; Charlottesville city; Virginia,Median Family Income,182936,47453,2024,Charlottesville,Downtown Area,87017.54,FALSE

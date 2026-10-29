@@ -1,0 +1,17 @@
+locality,year,group,inc_v_budget,estimate,total_families,percent,description
+Albemarle County,2024,All Families,inc_over_budget,20844.285491419658,28396,73.41,Families earning at or above survival budget
+Albemarle County,2024,All Families,inc_under_budget,7551.714508580343,28396,26.59,Families earning below survival budget
+Buckingham County,2024,All Families,inc_over_budget,2418.267329821988,4074,59.36,Families earning at or above survival budget
+Buckingham County,2024,All Families,inc_under_budget,1655.732670178012,4074,40.64,Families earning below survival budget
+Charlottesville City,2024,All Families,inc_over_budget,5768.142958518341,8903,64.79,Families earning at or above survival budget
+Charlottesville City,2024,All Families,inc_under_budget,3134.857041481659,8903,35.21,Families earning below survival budget
+Fluvanna County,2024,All Families,inc_over_budget,4963.685894635786,7549,65.75,Families earning at or above survival budget
+Fluvanna County,2024,All Families,inc_under_budget,2585.3141053642144,7549,34.25,Families earning below survival budget
+Greene County,2024,All Families,inc_over_budget,3424.2485379415175,5762,59.43,Families earning at or above survival budget
+Greene County,2024,All Families,inc_under_budget,2337.7514620584825,5762,40.57,Families earning below survival budget
+Louisa County,2024,All Families,inc_over_budget,7581.546103073539,11351,66.79,Families earning at or above survival budget
+Louisa County,2024,All Families,inc_under_budget,3769.4538969264618,11351,33.21,Families earning below survival budget
+Nelson County,2024,All Families,inc_over_budget,2393.384871394856,3826,62.56,Families earning at or above survival budget
+Nelson County,2024,All Families,inc_under_budget,1432.615128605144,3826,37.44,Families earning below survival budget
+Total for Region,2024,All Families,inc_over_budget,47393.56118680568,69861,67.84,Families earning at or above survival budget
+Total for Region,2024,All Families,inc_under_budget,22467.438813194316,69861,32.16,Families earning below survival budget

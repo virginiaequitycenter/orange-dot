@@ -1,0 +1,78 @@
+County,Categories,Average Budget 65+ Household,Single Senior,Two Seniors
+Albemarle,Housing,1562,1551,1573
+Albemarle,Child Care,0,0,0
+Albemarle,Food,688.5,486,891
+Albemarle,Transportation,363,306,420
+Albemarle,Health Care,727,485,969
+Albemarle,Technology,119,102,136
+Albemarle,Miscellaneous,346,293,399
+Albemarle,Taxes,737,589,885
+Albemarle,Monthly Total,4542.5,3812,5273
+Albemarle,ANNUAL TOTAL,54510,45744,63276
+Albemarle,Hourly Wage,27.26,22.87,31.64
+Buckingham,Housing,925,908,942
+Buckingham,Child Care,0,0,0
+Buckingham,Food,577.5,408,747
+Buckingham,Transportation,363,306,420
+Buckingham,Health Care,753,502,1004
+Buckingham,Technology,119,102,136
+Buckingham,Miscellaneous,274,223,325
+Buckingham,Taxes,535,392,678
+Buckingham,Monthly Total,3546.5,2841,4252
+Buckingham,ANNUAL TOTAL,42558,34092,51024
+Buckingham,Hourly Wage,21.28,17.05,25.51
+Charlottesville,Housing,1614,1600,1628
+Charlottesville,Child Care,0,0,0
+Charlottesville,Food,842.5,595,1090
+Charlottesville,Transportation,363,306,420
+Charlottesville,Health Care,729.5,486,973
+Charlottesville,Technology,119,102,136
+Charlottesville,Miscellaneous,367,309,425
+Charlottesville,Taxes,795.5,634,957
+Charlottesville,Monthly Total,4830.5,4032,5629
+Charlottesville,ANNUAL TOTAL,57966,48384,67548
+Charlottesville,Hourly Wage,28.98,24.19,33.77
+Fluvanna,Housing,1544,1531,1557
+Fluvanna,Child Care,0,0,0
+Fluvanna,Food,688.5,486,891
+Fluvanna,Transportation,363,306,420
+Fluvanna,Health Care,699.5,466,933
+Fluvanna,Technology,119,102,136
+Fluvanna,Miscellaneous,341.5,289,394
+Fluvanna,Taxes,724,578,870
+Fluvanna,Monthly Total,4479.5,3758,5201
+Fluvanna,ANNUAL TOTAL,53754,45096,62412
+Fluvanna,Hourly Wage,26.88,22.55,31.21
+Greene,Housing,1544,1531,1557
+Greene,Child Care,0,0,0
+Greene,Food,842.5,595,1090
+Greene,Transportation,363,306,420
+Greene,Health Care,747.5,498,997
+Greene,Technology,119,102,136
+Greene,Miscellaneous,361.5,303,420
+Greene,Taxes,781,618,944
+Greene,Monthly Total,4758.5,3953,5564
+Greene,ANNUAL TOTAL,57102,47436,66768
+Greene,Hourly Wage,28.55,23.72,33.38
+Louisa,Housing,1096,1081,1111
+Louisa,Child Care,0,0,0
+Louisa,Food,623.5,440,807
+Louisa,Transportation,363,306,420
+Louisa,Health Care,760,507,1013
+Louisa,Technology,119,102,136
+Louisa,Miscellaneous,296.5,244,349
+Louisa,Taxes,598,451,745
+Louisa,Monthly Total,3856,3131,4581
+Louisa,ANNUAL TOTAL,46272,37572,54972
+Louisa,Hourly Wage,23.14,18.79,27.49
+Nelson,Housing,1544,1531,1557
+Nelson,Child Care,0,0,0
+Nelson,Food,600.5,424,777
+Nelson,Transportation,363,306,420
+Nelson,Health Care,718.5,479,958
+Nelson,Technology,119,102,136
+Nelson,Miscellaneous,334.5,284,385
+Nelson,Taxes,705,565,845
+Nelson,Monthly Total,4384.5,3691,5078
+Nelson,ANNUAL TOTAL,52614,44292,60936
+Nelson,Hourly Wage,26.31,22.15,30.47

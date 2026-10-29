@@ -1,0 +1,477 @@
+GEOID,locality,variable,group,estimate,moe,total_families,year,inc_band,inc_group
+51003,"Albemarle County, Virginia",B19101_001,All Families,28396,761,28396,2024,Total Families,NA
+51003,"Albemarle County, Virginia",B19101_002,All Families,421,141,28396,2024,Less than 10000,below_15k
+51003,"Albemarle County, Virginia",B19101_003,All Families,215,110,28396,2024,10000 to 14999,below_15k
+51003,"Albemarle County, Virginia",B19101_004,All Families,357,172,28396,2024,15000 to 19999,below_30k
+51003,"Albemarle County, Virginia",B19101_005,All Families,339,178,28396,2024,20000 to 24999,below_30k
+51003,"Albemarle County, Virginia",B19101_006,All Families,547,224,28396,2024,25000 to 29999,below_30k
+51003,"Albemarle County, Virginia",B19101_007,All Families,534,203,28396,2024,30000 to 34999,below_45k
+51003,"Albemarle County, Virginia",B19101_008,All Families,527,205,28396,2024,35000 to 39999,below_45k
+51003,"Albemarle County, Virginia",B19101_009,All Families,380,148,28396,2024,40000 to 44999,below_45k
+51003,"Albemarle County, Virginia",B19101_010,All Families,659,211,28396,2024,45000 to 49999,below_60k
+51003,"Albemarle County, Virginia",B19101_011,All Families,1094,234,28396,2024,50000 to 59999,below_60k
+51003,"Albemarle County, Virginia",B19101_012,All Families,1696,275,28396,2024,60000 to 74999,below_75k
+51003,"Albemarle County, Virginia",B19101_013,All Families,2938,338,28396,2024,75000 to 99999,below_100k
+51003,"Albemarle County, Virginia",B19101_014,All Families,3051,410,28396,2024,100000 to 124999,above_100k
+51003,"Albemarle County, Virginia",B19101_015,All Families,2801,383,28396,2024,125000 to 149999,above_100k
+51003,"Albemarle County, Virginia",B19101_016,All Families,4637,424,28396,2024,150000 to 199999,above_100k
+51003,"Albemarle County, Virginia",B19101_017,All Families,8200,616,28396,2024,200000 or more,above_100k
+51029,"Buckingham County, Virginia",B19101_001,All Families,4074,259,4074,2024,Total Families,NA
+51029,"Buckingham County, Virginia",B19101_002,All Families,110,61,4074,2024,Less than 10000,below_15k
+51029,"Buckingham County, Virginia",B19101_003,All Families,146,71,4074,2024,10000 to 14999,below_15k
+51029,"Buckingham County, Virginia",B19101_004,All Families,34,38,4074,2024,15000 to 19999,below_30k
+51029,"Buckingham County, Virginia",B19101_005,All Families,102,65,4074,2024,20000 to 24999,below_30k
+51029,"Buckingham County, Virginia",B19101_006,All Families,109,61,4074,2024,25000 to 29999,below_30k
+51029,"Buckingham County, Virginia",B19101_007,All Families,141,74,4074,2024,30000 to 34999,below_45k
+51029,"Buckingham County, Virginia",B19101_008,All Families,163,88,4074,2024,35000 to 39999,below_45k
+51029,"Buckingham County, Virginia",B19101_009,All Families,181,85,4074,2024,40000 to 44999,below_45k
+51029,"Buckingham County, Virginia",B19101_010,All Families,217,142,4074,2024,45000 to 49999,below_60k
+51029,"Buckingham County, Virginia",B19101_011,All Families,219,84,4074,2024,50000 to 59999,below_60k
+51029,"Buckingham County, Virginia",B19101_012,All Families,528,149,4074,2024,60000 to 74999,below_75k
+51029,"Buckingham County, Virginia",B19101_013,All Families,610,148,4074,2024,75000 to 99999,below_100k
+51029,"Buckingham County, Virginia",B19101_014,All Families,469,153,4074,2024,100000 to 124999,above_100k
+51029,"Buckingham County, Virginia",B19101_015,All Families,342,103,4074,2024,125000 to 149999,above_100k
+51029,"Buckingham County, Virginia",B19101_016,All Families,514,157,4074,2024,150000 to 199999,above_100k
+51029,"Buckingham County, Virginia",B19101_017,All Families,189,81,4074,2024,200000 or more,above_100k
+51065,"Fluvanna County, Virginia",B19101_001,All Families,7549,385,7549,2024,Total Families,NA
+51065,"Fluvanna County, Virginia",B19101_002,All Families,42,45,7549,2024,Less than 10000,below_15k
+51065,"Fluvanna County, Virginia",B19101_003,All Families,128,81,7549,2024,10000 to 14999,below_15k
+51065,"Fluvanna County, Virginia",B19101_004,All Families,195,105,7549,2024,15000 to 19999,below_30k
+51065,"Fluvanna County, Virginia",B19101_005,All Families,43,74,7549,2024,20000 to 24999,below_30k
+51065,"Fluvanna County, Virginia",B19101_006,All Families,53,46,7549,2024,25000 to 29999,below_30k
+51065,"Fluvanna County, Virginia",B19101_007,All Families,98,57,7549,2024,30000 to 34999,below_45k
+51065,"Fluvanna County, Virginia",B19101_008,All Families,51,46,7549,2024,35000 to 39999,below_45k
+51065,"Fluvanna County, Virginia",B19101_009,All Families,137,83,7549,2024,40000 to 44999,below_45k
+51065,"Fluvanna County, Virginia",B19101_010,All Families,96,73,7549,2024,45000 to 49999,below_60k
+51065,"Fluvanna County, Virginia",B19101_011,All Families,664,222,7549,2024,50000 to 59999,below_60k
+51065,"Fluvanna County, Virginia",B19101_012,All Families,826,268,7549,2024,60000 to 74999,below_75k
+51065,"Fluvanna County, Virginia",B19101_013,All Families,1008,225,7549,2024,75000 to 99999,below_100k
+51065,"Fluvanna County, Virginia",B19101_014,All Families,1335,284,7549,2024,100000 to 124999,above_100k
+51065,"Fluvanna County, Virginia",B19101_015,All Families,548,158,7549,2024,125000 to 149999,above_100k
+51065,"Fluvanna County, Virginia",B19101_016,All Families,1266,265,7549,2024,150000 to 199999,above_100k
+51065,"Fluvanna County, Virginia",B19101_017,All Families,1059,268,7549,2024,200000 or more,above_100k
+51079,"Greene County, Virginia",B19101_001,All Families,5762,404,5762,2024,Total Families,NA
+51079,"Greene County, Virginia",B19101_002,All Families,187,105,5762,2024,Less than 10000,below_15k
+51079,"Greene County, Virginia",B19101_003,All Families,87,78,5762,2024,10000 to 14999,below_15k
+51079,"Greene County, Virginia",B19101_004,All Families,135,104,5762,2024,15000 to 19999,below_30k
+51079,"Greene County, Virginia",B19101_005,All Families,142,111,5762,2024,20000 to 24999,below_30k
+51079,"Greene County, Virginia",B19101_006,All Families,42,46,5762,2024,25000 to 29999,below_30k
+51079,"Greene County, Virginia",B19101_007,All Families,77,59,5762,2024,30000 to 34999,below_45k
+51079,"Greene County, Virginia",B19101_008,All Families,161,100,5762,2024,35000 to 39999,below_45k
+51079,"Greene County, Virginia",B19101_009,All Families,165,116,5762,2024,40000 to 44999,below_45k
+51079,"Greene County, Virginia",B19101_010,All Families,89,59,5762,2024,45000 to 49999,below_60k
+51079,"Greene County, Virginia",B19101_011,All Families,276,111,5762,2024,50000 to 59999,below_60k
+51079,"Greene County, Virginia",B19101_012,All Families,651,179,5762,2024,60000 to 74999,below_75k
+51079,"Greene County, Virginia",B19101_013,All Families,760,199,5762,2024,75000 to 99999,below_100k
+51079,"Greene County, Virginia",B19101_014,All Families,541,150,5762,2024,100000 to 124999,above_100k
+51079,"Greene County, Virginia",B19101_015,All Families,742,220,5762,2024,125000 to 149999,above_100k
+51079,"Greene County, Virginia",B19101_016,All Families,852,212,5762,2024,150000 to 199999,above_100k
+51079,"Greene County, Virginia",B19101_017,All Families,855,224,5762,2024,200000 or more,above_100k
+51109,"Louisa County, Virginia",B19101_001,All Families,11351,495,11351,2024,Total Families,NA
+51109,"Louisa County, Virginia",B19101_002,All Families,78,58,11351,2024,Less than 10000,below_15k
+51109,"Louisa County, Virginia",B19101_003,All Families,238,116,11351,2024,10000 to 14999,below_15k
+51109,"Louisa County, Virginia",B19101_004,All Families,212,112,11351,2024,15000 to 19999,below_30k
+51109,"Louisa County, Virginia",B19101_005,All Families,163,95,11351,2024,20000 to 24999,below_30k
+51109,"Louisa County, Virginia",B19101_006,All Families,315,138,11351,2024,25000 to 29999,below_30k
+51109,"Louisa County, Virginia",B19101_007,All Families,448,185,11351,2024,30000 to 34999,below_45k
+51109,"Louisa County, Virginia",B19101_008,All Families,223,141,11351,2024,35000 to 39999,below_45k
+51109,"Louisa County, Virginia",B19101_009,All Families,255,94,11351,2024,40000 to 44999,below_45k
+51109,"Louisa County, Virginia",B19101_010,All Families,487,178,11351,2024,45000 to 49999,below_60k
+51109,"Louisa County, Virginia",B19101_011,All Families,728,228,11351,2024,50000 to 59999,below_60k
+51109,"Louisa County, Virginia",B19101_012,All Families,900,229,11351,2024,60000 to 74999,below_75k
+51109,"Louisa County, Virginia",B19101_013,All Families,1529,282,11351,2024,75000 to 99999,below_100k
+51109,"Louisa County, Virginia",B19101_014,All Families,1346,285,11351,2024,100000 to 124999,above_100k
+51109,"Louisa County, Virginia",B19101_015,All Families,1325,258,11351,2024,125000 to 149999,above_100k
+51109,"Louisa County, Virginia",B19101_016,All Families,1695,347,11351,2024,150000 to 199999,above_100k
+51109,"Louisa County, Virginia",B19101_017,All Families,1409,300,11351,2024,200000 or more,above_100k
+51125,"Nelson County, Virginia",B19101_001,All Families,3826,287,3826,2024,Total Families,NA
+51125,"Nelson County, Virginia",B19101_002,All Families,138,82,3826,2024,Less than 10000,below_15k
+51125,"Nelson County, Virginia",B19101_003,All Families,19,28,3826,2024,10000 to 14999,below_15k
+51125,"Nelson County, Virginia",B19101_004,All Families,78,74,3826,2024,15000 to 19999,below_30k
+51125,"Nelson County, Virginia",B19101_005,All Families,51,40,3826,2024,20000 to 24999,below_30k
+51125,"Nelson County, Virginia",B19101_006,All Families,42,30,3826,2024,25000 to 29999,below_30k
+51125,"Nelson County, Virginia",B19101_007,All Families,82,79,3826,2024,30000 to 34999,below_45k
+51125,"Nelson County, Virginia",B19101_008,All Families,73,57,3826,2024,35000 to 39999,below_45k
+51125,"Nelson County, Virginia",B19101_009,All Families,120,67,3826,2024,40000 to 44999,below_45k
+51125,"Nelson County, Virginia",B19101_010,All Families,153,105,3826,2024,45000 to 49999,below_60k
+51125,"Nelson County, Virginia",B19101_011,All Families,221,92,3826,2024,50000 to 59999,below_60k
+51125,"Nelson County, Virginia",B19101_012,All Families,392,131,3826,2024,60000 to 74999,below_75k
+51125,"Nelson County, Virginia",B19101_013,All Families,490,156,3826,2024,75000 to 99999,below_100k
+51125,"Nelson County, Virginia",B19101_014,All Families,446,126,3826,2024,100000 to 124999,above_100k
+51125,"Nelson County, Virginia",B19101_015,All Families,335,106,3826,2024,125000 to 149999,above_100k
+51125,"Nelson County, Virginia",B19101_016,All Families,468,120,3826,2024,150000 to 199999,above_100k
+51125,"Nelson County, Virginia",B19101_017,All Families,718,167,3826,2024,200000 or more,above_100k
+51540,"Charlottesville city, Virginia",B19101_001,All Families,8903,448,8903,2024,Total Families,NA
+51540,"Charlottesville city, Virginia",B19101_002,All Families,301,134,8903,2024,Less than 10000,below_15k
+51540,"Charlottesville city, Virginia",B19101_003,All Families,258,181,8903,2024,10000 to 14999,below_15k
+51540,"Charlottesville city, Virginia",B19101_004,All Families,65,56,8903,2024,15000 to 19999,below_30k
+51540,"Charlottesville city, Virginia",B19101_005,All Families,221,128,8903,2024,20000 to 24999,below_30k
+51540,"Charlottesville city, Virginia",B19101_006,All Families,237,169,8903,2024,25000 to 29999,below_30k
+51540,"Charlottesville city, Virginia",B19101_007,All Families,47,35,8903,2024,30000 to 34999,below_45k
+51540,"Charlottesville city, Virginia",B19101_008,All Families,238,136,8903,2024,35000 to 39999,below_45k
+51540,"Charlottesville city, Virginia",B19101_009,All Families,246,140,8903,2024,40000 to 44999,below_45k
+51540,"Charlottesville city, Virginia",B19101_010,All Families,100,81,8903,2024,45000 to 49999,below_60k
+51540,"Charlottesville city, Virginia",B19101_011,All Families,387,132,8903,2024,50000 to 59999,below_60k
+51540,"Charlottesville city, Virginia",B19101_012,All Families,570,197,8903,2024,60000 to 74999,below_75k
+51540,"Charlottesville city, Virginia",B19101_013,All Families,967,250,8903,2024,75000 to 99999,below_100k
+51540,"Charlottesville city, Virginia",B19101_014,All Families,938,271,8903,2024,100000 to 124999,above_100k
+51540,"Charlottesville city, Virginia",B19101_015,All Families,674,185,8903,2024,125000 to 149999,above_100k
+51540,"Charlottesville city, Virginia",B19101_016,All Families,1296,240,8903,2024,150000 to 199999,above_100k
+51540,"Charlottesville city, Virginia",B19101_017,All Families,2358,303,8903,2024,200000 or more,above_100k
+51003,"Albemarle County, Virginia",B19101H_001,"White, Not Hispanic",22354,664,22354,2024,Total Families,NA
+51003,"Albemarle County, Virginia",B19101H_002,"White, Not Hispanic",278,105,22354,2024,Less than 10000,below_15k
+51003,"Albemarle County, Virginia",B19101H_003,"White, Not Hispanic",170,96,22354,2024,10000 to 14999,below_15k
+51003,"Albemarle County, Virginia",B19101H_004,"White, Not Hispanic",184,133,22354,2024,15000 to 19999,below_30k
+51003,"Albemarle County, Virginia",B19101H_005,"White, Not Hispanic",304,161,22354,2024,20000 to 24999,below_30k
+51003,"Albemarle County, Virginia",B19101H_006,"White, Not Hispanic",265,148,22354,2024,25000 to 29999,below_30k
+51003,"Albemarle County, Virginia",B19101H_007,"White, Not Hispanic",299,143,22354,2024,30000 to 34999,below_45k
+51003,"Albemarle County, Virginia",B19101H_008,"White, Not Hispanic",288,134,22354,2024,35000 to 39999,below_45k
+51003,"Albemarle County, Virginia",B19101H_009,"White, Not Hispanic",237,108,22354,2024,40000 to 44999,below_45k
+51003,"Albemarle County, Virginia",B19101H_010,"White, Not Hispanic",280,128,22354,2024,45000 to 49999,below_60k
+51003,"Albemarle County, Virginia",B19101H_011,"White, Not Hispanic",887,206,22354,2024,50000 to 59999,below_60k
+51003,"Albemarle County, Virginia",B19101H_012,"White, Not Hispanic",1164,234,22354,2024,60000 to 74999,below_75k
+51003,"Albemarle County, Virginia",B19101H_013,"White, Not Hispanic",2317,281,22354,2024,75000 to 99999,below_100k
+51003,"Albemarle County, Virginia",B19101H_014,"White, Not Hispanic",2291,332,22354,2024,100000 to 124999,above_100k
+51003,"Albemarle County, Virginia",B19101H_015,"White, Not Hispanic",2435,374,22354,2024,125000 to 149999,above_100k
+51003,"Albemarle County, Virginia",B19101H_016,"White, Not Hispanic",3683,349,22354,2024,150000 to 199999,above_100k
+51003,"Albemarle County, Virginia",B19101H_017,"White, Not Hispanic",7272,615,22354,2024,200000 or more,above_100k
+51029,"Buckingham County, Virginia",B19101H_001,"White, Not Hispanic",2692,219,2692,2024,Total Families,NA
+51029,"Buckingham County, Virginia",B19101H_002,"White, Not Hispanic",21,27,2692,2024,Less than 10000,below_15k
+51029,"Buckingham County, Virginia",B19101H_003,"White, Not Hispanic",34,34,2692,2024,10000 to 14999,below_15k
+51029,"Buckingham County, Virginia",B19101H_004,"White, Not Hispanic",0,21,2692,2024,15000 to 19999,below_30k
+51029,"Buckingham County, Virginia",B19101H_005,"White, Not Hispanic",35,38,2692,2024,20000 to 24999,below_30k
+51029,"Buckingham County, Virginia",B19101H_006,"White, Not Hispanic",101,60,2692,2024,25000 to 29999,below_30k
+51029,"Buckingham County, Virginia",B19101H_007,"White, Not Hispanic",122,72,2692,2024,30000 to 34999,below_45k
+51029,"Buckingham County, Virginia",B19101H_008,"White, Not Hispanic",124,82,2692,2024,35000 to 39999,below_45k
+51029,"Buckingham County, Virginia",B19101H_009,"White, Not Hispanic",146,76,2692,2024,40000 to 44999,below_45k
+51029,"Buckingham County, Virginia",B19101H_010,"White, Not Hispanic",123,102,2692,2024,45000 to 49999,below_60k
+51029,"Buckingham County, Virginia",B19101H_011,"White, Not Hispanic",180,72,2692,2024,50000 to 59999,below_60k
+51029,"Buckingham County, Virginia",B19101H_012,"White, Not Hispanic",334,122,2692,2024,60000 to 74999,below_75k
+51029,"Buckingham County, Virginia",B19101H_013,"White, Not Hispanic",326,113,2692,2024,75000 to 99999,below_100k
+51029,"Buckingham County, Virginia",B19101H_014,"White, Not Hispanic",289,126,2692,2024,100000 to 124999,above_100k
+51029,"Buckingham County, Virginia",B19101H_015,"White, Not Hispanic",252,96,2692,2024,125000 to 149999,above_100k
+51029,"Buckingham County, Virginia",B19101H_016,"White, Not Hispanic",451,143,2692,2024,150000 to 199999,above_100k
+51029,"Buckingham County, Virginia",B19101H_017,"White, Not Hispanic",154,79,2692,2024,200000 or more,above_100k
+51065,"Fluvanna County, Virginia",B19101H_001,"White, Not Hispanic",6218,353,6218,2024,Total Families,NA
+51065,"Fluvanna County, Virginia",B19101H_002,"White, Not Hispanic",35,43,6218,2024,Less than 10000,below_15k
+51065,"Fluvanna County, Virginia",B19101H_003,"White, Not Hispanic",51,49,6218,2024,10000 to 14999,below_15k
+51065,"Fluvanna County, Virginia",B19101H_004,"White, Not Hispanic",43,52,6218,2024,15000 to 19999,below_30k
+51065,"Fluvanna County, Virginia",B19101H_005,"White, Not Hispanic",0,25,6218,2024,20000 to 24999,below_30k
+51065,"Fluvanna County, Virginia",B19101H_006,"White, Not Hispanic",53,46,6218,2024,25000 to 29999,below_30k
+51065,"Fluvanna County, Virginia",B19101H_007,"White, Not Hispanic",98,57,6218,2024,30000 to 34999,below_45k
+51065,"Fluvanna County, Virginia",B19101H_008,"White, Not Hispanic",48,46,6218,2024,35000 to 39999,below_45k
+51065,"Fluvanna County, Virginia",B19101H_009,"White, Not Hispanic",118,79,6218,2024,40000 to 44999,below_45k
+51065,"Fluvanna County, Virginia",B19101H_010,"White, Not Hispanic",81,64,6218,2024,45000 to 49999,below_60k
+51065,"Fluvanna County, Virginia",B19101H_011,"White, Not Hispanic",597,213,6218,2024,50000 to 59999,below_60k
+51065,"Fluvanna County, Virginia",B19101H_012,"White, Not Hispanic",567,189,6218,2024,60000 to 74999,below_75k
+51065,"Fluvanna County, Virginia",B19101H_013,"White, Not Hispanic",931,214,6218,2024,75000 to 99999,below_100k
+51065,"Fluvanna County, Virginia",B19101H_014,"White, Not Hispanic",1074,244,6218,2024,100000 to 124999,above_100k
+51065,"Fluvanna County, Virginia",B19101H_015,"White, Not Hispanic",502,150,6218,2024,125000 to 149999,above_100k
+51065,"Fluvanna County, Virginia",B19101H_016,"White, Not Hispanic",1051,250,6218,2024,150000 to 199999,above_100k
+51065,"Fluvanna County, Virginia",B19101H_017,"White, Not Hispanic",969,249,6218,2024,200000 or more,above_100k
+51079,"Greene County, Virginia",B19101H_001,"White, Not Hispanic",4723,364,4723,2024,Total Families,NA
+51079,"Greene County, Virginia",B19101H_002,"White, Not Hispanic",105,70,4723,2024,Less than 10000,below_15k
+51079,"Greene County, Virginia",B19101H_003,"White, Not Hispanic",22,26,4723,2024,10000 to 14999,below_15k
+51079,"Greene County, Virginia",B19101H_004,"White, Not Hispanic",26,27,4723,2024,15000 to 19999,below_30k
+51079,"Greene County, Virginia",B19101H_005,"White, Not Hispanic",55,80,4723,2024,20000 to 24999,below_30k
+51079,"Greene County, Virginia",B19101H_006,"White, Not Hispanic",13,23,4723,2024,25000 to 29999,below_30k
+51079,"Greene County, Virginia",B19101H_007,"White, Not Hispanic",77,59,4723,2024,30000 to 34999,below_45k
+51079,"Greene County, Virginia",B19101H_008,"White, Not Hispanic",94,73,4723,2024,35000 to 39999,below_45k
+51079,"Greene County, Virginia",B19101H_009,"White, Not Hispanic",118,82,4723,2024,40000 to 44999,below_45k
+51079,"Greene County, Virginia",B19101H_010,"White, Not Hispanic",85,58,4723,2024,45000 to 49999,below_60k
+51079,"Greene County, Virginia",B19101H_011,"White, Not Hispanic",259,106,4723,2024,50000 to 59999,below_60k
+51079,"Greene County, Virginia",B19101H_012,"White, Not Hispanic",588,175,4723,2024,60000 to 74999,below_75k
+51079,"Greene County, Virginia",B19101H_013,"White, Not Hispanic",596,163,4723,2024,75000 to 99999,below_100k
+51079,"Greene County, Virginia",B19101H_014,"White, Not Hispanic",503,140,4723,2024,100000 to 124999,above_100k
+51079,"Greene County, Virginia",B19101H_015,"White, Not Hispanic",657,214,4723,2024,125000 to 149999,above_100k
+51079,"Greene County, Virginia",B19101H_016,"White, Not Hispanic",818,199,4723,2024,150000 to 199999,above_100k
+51079,"Greene County, Virginia",B19101H_017,"White, Not Hispanic",707,205,4723,2024,200000 or more,above_100k
+51109,"Louisa County, Virginia",B19101H_001,"White, Not Hispanic",9169,396,9169,2024,Total Families,NA
+51109,"Louisa County, Virginia",B19101H_002,"White, Not Hispanic",37,39,9169,2024,Less than 10000,below_15k
+51109,"Louisa County, Virginia",B19101H_003,"White, Not Hispanic",96,91,9169,2024,10000 to 14999,below_15k
+51109,"Louisa County, Virginia",B19101H_004,"White, Not Hispanic",177,105,9169,2024,15000 to 19999,below_30k
+51109,"Louisa County, Virginia",B19101H_005,"White, Not Hispanic",139,86,9169,2024,20000 to 24999,below_30k
+51109,"Louisa County, Virginia",B19101H_006,"White, Not Hispanic",242,111,9169,2024,25000 to 29999,below_30k
+51109,"Louisa County, Virginia",B19101H_007,"White, Not Hispanic",399,185,9169,2024,30000 to 34999,below_45k
+51109,"Louisa County, Virginia",B19101H_008,"White, Not Hispanic",127,112,9169,2024,35000 to 39999,below_45k
+51109,"Louisa County, Virginia",B19101H_009,"White, Not Hispanic",209,79,9169,2024,40000 to 44999,below_45k
+51109,"Louisa County, Virginia",B19101H_010,"White, Not Hispanic",388,156,9169,2024,45000 to 49999,below_60k
+51109,"Louisa County, Virginia",B19101H_011,"White, Not Hispanic",588,193,9169,2024,50000 to 59999,below_60k
+51109,"Louisa County, Virginia",B19101H_012,"White, Not Hispanic",745,203,9169,2024,60000 to 74999,below_75k
+51109,"Louisa County, Virginia",B19101H_013,"White, Not Hispanic",1268,273,9169,2024,75000 to 99999,below_100k
+51109,"Louisa County, Virginia",B19101H_014,"White, Not Hispanic",1017,241,9169,2024,100000 to 124999,above_100k
+51109,"Louisa County, Virginia",B19101H_015,"White, Not Hispanic",1018,220,9169,2024,125000 to 149999,above_100k
+51109,"Louisa County, Virginia",B19101H_016,"White, Not Hispanic",1522,323,9169,2024,150000 to 199999,above_100k
+51109,"Louisa County, Virginia",B19101H_017,"White, Not Hispanic",1197,264,9169,2024,200000 or more,above_100k
+51125,"Nelson County, Virginia",B19101H_001,"White, Not Hispanic",3247,246,3247,2024,Total Families,NA
+51125,"Nelson County, Virginia",B19101H_002,"White, Not Hispanic",121,79,3247,2024,Less than 10000,below_15k
+51125,"Nelson County, Virginia",B19101H_003,"White, Not Hispanic",1,20,3247,2024,10000 to 14999,below_15k
+51125,"Nelson County, Virginia",B19101H_004,"White, Not Hispanic",71,72,3247,2024,15000 to 19999,below_30k
+51125,"Nelson County, Virginia",B19101H_005,"White, Not Hispanic",46,39,3247,2024,20000 to 24999,below_30k
+51125,"Nelson County, Virginia",B19101H_006,"White, Not Hispanic",42,30,3247,2024,25000 to 29999,below_30k
+51125,"Nelson County, Virginia",B19101H_007,"White, Not Hispanic",82,79,3247,2024,30000 to 34999,below_45k
+51125,"Nelson County, Virginia",B19101H_008,"White, Not Hispanic",65,56,3247,2024,35000 to 39999,below_45k
+51125,"Nelson County, Virginia",B19101H_009,"White, Not Hispanic",120,67,3247,2024,40000 to 44999,below_45k
+51125,"Nelson County, Virginia",B19101H_010,"White, Not Hispanic",120,87,3247,2024,45000 to 49999,below_60k
+51125,"Nelson County, Virginia",B19101H_011,"White, Not Hispanic",160,81,3247,2024,50000 to 59999,below_60k
+51125,"Nelson County, Virginia",B19101H_012,"White, Not Hispanic",355,128,3247,2024,60000 to 74999,below_75k
+51125,"Nelson County, Virginia",B19101H_013,"White, Not Hispanic",433,147,3247,2024,75000 to 99999,below_100k
+51125,"Nelson County, Virginia",B19101H_014,"White, Not Hispanic",359,99,3247,2024,100000 to 124999,above_100k
+51125,"Nelson County, Virginia",B19101H_015,"White, Not Hispanic",268,84,3247,2024,125000 to 149999,above_100k
+51125,"Nelson County, Virginia",B19101H_016,"White, Not Hispanic",370,112,3247,2024,150000 to 199999,above_100k
+51125,"Nelson County, Virginia",B19101H_017,"White, Not Hispanic",634,134,3247,2024,200000 or more,above_100k
+51540,"Charlottesville city, Virginia",B19101H_001,"White, Not Hispanic",5945,372,5945,2024,Total Families,NA
+51540,"Charlottesville city, Virginia",B19101H_002,"White, Not Hispanic",149,95,5945,2024,Less than 10000,below_15k
+51540,"Charlottesville city, Virginia",B19101H_003,"White, Not Hispanic",33,50,5945,2024,10000 to 14999,below_15k
+51540,"Charlottesville city, Virginia",B19101H_004,"White, Not Hispanic",0,28,5945,2024,15000 to 19999,below_30k
+51540,"Charlottesville city, Virginia",B19101H_005,"White, Not Hispanic",24,39,5945,2024,20000 to 24999,below_30k
+51540,"Charlottesville city, Virginia",B19101H_006,"White, Not Hispanic",92,78,5945,2024,25000 to 29999,below_30k
+51540,"Charlottesville city, Virginia",B19101H_007,"White, Not Hispanic",16,21,5945,2024,30000 to 34999,below_45k
+51540,"Charlottesville city, Virginia",B19101H_008,"White, Not Hispanic",90,69,5945,2024,35000 to 39999,below_45k
+51540,"Charlottesville city, Virginia",B19101H_009,"White, Not Hispanic",25,26,5945,2024,40000 to 44999,below_45k
+51540,"Charlottesville city, Virginia",B19101H_010,"White, Not Hispanic",59,66,5945,2024,45000 to 49999,below_60k
+51540,"Charlottesville city, Virginia",B19101H_011,"White, Not Hispanic",134,73,5945,2024,50000 to 59999,below_60k
+51540,"Charlottesville city, Virginia",B19101H_012,"White, Not Hispanic",312,135,5945,2024,60000 to 74999,below_75k
+51540,"Charlottesville city, Virginia",B19101H_013,"White, Not Hispanic",564,156,5945,2024,75000 to 99999,below_100k
+51540,"Charlottesville city, Virginia",B19101H_014,"White, Not Hispanic",720,247,5945,2024,100000 to 124999,above_100k
+51540,"Charlottesville city, Virginia",B19101H_015,"White, Not Hispanic",563,165,5945,2024,125000 to 149999,above_100k
+51540,"Charlottesville city, Virginia",B19101H_016,"White, Not Hispanic",1111,232,5945,2024,150000 to 199999,above_100k
+51540,"Charlottesville city, Virginia",B19101H_017,"White, Not Hispanic",2053,296,5945,2024,200000 or more,above_100k
+51003,"Albemarle County, Virginia",B19101B_001,Black,2353,269,2353,2024,Total Families,NA
+51003,"Albemarle County, Virginia",B19101B_002,Black,73,54,2353,2024,Less than 10000,below_15k
+51003,"Albemarle County, Virginia",B19101B_003,Black,45,54,2353,2024,10000 to 14999,below_15k
+51003,"Albemarle County, Virginia",B19101B_004,Black,112,92,2353,2024,15000 to 19999,below_30k
+51003,"Albemarle County, Virginia",B19101B_005,Black,13,22,2353,2024,20000 to 24999,below_30k
+51003,"Albemarle County, Virginia",B19101B_006,Black,120,90,2353,2024,25000 to 29999,below_30k
+51003,"Albemarle County, Virginia",B19101B_007,Black,51,59,2353,2024,30000 to 34999,below_45k
+51003,"Albemarle County, Virginia",B19101B_008,Black,203,134,2353,2024,35000 to 39999,below_45k
+51003,"Albemarle County, Virginia",B19101B_009,Black,50,58,2353,2024,40000 to 44999,below_45k
+51003,"Albemarle County, Virginia",B19101B_010,Black,224,158,2353,2024,45000 to 49999,below_60k
+51003,"Albemarle County, Virginia",B19101B_011,Black,41,48,2353,2024,50000 to 59999,below_60k
+51003,"Albemarle County, Virginia",B19101B_012,Black,309,142,2353,2024,60000 to 74999,below_75k
+51003,"Albemarle County, Virginia",B19101B_013,Black,177,74,2353,2024,75000 to 99999,below_100k
+51003,"Albemarle County, Virginia",B19101B_014,Black,343,210,2353,2024,100000 to 124999,above_100k
+51003,"Albemarle County, Virginia",B19101B_015,Black,95,76,2353,2024,125000 to 149999,above_100k
+51003,"Albemarle County, Virginia",B19101B_016,Black,306,133,2353,2024,150000 to 199999,above_100k
+51003,"Albemarle County, Virginia",B19101B_017,Black,191,97,2353,2024,200000 or more,above_100k
+51029,"Buckingham County, Virginia",B19101B_001,Black,1176,142,1176,2024,Total Families,NA
+51029,"Buckingham County, Virginia",B19101B_002,Black,72,56,1176,2024,Less than 10000,below_15k
+51029,"Buckingham County, Virginia",B19101B_003,Black,112,68,1176,2024,10000 to 14999,below_15k
+51029,"Buckingham County, Virginia",B19101B_004,Black,34,38,1176,2024,15000 to 19999,below_30k
+51029,"Buckingham County, Virginia",B19101B_005,Black,42,37,1176,2024,20000 to 24999,below_30k
+51029,"Buckingham County, Virginia",B19101B_006,Black,8,14,1176,2024,25000 to 29999,below_30k
+51029,"Buckingham County, Virginia",B19101B_007,Black,11,14,1176,2024,30000 to 34999,below_45k
+51029,"Buckingham County, Virginia",B19101B_008,Black,23,28,1176,2024,35000 to 39999,below_45k
+51029,"Buckingham County, Virginia",B19101B_009,Black,18,25,1176,2024,40000 to 44999,below_45k
+51029,"Buckingham County, Virginia",B19101B_010,Black,94,88,1176,2024,45000 to 49999,below_60k
+51029,"Buckingham County, Virginia",B19101B_011,Black,39,34,1176,2024,50000 to 59999,below_60k
+51029,"Buckingham County, Virginia",B19101B_012,Black,194,85,1176,2024,60000 to 74999,below_75k
+51029,"Buckingham County, Virginia",B19101B_013,Black,252,99,1176,2024,75000 to 99999,below_100k
+51029,"Buckingham County, Virginia",B19101B_014,Black,142,90,1176,2024,100000 to 124999,above_100k
+51029,"Buckingham County, Virginia",B19101B_015,Black,60,54,1176,2024,125000 to 149999,above_100k
+51029,"Buckingham County, Virginia",B19101B_016,Black,52,63,1176,2024,150000 to 199999,above_100k
+51029,"Buckingham County, Virginia",B19101B_017,Black,23,28,1176,2024,200000 or more,above_100k
+51065,"Fluvanna County, Virginia",B19101B_001,Black,828,203,828,2024,Total Families,NA
+51065,"Fluvanna County, Virginia",B19101B_002,Black,0,25,828,2024,Less than 10000,below_15k
+51065,"Fluvanna County, Virginia",B19101B_003,Black,77,76,828,2024,10000 to 14999,below_15k
+51065,"Fluvanna County, Virginia",B19101B_004,Black,152,105,828,2024,15000 to 19999,below_30k
+51065,"Fluvanna County, Virginia",B19101B_005,Black,43,74,828,2024,20000 to 24999,below_30k
+51065,"Fluvanna County, Virginia",B19101B_006,Black,0,25,828,2024,25000 to 29999,below_30k
+51065,"Fluvanna County, Virginia",B19101B_007,Black,0,25,828,2024,30000 to 34999,below_45k
+51065,"Fluvanna County, Virginia",B19101B_008,Black,0,25,828,2024,35000 to 39999,below_45k
+51065,"Fluvanna County, Virginia",B19101B_009,Black,0,25,828,2024,40000 to 44999,below_45k
+51065,"Fluvanna County, Virginia",B19101B_010,Black,0,25,828,2024,45000 to 49999,below_60k
+51065,"Fluvanna County, Virginia",B19101B_011,Black,38,54,828,2024,50000 to 59999,below_60k
+51065,"Fluvanna County, Virginia",B19101B_012,Black,148,166,828,2024,60000 to 74999,below_75k
+51065,"Fluvanna County, Virginia",B19101B_013,Black,2,3,828,2024,75000 to 99999,below_100k
+51065,"Fluvanna County, Virginia",B19101B_014,Black,168,124,828,2024,100000 to 124999,above_100k
+51065,"Fluvanna County, Virginia",B19101B_015,Black,35,53,828,2024,125000 to 149999,above_100k
+51065,"Fluvanna County, Virginia",B19101B_016,Black,83,71,828,2024,150000 to 199999,above_100k
+51065,"Fluvanna County, Virginia",B19101B_017,Black,82,84,828,2024,200000 or more,above_100k
+51079,"Greene County, Virginia",B19101B_001,Black,447,111,447,2024,Total Families,NA
+51079,"Greene County, Virginia",B19101B_002,Black,56,55,447,2024,Less than 10000,below_15k
+51079,"Greene County, Virginia",B19101B_003,Black,61,76,447,2024,10000 to 14999,below_15k
+51079,"Greene County, Virginia",B19101B_004,Black,109,100,447,2024,15000 to 19999,below_30k
+51079,"Greene County, Virginia",B19101B_005,Black,18,27,447,2024,20000 to 24999,below_30k
+51079,"Greene County, Virginia",B19101B_006,Black,0,25,447,2024,25000 to 29999,below_30k
+51079,"Greene County, Virginia",B19101B_007,Black,0,25,447,2024,30000 to 34999,below_45k
+51079,"Greene County, Virginia",B19101B_008,Black,43,67,447,2024,35000 to 39999,below_45k
+51079,"Greene County, Virginia",B19101B_009,Black,0,25,447,2024,40000 to 44999,below_45k
+51079,"Greene County, Virginia",B19101B_010,Black,4,7,447,2024,45000 to 49999,below_60k
+51079,"Greene County, Virginia",B19101B_011,Black,0,25,447,2024,50000 to 59999,below_60k
+51079,"Greene County, Virginia",B19101B_012,Black,23,42,447,2024,60000 to 74999,below_75k
+51079,"Greene County, Virginia",B19101B_013,Black,62,63,447,2024,75000 to 99999,below_100k
+51079,"Greene County, Virginia",B19101B_014,Black,28,40,447,2024,100000 to 124999,above_100k
+51079,"Greene County, Virginia",B19101B_015,Black,10,15,447,2024,125000 to 149999,above_100k
+51079,"Greene County, Virginia",B19101B_016,Black,28,47,447,2024,150000 to 199999,above_100k
+51079,"Greene County, Virginia",B19101B_017,Black,5,11,447,2024,200000 or more,above_100k
+51109,"Louisa County, Virginia",B19101B_001,Black,1335,224,1335,2024,Total Families,NA
+51109,"Louisa County, Virginia",B19101B_002,Black,12,22,1335,2024,Less than 10000,below_15k
+51109,"Louisa County, Virginia",B19101B_003,Black,84,73,1335,2024,10000 to 14999,below_15k
+51109,"Louisa County, Virginia",B19101B_004,Black,35,36,1335,2024,15000 to 19999,below_30k
+51109,"Louisa County, Virginia",B19101B_005,Black,0,28,1335,2024,20000 to 24999,below_30k
+51109,"Louisa County, Virginia",B19101B_006,Black,44,45,1335,2024,25000 to 29999,below_30k
+51109,"Louisa County, Virginia",B19101B_007,Black,27,43,1335,2024,30000 to 34999,below_45k
+51109,"Louisa County, Virginia",B19101B_008,Black,95,75,1335,2024,35000 to 39999,below_45k
+51109,"Louisa County, Virginia",B19101B_009,Black,24,41,1335,2024,40000 to 44999,below_45k
+51109,"Louisa County, Virginia",B19101B_010,Black,91,76,1335,2024,45000 to 49999,below_60k
+51109,"Louisa County, Virginia",B19101B_011,Black,44,43,1335,2024,50000 to 59999,below_60k
+51109,"Louisa County, Virginia",B19101B_012,Black,102,71,1335,2024,60000 to 74999,below_75k
+51109,"Louisa County, Virginia",B19101B_013,Black,156,86,1335,2024,75000 to 99999,below_100k
+51109,"Louisa County, Virginia",B19101B_014,Black,288,147,1335,2024,100000 to 124999,above_100k
+51109,"Louisa County, Virginia",B19101B_015,Black,139,76,1335,2024,125000 to 149999,above_100k
+51109,"Louisa County, Virginia",B19101B_016,Black,78,63,1335,2024,150000 to 199999,above_100k
+51109,"Louisa County, Virginia",B19101B_017,Black,116,78,1335,2024,200000 or more,above_100k
+51125,"Nelson County, Virginia",B19101B_001,Black,318,96,318,2024,Total Families,NA
+51125,"Nelson County, Virginia",B19101B_002,Black,0,21,318,2024,Less than 10000,below_15k
+51125,"Nelson County, Virginia",B19101B_003,Black,18,22,318,2024,10000 to 14999,below_15k
+51125,"Nelson County, Virginia",B19101B_004,Black,7,12,318,2024,15000 to 19999,below_30k
+51125,"Nelson County, Virginia",B19101B_005,Black,5,8,318,2024,20000 to 24999,below_30k
+51125,"Nelson County, Virginia",B19101B_006,Black,0,21,318,2024,25000 to 29999,below_30k
+51125,"Nelson County, Virginia",B19101B_007,Black,0,21,318,2024,30000 to 34999,below_45k
+51125,"Nelson County, Virginia",B19101B_008,Black,8,12,318,2024,35000 to 39999,below_45k
+51125,"Nelson County, Virginia",B19101B_009,Black,0,21,318,2024,40000 to 44999,below_45k
+51125,"Nelson County, Virginia",B19101B_010,Black,5,9,318,2024,45000 to 49999,below_60k
+51125,"Nelson County, Virginia",B19101B_011,Black,61,48,318,2024,50000 to 59999,below_60k
+51125,"Nelson County, Virginia",B19101B_012,Black,9,18,318,2024,60000 to 74999,below_75k
+51125,"Nelson County, Virginia",B19101B_013,Black,42,56,318,2024,75000 to 99999,below_100k
+51125,"Nelson County, Virginia",B19101B_014,Black,82,77,318,2024,100000 to 124999,above_100k
+51125,"Nelson County, Virginia",B19101B_015,Black,13,19,318,2024,125000 to 149999,above_100k
+51125,"Nelson County, Virginia",B19101B_016,Black,50,70,318,2024,150000 to 199999,above_100k
+51125,"Nelson County, Virginia",B19101B_017,Black,18,20,318,2024,200000 or more,above_100k
+51540,"Charlottesville city, Virginia",B19101B_001,Black,1512,248,1512,2024,Total Families,NA
+51540,"Charlottesville city, Virginia",B19101B_002,Black,152,118,1512,2024,Less than 10000,below_15k
+51540,"Charlottesville city, Virginia",B19101B_003,Black,225,174,1512,2024,10000 to 14999,below_15k
+51540,"Charlottesville city, Virginia",B19101B_004,Black,29,27,1512,2024,15000 to 19999,below_30k
+51540,"Charlottesville city, Virginia",B19101B_005,Black,32,39,1512,2024,20000 to 24999,below_30k
+51540,"Charlottesville city, Virginia",B19101B_006,Black,106,124,1512,2024,25000 to 29999,below_30k
+51540,"Charlottesville city, Virginia",B19101B_007,Black,20,24,1512,2024,30000 to 34999,below_45k
+51540,"Charlottesville city, Virginia",B19101B_008,Black,148,117,1512,2024,35000 to 39999,below_45k
+51540,"Charlottesville city, Virginia",B19101B_009,Black,176,136,1512,2024,40000 to 44999,below_45k
+51540,"Charlottesville city, Virginia",B19101B_010,Black,26,33,1512,2024,45000 to 49999,below_60k
+51540,"Charlottesville city, Virginia",B19101B_011,Black,91,71,1512,2024,50000 to 59999,below_60k
+51540,"Charlottesville city, Virginia",B19101B_012,Black,152,127,1512,2024,60000 to 74999,below_75k
+51540,"Charlottesville city, Virginia",B19101B_013,Black,136,81,1512,2024,75000 to 99999,below_100k
+51540,"Charlottesville city, Virginia",B19101B_014,Black,101,95,1512,2024,100000 to 124999,above_100k
+51540,"Charlottesville city, Virginia",B19101B_015,Black,7,13,1512,2024,125000 to 149999,above_100k
+51540,"Charlottesville city, Virginia",B19101B_016,Black,96,62,1512,2024,150000 to 199999,above_100k
+51540,"Charlottesville city, Virginia",B19101B_017,Black,15,21,1512,2024,200000 or more,above_100k
+51003,"Albemarle County, Virginia",B19101I_001,Hispanic,1833,223,1833,2024,Total Families,NA
+51003,"Albemarle County, Virginia",B19101I_002,Hispanic,13,23,1833,2024,Less than 10000,below_15k
+51003,"Albemarle County, Virginia",B19101I_003,Hispanic,0,31,1833,2024,10000 to 14999,below_15k
+51003,"Albemarle County, Virginia",B19101I_004,Hispanic,0,31,1833,2024,15000 to 19999,below_30k
+51003,"Albemarle County, Virginia",B19101I_005,Hispanic,17,29,1833,2024,20000 to 24999,below_30k
+51003,"Albemarle County, Virginia",B19101I_006,Hispanic,162,130,1833,2024,25000 to 29999,below_30k
+51003,"Albemarle County, Virginia",B19101I_007,Hispanic,103,111,1833,2024,30000 to 34999,below_45k
+51003,"Albemarle County, Virginia",B19101I_008,Hispanic,32,41,1833,2024,35000 to 39999,below_45k
+51003,"Albemarle County, Virginia",B19101I_009,Hispanic,74,87,1833,2024,40000 to 44999,below_45k
+51003,"Albemarle County, Virginia",B19101I_010,Hispanic,121,94,1833,2024,45000 to 49999,below_60k
+51003,"Albemarle County, Virginia",B19101I_011,Hispanic,132,72,1833,2024,50000 to 59999,below_60k
+51003,"Albemarle County, Virginia",B19101I_012,Hispanic,131,77,1833,2024,60000 to 74999,below_75k
+51003,"Albemarle County, Virginia",B19101I_013,Hispanic,216,154,1833,2024,75000 to 99999,below_100k
+51003,"Albemarle County, Virginia",B19101I_014,Hispanic,252,117,1833,2024,100000 to 124999,above_100k
+51003,"Albemarle County, Virginia",B19101I_015,Hispanic,74,59,1833,2024,125000 to 149999,above_100k
+51003,"Albemarle County, Virginia",B19101I_016,Hispanic,225,112,1833,2024,150000 to 199999,above_100k
+51003,"Albemarle County, Virginia",B19101I_017,Hispanic,281,126,1833,2024,200000 or more,above_100k
+51029,"Buckingham County, Virginia",B19101I_001,Hispanic,35,28,35,2024,Total Families,NA
+51029,"Buckingham County, Virginia",B19101I_002,Hispanic,17,18,35,2024,Less than 10000,below_15k
+51029,"Buckingham County, Virginia",B19101I_003,Hispanic,0,21,35,2024,10000 to 14999,below_15k
+51029,"Buckingham County, Virginia",B19101I_004,Hispanic,0,21,35,2024,15000 to 19999,below_30k
+51029,"Buckingham County, Virginia",B19101I_005,Hispanic,0,21,35,2024,20000 to 24999,below_30k
+51029,"Buckingham County, Virginia",B19101I_006,Hispanic,0,21,35,2024,25000 to 29999,below_30k
+51029,"Buckingham County, Virginia",B19101I_007,Hispanic,0,21,35,2024,30000 to 34999,below_45k
+51029,"Buckingham County, Virginia",B19101I_008,Hispanic,10,19,35,2024,35000 to 39999,below_45k
+51029,"Buckingham County, Virginia",B19101I_009,Hispanic,0,21,35,2024,40000 to 44999,below_45k
+51029,"Buckingham County, Virginia",B19101I_010,Hispanic,0,21,35,2024,45000 to 49999,below_60k
+51029,"Buckingham County, Virginia",B19101I_011,Hispanic,0,21,35,2024,50000 to 59999,below_60k
+51029,"Buckingham County, Virginia",B19101I_012,Hispanic,0,21,35,2024,60000 to 74999,below_75k
+51029,"Buckingham County, Virginia",B19101I_013,Hispanic,8,15,35,2024,75000 to 99999,below_100k
+51029,"Buckingham County, Virginia",B19101I_014,Hispanic,0,21,35,2024,100000 to 124999,above_100k
+51029,"Buckingham County, Virginia",B19101I_015,Hispanic,0,21,35,2024,125000 to 149999,above_100k
+51029,"Buckingham County, Virginia",B19101I_016,Hispanic,0,21,35,2024,150000 to 199999,above_100k
+51029,"Buckingham County, Virginia",B19101I_017,Hispanic,0,21,35,2024,200000 or more,above_100k
+51065,"Fluvanna County, Virginia",B19101I_001,Hispanic,160,76,160,2024,Total Families,NA
+51065,"Fluvanna County, Virginia",B19101I_002,Hispanic,0,25,160,2024,Less than 10000,below_15k
+51065,"Fluvanna County, Virginia",B19101I_003,Hispanic,0,25,160,2024,10000 to 14999,below_15k
+51065,"Fluvanna County, Virginia",B19101I_004,Hispanic,0,25,160,2024,15000 to 19999,below_30k
+51065,"Fluvanna County, Virginia",B19101I_005,Hispanic,0,25,160,2024,20000 to 24999,below_30k
+51065,"Fluvanna County, Virginia",B19101I_006,Hispanic,0,25,160,2024,25000 to 29999,below_30k
+51065,"Fluvanna County, Virginia",B19101I_007,Hispanic,0,25,160,2024,30000 to 34999,below_45k
+51065,"Fluvanna County, Virginia",B19101I_008,Hispanic,3,8,160,2024,35000 to 39999,below_45k
+51065,"Fluvanna County, Virginia",B19101I_009,Hispanic,19,26,160,2024,40000 to 44999,below_45k
+51065,"Fluvanna County, Virginia",B19101I_010,Hispanic,0,25,160,2024,45000 to 49999,below_60k
+51065,"Fluvanna County, Virginia",B19101I_011,Hispanic,15,23,160,2024,50000 to 59999,below_60k
+51065,"Fluvanna County, Virginia",B19101I_012,Hispanic,0,25,160,2024,60000 to 74999,below_75k
+51065,"Fluvanna County, Virginia",B19101I_013,Hispanic,23,37,160,2024,75000 to 99999,below_100k
+51065,"Fluvanna County, Virginia",B19101I_014,Hispanic,37,52,160,2024,100000 to 124999,above_100k
+51065,"Fluvanna County, Virginia",B19101I_015,Hispanic,0,25,160,2024,125000 to 149999,above_100k
+51065,"Fluvanna County, Virginia",B19101I_016,Hispanic,55,51,160,2024,150000 to 199999,above_100k
+51065,"Fluvanna County, Virginia",B19101I_017,Hispanic,8,15,160,2024,200000 or more,above_100k
+51079,"Greene County, Virginia",B19101I_001,Hispanic,313,79,313,2024,Total Families,NA
+51079,"Greene County, Virginia",B19101I_002,Hispanic,0,25,313,2024,Less than 10000,below_15k
+51079,"Greene County, Virginia",B19101I_003,Hispanic,4,6,313,2024,10000 to 14999,below_15k
+51079,"Greene County, Virginia",B19101I_004,Hispanic,0,25,313,2024,15000 to 19999,below_30k
+51079,"Greene County, Virginia",B19101I_005,Hispanic,69,68,313,2024,20000 to 24999,below_30k
+51079,"Greene County, Virginia",B19101I_006,Hispanic,20,28,313,2024,25000 to 29999,below_30k
+51079,"Greene County, Virginia",B19101I_007,Hispanic,0,25,313,2024,30000 to 34999,below_45k
+51079,"Greene County, Virginia",B19101I_008,Hispanic,0,25,313,2024,35000 to 39999,below_45k
+51079,"Greene County, Virginia",B19101I_009,Hispanic,0,25,313,2024,40000 to 44999,below_45k
+51079,"Greene County, Virginia",B19101I_010,Hispanic,0,25,313,2024,45000 to 49999,below_60k
+51079,"Greene County, Virginia",B19101I_011,Hispanic,17,32,313,2024,50000 to 59999,below_60k
+51079,"Greene County, Virginia",B19101I_012,Hispanic,37,48,313,2024,60000 to 74999,below_75k
+51079,"Greene County, Virginia",B19101I_013,Hispanic,16,21,313,2024,75000 to 99999,below_100k
+51079,"Greene County, Virginia",B19101I_014,Hispanic,10,11,313,2024,100000 to 124999,above_100k
+51079,"Greene County, Virginia",B19101I_015,Hispanic,69,66,313,2024,125000 to 149999,above_100k
+51079,"Greene County, Virginia",B19101I_016,Hispanic,0,25,313,2024,150000 to 199999,above_100k
+51079,"Greene County, Virginia",B19101I_017,Hispanic,71,65,313,2024,200000 or more,above_100k
+51109,"Louisa County, Virginia",B19101I_001,Hispanic,318,95,318,2024,Total Families,NA
+51109,"Louisa County, Virginia",B19101I_002,Hispanic,0,28,318,2024,Less than 10000,below_15k
+51109,"Louisa County, Virginia",B19101I_003,Hispanic,28,44,318,2024,10000 to 14999,below_15k
+51109,"Louisa County, Virginia",B19101I_004,Hispanic,0,28,318,2024,15000 to 19999,below_30k
+51109,"Louisa County, Virginia",B19101I_005,Hispanic,1,7,318,2024,20000 to 24999,below_30k
+51109,"Louisa County, Virginia",B19101I_006,Hispanic,0,28,318,2024,25000 to 29999,below_30k
+51109,"Louisa County, Virginia",B19101I_007,Hispanic,0,28,318,2024,30000 to 34999,below_45k
+51109,"Louisa County, Virginia",B19101I_008,Hispanic,1,2,318,2024,35000 to 39999,below_45k
+51109,"Louisa County, Virginia",B19101I_009,Hispanic,0,28,318,2024,40000 to 44999,below_45k
+51109,"Louisa County, Virginia",B19101I_010,Hispanic,8,13,318,2024,45000 to 49999,below_60k
+51109,"Louisa County, Virginia",B19101I_011,Hispanic,81,102,318,2024,50000 to 59999,below_60k
+51109,"Louisa County, Virginia",B19101I_012,Hispanic,53,37,318,2024,60000 to 74999,below_75k
+51109,"Louisa County, Virginia",B19101I_013,Hispanic,38,40,318,2024,75000 to 99999,below_100k
+51109,"Louisa County, Virginia",B19101I_014,Hispanic,0,28,318,2024,100000 to 124999,above_100k
+51109,"Louisa County, Virginia",B19101I_015,Hispanic,3,7,318,2024,125000 to 149999,above_100k
+51109,"Louisa County, Virginia",B19101I_016,Hispanic,69,72,318,2024,150000 to 199999,above_100k
+51109,"Louisa County, Virginia",B19101I_017,Hispanic,36,41,318,2024,200000 or more,above_100k
+51125,"Nelson County, Virginia",B19101I_001,Hispanic,162,57,162,2024,Total Families,NA
+51125,"Nelson County, Virginia",B19101I_002,Hispanic,9,16,162,2024,Less than 10000,below_15k
+51125,"Nelson County, Virginia",B19101I_003,Hispanic,0,21,162,2024,10000 to 14999,below_15k
+51125,"Nelson County, Virginia",B19101I_004,Hispanic,0,21,162,2024,15000 to 19999,below_30k
+51125,"Nelson County, Virginia",B19101I_005,Hispanic,0,21,162,2024,20000 to 24999,below_30k
+51125,"Nelson County, Virginia",B19101I_006,Hispanic,0,21,162,2024,25000 to 29999,below_30k
+51125,"Nelson County, Virginia",B19101I_007,Hispanic,0,21,162,2024,30000 to 34999,below_45k
+51125,"Nelson County, Virginia",B19101I_008,Hispanic,0,21,162,2024,35000 to 39999,below_45k
+51125,"Nelson County, Virginia",B19101I_009,Hispanic,0,21,162,2024,40000 to 44999,below_45k
+51125,"Nelson County, Virginia",B19101I_010,Hispanic,0,21,162,2024,45000 to 49999,below_60k
+51125,"Nelson County, Virginia",B19101I_011,Hispanic,0,21,162,2024,50000 to 59999,below_60k
+51125,"Nelson County, Virginia",B19101I_012,Hispanic,28,29,162,2024,60000 to 74999,below_75k
+51125,"Nelson County, Virginia",B19101I_013,Hispanic,0,21,162,2024,75000 to 99999,below_100k
+51125,"Nelson County, Virginia",B19101I_014,Hispanic,5,9,162,2024,100000 to 124999,above_100k
+51125,"Nelson County, Virginia",B19101I_015,Hispanic,54,47,162,2024,125000 to 149999,above_100k
+51125,"Nelson County, Virginia",B19101I_016,Hispanic,0,21,162,2024,150000 to 199999,above_100k
+51125,"Nelson County, Virginia",B19101I_017,Hispanic,66,65,162,2024,200000 or more,above_100k
+51540,"Charlottesville city, Virginia",B19101I_001,Hispanic,635,101,635,2024,Total Families,NA
+51540,"Charlottesville city, Virginia",B19101I_002,Hispanic,0,28,635,2024,Less than 10000,below_15k
+51540,"Charlottesville city, Virginia",B19101I_003,Hispanic,0,28,635,2024,10000 to 14999,below_15k
+51540,"Charlottesville city, Virginia",B19101I_004,Hispanic,0,28,635,2024,15000 to 19999,below_30k
+51540,"Charlottesville city, Virginia",B19101I_005,Hispanic,56,95,635,2024,20000 to 24999,below_30k
+51540,"Charlottesville city, Virginia",B19101I_006,Hispanic,10,18,635,2024,25000 to 29999,below_30k
+51540,"Charlottesville city, Virginia",B19101I_007,Hispanic,0,28,635,2024,30000 to 34999,below_45k
+51540,"Charlottesville city, Virginia",B19101I_008,Hispanic,0,28,635,2024,35000 to 39999,below_45k
+51540,"Charlottesville city, Virginia",B19101I_009,Hispanic,23,37,635,2024,40000 to 44999,below_45k
+51540,"Charlottesville city, Virginia",B19101I_010,Hispanic,15,27,635,2024,45000 to 49999,below_60k
+51540,"Charlottesville city, Virginia",B19101I_011,Hispanic,156,97,635,2024,50000 to 59999,below_60k
+51540,"Charlottesville city, Virginia",B19101I_012,Hispanic,99,91,635,2024,60000 to 74999,below_75k
+51540,"Charlottesville city, Virginia",B19101I_013,Hispanic,33,39,635,2024,75000 to 99999,below_100k
+51540,"Charlottesville city, Virginia",B19101I_014,Hispanic,53,54,635,2024,100000 to 124999,above_100k
+51540,"Charlottesville city, Virginia",B19101I_015,Hispanic,53,49,635,2024,125000 to 149999,above_100k
+51540,"Charlottesville city, Virginia",B19101I_016,Hispanic,28,34,635,2024,150000 to 199999,above_100k
+51540,"Charlottesville city, Virginia",B19101I_017,Hispanic,109,71,635,2024,200000 or more,above_100k
