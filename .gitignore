@@ -3,6 +3,8 @@
 /.DS_Store
 atlas_files/test_files/
 prep/
+*hold/
+*rawdata/
 
 # Temp data
 tempdata/

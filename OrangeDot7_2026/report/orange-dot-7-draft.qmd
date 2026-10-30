@@ -1,5 +1,5 @@
 ---
-title: "Orange Dot 7.0 DRAFT"
+title: "Orange Dot Report 7.0: Realizing Our Potential"
 subtitle: "Family Self-Sufficiency in the Charlottesville Region: Albemarle, Buckingham, Fluvanna, Greene, Louisa, Nelson Counties & the City of Charlottesville, Virginia"
 date: "October 2026"
 date-format: "MMMM YYYY"
@@ -8,6 +8,7 @@ format:
   html:
     toc: true
     toc-depth: 4
+    fig-dpi: 150
     theme: cosmo
     embed-resources: true
     # grid:
@@ -22,7 +23,7 @@ format:
   #   # fig-width: 3
   #   # fig-height: 2
   #   # # fig-format: png
-  #   fig-dpi: 300
+  #   fig-dpi: 250
   #   # embed-resources: true
   #   reference-doc: styles.docx
 execute:
@@ -38,8 +39,8 @@ margin: 0 0 22px;
 border-left: 6px solid #3991d1;
 }
 
-h5, .h5, h4, .h4, h3, .h3 {
-  font-weight: 600;
+h5, .h5{
+  font-weight: 500;
 }
 h4, .h4, h3, .h3 {
   font-size: calc(1.27rem + 0.24vw);
@@ -49,13 +50,6 @@ h5, .h5 {
   font-size: calc(1.07rem + 0.24vw);
 }
 
-h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
-  margin-top: 0;
-  margin-bottom: .5rem;
-  /*font-weight: 400;*/
-  line-height: 1.2;
-  color: #373a3c;
-}
 
 .tab-content {
     padding: 12px;
@@ -104,7 +98,6 @@ library(patchwork)
 library(rcartocolor)
 library(gt)
 
-
 # Tract geometries ----
 county_codes <- c("003", "540", "065", "079", "109", "125", "029")
 tract_geo <- tracts(state = "VA", county = county_codes, year = 2024)
@@ -133,7 +126,58 @@ source_acs <- "Data Source: American Community Survey (ACS), 2020-2024; U.S. Cen
 source_pums <- "Data Source: ACS Public Use Microdata Sample (PUMS), 2020-2024; U.S. Census Bureau"
 ```
 
+## Executive Summary
+
+In the larger Charlottesville region, 22,467 families (32%) do not make enough money to meet their basic needs, including the cost of housing, child care, food, transportation, health care, phone, internet, and taxes. Rising costs and inflation combined with stagnant wages and undervalued labor has made it increasingly difficult for families to be self-sufficient. 
+
+The goal of the Orange Dot Report is to provide an overview of the families in our region that struggle to afford the basic necessities. To determine what annual income is required for a family in our region to be considered self-sufficient, this year’s report uses household budget data from the national research project, United for ALICE. United for ALICE provides household survival budgets that reflect the minimum cost of living in today’s economy and vary by location and family size. 
+
+The Orange Dot Report focuses on families living in the City of Charlottesville and the surrounding counties of Albemarle, Buckingham, Fluvanna, Greene, Louisa, and Nelson. The average annual survival budget for families in our region ranges from around $66,000 in Buckingham to $87,000 in the City of Charlottesville. A detailed breakdown of these costs and wages are provided in this report for each locality.
+
+While families facing economic insecurity live throughout our region, the struggle is not equally shared. For families with children under 18 years old, the financial burden is larger: 1 in 3 (34%) do not earn enough to meet their basic needs, compared to 1 in 5 (20%) families without children under 18 years. Additionally, 56% of Black families and 47% of Hispanic families do not earn enough to meet their basic needs, compared to 28% of white families. This reflects a persistent gap resulting from past and ongoing policies that suppress investment, opportunity, and wealth creation in minoritized communities.
+
+The percent of families struggling overall is highest in Buckingham and Greene counties at 41%, and lowest in Albemarle County, at 27%. The variation within localities is even greater. Most localities in our region have areas where over half (50%) of families have less than family-sufficient incomes. Albemarle, Fluvanna, and the City of Charlottesville each have neighborhoods where 3 in 4 families (75%) do not earn enough to meet the local cost of living.
+
+In addition to presenting survival budgets and income data for families, the Locality Profiles in this year’s Orange Dot Report also include information on households aged 65 years and over. There are many areas in our region where those 65 years and over, who may no longer be in the workforce and living on fixed incomes, do not have enough to meet their basic needs. 
+
+Despite more than a decade of attention and the dedicated efforts of many valuable organizations and programs, there are still too many struggling families. For a region as prosperous as ours, we have the means to build programs and enact policy that helps more families become self-sufficient. 
+
+## Introduction
+
+>We seek to build “a world of constantly accelerating economic progress—not material welfare as an end in itself, but as a means to liberate the capacity of every human being to pursue his talents and to pursue his hopes.” 
+>
+> --- Robert F. Kennedy, Remarks delivered June 6, 1966, Cape Town, South Africa
+
+A community thrives when its residents thrive. Residents thrive when their capacity as human beings is unleashed. And their capacity as human beings can only be unleashed when their basic needs are met.
+
+As illustrated in the pages that follow, there are too many families in our community who do not earn enough to meet their basic needs. When you worry every month about paying the landlord, every week about buying groceries, every day about whether your car will start, it is difficult to be the parent you want to be, the worker you know you could be, or the person you were meant to be.
+
+There are thousands in our community who dream of being their better selves, but their daily reality causes that dream to fade. Too often, that reality involves working long hours for low wages. These neighbors have a lack of income, but not a lack of value. They want to do better for themselves and their families, but the pathway that could lead them there is unmarked. They recognize the potential they have within them but can’t find the way to realize that potential.
+
+In his I Have A Dream speech, Dr. Martin Luther King, Jr. lamented that there were too many Americans living “on a lonely island of poverty in the midst of a vast ocean of material prosperity.” 
+
+Today, we remain surrounded by a vast ocean of material prosperity. Yet, here in our community there are too many families currently stranded on that island. Too many who do not make enough to meet the costs of survival—food, shelter, clothing and utilities—and the added costs related to working—childcare and transportation. Too many left behind. 
+
+>“Only when we know where we are will we know where we can go and how we can get there.”
+> --- Robert F. Kennedy, in a 1968 address, paraphrasing from Abraham Lincoln’s “House Divided” speech.
+
+We cannot begin to realize the potential of those being left behind, however, without understanding their circumstances. 
+
+## Defining Self-Sufficiency
+
+The goal of the Orange Dot Report is to provide an overview of the families in our region that struggle to afford the basic necessities, to describe where we are. This year’s report uses household budget data from the national research project, United for ALICE, to estimate the annual income required for a family in our region to be self-sufficient.
+
+United for ALICE provides household budgets that are specific to location and household composition, taking into account different sized households, ages of children and local cost of living. The Household Survival Budgets, used to determine family self-sufficiency in this report, reflect the minimum cost to live and work in today’s economy and include housing, child care, food, transportation, health care, and technology, plus taxes and a contingency fund for one-time unanticipated costs. The data sources used by United for ALICE in determining household expenses are comparable to those used in past Orange Dot Reports, and their methods are replicable, updated annually, and sensitive to local context. For more information on the sources used in determining household budgets, see more at United for ALICE: [https://www.unitedforalice.org/the-cost-of-basics/virginia](https://www.unitedforalice.org/the-cost-of-basics/virginia).
+
+The Orange Dot Report differs from the work of United for ALICE in one fundamental respect: Orange Dot focuses on family households while ALICE focuses on all households. Family households are defined by the U.S. Census as households where two or more people are related by birth, marriage, or adoption. By centering families, the Orange Dot Report focuses on households in our community who are more likely to be pooling resources and sharing in financial hardship.^[Family households, by definition, exclude households composed of single adults. Thus, college students are not counted in this analysis unless they reside with a relative. As this definition can also exclude older adults living alone, who may face higher risk of economic instability, we include separate estimates of the economic self-sufficiency of households aged 65 and over to provide a more complete picture of this growing population.] To more clearly understand the impact of rising costs, this year’s Orange Dot Report also provides data for both families with and without children under 18 years old. Families with dependents, in particular, face higher barriers to mobility, education, and other investments to improve work and wage prospects.
+
 ## Families Struggling in Our Region
+
+There are approximately 70,000 families living in the Charlottesville region, defined in this report as the City of Charlottesville and the surrounding counties of Albemarle, Buckingham, Fluvanna, Greene, Louisa, and Nelson. Of these families, over 22,000 (32%) do not earn enough to provide for their family’s basic needs. This is nearly one in three families struggling to keep up with the rising cost of living in our region.
+
+The summary tables below show the breakdown of struggling families in the Charlottesville region. In each locality, nearly 30% of families or more are struggling, with the highest percentages in Buckingham and Fluvanna, at 41%. Localities in our region vary in population, so that even though Albemarle has the lowest percent (27%), it has the highest number of families struggling to meet their basic minimum needs, at over 7,500. 
+
+While families facing economic insecurity live throughout our region, the struggle is not equally shared. For families with children under 18 years old, the financial burden is larger: 34% struggle to meet their basic needs compared to 20% for families without children under 18. Additionally, 56% of Black families and 47% of Hispanic families do not earn enough to meet their basic needs, compared to 28% of white families. This reflects a persistent gap resulting from past and ongoing policies that suppress investment, opportunity, and wealth creation in minoritized communities.
 
 ```{r, results='asis'}
 #| label: region-summary
@@ -246,7 +290,9 @@ fam_type_region_table %>%
 
 ```{r fig-region-race-ethn}
 #| fig-height: 5
+#| fig-width: 7
 #| fig-align: "center"
+#| out-width: "100%"
 #| fig-cap: "Percent and number of struggling families by race and ethinicity for the Charlottesville region, including Albemarle, Buckingham, Fluvanna, Greene, Louisa, Nelson Counties and the City of Charlottesville. 56% of Black families and 47% of Hispanic families do not earn enough to meet their basic needs, compared to 28% of white families."
 
 # Read in data
@@ -285,12 +331,15 @@ region_fam_race %>%
 ```
 
 ## Undervalued Labor
+
+A majority (64%) of workers in struggling families are working at least 40 hours per week, the equivalent of a full-time job. Many of those who are working less than full time would like to work more. These workers are also in low-waged employment. Half of workers in struggling families are earning less than $30,000 a year—making it difficult to impossible to meet their household’s survival budget for single or two-parent households. This deeper understanding about people in the workforce who are in families earning below what they need is drawn from the ACS Public Use Microdata Sample provided by the U.S. Census Bureau for our region.^[The Thomas Jefferson Planning District includes the City of Charlottesville, and Albemarle, Fluvanna, Greene, Louisa, and Nelson counties. Buckingham County is not included in the microdata sample.]
+
 ```{r fig-worker-hours}
 #| fig-height: 4.5
 #| fig-width: 9
 #| fig-align: "center"
 #| out-width: "100%"
-#| fig-cap: "Estimated number and percent of workers in the TJ Planning District in families with income less than the household survival budget by weekly hours worked. 64% of these workers worked 40 or more hours a week; 88% worked 20 or more hours a week."
+#| fig-cap: "Estimated number and percent of workers in the TJ Planning District in families with income less than the household survival budget by weekly hours worked. 64% of these workers worked 40 or more hours a week; 88% worked 20 or more hours a week. The Thomas Jefferson Planning District includes the City of Charlottesville, and Albemarle, Fluvanna, Greene, Louisa, and Nelson counties. Buckingham County is not included in the microdata sample."
 
 workers_by_hours <- read_csv("../data/pums_workers_by_hours.csv") %>% 
   mutate(
@@ -316,7 +365,7 @@ workers_by_hours %>%
                      expand = expansion(mult = c(0, .3))) +
   labs(title = "Weekly Hours Worked for Workers Earning Below Survival Budget",
        subtitle = geography_label,
-       caption = paste0("The Thomas Jefferson Planning District includes the City of Charlottesville, and Albemarle, Fluvanna,\n Greene, Louisa, and Nelson counties. Buckingham County is not included in the microdata sample.\n ",source_pums)
+       caption = source_pums
        ) +
   theme_minimal() +
   theme(legend.title=element_blank(),
@@ -341,7 +390,7 @@ workers_by_hours %>%
 #| fig-width: 9
 #| fig-align: "center"
 #| out-width: "100%"
-#| fig-cap: "Estimated number and percent of workers in the TJ Planning District in families with income less than the household survival budget by their annual wage. 77% of these workers earned less than $45,000 a year."
+#| fig-cap: "Estimated number and percent of workers in the TJ Planning District in families with income less than the household survival budget by their annual wage. 77% of these workers earned less than $45,000 a year. The Thomas Jefferson Planning District includes the City of Charlottesville, and Albemarle, Fluvanna, Greene, Louisa, and Nelson counties. Buckingham County is not included in the microdata sample."
 
 workers_by_wages <- read_csv("../data/pums_workers_by_wage_bins.csv") %>% 
    mutate(wage_bin_label = factor(wage_bin_label,
@@ -369,7 +418,7 @@ workers_by_wages %>%
   scale_fill_manual(values = c("#DE8A5A", "#EDBB8A", "#EDBB8A", "#F6EDBD","#B4C8A8", "#B4C8A8", "#70A494"))+
   labs(title = "Annual Wage for Workers Earning Below Survival Budget",
        subtitle = geography_label,
-       caption = paste0("The Thomas Jefferson Planning District includes the City of Charlottesville, and Albemarle, Fluvanna,\n Greene, Louisa, and Nelson counties. Buckingham County is not included in the microdata sample.\n ",source_pums)
+       caption = source_pums
        ) +
   theme_minimal() +
   theme(legend.title=element_blank(),
@@ -388,6 +437,23 @@ workers_by_wages %>%
         plot.title = element_text(size = 16),
         plot.caption = element_text(size = 11))
 ```
+
+As the data suggests, for most families, low-incomeness is not a constant that must be worked around, but a variable that must be changed. For a family experiencing economic struggle, the first question should be: What do they need to increase their income?
+
+Some families are on fixed incomes or have otherwise reached a more constrained earning potential due to illness, caregiving responsibilities, and other circumstances. The vast majority of workers, however, have the capacity to earn a wage that can support their families. They are working, but their labor is not sufficiently valued.
+
+The undervaluing of labor has far-reaching consequences. The myth of the American Dream promotes the idea that those who work hard and play by the rules will get ahead. The flipside of that myth—if you haven’t gotten ahead, it must be because you don’t work hard enough or play by the rules—leads to negative beliefs about the poor in our society and, subsequently, to reduced support for resources and programs meant to reduce the burdens of poverty. Working hard, however, does not guarantee that individuals will get ahead. Take the formulas below:
+
+
+::: {.shadowbox}
+Hard Work × High Wages  =  High Income\
+Hard Work × Low Wages  =  Low Income
+:::
+
+It’s not the hard work that makes the difference—it’s the low wage. The full-time worker making Virginia’s minimum wage will have a gross income of $26,500 per year.^[Based on the 2026 minimum wage of $12.77 per hour. In 2027, the Virginia minimum wage will increase to $13.75, and subsequently increase to $15.00 per in 2028. https://www.governor.virginia.gov/newsroom/news-releases/2026/april-releases/name-1116004-en.html] To reduce the number of struggling families, therefore, requires an increase in their wages. We need a system that identifies the hard-working families whose labor is not sufficiently valued and help them increase their value in the marketplace.
+
+To get ahead, those workers need jobs and careers that pay enough to support their families. 
+The table below provides information on the types of jobs and the corresponding wages that fall into different earning bands. Note that a number of the lowest paying jobs provide some of the highest value for our society: caring for our children when they’re young and our parents when they’re old. These jobs require them to sacrifice for our benefit by working for less pay than they can live on.
 
 ```{r occupations-by-wage}
 occupations_by_wagebin <- read_csv("../data/bls_occupations_by_wagebin.csv")
@@ -488,6 +554,7 @@ occupations_filtered %>%
     style = cell_text(align = "center", v_align = "middle"),
     locations = list(cells_column_labels(2:4), cells_body(2:4))
   ) %>% 
+  opt_vertical_padding(scale = 0.55) |>
   tab_footnote(
     footnote = "A full list of occupations and wages is available here: https://github.com/virginiaequitycenter/orange-dot/blob/main/OrangeDot7_2026/data/bls_occupations_by_wagebin.csv",
     locations = cells_title(groups = "title")
@@ -598,14 +665,14 @@ med_inc_tract <- med_inc_tract[order(med_inc_tract$tractnames, decreasing=FALSE)
 med_faminc_low <- med_inc_tract %>% 
   filter(str_detect(county,local_name)) |>
   filter(estimate == min(estimate, na.rm = TRUE)) |> 
-  mutate(tractnames = str_remove(tractnames, "/*")) 
+  mutate(tractnames = str_remove(tractnames, fixed("*"))) 
 med_faminc_low_est <- paste0("$", prettyNum(unique(med_faminc_low$estimate), big.mark=",", preserve.width="none"))
 med_faminc_low_name <- paste(med_faminc_low$tractnames, collapse = " and ")
 
 med_faminc_high <- med_inc_tract %>% 
   filter(str_detect(county,local_name)) |> 
   filter(estimate == max(estimate, na.rm = TRUE)) |> 
-  mutate(tractnames = str_remove(tractnames, "/*")) 
+  mutate(tractnames = str_remove(tractnames, fixed("*"))) 
 med_faminc_high_est <- paste0("$", prettyNum(unique(med_faminc_high$estimate), big.mark=",", preserve.width="none"))
 med_faminc_high_name <- paste(med_faminc_high$tractnames, collapse = " and ")
 
@@ -828,7 +895,6 @@ inc_band_local |>
 ```{r}
 #| label: fig-income-bands-type
 #| eval: false
-#| fig-width: 10
 
 # Read in data
 inc_bands_type <- read_csv("../data/income_bands_fam_type_county_2024.csv") |> 
@@ -976,7 +1042,7 @@ med_inc_map <- med_inc_tract %>%
   mutate(estimate = round(estimate, -3),
          text = paste0("$", prettyNum((estimate/1000), big.mark=",", preserve.width="none"), "K")) %>%
   ggplot() +
-  annotation_map_tile(zoomin = 1, progress = "none", cachedir = "../data/tempdata/") +
+  annotation_map_tile(zoomin = 1, progress = "none", cachedir = "orange-dot-7_cache/") +
   geom_sf(aes(fill = round(estimate,0)), color = "white") +
   geom_sf_text(aes(label = text), size = 3.5, color = "black") +
   # scale_fill_stepsn(colors = pal_inc,
@@ -1074,7 +1140,7 @@ medinc_rank
 under_budget_map <- under_budget_tract %>%
   mutate(text = paste0(round(percent,0), "%")) %>%
   ggplot() +
-  annotation_map_tile(zoomin = 1, progress = "none", cachedir = "../data/tempdata/") +
+  annotation_map_tile(zoomin = 1, progress = "none", cachedir = "orange-dot-7_cache/") +
   geom_sf(aes(fill = round(percent,0)), color = "white") +
   geom_sf_text(aes(label = text), size = 3.5, color = "black") +
   # scale_fill_stepsn(colors = pal_ssw,
@@ -1107,24 +1173,6 @@ under_budget_map <- under_budget_tract %>%
         plot.title = element_text(size = 16),
         plot.subtitle = element_text(size = 14),
         plot.caption = element_text(size = 10))
-  # geom_sf_text(aes(label = text), size = 3.25, color = "black") +
-  # scale_fill_stepsn(colors = pal_ssw,
-  #                   labels = scales::label_percent(scale = 1),
-  #                   n.breaks = 6,
-  #                   guide = guide_colourbar(title = "Percent Families",
-  #                                           title.position = "top",
-  #                                           direction = "vertical",
-  #                                           # title.hjust = 0.5,
-  #                                           # nbin = 6,
-  #                                           theme = theme(legend.key.height  = unit(12, "lines"),
-  #                                                         legend.key.width = unit(0.5, "lines"),
-  #                                                         text = element_text(size = 11))
-  #                                           )
-  #                   )+
-  # theme_map() +
-  # theme(legend.position ="right",
-  #       plot.title = element_text(size = 14),
-  #       plot.subtitle = element_text(size = 14))
 
 under_budget_map
 ```
@@ -1249,7 +1297,7 @@ inc_band_65plus_local |>
                      expand = expansion(mult = c(0, .3))
                      ) +
   scale_fill_manual(values = c("#DE8A5A", "#DE8A5A", "#EDBB8A","#EDBB8A","#B4C8A8","#B4C8A8","grey"))+
-  labs(title = "Number of Households 65 years and over by Annual Income Bands",
+  labs(title = paste0("Households 65+ by Annual Income Band for ", inc_band_local$locality),
        subtitle = local_name,
        caption = source_acs
        ) +
@@ -1273,7 +1321,7 @@ inc_band_65plus_local |>
 over65_budget_map <- over65_budget_tract %>%
   mutate(text = paste0(round(percent,0), "%")) %>%
   ggplot() +
-  annotation_map_tile(zoomin = 1, progress = "none", cachedir = "../data/tempdata/") +
+  annotation_map_tile(zoomin = 1, progress = "none", cachedir = "orange-dot-7_cache/") +
   geom_sf(aes(fill = round(percent,0)), color = "white") +
   geom_sf_text(aes(label = text), size = 3.5, color = "black") +
   # scale_fill_stepsn(colors = pal_ssw,
@@ -1291,7 +1339,7 @@ over65_budget_map <- over65_budget_tract %>%
                                                           text = element_text(size = 10)) 
                                             )
                     )+
-  labs(title = "Households 65 years and over with Income below Average Survival Budget",
+  labs(title = "Households 65+ with Income below Average Survival Budget",
       subtitle = local_name,
       caption = source_acs
       ) +
@@ -1370,6 +1418,15 @@ local_name <- "Albemarle"
 #| ref.label: all-fam-budget
 ```
 
+```{r fig-family-race-alb}
+#| ref.label: "fig-family-race"
+#| fig-cap: "Percent and number of families earning above and below the average family survival budget, 2024 for Albemarle County"
+#| fig-height: 5
+#| fig-width: 7
+#| fig-align: "center"
+#| out-width: "100%"
+```
+
 ```{r fig-income-bands-alb}
 #| ref.label: fig-income-bands
 #| fig-width: 9
@@ -1386,13 +1443,6 @@ local_name <- "Albemarle"
 #| out-width: "100%"
 ```
 
-```{r fig-family-race-alb}
-#| ref.label: "fig-family-race"
-#| fig-cap: "Percent and number of families earning above and below the average family survival budget, 2024 for Albemarle County"
-#| fig-height: 5
-#| fig-align: "center"
-```
-
 ::: {.content-hidden when-format="docx"} 
 ::: {layout="[70,30]"}
 ```{r fig-inc-tract-map-alb}
@@ -1400,6 +1450,7 @@ local_name <- "Albemarle"
 #| fig-width: 9
 #| ref.label: "fig-inc-tract-map"
 #| fig-cap: "Median family income by census tract, 2024, for Albemarle County."
+#| out-width: "100%"
 ```
 
 ```{r inc_tract_margin_alb}
@@ -1412,6 +1463,7 @@ local_name <- "Albemarle"
 ```{r inc-tract-alb}
 #| fig-height: 11
 #| fig-width: 9
+#| out-width: "100%"
 #| ref.label: ["fig-inc-tract-map","inc-tract-margin"]
 ```
 ::: 
@@ -1421,6 +1473,7 @@ local_name <- "Albemarle"
 ```{r fig-below-tract-map-alb}
 #| fig-height: 11
 #| fig-width: 9
+#| out-width: "100%"
 #| ref.label: fig-below-tract-map
 #| fig-cap: "Percent of families with annual income below the survival budget by census tract, 2024, for Albemarle County."
 ```
@@ -1435,6 +1488,7 @@ local_name <- "Albemarle"
 ```{r below-tract-alb}
 #| fig-height: 11
 #| fig-width: 9
+#| out-width: "100%"
 #| ref.label: ["fig-below-tract-map","below-tract-margin"]
 ```
 ::: 
@@ -1457,6 +1511,7 @@ local_name <- "Albemarle"
 ```{r fig-below-65plus-tract-map-alb}
 #| fig-height: 11
 #| fig-width: 9
+#| out-width: "100%"
 #| ref.label: fig-below-65plus-tract-map
 #| fig-cap: "Percent of households 65 years and over with annual income below the survival budget by census tract, 2024, for Albemarle County."
 ```
@@ -1471,6 +1526,7 @@ local_name <- "Albemarle"
 ```{r below-65plus-tract-alb}
 #| fig-height: 11
 #| fig-width: 9
+#| out-width: "100%"
 #| ref.label: ["fig-below-65plus-tract-map","below-65plus-margin"]
 ```
 ::: 
@@ -1499,6 +1555,15 @@ local_name <- "Buckingham"
 #| ref.label: all-fam-budget
 ```
 
+```{r fig-family-race-buc}
+#| ref.label: "fig-family-race"
+#| fig-cap: "Percent and number of families earning above and below the average family survival budget, 2024 for Buckingham County"
+#| fig-height: 5
+#| fig-width: 7
+#| fig-align: "center"
+#| out-width: "100%"
+```
+
 ```{r fig-income-bands-buc}
 #| ref.label: fig-income-bands
 #| fig-width: 9
@@ -1515,18 +1580,12 @@ local_name <- "Buckingham"
 #| out-width: "100%"
 ```
 
-```{r fig-family-race-buc}
-#| ref.label: "fig-family-race"
-#| fig-cap: "Percent and number of families earning above and below the average family survival budget, 2024 for Buckingham County"
-#| fig-height: 5
-#| fig-align: "center"
-```
-
 ::: {.content-hidden when-format="docx"}
 ::: {layout="[70,30]"}
 ```{r fig-inc-tract-map-buc}
 #| fig-height: 8
 #| fig-width: 7
+#| out-width: "100%"
 #| ref.label: "fig-inc-tract-map"
 #| fig-cap: "Median family income by census tract, 2024, for Buckingham County."
 ```
@@ -1541,6 +1600,7 @@ local_name <- "Buckingham"
 ```{r inc-tract-buc}
 #| fig-height: 8
 #| fig-width: 7
+#| out-width: "100%"
 #| ref.label: ["fig-inc-tract-map","inc-tract-margin"]
 ```
 ::: 
@@ -1550,6 +1610,7 @@ local_name <- "Buckingham"
 ```{r fig-below-tract-map-buc}
 #| fig-height: 8
 #| fig-width: 7
+#| out-width: "100%"
 #| ref.label: fig-below-tract-map
 #| fig-cap: "Percent of families with annual income below the survival budget by census tract, 2024, for Buckingham County."
 ```
@@ -1564,6 +1625,7 @@ local_name <- "Buckingham"
 ```{r below-tract-buc}
 #| fig-height: 8
 #| fig-width: 7
+#| out-width: "100%"
 #| ref.label: ["fig-below-tract-map","below-tract-margin"]
 ```
 ::: 
@@ -1586,6 +1648,7 @@ local_name <- "Buckingham"
 ```{r fig-below-65plus-tract-map-buc}
 #| fig-height: 8
 #| fig-width: 7
+#| out-width: "100%"
 #| ref.label: fig-below-65plus-tract-map
 #| fig-cap: "Percent of households 65 years and over with annual income below the survival budget by census tract, 2024, for Buckingham County."
 ```
@@ -1600,6 +1663,7 @@ local_name <- "Buckingham"
 ```{r below-65plus-tract-buc}
 #| fig-height: 8
 #| fig-width: 7
+#| out-width: "100%"
 #| ref.label: ["fig-below-65plus-tract-map","below-65plus-margin"]
 ```
 ::: 
@@ -1628,6 +1692,15 @@ local_name <- "Charlottesville"
 #| ref.label: all-fam-budget
 ```
 
+```{r fig-family-race-cville}
+#| ref.label: "fig-family-race"
+#| fig-cap: "Percent and number of families earning above and below the average family survival budget, 2024 for Charlottesville City"
+#| fig-height: 5
+#| fig-width: 7
+#| fig-align: "center"
+#| out-width: "100%"
+```
+
 ```{r fig-income-bands-cville}
 #| ref.label: fig-income-bands
 #| fig-width: 9
@@ -1644,18 +1717,12 @@ local_name <- "Charlottesville"
 #| out-width: "100%"
 ```
 
-```{r fig-family-race-cville}
-#| ref.label: "fig-family-race"
-#| fig-cap: "Percent and number of families earning above and below the average family survival budget, 2024 for Charlottesville City"
-#| fig-height: 5
-#| fig-align: "center"
-```
-
 ::: {.content-hidden when-format="docx"}
 ::: {layout="[70,30]"}
 ```{r fig-inc-tract-map-cville}
 #| fig-height: 8
 #| fig-width: 7
+#| out-width: "100%"
 #| ref.label: "fig-inc-tract-map"
 #| fig-cap: "Median family income by census tract, 2024, for Charlottesville City."
 ```
@@ -1670,6 +1737,7 @@ local_name <- "Charlottesville"
 ```{r inc-tract-cville}
 #| fig-height: 8
 #| fig-width: 7
+#| out-width: "100%"
 #| ref.label: ["fig-inc-tract-map","inc-tract-margin"]
 ```
 ::: 
@@ -1679,6 +1747,7 @@ local_name <- "Charlottesville"
 ```{r fig-below-tract-map-cville}
 #| fig-height: 8
 #| fig-width: 7
+#| out-width: "100%"
 #| ref.label: fig-below-tract-map
 #| fig-cap: "Percent of families with annual income below the survival budget by census tract, 2024, for Charlottesville City."
 ```
@@ -1693,6 +1762,7 @@ local_name <- "Charlottesville"
 ```{r below-tract-cville}
 #| fig-height: 8
 #| fig-width: 7
+#| out-width: "100%"
 #| ref.label: ["fig-below-tract-map","below-tract-margin"]
 ```
 ::: 
@@ -1715,6 +1785,7 @@ local_name <- "Charlottesville"
 ```{r fig-below-65plus-tract-map-cville}
 #| fig-height: 8
 #| fig-width: 7
+#| out-width: "100%"
 #| ref.label: fig-below-65plus-tract-map
 #| fig-cap: "Percent of households 65 years and over with annual income below the survival budget by census tract, 2024, for Charlottesville City"
 ```
@@ -1729,6 +1800,7 @@ local_name <- "Charlottesville"
 ```{r below-65plus-tract-cville}
 #| fig-height: 8
 #| fig-width: 7
+#| out-width: "100%"
 #| ref.label: ["fig-below-65plus-tract-map","below-65plus-margin"]
 ```
 ::: 
@@ -1757,6 +1829,15 @@ local_name <- "Fluvanna"
 #| ref.label: all-fam-budget
 ```
 
+```{r fig-family-race-flu}
+#| ref.label: "fig-family-race"
+#| fig-cap: "Percent and number of families earning above and below the average family survival budget, 2024 for Fluvanna County"
+#| fig-height: 5
+#| fig-width: 7
+#| fig-align: "center"
+#| out-width: "100%"
+```
+
 ```{r fig-income-bands-flu}
 #| ref.label: fig-income-bands
 #| fig-width: 9
@@ -1773,18 +1854,12 @@ local_name <- "Fluvanna"
 #| out-width: "100%"
 ```
 
-```{r fig-family-race-flu}
-#| ref.label: "fig-family-race"
-#| fig-cap: "Percent and number of families earning above and below the average family survival budget, 2024 for Fluvanna County"
-#| fig-height: 5
-#| fig-align: "center"
-```
-
 ::: {.content-hidden when-format="docx"}
 ::: {layout="[70,30]"}
 ```{r fig-inc-tract-map-flu}
 #| fig-height: 8
 #| fig-width: 7
+#| out-width: "100%"
 #| ref.label: "fig-inc-tract-map"
 #| fig-cap: "Median family income by census tract, 2024, for Fluvanna County."
 ```
@@ -1799,6 +1874,7 @@ local_name <- "Fluvanna"
 ```{r inc-tract-flu}
 #| fig-height: 8
 #| fig-width: 7
+#| out-width: "100%"
 #| ref.label: ["fig-inc-tract-map","inc-tract-margin"]
 ```
 ::: 
@@ -1808,6 +1884,7 @@ local_name <- "Fluvanna"
 ```{r fig-below-tract-map-flu}
 #| fig-height: 8
 #| fig-width: 7
+#| out-width: "100%"
 #| ref.label: fig-below-tract-map
 #| fig-cap: "Percent of families with annual income below the survival budget by census tract, 2024, for Fluvanna County."
 ```
@@ -1822,6 +1899,7 @@ local_name <- "Fluvanna"
 ```{r below-tract-flu}
 #| fig-height: 8
 #| fig-width: 7
+#| out-width: "100%"
 #| ref.label: ["fig-below-tract-map","below-tract-margin"]
 ```
 ::: 
@@ -1844,6 +1922,7 @@ local_name <- "Fluvanna"
 ```{r fig-below-65plus-tract-map-flu}
 #| fig-height: 8
 #| fig-width: 7
+#| out-width: "100%"
 #| ref.label: fig-below-65plus-tract-map
 #| fig-cap: "Percent of households 65 years and over with annual income below the survival budget by census tract, 2024, for Fluvanna County."
 ```
@@ -1858,6 +1937,7 @@ local_name <- "Fluvanna"
 ```{r below-65plus-tract-flu}
 #| fig-height: 8
 #| fig-width: 7
+#| out-width: "100%"
 #| ref.label: ["fig-below-65plus-tract-map","below-65plus-margin"]
 ```
 ::: 
@@ -1886,6 +1966,15 @@ local_name <- "Greene"
 #| ref.label: all-fam-budget
 ```
 
+```{r fig-family-race-grn}
+#| ref.label: "fig-family-race"
+#| fig-cap: "Percent and number of families earning above and below the average family survival budget, 2024 for Greene County"
+#| fig-height: 5
+#| fig-width: 7
+#| fig-align: "center"
+#| out-width: "100%"
+```
+
 ```{r fig-income-bands-grn}
 #| ref.label: fig-income-bands
 #| fig-width: 9
@@ -1902,18 +1991,12 @@ local_name <- "Greene"
 #| out-width: "100%"
 ```
 
-```{r fig-family-race-grn}
-#| ref.label: "fig-family-race"
-#| fig-cap: "Percent and number of families earning above and below the average family survival budget, 2024 for Greene County"
-#| fig-height: 5
-#| fig-align: "center"
-```
-
 ::: {.content-hidden when-format="docx"}
 ::: {layout="[70,30]"}
 ```{r fig-inc-tract-map-grn}
 #| fig-height: 8
 #| fig-width: 7
+#| out-width: "100%"
 #| ref.label: "fig-inc-tract-map"
 #| fig-cap: "Median family income by census tract, 2024, for Greene County."
 ```
@@ -1928,6 +2011,7 @@ local_name <- "Greene"
 ```{r inc-tract-grn}
 #| fig-height: 8
 #| fig-width: 7
+#| out-width: "100%"
 #| ref.label: ["fig-inc-tract-map","inc-tract-margin"]
 ```
 ::: 
@@ -1937,6 +2021,7 @@ local_name <- "Greene"
 ```{r fig-below-tract-map-grn}
 #| fig-height: 8
 #| fig-width: 7
+#| out-width: "100%"
 #| ref.label: fig-below-tract-map
 #| fig-cap: "Percent of families with annual income below the survival budget by census tract, 2024, for Greene County."
 ```
@@ -1951,6 +2036,7 @@ local_name <- "Greene"
 ```{r below-tract-grn}
 #| fig-height: 8
 #| fig-width: 7
+#| out-width: "100%"
 #| ref.label: ["fig-below-tract-map","below-tract-margin"]
 ```
 ::: 
@@ -1973,6 +2059,7 @@ local_name <- "Greene"
 ```{r fig-below-65plus-tract-map-grn}
 #| fig-height: 8
 #| fig-width: 7
+#| out-width: "100%"
 #| ref.label: fig-below-65plus-tract-map
 #| fig-cap: "Percent of households 65 years and over with annual income below the survival budget by census tract, 2024, for Greene County."
 ```
@@ -1987,6 +2074,7 @@ local_name <- "Greene"
 ```{r below-65plus-tract-grn}
 #| fig-height: 8
 #| fig-width: 7
+#| out-width: "100%"
 #| ref.label: ["fig-below-65plus-tract-map","below-65plus-margin"]
 ```
 ::: 
@@ -2014,6 +2102,15 @@ local_name <- "Louisa"
 #| ref.label: all-fam-budget
 ```
 
+```{r fig-family-race-lou}
+#| ref.label: "fig-family-race"
+#| fig-cap: "Percent and number of families earning above and below the average family survival budget, 2024 for Louisa County"
+#| fig-height: 5
+#| fig-width: 7
+#| fig-align: "center"
+#| out-width: "100%"
+```
+
 ```{r fig-income-bands-lou}
 #| ref.label: fig-income-bands
 #| fig-width: 9
@@ -2030,18 +2127,12 @@ local_name <- "Louisa"
 #| out-width: "100%"
 ```
 
-```{r fig-family-race-lou}
-#| ref.label: "fig-family-race"
-#| fig-cap: "Percent and number of families earning above and below the average family survival budget, 2024 for Louisa County"
-#| fig-height: 5
-#| fig-align: "center"
-```
-
 ::: {.content-hidden when-format="docx"}
 ::: {layout="[70,30]"}
 ```{r fig-inc-tract-map-lou}
 #| fig-height: 8
 #| fig-width: 7
+#| out-width: "100%"
 #| ref.label: "fig-inc-tract-map"
 #| fig-cap: "Median family income by census tract, 2024, for Louisa County."
 ```
@@ -2056,6 +2147,7 @@ local_name <- "Louisa"
 ```{r inc-tract-lou}
 #| fig-height: 8
 #| fig-width: 7
+#| out-width: "100%"
 #| ref.label: ["fig-inc-tract-map","inc-tract-margin"]
 ```
 ::: 
@@ -2065,6 +2157,7 @@ local_name <- "Louisa"
 ```{r fig-below-tract-map-lou}
 #| fig-height: 8
 #| fig-width: 7
+#| out-width: "100%"
 #| ref.label: fig-below-tract-map
 #| fig-cap: "Percent of families with annual income below the survival budget by census tract, 2024, for Louisa County."
 ```
@@ -2079,6 +2172,7 @@ local_name <- "Louisa"
 ```{r below-tract-lou}
 #| fig-height: 8
 #| fig-width: 7
+#| out-width: "100%"
 #| ref.label: ["fig-below-tract-map","below-tract-margin"]
 ```
 ::: 
@@ -2101,6 +2195,7 @@ local_name <- "Louisa"
 ```{r fig-below-65plus-tract-map-lou}
 #| fig-height: 8
 #| fig-width: 7
+#| out-width: "100%"
 #| ref.label: fig-below-65plus-tract-map
 #| fig-cap: "Percent of households 65 years and over with annual income below the survival budget by census tract, 2024, for Louisa County."
 ```
@@ -2115,6 +2210,7 @@ local_name <- "Louisa"
 ```{r below-65plus-tract-lou}
 #| fig-height: 8
 #| fig-width: 7
+#| out-width: "100%"
 #| ref.label: ["fig-below-65plus-tract-map","below-65plus-margin"]
 ```
 ::: 
@@ -2142,6 +2238,15 @@ local_name <- "Nelson"
 #| ref.label: all-fam-budget
 ```
 
+```{r fig-family-race-nel}
+#| ref.label: "fig-family-race"
+#| fig-cap: "Percent and number of families earning above and below the average family survival budget, 2024 for Nelson County"
+#| fig-height: 5
+#| fig-width: 7
+#| fig-align: "center"
+#| out-width: "100%"
+```
+
 ```{r fig-income-bands-nel}
 #| ref.label: fig-income-bands
 #| fig-width: 9
@@ -2158,18 +2263,12 @@ local_name <- "Nelson"
 #| out-width: "100%"
 ```
 
-```{r fig-family-race-nel}
-#| ref.label: "fig-family-race"
-#| fig-cap: "Percent and number of families earning above and below the average family survival budget, 2024 for Nelson County"
-#| fig-height: 5
-#| fig-align: "center"
-```
-
 ::: {.content-hidden when-format="docx"}
 ::: {layout="[70,30]"}
 ```{r fig-inc-tract-map-nel}
 #| fig-height: 8
 #| fig-width: 7
+#| out-width: "100%"
 #| ref.label: "fig-inc-tract-map"
 #| fig-cap: "Median family income by census tract, 2024, for Nelson County."
 ```
@@ -2184,6 +2283,7 @@ local_name <- "Nelson"
 ```{r inc-tract-map-nel}
 #| fig-height: 8
 #| fig-width: 7
+#| out-width: "100%"
 #| ref.label: ["fig-inc-tract-map","inc-tract-margin"]
 ```
 ::: 
@@ -2193,6 +2293,7 @@ local_name <- "Nelson"
 ```{r fig-below-tract-map-nel}
 #| fig-height: 8
 #| fig-width: 7
+#| out-width: "100%"
 #| ref.label: fig-below-tract-map
 #| fig-cap: "Percent of families with annual income below the survival budget by census tract, 2024, for Nelson County."
 ```
@@ -2207,6 +2308,7 @@ local_name <- "Nelson"
 ```{r below-tract-map-nel}
 #| fig-height: 8
 #| fig-width: 7
+#| out-width: "100%"
 #| ref.label: ["fig-below-tract-map","below-tract-margin"]
 ```
 ::: 
@@ -2229,6 +2331,7 @@ local_name <- "Nelson"
 ```{r fig-below-65plus-tract-map-nel}
 #| fig-height: 8
 #| fig-width: 7
+#| out-width: "100%"
 #| ref.label: fig-below-65plus-tract-map
 #| fig-cap: "Percent of households 65 years and over with annual income below the survival budget by census tract, 2024, for Nelson County."
 ```
@@ -2243,6 +2346,7 @@ local_name <- "Nelson"
 ```{r below-65plus-tract-map-nel}
 #| fig-height: 8
 #| fig-width: 7
+#| out-width: "100%"
 #| ref.label: ["fig-below-65plus-tract-map","below-65plus-margin"]
 ```
 ::: 
@@ -2269,7 +2373,7 @@ The authors of this report are:
 The work supporting the Orange Dot Report 7.0, including our data collection documentation and the corresponding data, is publicly available on Github at https://github.com/virginiaequitycenter/orange-dot/tree/main
   
 ### Citation
-Elizabeth Mitchell, Michele Claibourn, Ridge Schuyler. “Orange Dot Report 7.0: Family Self-Sufficiency in the Charlottesville Region: Albemarle, Buckingham, Fluvanna, Greene, Louisa, Nelson Counties & the City of Charlottesville, Virginia.” Published November 2026.
+Elizabeth Mitchell, Michele Claibourn, Ridge Schuyler. UVA Center for Community Partnerships and Network2Work USA. Orange Dot Report 7.0: Family Self-Sufficiency in the Charlottesville Region: Albemarle, Buckingham, Fluvanna, Greene, Louisa, Nelson Counties & the City of Charlottesville, Virginia. Published October 2026.
 
 This work is licensed under a [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).
 
@@ -2336,7 +2440,7 @@ walk(sheet_names, function(s) {
 ```
 :::
 
-[Download Survival Budgets by Family Composition](family-survival-budgets-2024.xlsx){.external target="_blank"}
+[Download Survival Budgets by Family Composition](../pdfs/family-survival-budgets-2024.xlsx){.external target="_blank"}
 :::
 
 ### List of Occupations by Employment Rate 
@@ -2401,6 +2505,7 @@ occupations_by_rate %>%
     style = cell_text(align = "center", v_align = "middle"),
     locations = list(cells_column_labels(2:4), cells_body(2:4))
   ) %>% 
+  opt_vertical_padding(scale = 0.55) |>
   tab_footnote(
     footnote = "A full list of occupations and wages is available here: https://github.com/virginiaequitycenter/orange-dot/blob/main/OrangeDot7_2026/data/bls_occupations_by_wagebin.csv",
     locations = cells_title(groups = "title")
