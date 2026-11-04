@@ -13,7 +13,6 @@ library(survey)
 # Set WD ----
 setwd(here("OrangeDot7_2026"))
 
-
 # PUMS Analysis ----
 # Data ---- 
 hh <- read_csv("data/pums_household_processed_updated.csv")
@@ -68,6 +67,30 @@ workers_by_wages <- per |>
 # Save
 write_csv(workers_by_wages, file = "data/pums_workers_by_wage_bins.csv")
 
+# Family Compositions ----
+# among below income sufficiency
+family_compositions <- hh %>% 
+  filter(below_budget_finc == "Yes") %>%
+  mutate(
+    num_adults = as.integer(str_extract(family_type, "(?<=a)\\d+")),
+    num_infants = as.integer(str_extract(family_type, "(?<=i)\\d+")),
+    num_preschoolers = as.integer(str_extract(family_type, "(?<=p)\\d+")),
+    num_school_age = as.integer(str_extract(family_type, "(?<=s)\\d+")),
+    num_teenagers = as.integer(str_extract(family_type, "(?<=t)\\d+")),
+    num_other = as.integer(str_extract(family_type, "(?<=c)\\d+"))
+  ) %>%
+  replace_na(list(num_adults = 0, num_infants = 0, num_preschoolers = 0,
+                  num_school_age = 0, num_teenagers = 0, num_other = 0)) %>%
+  mutate(
+    num_children = num_infants + num_preschoolers + num_school_age + num_teenagers + num_other
+  ) %>% 
+  group_by(num_adults, num_children) %>% 
+  count(family_type, wt = wgtp, name = "count") %>% 
+  arrange(desc(count)) 
+
+write_csv(family_compositions_below_ess, file = "data/family_compositions_below_ess.csv")
+
+# DID NOT USE - replaced with PUMS variable PERNP Personal Wages 
 # # per: occp/socp = occupation codes 
 # # median wages of occupation: https://www.bls.gov/oes/current/oes_nat.htm#11-0000
 # #   Lots of non-matched (socp ending with X, but also others...)

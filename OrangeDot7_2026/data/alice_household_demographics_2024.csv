@@ -1,0 +1,92 @@
+County,Measure,Year,Name,Above,ALICE,Poverty,# Households,Percent Above,Percent ALICE,Percent Poverty
+Albemarle,Family,2024,Married,8386,620,84,9090,92.26,6.82,0.92
+Albemarle,Family,2024,Single-female-headed,633,874,882,2389,26.5,36.58,36.92
+Albemarle,Family,2024,Single-male-headed,389,477,30,896,43.42,53.24,3.35
+Buckingham,Family,2024,Married,842,66,110,1018,82.71,6.48,10.81
+Buckingham,Family,2024,Single-female-headed,19,119,170,308,6.17,38.64,55.19
+Buckingham,Family,2024,Single-male-headed,139,14,30,183,75.96,7.65,16.39
+Charlottesville,Family,2024,Married,2538,251,117,2906,87.34,8.64,4.03
+Charlottesville,Family,2024,Single-female-headed,223,418,377,1018,21.91,41.06,37.03
+Charlottesville,Family,2024,Single-male-headed,217,232,0,449,48.33,51.67,0
+Fluvanna,Family,2024,Married,1726,378,64,2168,79.61,17.44,2.95
+Fluvanna,Family,2024,Single-female-headed,188,79,22,289,65.05,27.34,7.61
+Fluvanna,Family,2024,Single-male-headed,46,138,33,217,21.2,63.59,15.21
+Greene,Family,2024,Married,1166,220,204,1590,73.33,13.84,12.83
+Greene,Family,2024,Single-female-headed,105,240,262,607,17.3,39.54,43.16
+Greene,Family,2024,Single-male-headed,55,153,0,208,26.44,73.56,0
+Louisa,Family,2024,Married,2336,490,282,3108,75.16,15.77,9.07
+Louisa,Family,2024,Single-female-headed,283,321,179,783,36.14,41,22.86
+Louisa,Family,2024,Single-male-headed,56,183,22,261,21.46,70.11,8.43
+Nelson,Family,2024,Married,630,123,55,808,77.97,15.22,6.81
+Nelson,Family,2024,Single-female-headed,45,78,66,189,23.81,41.27,34.92
+Virginia,Family,2024,Married,532608,85109,26769,644486,82.64,13.21,4.15
+Virginia,Family,2024,Single-female-headed,55983,75920,64646,196549,28.48,38.63,32.89
+Virginia,Family,2024,Single-male-headed,31152,28978,11352,71482,43.58,40.54,15.88
+Albemarle,Age,2024,Under 25,425,1494,680,2599,16.35,57.48,26.16
+Albemarle,Age,2024,25 to 44,10357,3047,2443,15847,65.36,19.23,15.42
+Albemarle,Age,2024,45 to 64,10968,2184,584,13736,79.85,15.9,4.25
+Albemarle,Age,2024,65 and Over,10288,4729,1305,16322,63.03,28.97,8
+Buckingham,Age,2024,25 to 44,1015,372,279,1666,60.92,22.33,16.75
+Buckingham,Age,2024,45 to 64,1099,911,267,2277,48.27,40.01,11.73
+Buckingham,Age,2024,65 and Over,939,1080,221,2240,41.92,48.21,9.87
+Charlottesville,Age,2024,Under 25,319,605,1320,2244,14.22,26.96,58.82
+Charlottesville,Age,2024,25 to 44,4336,2481,1170,7987,54.29,31.06,14.65
+Charlottesville,Age,2024,45 to 64,3366,1332,876,5574,60.39,23.9,15.72
+Charlottesville,Age,2024,65 and Over,2043,1699,268,4010,50.95,42.37,6.68
+Fluvanna,Age,2024,Under 25,53,44,26,123,43.09,35.77,21.14
+Fluvanna,Age,2024,25 to 44,2094,740,91,2925,71.59,25.3,3.11
+Fluvanna,Age,2024,45 to 64,2309,1155,351,3815,60.52,30.28,9.2
+Fluvanna,Age,2024,65 and Over,1915,1194,357,3466,55.25,34.45,10.3
+Greene,Age,2024,Under 25,98,12,24,134,73.13,8.96,17.91
+Greene,Age,2024,25 to 44,1428,675,384,2487,57.42,27.14,15.44
+Greene,Age,2024,45 to 64,1845,778,349,2972,62.08,26.18,11.74
+Greene,Age,2024,65 and Over,1278,874,287,2439,52.4,35.83,11.77
+Louisa,Age,2024,Under 25,53,94,56,203,26.11,46.31,27.59
+Louisa,Age,2024,25 to 44,2671,991,583,4245,62.92,23.35,13.73
+Louisa,Age,2024,45 to 64,4377,1261,411,6049,72.36,20.85,6.79
+Louisa,Age,2024,65 and Over,2789,1697,578,5064,55.08,33.51,11.41
+Nelson,Age,2024,25 to 44,789,260,114,1163,67.84,22.36,9.8
+Nelson,Age,2024,45 to 64,1319,678,486,2483,53.12,27.31,19.57
+Nelson,Age,2024,65 and Over,1374,909,381,2664,51.58,34.12,14.3
+Virginia,Age,2024,Under 25,38401,44755,34140,117296,32.74,38.16,29.11
+Virginia,Age,2024,25 to 44,743587,283821,107461,1134869,65.52,25.01,9.47
+Virginia,Age,2024,45 to 64,837471,283496,99624,1220591,68.61,23.23,8.16
+Virginia,Age,2024,65 and Over,504816,323667,104654,933137,54.1,34.69,11.22
+Albemarle,Race,2024,Asian,1414,361,97,1872,75.53,19.28,5.18
+Albemarle,Race,2024,Black,1589,1837,533,3959,40.14,46.4,13.46
+Albemarle,Race,2024,Hispanic,1609,988,78,2675,60.15,36.93,2.92
+Albemarle,Race,2024,AI/AN,45,107,0,152,29.61,70.39,0
+Albemarle,Race,2024,White,25132,9753,1528,36413,69.02,26.78,4.2
+Albemarle,Race,2024,2+ Races,1271,582,100,1953,65.08,29.8,5.12
+Buckingham,Race,2024,Black,807,727,205,1739,46.41,41.81,11.79
+Buckingham,Race,2024,White,2100,1762,288,4150,50.6,42.46,6.94
+Buckingham,Race,2024,2+ Races,141,153,0,294,47.96,52.04,0
+Charlottesville,Race,2024,Asian,393,573,213,1179,33.33,48.6,18.07
+Charlottesville,Race,2024,Black,746,1628,789,3163,23.59,51.47,24.94
+Charlottesville,Race,2024,Hispanic,472,438,108,1018,46.37,43.03,10.61
+Charlottesville,Race,2024,White,7885,4341,1223,13449,58.63,32.28,9.09
+Charlottesville,Race,2024,2+ Races,704,369,110,1183,59.51,31.19,9.3
+Fluvanna,Race,2024,Black,444,661,221,1326,33.48,49.85,16.67
+Fluvanna,Race,2024,Hispanic,228,58,0,286,79.72,20.28,0
+Fluvanna,Race,2024,White,5454,2443,319,8216,66.38,29.73,3.88
+Fluvanna,Race,2024,2+ Races,314,197,0,511,61.45,38.55,0
+Greene,Race,2024,Asian,99,19,0,118,83.9,16.1,0
+Greene,Race,2024,Black,121,353,161,635,19.06,55.59,25.35
+Greene,Race,2024,Hispanic,161,157,0,318,50.63,49.37,0
+Greene,Race,2024,White,4170,2271,289,6730,61.96,33.74,4.29
+Greene,Race,2024,2+ Races,142,111,0,253,56.13,43.87,0
+Louisa,Race,2024,Black,1002,621,381,2004,50,30.99,19.01
+Louisa,Race,2024,Hispanic,227,158,29,414,54.83,38.16,7
+Louisa,Race,2024,White,8131,3624,525,12280,66.21,29.51,4.28
+Louisa,Race,2024,2+ Races,409,302,43,754,54.24,40.05,5.7
+Nelson,Race,2024,Black,258,324,90,672,38.39,48.21,13.39
+Nelson,Race,2024,Hispanic,140,17,19,176,79.55,9.66,10.8
+Nelson,Race,2024,White,2991,1694,586,5271,56.74,32.14,11.12
+Nelson,Race,2024,2+ Races,156,74,21,251,62.15,29.48,8.37
+Virginia,Race,2024,Asian,144942,48594,9955,203491,71.23,23.88,4.89
+Virginia,Race,2024,Black,301326,258108,73192,632626,47.63,40.8,11.57
+Virginia,Race,2024,Hawaiian,1237,625,145,2007,61.63,31.14,7.22
+Virginia,Race,2024,Hispanic,151747,101628,15804,269179,56.37,37.75,5.87
+Virginia,Race,2024,AI/AN,5270,3977,600,9847,53.52,40.39,6.09
+Virginia,Race,2024,White,1422947,591090,127318,2141355,66.45,27.6,5.95
+Virginia,Race,2024,2+ Races,139546,71630,14659,225835,61.79,31.72,6.49
